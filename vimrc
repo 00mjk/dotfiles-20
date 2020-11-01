@@ -139,22 +139,52 @@ let NERDTreeShowHidden=1 " show hidden files at startup
 let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184844/hide-certain-files-in-nerdtree
 let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
 
-" CtrlP
-let g:ctrlp_show_hidden = 1
+" -------------
+" --- CtrlP ---
+" -------------
 
+let g:ctrlp_show_hidden = 1
+" open new file with <c-y> in the current window instead of v-split, to be
+" consistent with the behaviour of the `:edit' command
+let g:ctrlp_open_new_file = 'r'
+" the max height for the results is still 10, but can be scrolled up if there
+" are more
+let g:ctrlp_match_window = 'results:100'
+" when opening multiple files (selected with <c-z> and <c-o>)...
+"   - open the first in the current window, and the rest as hidden
+"     buffers (option 'r')
+"   - set the maximum number of splits to use to '1' (which means only the
+"     current one, no new splits will be created)
+" unlike 'ij', this also works when the only buffer is the no-name buffer
+let g:ctrlp_open_multiple_files = 'r1'
+
+" only effective if `ag' not available
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|bbin|node_modules)$',
+  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|node_modules)$',
   \ 'file': '\v\.(exe|so|dll|class|pyc)$',
   \ }
 
+" Use ag if available, because faster.
+" Normally ag excludes directories like `git', but the `--hidden' option
+" overrides that. We need therefore to explicitly specify the paths to be
+" ignored.
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'.
+        \' --ignore-dir=.git'.
+        \' --ignore-dir=.hg'.
+        \' --ignore-dir=.svn'.
+        \' --ignore-dir=.bundle'.
+        \' --ignore-dir=.bin'.
+        \' --ignore-dir=node_modules'.
+        \' --ignore=*.exe'.
+        \' --ignore=*.so'.
+        \' --ignore=*.class'.
+        \' --ignore=*.dll'.
+        \' --ignore=*.pyc'
+endif
+
 " use ctrlp in a single shortcut to navigate buffers
 noremap <Leader>b :CtrlPBuffer<CR>
-
-" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim),
-" because faster and respects .gitignore
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
 
 " Search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
