@@ -325,9 +325,14 @@ set modeline
 " --- Remember cursor position (when re-opening a file) --- "
 " --------------------------------------------------------- "
 
+" Exclude git commit messages.
+let cursorRestoreExclusions = ['gitcommit']
+
 autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \ exe "normal! g`\"" |
+  \ if index(cursorRestoreExclusions, &ft) < 0
+	\ && line("'\"") > 1
+  \ && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
   \ endif
 
 " --------------------- "
