@@ -347,8 +347,8 @@ set nowrap " Do not visually wrap lines by default.
 
 set breakindent " Align visually wrapped lines with the original indentation.
 set linebreak " Break between words when wrapping (don't break within words).
-" toggle wrapping with leader-w
-nmap <silent> <leader>w :set wrap!<CR>
+" toggle wrapping with leader-ww
+nmap <silent> <leader>ww :set wrap!<CR>
 " allow navigating 'visual lines' with j/k and up/down, instead of actual lines
 nnoremap j gj
 nnoremap k gk
