@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z $(command -v git) ]]; then
+  echo "Please install git first"
+  exit 1
+fi
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+sudo apt-get update -qq
+
+sudo apt-get install mumble-server -yq
+
+sudo service mumble-server enable
