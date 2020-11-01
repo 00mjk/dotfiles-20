@@ -31,11 +31,12 @@
   s = status
   co = checkout
   hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
+  slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
   stash-all = stash save --include-untracked
   remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
-  # When "forcing with lease", it's essential that the working tree is up to date with the remote, so we pull first
-  force = "!f() { git pull origin HEAD; git push --force-with-lease origin HEAD; }; f"
+  # When "forcing with lease", it's essential that the working tree is up to
+  # date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/ 
+  force = push --force-with-lease
   amend = commit --amend --no-edit
 
 [color]
@@ -55,6 +56,6 @@
 
 [rerere]
   enabled = true
-  
+
 [tag]
   forceSignAnnotated = true
