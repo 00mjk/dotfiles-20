@@ -13,6 +13,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-dispatch'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -878,7 +879,7 @@ let s:rgignore =
 " ----------------------- "
 
 if executable('rg')
-  let g:ackprg = 'rg --hidden --no-heading --line-number --follow --smart-case --no-ignore-vcs' . s:rgignore
+  let g:ackprg = 'rg --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
 elseif executable('ag')
   let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
 endif
@@ -890,6 +891,9 @@ let g:ackhighlight = 1
 
 " Search for visual selection (rudimental, only works in basic scenarios)
 vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
+
+" Run in the background with the help of tpope/vim-dispatch
+let g:ack_use_dispatch = 1
 
 " ---------------- "
 " --- NERDTree --- "
