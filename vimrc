@@ -189,9 +189,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-" ----------------------------- "
-" --- Indentation shortcuts --- "
-" ----------------------------- "
+" --------------------------- "
+" --- Indenting shortcuts --- "
+" --------------------------- "
 
 " Indent/Unindent visually selected lines without losing the selection.
 vnoremap > >gv
@@ -466,7 +466,7 @@ let s:agignore =
 " ----------- "
 
 if executable('ag')
-  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
+  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores --literal' . s:agignore
 endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
