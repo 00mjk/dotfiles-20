@@ -55,9 +55,9 @@ Plug 'Quramy/tsuquyomi'
 
 Plug 'altercation/vim-colors-solarized'
 
-" ----------------------------------- "
-" --- Experimental or rarely used --- "
-" ----------------------------------- "
+" ------------------------------------------- "
+" --- Experimental or rarely used plugins --- "
+" ------------------------------------------- "
 
 " Plug 'dhruvasagar/vim-table-mode'
 
@@ -66,18 +66,20 @@ Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
+" ------------------- "
 " --- Colorscheme --- "
+" ------------------- "
 
 " Try to use 'peachpuff' if available, because it's adapts to dark and light
 " background terminals, at the same time, which is useful for pairing.
 try
   colorscheme peachpuff
   catch
-		echom "'peachpuff' colorscheme not available, defaulting to 'default'"
+    echom "'peachpuff' colorscheme not available, defaulting to 'default'"
   try
     colorscheme default
-    catch
-			echom "'default' colorscheme not available, not setting the colorscheme"
+  catch
+    echom "'default' colorscheme not available, not setting the colorscheme"
   endtry
 endtry
 
@@ -130,8 +132,6 @@ if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
   autocmd FileType qf set colorcolumn=
 endif
-
-hi Visual
 
 " ---------------------- "
 " --- Search options --- "
