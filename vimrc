@@ -258,7 +258,7 @@ nnoremap < <<
 " default, depending on the version of Vim.
 " Wrap text automatically (a), both for text (t) and comments (c).
 " Remove the comment characters when joining lines (j).
-set formatoptions+=atcj
+" set formatoptions+=atcj
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
