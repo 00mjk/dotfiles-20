@@ -133,6 +133,7 @@ set matchtime=0 " ...but stay out of the way (do not jump around)
 filetype plugin indent on " automatically detect file types.
 syntax on " syntax highlighting
 
+set noshowcmd                     " showcmd (on by default) is very noisy when running long commands, such as Ack
 set noerrorbells visualbell t_vb= " disable all bells
 set backspace=indent,eol,start    " allow extended backspace behaviour
 set virtualedit=block             " allow placing the cursor after the last char in visual block
