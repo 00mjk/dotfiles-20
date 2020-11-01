@@ -126,7 +126,7 @@ export VISUAL=$(command -v vim)
 # ----------- #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light"
+export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --reverse --info=inline"
 [ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
