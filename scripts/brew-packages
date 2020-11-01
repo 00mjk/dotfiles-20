@@ -54,6 +54,7 @@ brew install \
   jq \
   less \
   lf \
+  libxml2 \
   lsof \
   make \
   mosh \
