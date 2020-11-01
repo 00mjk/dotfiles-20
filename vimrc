@@ -862,8 +862,14 @@ endif
 "
 " Run :AirlineExtensions to find which are enabled.
 
+" the built-in quickfix extension is lightweight and we can leave it on
 " let g:airline#extensions#quickfix#enabled = 0
-" let g:airline#extensions#tagbar#enabled = 0
+
+" unfortunately tagbar, because it's not asynchronous, can make this extension
+" quite slow, delaying the painting of the status bar
+let g:airline#extensions#tagbar#enabled = 0
+
+" other resource-intensive extensions are all better disabled
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#fugitiveline#enabled = 0
 let g:airline#extensions#fzf#enabled = 0
