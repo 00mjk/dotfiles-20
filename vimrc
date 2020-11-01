@@ -47,6 +47,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'mhinz/vim-grepper'
 
 " TypeScript
 " ...syntax
@@ -951,6 +952,58 @@ vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
 " only appears to work in tmux
 if $TMUX != ""
   let g:ack_use_dispatch = 1
+endif
+
+" ------------------- "
+" --- vim-grepper --- "
+" ------------------- "
+
+" the variable will not exist if the plugin has not been installed yet (for
+" example on vim-plug's first run), this will initialise it with defaults
+runtime plugin/grepper.vim
+
+if exists("g:grepper")
+  let g:grepper.tools = [
+    \'rg',
+    \'ag',
+    \'pt',
+    \'ack',
+    \'git',
+    \'ack-grep',
+    \'grep',
+    \'findstr',
+    \'sift',
+  \]
+
+  " use default quickfix window height of 10 lines, no matter how many matches
+  " grepper found
+  let g:grepper.open = 0
+  autocmd User Grepper copen
+
+  " let g:grepper.prompt = 0 " execute the query directly without prompting
+  " let g:grepper.switch = 0 " experimental: do not focus the result list
+  let g:grepper.prompt_text = '$t > ' " don't show the underlying search command, only the tool
+  let g:grepper.highlight = 1 " highlight matches
+  let g:grepper.stop = 1000 " limit the number of results to 1000 instead of the default 5000
+
+  " nnoremap <Leader>* :Grepper -tool git -open -switch -cword -noprompt<cr>
+
+  let s:rg_base_grepprg = 'rg --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
+
+  " also add `--` at the end, so that search patters starting with `-` can be
+  " used without escaping
+  let g:grepper.rg.grepprg = s:rg_base_grepprg . ' -- '
+
+  " this will open the Grepper prompt, where the search pattern can be entered
+  " (or by pressing Enter using the current word without selection)
+  nnoremap <Leader>s :Grepper<CR>
+  " mapping the operator (which can take ranges and motions like all normal
+  " operators) in visual mode, where the pattern will be the selected text
+  vmap gs <plug>(GrepperOperator)
+  " the operator for some tools such as rg and ag adds the double dash `--` to
+  " separate arguments, so it needs to be redefined
+  " <https://github.com/mhinz/vim-grepper/issues/139>
+  let g:grepper.operator.rg.grepprgbuf = s:rg_base_grepprg . ' $*'
 endif
 
 " ---------------- "
