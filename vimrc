@@ -938,7 +938,7 @@ let g:airline#extensions#default#layout = [
 " --- agignore --- "
 " ---------------- "
 
-let s:agignore =
+let s:ag_ignore =
       \' --ignore="_quarantine"'.
       \' --ignore="bitbucket.org"'.
       \' --ignore="cloud.google.com"'.
@@ -964,11 +964,16 @@ let s:agignore =
       \' --ignore="*.so"'.
       \' --ignore="tags"'
 
-" ---------------- "
-" --- rgignore --- "
-" ---------------- "
+let s:ag_defaults = ' --hidden --follow --smart-case --skip-vcs-ignores'
 
-let s:rgignore =
+let s:ag_grepprg = 'ag' . s:ag_defaults . s:ag_ignore
+
+" ------------------- "
+" --- rg defaults --- "
+" ------------------- "
+
+" TODO: move ignores to an rg config file, so they are the same everywhere
+let s:rg_ignore =
       \ " --glob='!**/.bin/'".
       \ " --glob='!**/.bundle/'".
       \ " --glob='!**/.git/'".
@@ -997,94 +1002,90 @@ let s:rgignore =
       \ " --glob='!*.so'".
       \ " --glob='!tags'"
 
-let s:rg_base_grepprg = 'rg --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
+let s:rgdefaults = " --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs"
 
-" ----------------------- "
-" --- Search with Ack --- "
-" ----------------------- "
-
-if executable('rg')
-  let g:ackprg = s:rg_base_grepprg
-elseif executable('ag')
-  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
-endif
-" do no jump to the first result
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
-" highlight the searched term
-let g:ackhighlight = 1
-
-" Search for visual selection (rudimental, only works in basic scenarios)
-vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
-
-" Run in the background with the help of tpope/vim-dispatch
-" only appears to work in tmux
-if $TMUX != ""
-  let g:ack_use_dispatch = 1
-endif
+let s:rg_grepprg = 'rg' . s:rgdefaults . s:rg_ignore
 
 " ------------------- "
 " --- vim-grepper --- "
 " ------------------- "
 
-" Asynchronous search.
+" the grepper variable will be merged with the defaults once the plugin loads
+let g:grepper = {}
+
+" list the possible search tools (backends) in order of preference, only the
+" available executables will remain available once the plugin loads
+let g:grepper.tools = [
+  \'rg',
+  \'ag',
+  \'pt',
+  \'ack',
+  \'git',
+  \'grep',
+\]
+
+let g:grepper.highlight = 1 " highlight matches
+let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
+
+" set up customised search commands
+let g:grepper.rg = {'grepprg': s:rg_grepprg}
+let g:grepper.ag = {'grepprg': s:ag_grepprg}
+
+" the following two settings will use the standard 10-line quickfix window
+" no matter how many matches found; see ':h grepper-faq-4'
+let g:grepper.open = 0
+autocmd User Grepper copen
+
+" focus the results automatically
+let g:grepper.switch = 1
+
+" this will open the Grepper prompt, where the search pattern can be entered
+" (or by pressing Enter using the current word if no pattern is given)
+
+" the prompt is a nice to have, and provides different functionality than the
+" command above, in particular shortcuts for changing search tool (with <Tab>)
+" and target directory of the search (with <C-d>)
 "
-" Alternative solutions are
+" however, it does not support path completion
 "
-" * Ack <https://github.com/mileszs/ack.vim> in conjunction with Dispatch
-"   <https://github.com/tpope/vim-dispatch>, which however appears to require
-"   tmux
-" * CtrlSF <https://github.com/dyng/ctrlsf.vim> the most popular, robust, and
-"   complete of the bunch
-" * vim-esearch <https://github.com/eugen0329/vim-esearch>
-" * agrep <https://github.com/ramele/agrep>
-" * FlyGrep <https://github.com/wsdjeg/FlyGrep.vim>
-" * fzf.vim <https://github.com/junegunn/fzf.vim>
+" only show a visual prompt, not the underlying search command;
+let g:grepper.prompt_text = ' ❯❯ '
 
-" the variable will not exist if the plugin has not been installed yet (for
-" example on vim-plug's first run), this will initialise it with defaults
-runtime plugin/grepper.vim
+" build a command that that supports both current word (when no args are given),
+" and path completion (like :Ack), because the Grepper prompt does not support
+" completion
+"
+" what suggested in the vim-grepper docs is not a solution: setting
+"
+"     let g:grepper.prompt = 0
+"
+" will allow path completion after the search pattern, but it will not search
+" for the current word with no input
+"
+function! AckgFunc(query)
+  if a:query == ''
+    execute 'Grepper -noprompt -cword'
+  else
+    execute 'Grepper -noprompt -query ' . a:query
+  endif
+endfunction
 
-if exists(":Grepper")
-  let g:grepper.tools = [
-    \'rg',
-    \'ag',
-    \'pt',
-    \'ack',
-    \'git',
-    \'ack-grep',
-    \'grep',
-    \'findstr',
-    \'sift',
-  \]
+command! -nargs=* -complete=file Ackg call AckgFunc(<q-args>)
 
-  " use default quickfix window height of 10 lines, no matter how many matches
-  " grepper found
-  let g:grepper.open = 0
-  autocmd User Grepper copen
+nnoremap <Leader>a :Ackg<Space>
 
-  let g:grepper.prompt_text = ' ❯❯ ' " only show a prompt, not the underlying search command
-  let g:grepper.highlight = 1 " highlight matches
-  let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
+" open the prompt with a shortcut
+nnoremap <Leader>s :Grepper<CR>
 
-  let g:grepper.rg.grepprg = s:rg_base_grepprg
+" search the word under the cursor directly
+nnoremap <Leader>8 :Grepper -open -cword -noprompt -switch<CR>
+nnoremap <Leader>* :Grepper -open -cword -noprompt -switch<CR>
 
-  " this will open the Grepper prompt, where the search pattern can be entered
-  " (or by pressing Enter using the current word if no pattern is given)
-  nnoremap <Leader>s :Grepper<CR>
-
-  " search the word under the cursor directly
-  nnoremap <Leader>8 :Grepper -open -cword -noprompt -switch<CR>
-  nnoremap <Leader>* :Grepper -open -cword -noprompt -switch<CR>
-
-  " --- operator --- "
-  " enable the operator in normal mode, it will take a range or motion; see
-  " :help grepper-operator
-  nmap gs <plug>(GrepperOperator)
-  " search the visual selection by mapping the operator (which can take ranges
-  " and motions like all normal operators)
-  xmap gs <plug>(GrepperOperator)
-endif
+" --- operator --- "
+" enable the operator in normal and visual mode, it will take a range or
+" motion; see :help grepper-operator
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 
 " ---------------- "
 " --- NERDTree --- "
