@@ -345,9 +345,7 @@ nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 set autoindent  " Remember indent level after going to the next line.
 set nowrap " Do not visually wrap lines by default.
 
-if version > 704
-  set breakindent " Align visually wrapped lines with the original indentation.
-endif
+set breakindent " Align visually wrapped lines with the original indentation.
 set linebreak " Break between words when wrapping (don't break within words).
 " toggle wrapping with leader-w
 nmap <silent> <leader>w :set wrap!<CR>
@@ -522,9 +520,9 @@ set omnifunc=syntaxcomplete#Complete
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" --------------- "
-" --- Pasting --- "
-" --------------- "
+" ---------------------- "
+" --- Copy and Paste --- "
+" ---------------------- "
 
 set pastetoggle=<F3>
 
@@ -586,6 +584,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " In modern Vim the markdown plugin is included by default in the Vim
 " distribution itself.
 let g:markdown_fenced_languages = [
+      \ 'bash=sh',
       \ 'go',
       \ 'golang=go',
       \ 'html',
@@ -911,9 +910,7 @@ autocmd FileType go nnoremap <Leader>z :GoDiagnostics!<CR>
 " ----------------- "
 
 let g:syntastic_javascript_checkers=['eslint']
-" let g:syntastic_go_checkers=[
-"   \ 'go'
-"   \]
+" let g:syntastic_go_checkers=['go']
 
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_always_populate_loc_list=1
