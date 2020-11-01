@@ -20,7 +20,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'terryma/vim-multiple-cursors'
@@ -45,6 +44,8 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'keith/swift.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " TypeScript
 " ...syntax
@@ -393,7 +394,8 @@ nmap ]q :cnext<CR>
 " ------------------------------ "
 
 " Open quickfix results in vertical and horizontal splits, with the same
-" shortcuts provided by default by CtrlP (<C-v> and <C-x>).
+" shortcuts provided by default by other plugins for the same purpose
+" (<C-v> and <C-x>).
 
 " Picking just the functionality we need from https://github.com/yssl/QFEnter
 
@@ -463,7 +465,9 @@ autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java
 
 " Enable syntax-based for natively supported languages, and using ctags when
 " available.
+" Plugins will overwrite with more specific setups as appropriate (like vim-go).
 set omnifunc=syntaxcomplete#Complete
+
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -657,61 +661,24 @@ let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184
 let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
 let NERDTreeCascadeSingleChildDir=0 " do not collapse on the same line directories that have only one child directory
 
-" ------------- "
-" --- CtrlP --- "
-" ------------- "
+" ----------------------------------- "
+" --- fzf and fzf.vim integration --- "
+" ----------------------------------- "
 
-let g:ctrlp_show_hidden = 1
-" open new file with <c-y> in the current window instead of v-split, to be
-" consistent with the behaviour of the `:edit' command
-let g:ctrlp_open_new_file = 'r'
-" the max height for the results is still 10, but can be scrolled up if there
-" are more
-let g:ctrlp_match_window = 'results:100'
-" when opening multiple files (selected with <c-z> and <c-o>)...
-"   - open the first in the current window, and the rest as hidden
-"     buffers (option 'r')
-"   - set the maximum number of splits to use to '1' (which means only the
-"     current one, no new splits will be created)
-" unlike 'ij', this also works when the only buffer is the no-name buffer
-let g:ctrlp_open_multiple_files = 'r1'
+" See also https://github.com/junegunn/fzf/blob/master/README-VIM.md
 
-" only effective if `ag' not available
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|node_modules|log|vendor)$',
-  \ 'file': '\v\.(exe|so|dll|class|pyc)$',
-  \ }
+" run in a less intrusive terminal buffer at the bottom
+let g:fzf_layout = { 'down': '~30%' }
+" command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+" disable the preview window
+let g:fzf_preview_window = ''
+" jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
-" Use ag if available, because faster.
-" Normally ag excludes directories like `git', but the `--hidden' option
-" overrides that. We need therefore to explicitly specify the paths to be
-" ignored.
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g "" ' . s:agignore
-endif
-
-" Ignore space chars in file finder by designating spaces as an abbreviation
-" for empty string that's expanded in fuzzy search, filename, full path &
-" regexp modes (set in the mode attr).
-" https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
-" Fixes fuzzy searching files with space seperated terms
-let g:ctrlp_abbrev = {
-  \ 'gmode': 'i',
-  \ 'abbrevs': [
-    \ {
-      \ 'pattern': ' ',
-      \ 'expanded': '',
-      \ 'mode': 'pfrz',
-    \ },
-    \ ]
-  \ }
-
-" use ctrlp in a single shortcut to navigate buffers
-noremap <Leader>b :CtrlPBuffer<CR>
-let g:ctrlp_switch_buffer = 0
-
-" include the current file
-let g:ctrlp_match_current_file = 1
+" same keybindings used for CtrlP
+nmap <C-p> :Files<CR>
+noremap <Leader>b :Buffers<CR>
 
 " ---------------------- "
 " --- vim-commentary --- "
