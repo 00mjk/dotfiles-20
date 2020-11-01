@@ -1,0 +1,280 @@
+# vim: set ft=dircolors:
+
+# Based on GNU's dircolors default database (below is the original copyright
+# notice), and on 
+# 
+#   Configuration file for dircolors, a utility to help you set the LS_COLORS
+#   environment variable used by GNU ls with the --color option. Copyright (C)
+#   1996-2020 Free Software Foundation, Inc. Copying and distribution of this
+#   file, with or without modification, are permitted provided the copyright
+#   notice and this notice are preserved.
+# 
+# The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
+# slackware version of dircolors) are recognized but ignored.
+
+# Below are TERM entries, which can be a glob patterns, to match
+# against the TERM environment variable to determine if it is colorizable.
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM xterm*
+ 
+# -------------- #
+# --- Legend --- #
+# -------------- #
+
+# Attribute codes:
+# 
+#   00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# 
+# Text color codes, respectively normal and bright:
+#
+#   Foreground
+#   30/90=black 31/91=red 32/92=green 33/93=yellow 34/94=blue 35/95=magenta 36/96=cyan 37/97=white
+#
+#   Background
+#   40/100=black 41/101=red 42/102=green 44/104=yellow 44/104=blue 45/105=magenta 46/106=cyan 47/107=white
+#
+
+# ------------------ #
+# --- File types --- #
+# ------------------ #
+
+RESET 0 # reset to "normal" color
+NORMAL 00 # no color code at all
+FILE 00 # regular file: use no color at all
+DIR 34 # directory
+MULTIHARDLINK 00 # regular file with more than one link
+LINK 32 # symbolic link. (If you set this to 'target' instead of a
+ # numerical value, the color is as for the file pointed to.)
+FIFO 97;104 # pipe
+SOCK 90;102 # socket
+DOOR 90;102 # door
+BLK 105;97 # block device driver
+CHR 105;97 # character device driver
+
+# ------------------- #
+# --- Executables --- #
+# ------------------- #
+
+EXEC 31 
+
+.sh 31
+.cmd 31 
+.exe 31
+.com 31
+.btm 31
+.bat 31
+.csh 31
+
+# ----------------------- #
+# --- File attributes --- #
+# ----------------------- #
+
+ORPHAN 101;37 # symlink to nonexistent file, or non-stat'able file ...
+MISSING 101;37 # ... and the files they point to
+SETUID 31;103 # file that is setuid (u+s)
+SETGID 31;103 # file that is setgid (g+s)
+CAPABILITY 31;103 # file with capability
+STICKY_OTHER_WRITABLE 35;103 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 35;103 # dir that is other-writable (o+w) and not sticky
+STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
+
+
+# ---------------- #
+# --- Archives --- #
+# ---------------- #
+
+.tar 90
+.tgz 90
+.arc 90
+.arj 90
+.taz 90
+.lha 90
+.lz4 90
+.lzh 90
+.lzma 90
+.tlz 90
+.txz 90
+.tzo 90
+.t7z 90
+.zip 90
+.z 90
+.dz 90
+.gz 90
+.lrz 90
+.lz 90
+.lzo 90
+.xz 90
+.zst 90
+.tzst 90
+.bz2 90
+.bz 90
+.tbz 90
+.tbz2 90
+.tz 90
+.deb 90
+.rpm 90
+.jar 90
+.war 90
+.ear 90
+.sar 90
+.rar 90
+.alz 90
+.ace 90
+.zoo 90
+.cpio 90
+.7z 90
+.rz 90
+.cab 90
+.wim 90
+.swm 90
+.dwm 90
+.esd 90
+
+# -------------- #
+# --- Images --- #
+# -------------- #
+
+.jpg 33
+.jpeg 33
+.mjpg 33
+.mjpeg 33
+.gif 33
+.bmp 33
+.pbm 33
+.pgm 33
+.ppm 33
+.tga 33
+.xbm 33
+.xpm 33
+.tif 33
+.tiff 33
+.png 33
+.svg 33
+.svgz 33
+.mng 33
+.pcx 33
+
+# -------------- #
+# --- Videos --- #
+# -------------- #
+
+.mov 33
+.mpg 33
+.mpeg 33
+.m2v 33
+.mkv 33
+.webm 33
+.webp 33
+.ogm 33
+.mp4 33
+.m4v 33
+.mp4v 33
+.vob 33
+.qt 33
+.nuv 33
+.wmv 33
+.asf 33
+.rm 33
+.rmvb 33
+.flc 33
+.avi 33
+.fli 33
+.flv 33
+.gl 33
+.dl 33
+.xcf 33
+.xwd 33
+.yuv 33
+.cgm 33
+.emf 33
+.ogv 33
+.ogx 33
+
+# ------------------- #
+# --- Audio files --- #
+# ------------------- #
+
+.aac 33
+.au 33
+.flac 33
+.m4a 33
+.mid 33
+.midi 33
+.mka 33
+.mp3 33
+.mpc 33
+.ogg 33
+.ra 33
+.wav 33
+.oga 33
+.opus 33
+.spx 33
+.xspf 33
+
+# ------------------------- #
+# --- Unimportant files --- #
+# ------------------------- #
+
+*~ 92
+*# 92
+.log 92
+.tmp 92
+.bak 92
+.bak 92
+.BAK 92
+.old 92
+.OLD 92
+.org_archive 92
+.off 92
+.OFF 92
+.dist 92
+.DIST 92
+.orig 92
+.ORIG 92
+.swp 92
+.swo 92
+*.v 92
+
+# ------------------- #
+# --- For testing --- #
+# ------------------- #
+
+.ANSI-30-black 30
+.ANSI-01;30-bdblack 01;30
+.ANSI-31-red 31
+.ANSI-01;31-bdred 01;31
+.ANSI-32-green 32
+.ANSI-01;32-bdgreen 01;32
+.ANSI-33-yellow 33
+.ANSI-01;33-bdyellow 01;33
+.ANSI-34-blue 34
+.ANSI-01;34-bdblue 01;34
+.ANSI-35-magenta 35
+.ANSI-01;35-bdmagenta 01;35
+.ANSI-36-cyan 36
+.ANSI-01;36-bdcyan 01;36
+.ANSI-37-white 37
+.ANSI-01;37-bdwhite 01;37
+
