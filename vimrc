@@ -778,6 +778,16 @@ autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
       \ specify
       \ subject
       \ xit
+      \ any_args
+      \ anything
+      \ array_including
+      \ boolean
+      \ duck_type
+      \ hash_excluding
+      \ hash_including
+      \ instance_of
+      \ kind_of
+      \ no_args
 
 highlight def link rubyRspec Function
 
