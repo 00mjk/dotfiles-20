@@ -1226,9 +1226,12 @@ let g:be_modes = {
 \}
 
 function BE_Statusline(active)
-  if &l:buftype ==# 'nofile' || &l:filetype ==# 'netrw'
-    let &l:statusline=' '
-  elseif a:active == 1
+  " an empty buftype name means a normal buffer...
+  if len(&buftype) != 0     | return | endif
+  " unless it's the Explore window netrw
+  if &filetype ==? 'netrw'  | return | endif
+
+  if a:active == 1
     let &l:statusline=' %{g:be_modes[mode()]}%{&paste ? "(PASTE)" : ""} | %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
   else
     let &l:statusline=' %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
@@ -1237,6 +1240,8 @@ endfunction
 
 augroup StatuslineEvents
     autocmd!
-    autocmd WinEnter,BufWinEnter  * call BE_Statusline(1)
-    autocmd WinLeave              * call BE_Statusline(0)
+    autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
+    autocmd FileType              netrw     setlocal statusline=\ %<%f
+    autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
+    autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
