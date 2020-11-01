@@ -19,6 +19,8 @@ LATEST_DC="$(
 if [[ "${CURRENT_DC}" == $(echo -e "${CURRENT_DC}\n${LATEST_DC}" | sort -rV | head -n1) ]]; then
   echo "Current docker-compose ${CURRENT_DC} is already the latest"
 else
+  echo "Updating from ${CURRENT_DC} to ${LATEST_DC}"
+
   sudo rm -f /usr/local/bin/docker-compose
 
   echo "Installing '/usr/local/bin/docker-compose'"
