@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+sudo apt-get update -qq
+
+sudo apt-get install -yq \
+  tigervnc-standalone-server \
+  fluxbox \
+  x11-xkb-utils \
+  chromium-browser \
+  lxterminal \
+
+backup_and_symlink $ROOTDIR/xstartup $HOME/.vnc/xstartup
+
+echo "
+You can now start the VNC server with
+
+    vncserver -geometry 1280x800
+
+...and stop it with
+
+    vncserver -kill
+"
