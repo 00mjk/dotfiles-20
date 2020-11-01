@@ -267,3 +267,36 @@ let g:go_highlight_types = 1
 let g:go_highlight_format_strings = 1
 " specify it even it's currently the default
 let g:go_highlight_string_spellcheck = 1
+
+" ---------------------------------
+" --- RSpec syntax highlighting ---
+" ---------------------------------
+
+autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
+      \ after
+      \ before
+      \ class_double
+      \ context
+      \ describe
+      \ described_class
+      \ double
+      \ expect
+      \ include_context
+      \ include_examples
+      \ instance_double
+      \ it
+      \ it_behaves_like
+      \ it_should_behave_like
+      \ its
+      \ let
+      \ object_double
+      \ raise_error
+      \ setup
+      \ shared_context
+      \ shared_examples
+      \ shared_examples_for
+      \ specify
+      \ subject
+      \ xit
+
+highlight def link rubyRspec Function
