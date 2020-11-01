@@ -35,6 +35,7 @@ alias be='bundle exec'
 # docker 
 
 alias d='docker'
+alias dk='docker'
 alias dc='docker-compose'
 alias rmimages='docker rmi $(docker images -a -q)'
 alias rmcontainers='docker rm $(docker ps -a -f status=exited -q)'
