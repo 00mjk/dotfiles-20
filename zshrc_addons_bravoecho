@@ -15,6 +15,7 @@ export COMPLETION_WAITING_DOTS="true"
 export HIST_STAMPS="yyyy-mm-dd"
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# fix the Alt-C (Option-C) keybinding for FZF cd to directory
 if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget
 fi
