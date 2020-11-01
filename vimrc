@@ -130,6 +130,8 @@ if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
 endif
 
+hi Visual
+
 " ---------------------- "
 " --- Search options --- "
 " ---------------------- "
@@ -144,8 +146,10 @@ set hlsearch    " highlight results
 " and most other terminal themes, but might require tweaking in the
 " ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
 " Pastel...)
-" See the README for more options.
+" See the README/TODO for more options.
 hi Search term=reverse cterm=reverse ctermfg=11 ctermbg=0
+hi Todo term=reverse cterm=reverse,bold ctermfg=7 ctermbg=0
+hi Visual term=reverse cterm=reverse ctermfg=7 ctermbg=0
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
