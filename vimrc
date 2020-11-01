@@ -86,7 +86,7 @@ call plug#end()
 " reverting the keys in :q (therefore bringing up the command history) is quite
 " common and almost never what one wants, so it's disabled;
 " however, since the command history is indeed useful sometimes, it's still
-" possible to summon it with the built-in :<C-f>
+" possible to summon it with the Vim-native :<C-f>
 map q: <Nop>
 " disable interactive ex-mode
 nnoremap Q <nop>
@@ -307,6 +307,7 @@ endfunction
 " --- Reselect last edited text --- "
 " --------------------------------- "
 
+" TODO: fix reselect last visual selection because this doesn't work any more
 " Leader-gv selects the just changed or pasted text, similar to how the native
 " gv reselects the last visual selection.
 " <http://vim.wikia.com/wiki/Selecting_your_pasted_text>
@@ -513,7 +514,7 @@ endif
 " --- Intuitive home key --- "
 " -------------------------- "
 
-" 1. Fix the home inside tmux
+" 1. Fix the home key inside tmux
 if &term =~ '^screen'
   exec "set <Home>=\e[1~"
 endif
@@ -522,16 +523,15 @@ noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^
 " 3. also support insert mode
 imap <silent> <Home> <C-O><Home>
 
-" -------------------------------- "
-" --- Quickfix list navigation --- "
-" -------------------------------- "
-" Useful for any type of search and command that populates the quickfix list.
-nmap [q :cprevious<CR>
-nmap ]q :cnext<CR>
-
 " ------------------------------ "
 " --- Quickfix list mappings --- "
 " ------------------------------ "
+
+" Navigation
+" ----------
+" Useful for any type of search and command that populates the quickfix list.
+nmap [q :cprevious<CR>
+nmap ]q :cnext<CR>
 
 " Close quickfix list with Q like some plugins do
 " -----------------------------------------------
@@ -1166,6 +1166,7 @@ endif
 " ---------------------------------- "
 
 " <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
+" TODO: fix vimrc auto-reload because this doesn't work
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " ------------------ "
