@@ -207,7 +207,7 @@ nmap <C-J> :bprev<CR>
 
 " Close the current buffer without closing the window
 " <http://stackoverflow.com/a/8585343/417375>
-nnoremap <Leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " ---------------- "
 " --- Wrapping --- "
@@ -256,9 +256,6 @@ inoremap jj <ESC>
 
 " Map leader-S to save file
 nmap <Leader>s :w<CR>
-
-" Map leader-q to quit vim
-nmap <Leader>q :qa!<CR>
 
 " Map F1 key (main vim help) to ESC to avoid bringing it up by mistake.
 nnoremap <F1> <ESC>
