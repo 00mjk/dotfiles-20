@@ -45,6 +45,7 @@ sudo apt-get install -yq \
   vim-nox \
   wget \
   graphviz \
+  gnupg2 \
 
 sudo apt-get autoremove --purge -y
 
