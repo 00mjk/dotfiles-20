@@ -24,6 +24,7 @@ sudo apt-get install -yq \
   build-essential \
   coreutils \
   curl \
+  dnsutils \
   exuberant-ctags \
   gdebi-core \
   jq \
