@@ -73,7 +73,7 @@ _parse_git_status(){
 
   local sync_state=
   if [[ $is_tracking_remote && $is_not_synced ]]; then
-    # ## master...origin/master [behind 2] => [behind 2]
+    # ## main...origin/main [behind 2] => [behind 2]
     sync_state="${RED}$(echo "${statusheader}" | sed -re 's|^.*(\[.*)$|\1|')${NC}"
   elif [[ $is_tracking_remote ]]; then
     sync_state="${GREEN}[synced]${NC}"
