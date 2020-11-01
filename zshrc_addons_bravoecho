@@ -1,19 +1,18 @@
 # vim: set ft=zsh:
 
-setopt histignoredups
+setopt hist_ignore_dups
 setopt hist_ignore_all_dups
+
 # autocomplete hidden files...
 setopt glob_dots
 # ...but exclude "." and ".."
 zstyle ':completion:*' special-dirs false
-# prevents you from accidentally overwriting an existing file.
+
+# prevents accidentally overwriting an existing file
 setopt noclobber
 
-ZSH_CUSTOM=~/.zsh_custom
-ZSH_THEME="bravoecho"
-export ZSH="${HOME}/.oh-my-zsh"
-COMPLETION_WAITING_DOTS="true"
-HIST_STAMPS="yyyy-mm-dd"
+export COMPLETION_WAITING_DOTS="true"
+export HIST_STAMPS="yyyy-mm-dd"
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
