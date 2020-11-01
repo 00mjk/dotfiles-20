@@ -30,8 +30,11 @@ Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'vim-syntastic/syntastic'
 Plug 'posva/vim-vue'
-
 Plug 'majutsushi/tagbar'
+
+Plug 'altercation/vim-colors-solarized'
+
+" Experimental
 Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
@@ -302,6 +305,37 @@ nmap [q :cprevious<CR>
 nmap ]q :cnext<CR>
 
 " ------------------------------ "
+" --- Quickfix list mappings --- "
+" ------------------------------ "
+
+" Open quickfix results in vertical and horizontal splits, with the same
+" shortcuts provided by default by CtrlP (<C-v> and <C-x>).
+
+" Picking just the functionality we need from https://github.com/yssl/QFEnter
+
+" 1. get the current line of the quickfix (which corresponds to the item number)
+" 2. jump to the previous window
+" 3. switch to a new vertical split
+" 4. open the 'current' item of the quickfix list in the newly created buffer
+"    (the current means, the one focused before switching to the new buffer)
+function! <SID>OpenQuickfixVert()
+  let l:qf_idx = line('.')
+  wincmd p
+  vnew
+  execute l:qf_idx . 'cc'
+endfunction
+
+function! <SID>OpenQuickfixHorz()
+  let l:qf_idx = line('.')
+  wincmd p
+  split
+  execute l:qf_idx . 'cc'
+endfunction
+
+autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfixVert()<CR>
+autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfixHorz()<CR>
+
+" ------------------------------ "
 " --- Move lines up and down --- "
 " ------------------------------ "
 
@@ -332,12 +366,13 @@ set listchars=tab:»·,trail:·,extends:>,precedes:<
 nmap <silent> <Leader>h :set nolist!<CR>
 
 function! <SID>StripTrailingWhitespaces()
+  " store the original position
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e " end of lines
   %s/\n\{3,}/\r\r/e " multiple blank lines
   silent! %s/\($\n\s*\)\+\%$// " end of file
-  call cursor(l, c)
+  call cursor(l, c) " back to the original position
 endfun
 
 autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
@@ -625,13 +660,6 @@ let g:syntastic_javascript_checkers=['eslint']
 " ---------------- "
 
 let g:vim_json_syntax_conceal = 0
-
-" -------------- "
-" --- tagbar --- "
-" -------------- "
-
-" Do not sort the tags alphabetically when opening the tagbar
-let g:tagbar_sort = 0
 
 " ------------------------------------- "
 " --- Load additional configuration --- "
