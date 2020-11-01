@@ -958,11 +958,25 @@ endif
 " --- vim-grepper --- "
 " ------------------- "
 
+" Asynchronous search.
+"
+" Alternative solutions are
+"
+" * Ack <https://github.com/mileszs/ack.vim> in conjunction with Dispatch
+"   <https://github.com/tpope/vim-dispatch>, which however appears to require
+"   tmux
+" * CtrlSF <https://github.com/dyng/ctrlsf.vim> the most popular, robust, and
+"   complete of the bunch
+" * vim-esearch <https://github.com/eugen0329/vim-esearch>
+" * agrep <https://github.com/ramele/agrep>
+" * FlyGrep <https://github.com/wsdjeg/FlyGrep.vim>
+" * fzf.vim <https://github.com/junegunn/fzf.vim>
+
 " the variable will not exist if the plugin has not been installed yet (for
 " example on vim-plug's first run), this will initialise it with defaults
 runtime plugin/grepper.vim
 
-if exists("g:grepper")
+if exists(":Grepper")
   let g:grepper.tools = [
     \'rg',
     \'ag',
