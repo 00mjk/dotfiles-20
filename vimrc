@@ -702,14 +702,17 @@ nmap <M-l> :call TmuxWinCmd('l')<CR>
 "
 " * it's hugely popular
 " * it provides a 'tab bar' functionality, which is considered useful for users
-"   coming from GUI editors; this works really welle and can be displayed with
+"   coming from GUI editors; this works really well and can be displayed with
 "   the custom :ToggleTablineWithBuffers command
-" * some parts of the status bar are actually helpeful (in particular the Vim
+" * some parts of the status bar are actually helpful (in particular the Vim
 "   mode and how it's formatted)
 "
 " However, to prevent a cognitive storm, it's been heavily streamlined.
 
+set noshowmode " showing the Vim mode twice is ugly
+
 let g:airline_theme = 'base16_default' " Milder colorscheme (pending the creation of a true 16-color colorscheme)
+
 let g:airline_symbols_ascii = 1
 
 " --- tabline --- "
@@ -844,7 +847,7 @@ map <Leader>n :NERDTreeToggle<CR>
 map <Leader>f :NERDTreeFind<CR>
 
 let NERDTreeMinimalUI=1
-let NERDTreeShowHidden=1 " show hidden files at startup
+let NERDTreeShowHidden=1
 let NERDTreeNaturalSort=1
 let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184844/hide-certain-files-in-nerdtree
 let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
