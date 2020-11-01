@@ -96,6 +96,15 @@ brew cask install \
   rectangle \
   visual-studio-code
 
+ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
+
+if [[ "$(uname -s)" =~ Darwin && -d "${ZSH_SITE_FUNCTIONS}" ]]; then
+  pushd "${ZSH_SITE_FUNCTIONS}"
+  ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion _docker
+  ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion _docker-compose
+  popd
+fi
+
 echo "
 
 NOTES

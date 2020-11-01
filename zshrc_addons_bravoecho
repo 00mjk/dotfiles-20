@@ -1,20 +1,75 @@
 # vim: set ft=zsh:
 
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
+# NOTE: Vanilla zsh from Homebrew and oh-my-zsh installations are assumed.
 
-# autocomplete hidden files...
-setopt glob_dots
-# ...but exclude "." and ".."
-zstyle ':completion:*' special-dirs false
+setopt histignoredups
+setopt histignorealldups
+setopt histreduceblanks
 
 # prevents accidentally overwriting an existing file
 setopt noclobber
 
 export COMPLETION_WAITING_DOTS="true"
 export HIST_STAMPS="yyyy-mm-dd"
+
+# autocomplete hidden files...
+setopt globdots
+# ...but exclude "." and ".."
+zstyle ':completion:*' special-dirs false
+
+# allow to choose matching options when a command has a wildcard, instead of
+# completing the command with all the maches
+setopt globcomplete
+
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# enable autocompletion for aliases defined in shell_addons_bravoecho;
+# each alias will use the give command as the underlying target for the
+# autocompletion
+setopt completealiases
+
+autoload -Uz compinit && compinit -i
+
+compdef ll='ls'
+compdef la='ls'
+
+ZSH_SITE_FUNCTIONS="/usr/local/share/zsh/site-function"
+
+if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
+  compdef gti='git'
+  compdef g='git'
+  compdef ga='git'
+  compdef gaa='git'
+  compdef gap='git'
+  compdef gb='git'
+  compdef gba='git'
+  compdef gci='git'
+  compdef gcim='git'
+  compdef gco='git'
+  compdef gcl='git'
+  compdef gd='git'
+  compdef gds='git'
+  compdef gf='git'
+  compdef gp='git'
+  compdef gpl='git'
+  compdef gpp='git'
+  compdef gps='git'
+  compdef gs='git'
+  compdef gss='git'
+  compdef gst='git'
+  compdef gsm='git'
+  compdef gsd='git'
+fi
+
+if [[ -n "$(command -v docker)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]; then
+  compdef dk='docker'
+fi
+
+if [[ -n "$(command -v docker-compose)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]; then
+  compdef dc='docker-compose'
+fi
+
 # fix the Alt-C (Option-C) keybinding for FZF cd to directory
 if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget
@@ -26,6 +81,7 @@ fi
 #   * displays the current path
 #   * displays the current git branch if it's in a repo
 #   * puts the cursor into a new line
+#
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   function _bravoecho_git_branch() {
     local branch_name=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
