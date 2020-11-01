@@ -24,6 +24,10 @@
 Miscellanea
 -----------
 
+### Alternate JSON formatting, doesn't respect order
+
+" autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
+
 ### Airline
 
 Sections

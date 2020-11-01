@@ -749,13 +749,24 @@ let g:markdown_fenced_languages = [
       \ 'html',
       \ 'javascript',
       \ 'json',
-      \ 'kotlin',
       \ 'python',
       \ 'ruby',
       \ 'sh',
 \]
 let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
 let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
+
+" ----------------------- "
+" --- Auto-formatting --- "
+" ----------------------- "
+
+" Autoformat JSON with jq
+" -M  monochrome
+" -r raw output
+autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
+
+" Autoformat XML and HTML with xmllint
+autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
 
 " ---------------- "
 " --- vim-ruby --- "
