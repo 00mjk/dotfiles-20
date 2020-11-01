@@ -17,6 +17,7 @@ source "${CURRDIR}/utils.sh"
 sudo apt-get install -y \
   coreutils \
   curl \
+  exuberant-ctags \
   less \
   make \
   ruby \
