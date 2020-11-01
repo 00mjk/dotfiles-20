@@ -14,7 +14,6 @@ source "${CURRDIR}/utils.sh"
 
 backup_and_symlink $ROOTDIR/vimrc $HOME/.vimrc
 
-# Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -25,5 +24,3 @@ if [[ -n "$(command -v go)" ]]; then
 else
   echo "Golang is not installed, skipping vim-go binaries"
 fi
-
-
