@@ -2,8 +2,8 @@
 
 set -e
 
-If gcloud is installed globally, ignore it and install it afresh,
-otherwise just update the existing one.
+# If gcloud is installed globally, ignore it and install it afresh,
+# otherwise just update the existing one.
 if [[ "$(which gcloud)" == "${HOME}/google-cloud-sdk/bin/gcloud" ]]; then
   echo "Google Cloud SDK already installed for the current user, updating and installing additional components."
   gcloud components update --quiet
