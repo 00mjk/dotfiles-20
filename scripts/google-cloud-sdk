@@ -18,7 +18,7 @@ if [[ $(uname -s) == 'Linux' ]]; then
   sudo apt-get install -yq wget unzip python3-pip
 fi
 
-DOWNLOAD_DIR="${HOME}/downloads"
+DOWNLOAD_DIR="${HOME}/Downloads"
 mkdir -p "${DOWNLOAD_DIR}"
 
 FILENAME="google-cloud-sdk.zip"
