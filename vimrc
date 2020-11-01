@@ -130,6 +130,16 @@ set backup
 " (default 1000)
 set timeoutlen=350
 
+" --- history --- "
+"
+" !   save and restore global variables that start with an uppercase letter (it was included in the defaults)
+" '   max number of files to remember for marks
+" h   disable effect of 'hlsearch' when loading viminfo file
+" <   max number of lines saved per register
+" :   max number of entries in the command history
+" s   max size of register items in Kbytes
+set viminfo=!,'100,<50,s10,h,:1000
+
 " ------------------------------- "
 " --- Leader key alternatives --- "
 " ------------------------------- "
