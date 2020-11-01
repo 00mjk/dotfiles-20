@@ -1109,6 +1109,10 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " -------------- "
 
 let g:go_fmt_command = "goimports"
+let g:go_list_type = "quickfix"
+" let g:go_fmt_fail_silently = 1
+" let g:go_addtags_transform = "camelcase"
+" let g:go_addtags_transform = "snake_case"
 
 highlight link goBuiltins Keyword
 
@@ -1132,8 +1136,8 @@ let g:go_auto_type_info = 1
 " ...after only 100 ms instead of the default 800
 set updatetime=100
 
-autocmd FileType go nnoremap <Leader>z :GoDiagnostics!<CR>
-autocmd FileType go nnoremap <Leader>t :GoTest!<CR>
+autocmd FileType go nnoremap <Leader>z <Plug>(go-diagnostics)
+autocmd FileType go nnoremap <Leader>t <Plug>(go-test)
 
 " ----------------- "
 " --- Syntastic --- "
