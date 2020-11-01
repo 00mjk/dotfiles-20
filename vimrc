@@ -568,7 +568,7 @@ function! <SID>StripExtraWhitespace()
   call cursor(l, c) " back to the original position
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash autocmd BufWritePre <buffer> :call <SID>StripExtraWhitespace()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash,dircolors autocmd BufWritePre <buffer> :call <SID>StripExtraWhitespace()
 
 " StripTrailingWhitespace will not remove multiple blank lines, for langagues
 " where that is the desired style.
