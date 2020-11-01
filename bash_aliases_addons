@@ -53,7 +53,7 @@ gdel() {
   # excluding master itself.
   git branch --no-color --remote --merged origin/master \
     | cut -c3-  \
-    | grep -vE '^(origin/master|origin/HEAD)\b' \
+    | grep -vE '^(origin/master|origin/HEAD|origin/staging|origin/development|origin/production)\b' \
     | while read x; do
         git push --delete origin "${x#origin/}" # strip the origin/ prefix
       done
@@ -61,7 +61,7 @@ gdel() {
   # Same but with the local branches.
   git branch --list --no-color \
 		| cut -c3-  \
-    | grep -vE '^master$' \
+    | grep -vE '^(master|staging|development|production)$' \
     | while read x; do
         git branch -d "${x}"
       done
