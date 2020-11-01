@@ -14,8 +14,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
@@ -180,6 +180,12 @@ if exists('+colorcolumn')
   autocmd FileType qf set colorcolumn=
 endif
 
+" for some reason the vertsplit highlight needs to be placed after the set
+" colorcolumn option
+highlight VertSplit cterm=none,reverse ctermbg=8 ctermfg=8
+highlight EndOfBuffer cterm=none ctermfg=15
+highlight ColorColumn ctermbg=15
+
 " ---------------------- "
 " --- Search options --- "
 " ---------------------- "
@@ -195,9 +201,9 @@ set hlsearch    " highlight results
 " ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
 " Pastel...)
 " See the README/TODO for more options.
-hi Search term=reverse cterm=reverse ctermfg=11 ctermbg=0
-hi Todo term=reverse cterm=reverse,bold ctermfg=7 ctermbg=0
-hi Visual term=reverse cterm=reverse ctermfg=7 ctermbg=0
+highlight Search term=reverse cterm=reverse ctermfg=11 ctermbg=0
+highlight Todo term=reverse cterm=reverse,bold ctermfg=7 ctermbg=0
+highlight Visual term=reverse cterm=reverse ctermfg=7 ctermbg=0
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
@@ -1239,3 +1245,10 @@ endif
 
 " <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
+" ------------------ "
+" --- Statusline --- "
+" ------------------ "
+
+highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
+highlight! StatusLineNC cterm=none ctermfg=7 ctermbg=8
