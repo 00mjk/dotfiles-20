@@ -117,7 +117,21 @@ nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":s
 
 " Ack
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case --ignore={log,tags}'
+  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case'.
+        \' --ignore-dir=.git'.
+        \' --ignore-dir=.hg'.
+        \' --ignore-dir=.svn'.
+        \' --ignore-dir=.bundle'.
+        \' --ignore-dir=.bin'.
+        \' --ignore-dir=vendor'.
+        \' --ignore-dir=log'.
+        \' --ignore-dir=node_modules'.
+        \' --ignore=*.exe'.
+        \' --ignore=*.so'.
+        \' --ignore=*.class'.
+        \' --ignore=*.dll'.
+        \' --ignore=*.pyc'.
+        \' --ignore=tags'
 endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
@@ -155,7 +169,7 @@ let g:ctrlp_open_multiple_files = 'r1'
 
 " only effective if `ag' not available
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|node_modules)$',
+  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|node_modules|log|vendor)$',
   \ 'file': '\v\.(exe|so|dll|class|pyc)$',
   \ }
 
@@ -170,12 +184,15 @@ if executable('ag')
         \' --ignore-dir=.svn'.
         \' --ignore-dir=.bundle'.
         \' --ignore-dir=.bin'.
+        \' --ignore-dir=vendor'.
+        \' --ignore-dir=log'.
         \' --ignore-dir=node_modules'.
         \' --ignore=*.exe'.
         \' --ignore=*.so'.
         \' --ignore=*.class'.
         \' --ignore=*.dll'.
-        \' --ignore=*.pyc'
+        \' --ignore=*.pyc'.
+        \' --ignore=tags'
 endif
 
 " use ctrlp in a single shortcut to navigate buffers
