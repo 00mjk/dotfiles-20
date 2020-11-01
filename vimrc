@@ -225,6 +225,13 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 set pastetoggle=<F3>
 
+" --- Paste over visual selection preserving the content of the paste buffer
+vnoremap <Leader>p pgvy`>
+" p   -> paste normally
+" gv  -> reselect the pasted text
+" y   -> copy it again
+" `>  -> jump to the last character of the visual selection (built-in mark)
+
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
 " ---------------------------------------- "
