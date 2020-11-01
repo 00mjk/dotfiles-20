@@ -19,3 +19,25 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget
 fi
+
+# Lightweight prompt that:
+#
+#   * colorises the info about user and host
+#   * displays the current path
+#   * displays the current git branch if it's in a repo
+#   * puts the cursor into a new line
+if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
+  function _bravoecho_git_branch() {
+    local branch_name=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+    if [[ -n "${branch_name}" ]]; then
+      echo " on %{$fg[green]%}${branch_name}%{$reset_color%}"
+    fi
+  }
+
+  PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(_bravoecho_git_branch)]
+%# '
+else
+  PROMPT='[%n@%m:%~]
+%# '
+fi
