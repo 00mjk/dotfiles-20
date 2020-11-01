@@ -46,6 +46,9 @@ set cursorline
 set ignorecase
 set showmatch
 
+" enable mouse mode
+set mouse=a
+
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
