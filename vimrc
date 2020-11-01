@@ -304,8 +304,8 @@ set softtabstop=2
 
 autocmd FileType python
 	\ setlocal tabstop=4
-	\ setlocal softtabstop=4
-	\ setlocal shiftwidth=4
+	\ | setlocal softtabstop=4
+	\ | setlocal shiftwidth=4
 
 " --------------------------- "
 " --- Indenting shortcuts --- "
