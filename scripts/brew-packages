@@ -115,7 +115,8 @@ brew cask install \
   font-inconsolata \
   iterm2 \
   rectangle \
-  visual-studio-code
+  visual-studio-code \
+  sd-formatter
 
 # ------------------------------ #
 # --- Post install for casks --- #
@@ -157,11 +158,17 @@ NOTES
 
 * Other casks that could be useful:
 
-  - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - copyq (clipboard manager that supports images)
+  - discord
+  - dropbox
   - google-backup-and-sync (for personal accounts, works with G Suite, but does not support Shared Drives)
+  - google-chrome
+  - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - slack
+  - vagrant
   - virtualbox
   - virtualbox-extension-pack
-  - vagrant
-  - copyq (clipboard manager that supports images)
   - vlc
+  - zoomus
+
 "
