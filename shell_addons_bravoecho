@@ -19,10 +19,7 @@ export LS_COLORS
 # --- LESS --- #
 # ------------ #
 
-# -i smart-case insensitive search
-# -R render colours
-# -x2 render tabs with 2 spaces
-export LESS="iRx2"
+export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3"
 
 # # -----------
 # # --- GPG ---
