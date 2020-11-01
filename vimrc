@@ -468,7 +468,7 @@ let s:agignore =
 " ----------- "
 
 if executable('ag')
-  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores --literal' . s:agignore
+  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
 endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
