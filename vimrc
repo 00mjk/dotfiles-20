@@ -29,6 +29,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 Plug 'posva/vim-vue'
 Plug 'majutsushi/tagbar'
 Plug 'udalov/kotlin-vim'
@@ -836,7 +837,7 @@ nmap <M-l> :call TmuxWinCmd('l')<CR>
 " * some parts of the status bar are actually helpful (in particular the Vim
 "   mode and how it's formatted)
 "
-" However, to prevent a cognitive storm, it's been heavily streamlined.
+" However, to prevent a cognitive overload, it's been heavily streamlined.
 
 set noshowmode " showing the Vim mode twice is ugly
 
@@ -888,6 +889,7 @@ let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#term#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#ale#enabled = 0
 
 " customise the airline layout:
 " - remove section X (filetype)
@@ -1150,6 +1152,28 @@ let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list = 1
+
+" -------------------------------------- "
+" --- Ale (Asynchronous Lint Engine) --- "
+" -------------------------------------- "
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1 " it's the default, but let's make it explicit
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '•'
+
+" disable all linters unless explicitly enabled
+" let g:ale_linters_explicit = 1
+
+" open the loclist automatically on errors...
+let g:ale_open_list = 1
+" ...and close it when the buffer is closed
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
 " ---------------- "
 " --- vim-json --- "
