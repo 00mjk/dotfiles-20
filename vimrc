@@ -440,6 +440,8 @@ let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
 nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
+" Keep the tabline hidden by default
+au VimEnter * :set showtabline=0
 
 " ---------------- "
 " --- agignore --- "
