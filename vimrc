@@ -193,11 +193,13 @@ vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
 " --- Mouse support --- "
 " --------------------- "
 
-set mouse=a " enable mouse mode
-if has("mouse_sgr")
-  set ttymouse=sgr
-else
-  set ttymouse=xterm2
+if !has('nvim')
+  set mouse=a " enable mouse mode
+  if has("mouse_sgr")
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  end
 end
 
 " -------------------------- "
@@ -418,7 +420,9 @@ vnoremap <Leader>p pgvy`>
 " Delete without yanking, send the deleted content to the 'black hole' register.
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
-set <M-d>=d
+if !has('nvim')
+  set <M-d>=d
+end
 
 " ...then, the actual mapping:
 " current line in normal and insert mode
