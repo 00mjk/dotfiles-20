@@ -7,7 +7,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
-Plug 'fatih/vim-go'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
@@ -82,13 +83,13 @@ nmap <Leader>s :w<CR>
 nmap <Leader>q :qa!<CR>
 
 " vim-airline
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+
+let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creation of a 16-color colorscheme)
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
+let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
+" Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
 nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-" Show buffer number in status bar
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Ack
 if executable('ag')
@@ -120,7 +121,7 @@ let g:ctrlp_custom_ignore = {
 " use ctrlp in a single shortcut to navigate buffers
 noremap <Leader>b :CtrlPBuffer<CR>
 
-" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim), 
+" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim),
 " because faster and respects .gitignore
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -149,7 +150,7 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " Allow enter to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
@@ -160,3 +161,33 @@ set pastetoggle=<F3>
 set wildignore+=*.swp,*/tmp/
 set noswapfile
 set noundofile
+
+" Fix arrow key combos inside tmux
+
+" this enables to use native and custom key combos inside tmux,
+" as well as in standalone vim;
+" relies on the term being correctly set inside tmux
+if &term =~ '^screen'
+  exec "set <xUp>=\e[1;*A"
+  exec "set <xDown>=\e[1;*B"
+  exec "set <xRight>=\e[1;*C"
+  exec "set <xLeft>=\e[1;*D"
+endif
+
+" Navigate within and across tmux
+
+function! TmuxWinCmd(direction)
+  let wnr = winnr()
+  " try to move...
+  silent! execute 'wincmd ' . a:direction
+  " ...and if does nothing it means that it was the last vim pane,
+  " so we forward the command back to tmux
+  if wnr == winnr()
+    call system('tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR'))
+  end
+endfunction
+
+nmap <M-Down>   :call TmuxWinCmd('j')<CR>
+nmap <M-Up>     :call TmuxWinCmd('k')<CR>
+nmap <M-Left>   :call TmuxWinCmd('h')<CR>
+nmap <M-Right>  :call TmuxWinCmd('l')<CR>
