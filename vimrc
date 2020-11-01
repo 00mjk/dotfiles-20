@@ -37,6 +37,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'udalov/kotlin-vim'
 Plug 'SirVer/ultisnips'
 Plug 'bravoecho/vim-markdown-toc'
+Plug 'tpope/vim-abolish'
 
 Plug 'altercation/vim-colors-solarized'
 
