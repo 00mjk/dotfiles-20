@@ -1236,6 +1236,9 @@ let g:be_modes = {
 let g:be_buffer_types = {
   \ 'quickfix' : { 'name': 'QUICKFIX' , 'highlight': 'BE_ModeQuickfix' },
   \ 'loclist'  : { 'name': 'LOCLIST'  , 'highlight': 'BE_ModeLoclist'  },
+  \ 'preview'  : { 'name': 'PREVIEW'  , 'highlight': 'BE_ModeOther'    },
+  \ 'scratch'  : { 'name': 'SCRATCH'  , 'highlight': 'BE_ModeOther'    },
+  \ 'help'     : { 'name': 'HELP'     , 'highlight': 'BE_ModeOther'    },
 \}
 
 " highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
@@ -1258,8 +1261,8 @@ highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6   ctermbg=none
 highlight BE_ModeQuickfix         cterm=bold,reverse  ctermfg=9   ctermbg=none
 highlight BE_ModeQuickfixCentre   cterm=bold,reverse  ctermfg=1   ctermbg=none
 " yellow
-highlight BE_ModeLoclist         cterm=bold          ctermfg=none  ctermbg=11
-highlight BE_ModeLoclistCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
+highlight BE_ModeLoclist          cterm=bold          ctermfg=none  ctermbg=11
+highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=3     ctermbg=none
 
 let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
 let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
@@ -1267,35 +1270,74 @@ let g:BE_statusline_right_only_lines = ' %4l %6([%L]%)'
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
-  if len(&buftype) != 0 && &buftype != 'quickfix' | return | endif
+  if &l:buftype !=? '' && &l:buftype !=? 'quickfix' | return | endif
   " unless it's the Explore window netrw
-  if &filetype ==? 'netrw' | return | endif
-  " quickfix is handled separately
-  if getwininfo(win_getid())[0].quickfix == 1 | return | endif
+  if &l:filetype ==? 'netrw' | return | endif
+  " help is handled separately
+  if &l:filetype ==? 'help' | return | endif
 
-  if a:active == 1
+  " quickfix and loclist need to be handled both by filetype (for the
+  " scenarios) where the Enter events don't trigger) and by event, because if
+  " only the filetype is handled, both types of lists will be set with the same
+  " type of statusline
+  if &l:filetype ==? 'qf' && getwininfo(win_getid())[0].loclist == 1
+    setlocal statusline=%!BE_ListsStatusline('loclist')
+  elseif &l:filetype ==? 'qf'
+    setlocal statusline=%!BE_ListsStatusline('quickfix')
+  elseif &l:previewwindow == 1
+    setlocal statusline=%!BE_ModeOnlyStatusline('preview')
+  elseif (&l:buftype ==? 'nofile' && &l:filetype ==? '') || &l:buftype ==? 'acwrite'
+    " it's a 'scratch' file (we neeed to check filetype is empty because nerdtree is a 'nofile' too)
+    setlocal statusline=%!BE_ModeOnlyStatusline('scratch')
+  elseif a:active == 1
     setlocal statusline=%!BE_ActiveStatusline()
   else
     setlocal statusline=%!BE_InactiveStatusline()
   endif
 endfunction
 
-function! BE_ListsStatusline()
-  if getwininfo(win_getid())[0].loclist == 1
-    let l:list_type = 'loclist'
-  else
-    let l:list_type = 'quickfix'
-  endif
+function! BE_ModeOnlyStatusline(buffer_type)
+  let l:mode_name   = g:be_buffer_types[a:buffer_type]['name']
+  let l:mode_colour = g:be_buffer_types[a:buffer_type]['highlight']
 
-  let l:mode_name   = g:be_buffer_types[l:list_type]['name']
-  let l:mode_colour = g:be_buffer_types[l:list_type]['highlight']
+  let l:stl  = '%#'.l:mode_colour.'#'
+  let l:stl .= ' '.l:mode_name.' '
+  let l:stl .= '%#'.l:mode_colour.'Centre#'
+  let l:stl .= ' '
+
+  return l:stl
+endfunction
+
+function! BE_HelpStatusline()
+  let l:mode_name   = g:be_buffer_types['help']['name']
+  let l:mode_colour = g:be_buffer_types['help']['highlight']
+
+  let l:stl  = '%#'.l:mode_colour.'#'
+  let l:stl .= ' '.l:mode_name.' '
+  let l:stl .= '%#'.l:mode_colour.'Centre#'
+  let l:stl .= ' %F'
+
+  return l:stl
+endfunction
+
+function! BE_ListsStatusline(list_type)
+  let l:mode_name   = g:be_buffer_types[a:list_type]['name']
+  let l:mode_colour = g:be_buffer_types[a:list_type]['highlight']
 
   let l:stl  = '%#'.l:mode_colour.'#'
   let l:stl .= ' '.l:mode_name.' '
   let l:stl .= '%#'.l:mode_colour.'Centre#'
   let l:stl .= ' [%L]'
 
-  let &statusline=l:stl
+  return l:stl
+endfunction
+
+function! BE_ListsStatuslineInitial()
+  if getwininfo(win_getid())[0].loclist == 1
+    let &l:statusline = BE_ListsStatusline('loclist')
+  else
+    let &l:statusline = BE_ListsStatusline('quickfix')
+  endif
 endfunction
 
 function! BE_ActiveStatusline()
@@ -1313,7 +1355,7 @@ function! BE_ActiveStatusline()
 endfunction
 
 function! BE_InactiveStatusline()
-  let l:stl  = g:BE_statusline_centre
+  let l:stl  =  ' %<%f %m%r%h%w %='
   let l:stl .= g:BE_statusline_right
   return l:stl
 endfunction
@@ -1322,7 +1364,10 @@ augroup BE_StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
-    autocmd FileType              qf        call BE_ListsStatusline()
+    " quickfix and help also need to have its own autocmd because WinEnter and
+    " BufWinEnter are not triggered consistently on first opening it
+    autocmd FileType              help      setlocal statusline=%!BE_HelpStatusline()
+    autocmd  FileType             qf        call BE_ListsStatuslineInitial()
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
