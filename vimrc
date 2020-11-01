@@ -594,11 +594,63 @@ let g:markdown_fenced_languages = [
       \ 'kotlin',
       \ 'python',
       \ 'ruby',
-      \ 'bash=sh',
       \ 'sh',
 \]
 let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
 let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
+
+" ---------------- "
+" --- vim-ruby --- "
+" ---------------- "
+
+" Highlight ruby operators (`/`, `&&`, `*`...)
+let g:ruby_operators = 1
+
+" ----------------- "
+" --- vim-RSpec --- "
+" ----------------- "
+
+" --- Syntax highlighting outside Rails ---
+
+autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
+      \ after
+      \ before
+      \ class_double
+      \ contain_exactly
+      \ context
+      \ describe
+      \ described_class
+      \ double
+      \ expect
+      \ include_context
+      \ include_examples
+      \ instance_double
+      \ it
+      \ it_behaves_like
+      \ it_should_behave_like
+      \ its
+      \ let
+      \ object_double
+      \ raise_error
+      \ setup
+      \ shared_context
+      \ shared_examples
+      \ shared_examples_for
+      \ specify
+      \ subject
+      \ xit
+      \ any_args
+      \ anything
+      \ array_including
+      \ boolean
+      \ duck_type
+      \ hash_excluding
+      \ hash_including
+      \ instance_of
+      \ kind_of
+      \ no_args
+
+highlight def link rubyRspec Function
 
 " ------------------------------------------------------- "
 " --- File types for non-standard filename extensions --- "
@@ -844,52 +896,6 @@ let g:go_auto_type_info = 1
 set updatetime=100
 
 autocmd FileType go nnoremap <Leader>z :GoDiagnostics!<CR>
-
-" ----------------- "
-" --- vim-RSpec --- "
-" ----------------- "
-
-" --- Syntax highlighting outside Rails ---
-
-autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
-      \ after
-      \ before
-      \ class_double
-      \ contain_exactly
-      \ context
-      \ describe
-      \ described_class
-      \ double
-      \ expect
-      \ include_context
-      \ include_examples
-      \ instance_double
-      \ it
-      \ it_behaves_like
-      \ it_should_behave_like
-      \ its
-      \ let
-      \ object_double
-      \ raise_error
-      \ setup
-      \ shared_context
-      \ shared_examples
-      \ shared_examples_for
-      \ specify
-      \ subject
-      \ xit
-      \ any_args
-      \ anything
-      \ array_including
-      \ boolean
-      \ duck_type
-      \ hash_excluding
-      \ hash_including
-      \ instance_of
-      \ kind_of
-      \ no_args
-
-highlight def link rubyRspec Function
 
 " ----------------- "
 " --- Syntastic --- "
