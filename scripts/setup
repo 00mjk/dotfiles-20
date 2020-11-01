@@ -7,12 +7,14 @@ if [[ -z $(command -v git) ]]; then
   exit 1
 fi
 
-sudo apt-get update
-
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
 source "${CURRDIR}/utils.sh"
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
+sudo apt-get update
 
 sudo apt-get install -y \
   coreutils \
@@ -26,6 +28,10 @@ sudo apt-get install -y \
   unzip \
   vim-nox \
   wget \
+	nodejs \
+	build-essential \
+
+npm install eslint --global
 
 # Dotfiles
 backup_and_symlink $ROOTDIR/gitconfig_addons $HOME/.gitconfig_addons
