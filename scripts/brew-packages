@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# with help from
-#
-#   * https://github.com/fabiomaia/linuxify
-#   * https://github.com/ickc/GNU-ize
-
 set -e
 
 if [[ ! "$(uname -s)" =~ Darwin ]]; then
@@ -23,71 +18,109 @@ CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
 brew install \
-  autoconf \
   bash \
-  binutils \
+  bat \
   bmon \
+  cmark \
   coreutils \
   diffutils \
-  ed \
-  emacs \
   fd \
   ffmpeg \
   findutils \
   fzf \
   gawk \
-  gdb \
   git \
   gnu-getopt \
   gnu-indent \
   gnu-sed \
   gnu-tar \
   gnu-time \
-  gnu-units \
   gnu-which \
   gnupg \
   go \
+  golangci/tap/golangci-lint \
   gpatch \
+  graphviz \
   grep \
   gzip \
   htop \
   imagemagick \
   inetutils \
+  jq \
   less \
+  lf \
+  lsof \
   make \
   mosh \
+  mtr \
   nano \
   nethogs \
   nload \
   openssh \
   perl \
+  pre-commit \
   python \
+  ranger \
   rbenv \
   ripgrep \
   rsync \
   ruby-install \
-  screen \
   slurm \
   sqlite \
   the_silver_searcher \
   tmux \
-  unrar \
-  unzip \
+  trash \
+  tree \
   vim \
   watch \
   wdiff \
   wget \
   zsh
 
-echo "\n===> Configuring fzf\n"
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+
+printf "\n===> Configuring fzf\n"
+set -x
 /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+set +x
 
 printf "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
 
+brew cask install \
+  docker \
+  firefox \
+  font-inconsolata \
+  iterm2 \
+  rectangle \
+  visual-studio-code
+
 echo "
 
-NOTE: Many packages installed depend on the shell configuration provided.
-      Run './scripts/dotfiles' to install it.
+NOTES
+
+* Many packages installed depend on the shell configuration provided.
+  Run './scripts/dotfiles' to install it.
+
+* Other packages that are commonly useful:
+
+  - binutils
+  - ed
+  - emacs
+  - gdb
+  - gnu-units
+  - screen
+  - unrar
+  - unzip
+
+* Other casks that could be useful:
+
+  - google-drive-file-stream
+  - google-backup-and-sync
+  - virtualbox
+  - virtualbox-extension-pack
+  - vagrant
+  - copyq
+  - vlc
 "
