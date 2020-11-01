@@ -13,26 +13,26 @@ CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
 backup_and_symlink $ROOTDIR/gitconfig_addons_bravoecho $HOME/.gitconfig_addons_bravoecho
-backup_and_symlink $ROOTDIR/bash_aliases_addons_bravoecho $HOME/.bash_aliases_addons_bravoecho
-backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoecho
 backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
 
-if [[ -f "$HOME/.bashrc" ]]; then
-  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
-  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
+# aliases and other configuration compatible with both zsh and bash
+function configure_shell_addons() {
+  local rcfile=$1
 
-  # Allow to further customise aliases without the need to make changes to the provided setup.
-  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
-  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
-fi
+  if [[ -f "${HOME}/.${rcfile}" ]]; then
+    backup_and_symlink $ROOTDIR/shell_addons_bravoecho $HOME/.shell_addons_bravoecho
+    append_if_missing "$HOME/.${rcfile}" '[[ -e "${HOME}/.shell_addons_bravoecho" ]] && source ~/.shell_addons_bravoecho'
 
-if [[ -f "$HOME/.zshrc" ]]; then
-  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
-  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
+    backup_and_symlink $ROOTDIR/shell_aliases_bravoecho $HOME/.shell_aliases_bravoecho
+    append_if_missing "$HOME/.${rcfile}" '[[ -e "${HOME}/.shell_aliases_bravoecho" ]] && source ~/.shell_aliases_bravoecho'
 
-  # Allow to further customise aliases without the need to make changes to the provided setup.
-  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
-  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
-fi
+    # Allow to further customise aliases without the need to make changes to the provided setup.
+    append_if_missing "$HOME/.${rcfile}" '[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local'
+    append_if_missing "$HOME/.${rcfile}" '[[ -e "${HOME}/.shell_aliases_local" ]] && source ~/.shell_aliases_local'
+  fi
+}
+
+configure_shell_addons bashrc
+configure_shell_addons zshrc
 
 git config --global include.path .gitconfig_addons_bravoecho
