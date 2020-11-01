@@ -45,6 +45,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " TypeScript
 " ...syntax
