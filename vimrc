@@ -35,6 +35,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'godlygeek/tabular'
 Plug 'kchmck/vim-coffee-script'
 Plug 'udalov/kotlin-vim'
+Plug 'SirVer/ultisnips'
 
 Plug 'altercation/vim-colors-solarized'
 
