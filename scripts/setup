@@ -10,57 +10,8 @@ fi
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
-source "${CURRDIR}/utils.sh"
-
-# --------------------------------------------
-# --- File permissions required for Bionic ---
-# --------------------------------------------
-touch ~/.gitconfig
-mkdir -p ~/.config
-sudo chown -R developer.developer ~/.gitconfig ~/.config
-
-# ----------------------
-# --- Basic packages ---
-# ----------------------
-sudo apt-get update -q
-
-sudo apt-get install -y \
-  build-essential \
-  coreutils \
-  curl \
-  exuberant-ctags \
-  jq \
-  less \
-  lsof \
-  nmap \
-  make \
-  ruby \
-  silversearcher-ag \
-  tmux \
-  unzip \
-  vim-nox \
-  wget \
-
-# ----------------
-# --- Dotfiles ---
-# ----------------
-
-backup_and_symlink $ROOTDIR/gitconfig_addons $HOME/.gitconfig_addons
-backup_and_symlink $ROOTDIR/bash_aliases_addons $HOME/.bash_aliases_addons
-backup_and_symlink $ROOTDIR/bashrc_addons $HOME/.bashrc_addons
-backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
-
-# ------------
-# --- Bash ---
-# ------------
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons" ]] && source ~/.bashrc_addons'
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons" ]] && source ~/.bash_aliases_addons'
-
-# -----------
-# --- Git ---
-# -----------
-git config --global include.path .gitconfig_addons
-
+source $ROOTDIR/scripts/basic-packages
+source $ROOTDIR/scripts/dotfiles
 source $ROOTDIR/scripts/docker
 source $ROOTDIR/scripts/docker-compose
 source $ROOTDIR/scripts/golang
