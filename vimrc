@@ -741,10 +741,12 @@ command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
 
 " More extensions might need to be disabled if additional plugins are installed
 " and have a correspoding builtin extension.
+"
+" Run :AirlineExtensions to find which are enabled.
 
 " let g:airline#extensions#quickfix#enabled = 0
+" let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#fugitiveline#enabled = 0
 let g:airline#extensions#fzf#enabled = 0
 let g:airline#extensions#keymap#enabled = 0
@@ -762,7 +764,7 @@ let g:airline#extensions#wordcount#enabled = 0
 " - remove section B (git branch etc.)
 let g:airline#extensions#default#layout = [
   \ [ 'a', 'c' ],
-  \ [ 'z', 'error', 'warning', 'statistics' ]
+  \ [ 'x', 'z', 'error', 'warning', 'statistics' ]
 \ ]
 
 " ---------------- "
