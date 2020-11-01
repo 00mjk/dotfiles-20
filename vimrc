@@ -135,9 +135,9 @@ set swapfile
 set undofile
 set backup
 
-" --- reduce the command timeout --- "
-" (default 1000)
-set timeoutlen=300
+set timeoutlen=300 " reduce the command timeout (default 1000)
+
+set completeopt-=preview " do not open Preview split with docs for completion entries
 
 " --- history --- "
 set history=1000
@@ -319,9 +319,8 @@ endfunction
 " --- Reselect last edited text --- "
 " --------------------------------- "
 
-" TODO: fix reselect last visual selection because this doesn't work any more
-" Leader-gv selects the just changed or pasted text, similar to how the native
-" gv reselects the last visual selection.
+" Leader-gv selects text that was just just changed or pasted , similar to how
+" the native gv reselects the last visual selection.
 " <http://vim.wikia.com/wiki/Selecting_your_pasted_text>
 nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
 
