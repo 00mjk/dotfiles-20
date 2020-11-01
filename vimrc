@@ -1150,6 +1150,7 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
 " -------------- "
 
 nnoremap <Leader>tt :TagbarToggle<CR>
+let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
 " ------------------------------------- "
 " --- Load additional configuration --- "
