@@ -938,6 +938,7 @@ let s:rgignore =
       \ " --glob='!**/code.google.com/'".
       \ " --glob='!**/git/'".
       \ " --glob='!**/github.com/'".
+      \ " --glob='!**/google.golang.org/'".
       \ " --glob='!**/golang.org/'".
       \ " --glob='!**/gopkg.in/'".
       \ " --glob='!**/launchpad.net/'".
