@@ -404,6 +404,20 @@ inoremap <F1> <ESC>
 " http://www.commandlinefu.com/commands/view/1204/save-a-file-you-edited-in-vim-without-the-needed-permissions
 command Sudow :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
+" ---------------------------------------- "
+" --- Command aliases for common typos --- "
+" ---------------------------------------- "
+
+" http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
+command W   w
+command Wa  wa
+command WA  wa
+command Q   q
+command Qa  quitall
+command QA  quitall
+command Wq  wq
+command Wqa wqa
+
 " -------------------------- "
 " --- Intuitive home key --- "
 " -------------------------- "
