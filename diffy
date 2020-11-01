@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# --- VERSION 1 --- #
+
+# side-by-side diff with custom options:
+# sdiff --minimal --width $(tput cols) --expand-tabs --tabsize 2 --left "$2" "$5"
+
+# --- VERSION 2 --- #
+#
+# from Alternative 2:
+# <https://wiki.crdb.io/wiki/spaces/CRDB/pages/73072864/Git+diff+side+by+side>
+#
+# Usage:
+#
+#     GIT_EXTERNAL_DIFF=./<path-to-this-diffy-script> git diff
+#
+
+echo
+echo "-------------------------------------------------------------------------"
+echo "--- Diffy-ing: $1"
+echo "-------------------------------------------------------------------------"
+echo
+
+if stty >/dev/null 2>&1; then
+  pager=${PAGER:-less -r}
+else
+  pager=cat
+fi
+
+term_width=$(stty size | cut -d' ' -f2)
+cols_each_side=$(($term_width / 2))
+
+sdiff -W -w $term_width "$2" "$5" | colordiff | grep -E "^.{$cols_each_side} *[|<>] *" -A 5 -B 5 | $pager
