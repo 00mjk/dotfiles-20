@@ -1,3 +1,5 @@
+# vim: set ft=bash:
+
 # Sourced by other install scripts.
 
 backup_and_symlink () {
@@ -33,19 +35,19 @@ backup_and_symlink () {
   ln -sfnv "${target_path}" "${symlink_path}"
 }
 
-# echo doesn't work for appending to a file in this case, because
-# it expands variables recursively
-# sudo bash -c "echo $CONTENT_LINE >> $TARGET_FILE"
-# Using sed instead, see <http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/#append_lines>
-# Also add a blank line before the new content.
 append_if_missing () {
-  local TARGET_FILE=$1
-  local CONTENT_LINE=$2
+  local dest=$1
+  local content=$2
 
-  if [ "$(grep -F "${CONTENT_LINE}" $TARGET_FILE)" ]; then
-    echo "-- line \"$CONTENT_LINE\" already in $TARGET_FILE"
+  if [[ $(grep --line-regexp --fixed-strings --regexp="$content" $dest) ]]; then
+    echo "==> skipping \"$content\", already in $dest"
   else
-    echo "${CONTENT_LINE}" >> "${TARGET_FILE}"
-    echo "-- added \"$CONTENT_LINE\" to $TARGET_FILE"
+    if [ -w $dest ]; then
+      echo "${content}" >> "${dest}"
+    else
+      echo "==> Requesting sudo because the destination '${dest}' is not writable:"
+      echo "${content}" | sudo tee -a "${dest}" > /dev/null
+    fi
+    echo "==> added \"$content\" to $dest"
   fi
 }
