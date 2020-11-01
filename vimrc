@@ -1112,7 +1112,7 @@ autocmd FileType sql setlocal commentstring=--\ %s
 
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
-" let g:go_fmt_fail_silently = 1
+let g:go_fmt_fail_silently = 1 " we have other means of showing syntax errors
 " let g:go_addtags_transform = "camelcase"
 " let g:go_addtags_transform = "snake_case"
 
