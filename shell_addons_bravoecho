@@ -239,6 +239,11 @@ alias la='ls -lA'
 # -F will prints markers for dirs, executables and other special files, like 'ls -F'
 alias tree='command tree --dirsfirst -F'
 
+# --- yq --- #
+
+# takes JSON from stdin and converts it to colorised YAML
+alias yin='yq r -PC -'
+
 # --- bundler --- #
 
 alias be='bundle exec'
