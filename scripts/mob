@@ -1,152 +1,151 @@
 #!/bin/bash
 
+# Author: https://github.com/carloscalzo
+
 # ASCII constants
 readonly CLEAR_LINE='\033[K'
-readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
 readonly NO_COLOR='\033[0m'
 
 # command line arguments
 readonly ARGS=("$@")
 
-function countdown {
-  local i
-  for i in {5..1}
-  do
-    printf "MOB STARTING IN $i\r"
-    sleep 1
-  done
-}
+# seconds in a minute - useful for testing purposes
+readonly MINUTE=60
+
+# 'shuf' program - set to 'gshuf' on Mac ('brew install coreutils' to install 'gshuf')
+readonly SHUF_CMD=shuf
+
+# number of times the alerts flash on screen
+readonly ALERT_ROUNDS=10
 
 # one parameter: message (string)
 function alarm {
-  local msg=$1
-  printf $RED
-  local i
-  for i in {1..10}
-  do
-    printf "$msg\r"
-    sleep .5
-    printf "$CLEAR_LINE"
-    sleep .5
-  done
-  printf $NO_COLOR
-}
-
-# parameters: one+ team members, no of rounds (int), length of a round in min (int)
-function work {
-  local params=("$@")
-  local param_n=${#params[@]}
-
-  local time=${params[$((param_n - 1))]}
-  local rounds=${params[$((param_n - 2))]}
-  local team_size=$((param_n - 2))
-  local team=("${params[@]:0:$team_size}")
-
-  local i=0
-  local previous=""
-  local r
-  local next
-
-  while [ $i -lt $rounds ]
-  do
-    r=$(( RANDOM % team_size ))
-    next=${team[r]}
-
-    if [ "$next" !=  "$previous" ]
-    then
-      if [ $i -eq 0 ]
-      then
-        alarm "GET READY! FIRST: $next"
-      else
-        alarm "TIME'S UP! NEXT: $next"
-      fi
-
-      printf "NOW DRIVING: $next\r"
-      sleep $(( time * 60 ))
-      printf "$CLEAR_LINE"
-      previous=$next
-      ((i++))
-    fi
-  done
-}
-
-# one parameter: length in minutes (integer)
-function rest {
-  local time=$1
-  alarm "STOP! $time MIN BREAK"
-  progress_bar $time
+	local msg=$1
+	printf $GREEN
+	local i
+	for (( i=0; i<$ALERT_ROUNDS; i++ ))
+	do
+		printf "$msg\r"
+		sleep .5
+		printf "$CLEAR_LINE"
+		sleep .5
+	done
+	printf $NO_COLOR
 }
 
 # one parameter: length in minutes (integer)
 function progress_bar {
-  local i
-  local j
-  local time=$1
-  for (( i=0; i<$time; i++ ))
-  do
-    printf "["
+	local i
+	local j
+	local time=$1
+	local time_left
+	for (( i=0; i<$time; i++ ))
+	do
+		printf "["
 
-    for (( j=0; j<$i; j++ ))
-    do
-      printf "#"
-    done
-    for (( j=$i; j<$time; j++ ))
-    do
-      printf "."
-    done
+		for (( j=0; j<$i; j++ ))
+		do
+			printf "#"
+		done
+		for (( j=$i; j<$time; j++ ))
+		do
+			printf "."
+		done
 
-    printf "]"
-    printf " $(( time - i )) MIN LEFT"
+		printf "]"
 
-    sleep 60
-    printf "\r$CLEAR_LINE"
-  done
-}
+		time_left=$((time - i))
 
-function help {
-  printf "mob 1.0\n"
-  printf "usage:   mob team_member... work_rounds work_time rest_time\n"
-  printf "example: mob ADRIAN EVA LUCA TOM 4 10 10\n"
+		if [ $time_left -eq 1 ]
+		then
+			printf " $time_left minute left"
+		else
+			printf " $time_left minutes left"
+		fi
+
+		sleep $MINUTE
+		printf "\r$CLEAR_LINE"
+	done
 }
 
 function ctrl_c {
-  # reset font color in case ctrl-c was used while showing the "alarm"
-  printf "$NO_COLOR\n"
+	# reset font color in case ctrl-c was used while showing the "alarm"
+	printf "$NO_COLOR\n"
 
-  # make cursor visible
-  tput cnorm
+	# make cursor visible again
+	tput cnorm
 
-  exit 130
+	exit 130
 }
 
 # note: doesn't check type or value of command-line parameters
 function main {
-  local arg_n=${#ARGS[@]}
+	local arg_n=${#ARGS[@]}
 
-  # check number of command line arguments
-  if [ $arg_n -lt 4 ]
-  then
-    help
-    exit 1
-  fi
+	# check number of command line arguments
+	if [ $arg_n -lt 4 ]
+	then
+		printf "mob 1.3\n"
+		printf "usage: mob team_member... work_rounds work_time rest_time\n"
+		printf "example: mob adrian eva luca tom 4 10 10\n"
+		exit 1
+	fi
 
-  # make cursor invisible
-  tput civis
+	# make cursor invisible
+	tput civis
 
-  # command line arguments
-  local rest_time=${ARGS[$((arg_n - 1))]}
-  local work_params=("${ARGS[@]:0:$((arg_n - 1))}")
+	local rest_time=${ARGS[$((arg_n - 1))]}
+	local work_time=${ARGS[$((arg_n - 2))]}
+	local work_rounds=${ARGS[$((arg_n - 3))]}
+	local team=("${ARGS[@]:0:$((arg_n - 3))}")
+	local team_size=${#team[@]}
+	local i
+	local next
+	local next_index
+	local j=0
+	local indices=($($SHUF_CMD -i 0-$((team_size-1)) -n $team_size))
+	local last_index
 
-  # main loop
-  while true
-  do
-    countdown
-    work ${work_params[@]}
-    rest $rest_time
-  done
+	# main loop (use ctrl-c to exit)
+	while true
+	do
+		# work rounds
+		for (( i=0; i<$work_rounds; i++ ))
+		do
+			# random selection
+			next_index=${indices[j]}
+			next=${team[next_index]}
+			if [ $j -lt $((team_size - 1)) ]
+			then
+				((j++))
+			else
+				last_index=$next_index
+				j=0
+				indices=($($SHUF_CMD -i 0-$((team_size-1)) -n $team_size))
+				# the new sequence can't start with the last element from the previous one
+				while [ ${indices[0]} -eq $last_index ]
+				do
+					indices=($($SHUF_CMD -i 0-$((team_size-1)) -n $team_size))
+				done
+			fi
 
-  # make cursor visible again
-  tput cnorm
+			if [ $i -eq 0 ]
+			then
+				alarm "get ready! first: $next"
+			else
+				alarm "time's up! next: $next"
+			fi
+
+			printf "now driving: $next\r"
+			sleep $(( $work_time * MINUTE ))
+			printf "$CLEAR_LINE"
+		done
+
+		# rest
+		alarm "stop! $rest_time minute break"
+		progress_bar $rest_time
+	done
 }
 trap ctrl_c SIGINT
 
