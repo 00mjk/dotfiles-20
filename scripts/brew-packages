@@ -124,6 +124,9 @@ brew cask install \
   visual-studio-code \
   sd-formatter
 
+brew tap homebrew/cask-fonts
+brew cask install font-juliamono
+
 # ------------------------------ #
 # --- Post install for casks --- #
 # ------------------------------ #
