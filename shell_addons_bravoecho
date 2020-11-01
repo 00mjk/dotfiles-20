@@ -148,10 +148,21 @@ export VISUAL=$(command -v vim)
 # --- FZF --- #
 # ----------- #
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info=inline --bind 'ctrl-/:toggle-preview' --preview-window=:hidden --preview='[ -f {} ] && head -n 200 {}'"
+[[ $SHELL =~ zsh ]] && [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ $SHELL =~ bash ]] && [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+# use this for enabling preview in fzf (using a Ctrl-/ keybinding when in the
+# fzf results); it's not enabled because preview options in Vim are not
+# respected; also, remember to comment out the lines about the stty settings,
+# because they will cause an error in the preview output
+# export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline --bind 'ctrl-/:toggle-preview' --preview-window hidden --preview '[ -f {} ] && head -n 200 {}'"
+
+export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline"
+
 [ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always --exclude .git --no-ignore-vcs"
+
 [ -n "${FZF_DEFAULT_COMMAND}" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # the `~` key is normally easier to reach on both US and UK keyboards, PC and Mac
 FZF_COMPLETION_TRIGGER='~~'
 
