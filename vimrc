@@ -127,16 +127,18 @@ endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
-" ------------------------------------------- "
-" --- Search and replace visual selection --- "
-" ------------------------------------------- "
-
-" https://github.com/bryankennedy/vimrc/blob/master/vimrc
+" ------------------------------ "
+" --- Visual selection utils --- "
+" ------------------------------ "
+"
+" Based on
+" * https://github.com/bryankennedy/vimrc/blob/master/vimrc
+" * http://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
+" * http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
 
 " Escape special characters in a string for exact matching.
 " This is useful to copying strings from the file to the search tool
-" Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
-function! EscapeString (string)
+function! VimEscape(string)
   let string=a:string
   " Escape regex characters
   let string = escape(string, '^$.*\/~[]')
@@ -145,8 +147,7 @@ function! EscapeString (string)
   return string
 endfunction
 
-" This function passed the visual block through a string escape function
-" Based on http://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
+" Return the visually selected text without altering the unnamed register.
 function! GetVisual() range
   " Save the current register and clipboard
   let reg_save = getreg('"')
@@ -162,14 +163,28 @@ function! GetVisual() range
   call setreg('"', reg_save, regtype_save)
   let &clipboard = cb_save
 
-  "Escape any special characters in the selection
-  let escaped_selection = EscapeString(selection)
-
-  return escaped_selection
+  return selection
 endfunction
 
+function! GetVimEscapedVisual() range
+  return VimEscape(GetVisual())
+endfunction
+
+function! ShellEscape(str)
+  let str=a:str
+  return shellescape(fnameescape(str))
+endfunction
+
+function! GetShellEscapedVisual() range
+  return ShellEscape(GetVisual())
+endfunction
+
+" ------------------------------------------- "
+" --- Search and replace visual selection --- "
+" ------------------------------------------- "
+
 " Start the find and replace command across the entire file
-vnoremap <Leader>r <Esc>:%s/<c-r>=GetVisual()<cr>//c<Left><Left>
+vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
 
 " --------------------- "
 " --- Mouse support --- "
@@ -508,6 +523,9 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 " highlight the searched term
 let g:ackhighlight = 1
+
+" Search for visual selection
+vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
 
 " ---------------- "
 " --- NERDTree --- "
