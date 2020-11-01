@@ -643,6 +643,7 @@ autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
       \ instance_of
       \ kind_of
       \ no_args
+      \ match_array
 
 highlight def link rubyRspec Function
 
