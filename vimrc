@@ -200,7 +200,7 @@ xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 " ------------------------------------------- "
 
 " Start the find and replace command across the entire file
-" vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
+vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
 vnoremap <C-r> <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
 
 " ------------------------------ "
@@ -288,7 +288,7 @@ set mousemodel=popup
 " -------------------------- "
 
 " Use 2-space soft tabs by defaults
-" (it's overriden for some some languages with different conventions).
+" (it's overridden for some some languages with different conventions).
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
