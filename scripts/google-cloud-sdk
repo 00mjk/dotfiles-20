@@ -15,7 +15,7 @@ if [[ $(uname -s) == 'Linux' ]]; then
   sudo snap remove google-cloud-sdk
 
   sudo apt-get update -q
-  sudo apt-get install -yq wget unzip python-pip
+  sudo apt-get install -yq wget unzip python3-pip
 fi
 
 DOWNLOAD_DIR="${HOME}/downloads"
@@ -39,4 +39,4 @@ unzip "${DOWNLOAD_DIR}/${FILENAME}" -d "${HOME}"
   --additional-components kubectl app-engine-python beta alpha
 
 # https://github.com/GoogleCloudPlatform/gsutil/issues/378
-pip install google-compute-engine
+pip3 install google-compute-engine
