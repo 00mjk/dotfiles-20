@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z $(command -v git) ]]; then
+  echo "Please install git first"
+  exit 1
+fi
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get update -q
+sudo apt-get install -y nodejs
+
+sudo npm install eslint --global
