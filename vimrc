@@ -443,28 +443,28 @@ endif
 if !exists(":W")
   command W w
 endif
-if exists(":Wa")
+if !exists(":Wa")
   command Wa wa
 endif
-if exists(":WA")
+if !exists(":WA")
   command WA wa
 endif
-if exists(":Q")
+if !exists(":Q")
   command Q q
 endif
-if exists(":Qa")
+if !exists(":Qa")
   command Qa qa
 endif
-if exists(":QA")
+if !exists(":QA")
   command QA qa
 endif
-if exists(":Wq")
+if !exists(":Wq")
   command Wq wq
 endif
-if exists(":Wqa")
+if !exists(":Wqa")
   command Wqa wqa
 endif
-if exists(":Xa")
+if !exists(":Xa")
   command Xa xa
 endif
 
