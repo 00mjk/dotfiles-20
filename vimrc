@@ -379,13 +379,6 @@ autocmd BufReadPost *
 " --- Misc mappings --- "
 " --------------------- "
 
-" Set folding to leader-L
-" zr to unfold and zm to fold. zR to unfold all and zM to fold all
-nmap <Leader>l :set foldmethod=syntax<CR>
-
-" Remap jj to escape insert mode
-inoremap jj <ESC>
-
 " write all changed buffers with Ctrl-S
 inoremap <C-S> <esc>:wall<cr>
 nnoremap <C-S> :wall<CR>
