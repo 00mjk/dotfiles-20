@@ -1,25 +1,31 @@
 # vim: set ft=zsh:
 
-# NOTE: Vanilla zsh from Homebrew and oh-my-zsh installations are assumed.
+# NOTE: Vanilla latest zsh and oh-my-zsh installations are assumed.
 
-setopt histignoredups
-setopt histignorealldups
-setopt histreduceblanks
+# don't add history entry if it's a duplicate of the previous command (and only
+# if it's exactly the previous one, older duplicates don't count)
+setopt HIST_IGNORE_DUPS
+
+# when searching the history, don't show any duplicates in the results
+setopt HIST_FIND_NO_DUPS
+
+# remove whitespace from any command before adding it to the history
+setopt HIST_REDUCE_BLANKS
 
 # prevents accidentally overwriting an existing file
-setopt noclobber
+setopt NO_CLOBBER
 
 export COMPLETION_WAITING_DOTS="true"
 export HIST_STAMPS="yyyy-mm-dd"
 
 # autocomplete hidden files...
-setopt globdots
+setopt GLOB_DOTS
 # ...but exclude "." and ".."
 zstyle ':completion:*' special-dirs false
 
 # allow to choose matching options when a command has a wildcard, instead of
 # completing the command with all the maches
-setopt globcomplete
+setopt GLOB_COMPLETE
 
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -27,9 +33,14 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # enable autocompletion for aliases defined in shell_addons_bravoecho;
 # each alias will use the give command as the underlying target for the
 # autocompletion
-setopt completealiases
+#
+# the "completealiases" option prevents aliases on the command  line  from
+# being  internally  substituted before completion is attempted, so we need to
+# disable it
+unsetopt COMPLETE_ALIASES
 
-autoload -Uz compinit && compinit -i
+# this is already done by oh-my-zsh
+# autoload -Uz compinit && compinit -i
 
 compdef ll='ls'
 compdef la='ls'
