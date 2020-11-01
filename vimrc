@@ -66,6 +66,20 @@ Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
+" ------------------------------- "
+" --- Disable unused features --- "
+" ------------------------------- "
+
+" reverting the keys in :q (therefore bringing up the command history) is quite
+" common and almost never what one wants, so it's disabled;
+" however, since the command history is indeed useful sometimes, it's still
+" possible to summon it with the built-in :<C-f>
+map q: <Nop>
+" disable interactive ex-mode
+nnoremap Q <nop>
+" disable compatibility with old vi
+set nocompatible
+
 " ------------------- "
 " --- Colorscheme --- "
 " ------------------- "
