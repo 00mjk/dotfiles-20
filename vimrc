@@ -39,8 +39,6 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-abolish'
 Plug 'rodjek/vim-puppet'
 Plug 'mustache/vim-mustache-handlebars'
-" Reveal syntax highlighting group under the cursor
-Plug 'gerw/vim-HiLinkTrace'
 Plug 'keith/swift.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -55,8 +53,14 @@ Plug 'Quramy/tsuquyomi'
 
 Plug 'altercation/vim-colors-solarized'
 
-" Experimental
+" ----------------------------------- "
+" --- Experimental or rarely used --- "
+" ----------------------------------- "
+
 " Plug 'dhruvasagar/vim-table-mode'
+
+" Reveal syntax highlighting group under the cursor
+" Plug 'gerw/vim-HiLinkTrace'
 
 call plug#end()
 
