@@ -285,16 +285,22 @@ set ttyfast          " Send more characters for redraws (faster scrolling)
 set mousehide        " Hide mouse pointer while typing
 set mousemodel=popup
 
-" -------------------------- "
-" --- Tabs (indentation) --- "
-" -------------------------- "
+" ---------------------------- "
+" --- Tabs and indentation --- "
+" ---------------------------- "
 
 " Use 2-space soft tabs by defaults
-" (it's overridden for some some languages with different conventions).
+" (it's overridden for languages with different conventions).
+set autoindent  	" remember indent level after going to the next line.
+set expandtab 		" replace tabs with spaces
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab
+
+autocmd FileType python
+	\ set tabstop=4
+	\ set softtabstop=4
+	\ set shiftwidth=4
 
 " --------------------------- "
 " --- Indenting shortcuts --- "
@@ -309,9 +315,15 @@ vnoremap < <gv
 nnoremap > >>
 nnoremap < <<
 
-" ------------------------- "
-" -- Formatting options --- "
-" ------------------------- "
+" --------------- "
+" --- Folding --- "
+" --------------- "
+
+autocmd FileType python set foldmethod=indent
+
+" -------------------------- "
+" --- Formatting options --- "
+" -------------------------- "
 
 " Ensure some formatting options, some of which may already be enabled by
 " default, depending on the version of Vim.
@@ -364,7 +376,6 @@ nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 " --- Wrapping --- "
 " ---------------- "
 
-set autoindent  " Remember indent level after going to the next line.
 set nowrap " Do not visually wrap lines by default.
 
 set breakindent " Align visually wrapped lines with the original indentation.
@@ -510,7 +521,7 @@ nmap <silent> <Leader>w :set nolist!<CR>
 
 " --- Strip whitespace ---
 
-function! <SID>StripTrailingWhitespaces()
+function! <SID>StripExtraWhitespace()
   " store the original position
   let l = line(".")
   let c = col(".")
@@ -520,7 +531,20 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c) " back to the original position
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash autocmd BufWritePre <buffer> :call <SID>StripExtraWhitespace()
+
+" StripTrailingWhitespace will not remove multiple blank lines, for langagues
+" where that is the desired style.
+function! <SID>StripTrailingWhitespace()
+  " store the original position
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e " end of lines
+  silent! %s/\($\n\s*\)\+\%$// " end of file
+  call cursor(l, c) " back to the original position
+endfun
+
+autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 
 " -------------------- "
 " --- Omnicomplete --- "
