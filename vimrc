@@ -128,11 +128,10 @@ inoremap <C-Up> <ESC>:m .-2<CR>gi
 inoremap <C-j> <ESC>:m .+1<CR>gi
 inoremap <C-k> <ESC>:m .-2<CR>gi
 
-" -------------------
-" --- vim-airline ---
-" -------------------
+" vim-airline
 
 let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creation of a 16-color colorscheme)
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
