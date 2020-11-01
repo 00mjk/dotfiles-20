@@ -40,6 +40,12 @@ nnoremap - 0
 map <C-L> <C-w>w
 map <C-H> <C-w>p
 
+set number
+
+set cursorline
+set ignorecase
+set showmatch
+
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
