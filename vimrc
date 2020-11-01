@@ -572,3 +572,7 @@ let g:syntastic_javascript_checkers=['eslint']
 " ---------------- "
 
 let g:vim_json_syntax_conceal = 0
+
+if filereadable(glob("~/.vimrc.after"))
+  source ~/.vimrc.after
+endif
