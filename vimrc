@@ -433,6 +433,8 @@ endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+" highlight the searched term
+let g:ackhighlight = 1
 
 " ---------------- "
 " --- NERDTree --- "
