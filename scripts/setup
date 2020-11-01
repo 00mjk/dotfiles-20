@@ -10,7 +10,7 @@ fi
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
-source $ROOTDIR/scripts/basic-packages
+source $ROOTDIR/scripts/debian-packages
 
 source $ROOTDIR/scripts/dotfiles
 
