@@ -986,8 +986,6 @@ if exists("g:grepper")
   let g:grepper.highlight = 1 " highlight matches
   let g:grepper.stop = 1000 " limit the number of results to 1000 instead of the default 5000
 
-  " nnoremap <Leader>* :Grepper -tool git -open -switch -cword -noprompt<cr>
-
   let s:rg_base_grepprg = 'rg --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
 
   " also add `--` at the end, so that search patters starting with `-` can be
@@ -995,15 +993,19 @@ if exists("g:grepper")
   let g:grepper.rg.grepprg = s:rg_base_grepprg . ' -- '
 
   " this will open the Grepper prompt, where the search pattern can be entered
-  " (or by pressing Enter using the current word without selection)
+  " (or by pressing Enter using the current word if no pattern is given)
   nnoremap <Leader>s :Grepper<CR>
-  " mapping the operator (which can take ranges and motions like all normal
-  " operators) in visual mode, where the pattern will be the selected text
-  vmap gs <plug>(GrepperOperator)
   " the operator for some tools such as rg and ag adds the double dash `--` to
   " separate arguments, so it needs to be redefined
   " <https://github.com/mhinz/vim-grepper/issues/139>
+  " $* will be replaced by `-- <the-search-pattern>`
   let g:grepper.operator.rg.grepprgbuf = s:rg_base_grepprg . ' $*'
+  " enable the operator in normal mode or will take a range or motion; see
+  " :help grepper-operator
+  nmap gs <plug>(GrepperOperator)
+  " search the visual selection by mapping the operator (which can take ranges
+  " and motions like all normal operators)
+  xmap gs <plug>(GrepperOperator)
 endif
 
 " ---------------- "
