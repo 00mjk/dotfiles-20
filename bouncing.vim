@@ -8,13 +8,6 @@ inoremap jj <ESC>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-" Close quickfix list with escape
-" -------------------------------
-
-if has('localmap')
-  autocmd FileType qf nnoremap <buffer> <silent> <Esc> :<c-u> cclose<CR>
-endif
-
 " ================================
 " === Create path for new file ===
 " ================================

@@ -492,9 +492,16 @@ nmap ]q :cnext<CR>
 " --- Quickfix list mappings --- "
 " ------------------------------ "
 
-" Open quickfix results in vertical and horizontal splits, with the same
-" shortcuts provided by default by other plugins for the same purpose
-" (<C-v> and <C-x>).
+" Close quickfix list with Q like some plugins do
+" -----------------------------------------------
+if has('localmap')
+  autocmd FileType qf nnoremap <buffer> <silent> q :<c-u> cclose<CR>
+endif
+
+" Open quickfix results in vertical and horizontal splits
+" -------------------------------------------------------
+" with the same shortcuts provided by default by other plugins for the same
+" purpose (<C-v> and <C-x>).
 
 " Picking just the functionality we need from https://github.com/yssl/QFEnter
 
