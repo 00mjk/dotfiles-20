@@ -538,6 +538,27 @@ vnoremap <Leader>p pgvy`>
 " This was once in vim-sensible but then removed.
 nnoremap Y y$
 
+" 'borrowed' from
+" <https://github.com/zonk1024/vim_stuffs/blob/281b4dfe92d4883550659989c71ec72350f3dd10/vimrc#L129>
+" Turns on paste mode, puts you in insert mode then autocmds the cleanup
+function! InsertPaste() range
+  set paste
+  startinsert
+  augroup PasteHelper
+    autocmd InsertLeave * call LeavePaste()
+  augroup END
+endfunction
+
+" Cleanup by turning off paste mode and unbinding itself from InsertLeave
+function! LeavePaste() range
+  set paste!
+  augroup PasteHelper
+    autocmd!
+  augroup END
+endfunction
+
+nnoremap <Leader>i :call InsertPaste()<CR>
+
 " ------------------- "
 " --- Real delete --- "
 " ------------------- "
