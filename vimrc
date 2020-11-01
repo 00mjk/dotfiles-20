@@ -65,23 +65,37 @@ nnoremap Y y$
 " --- Visual options --- "
 " ---------------------- "
 
-set number
+set number " show line numbers
 
 set cursorline
-set ignorecase
-set showmatch
+set showmatch " highlight matching parentheses
+set matchtime=0 " ...but stay out of the way (do not jump around)
 
-filetype plugin indent on " Automatically detect file types.
+filetype plugin indent on " automatically detect file types.
 syntax on  " syntax highlighting
 
-set noerrorbells visualbell t_vb=    " Disable all bells
-set showcmd                          " show command that is being entered in the lower right
-set backspace=indent,eol,start       " Allow extended backspace behaviour
-set virtualedit=block                " allow placing the cursor after the last char
+set noerrorbells visualbell t_vb= " disable all bells
+set showcmd                       " show command that is being entered in the lower right
+set backspace=indent,eol,start    " allow extended backspace behaviour
+set virtualedit=block             " allow placing the cursor after the last char
 
 if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
 endif
+
+" ---------------------- "
+" --- Search options --- "
+" ---------------------- "
+
+set ignorecase  " ignore case when searching...
+set smartcase   " ...unless one upper case letter is present in the word
+set gdefault    " replace all the occurences in the line by default
+set incsearch   " start searching without pressing enter
+set hlsearch    " highlight results
+hi Search term=reverse cterm=reverse ctermbg=8 ctermfg=3
+
+" search and replace current word
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
 
 " --------------------- "
 " --- Mouse support --- "
@@ -89,9 +103,9 @@ endif
 
 set mouse=a " enable mouse mode
 if has("mouse_sgr")
-	set ttymouse=sgr
+  set ttymouse=sgr
 else
-	set ttymouse=xterm2
+  set ttymouse=xterm2
 end
 
 " -------------------------- "
@@ -195,13 +209,6 @@ inoremap <C-Down> <ESC>:m .+1<CR>gi
 inoremap <C-Up> <ESC>:m .-2<CR>gi
 inoremap <C-j> <ESC>:m .+1<CR>gi
 inoremap <C-k> <ESC>:m .-2<CR>gi
-
-" -------------------------- "
-" --- Search and replace --- "
-" -------------------------- "
-
-" ...current word
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
 
 " ------------------ "
 " --- Whitespace --- "
