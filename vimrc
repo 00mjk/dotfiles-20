@@ -721,6 +721,9 @@ let g:ctrlp_match_current_file = 1
 nmap <Leader>c gcc
 vmap <Leader>c gc
 
+autocmd FileType proto setlocal commentstring=//\ %s
+autocmd FileType sql setlocal commentstring=--\ %s
+
 " -------------- "
 " --- vim-go --- "
 " -------------- "
