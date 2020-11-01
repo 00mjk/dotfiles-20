@@ -46,6 +46,12 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'keith/swift.vim'
 Plug 'editorconfig/editorconfig-vim'
 
+" TypeScript
+" ...syntax
+Plug 'HerringtonDarkholme/yats.vim'
+" ...dev tools (TSServer client)
+Plug 'Quramy/tsuquyomi'
+
 Plug 'altercation/vim-colors-solarized'
 
 " Experimental
