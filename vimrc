@@ -86,7 +86,7 @@ nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
 
-" Allow vim options in individual lines with magic comments
+" Support vim options in individual files with magic comments
 set modeline
 
 " Remember cursor position when re-opening a file
