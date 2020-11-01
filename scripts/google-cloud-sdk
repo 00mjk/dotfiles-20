@@ -12,10 +12,10 @@ fi
 
 if [[ $(uname -s) == 'Linux' ]]; then
   # Remove the system-wide gcloud, because it doesn't support some modules.
-  sudo apt-get remove --purge -y google-cloud-sdk
+  sudo snap remove google-cloud-sdk
 
-  sudo apt-get update
-  sudo apt-get install -y wget unzip python-pip
+  sudo apt-get update -q
+  sudo apt-get install -yq wget unzip python-pip
 fi
 
 DOWNLOAD_DIR="${HOME}/downloads"
