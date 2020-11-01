@@ -55,6 +55,12 @@ if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
  source $HOME/google-cloud-sdk/completion.bash.inc
 fi
 
+# ----------------------------------- #
+# --- Kubernetes CLI autocomplete --- #
+# ----------------------------------- #
+
+source <(kubectl completion bash)
+
 # -------------
 # --- rbenv ---
 # -------------
@@ -183,3 +189,7 @@ my_custom_prompt () {
 }
 
 my_custom_prompt
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/developer/.sdkman"
+[[ -s "/home/developer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/developer/.sdkman/bin/sdkman-init.sh"
