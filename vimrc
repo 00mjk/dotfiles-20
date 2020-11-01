@@ -839,8 +839,8 @@ let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_tags_command = 'ctags -R'
 " disable the preview window
 let g:fzf_preview_window = ''
-" jump to the existing window if possible
-let g:fzf_buffers_jump = 1
+" do not jump to the existing window if the buffer is already visible
+let g:fzf_buffers_jump = 0
 
 " same keybindings used for CtrlP
 nmap <C-p> :Files<CR>
