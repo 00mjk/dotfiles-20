@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -e
+
+# The Golang project does not use github releases properly (2017-09-15).
+# This might change in the future, but for now we need to derive the
+# latest version from the branch names.
+GO_VERSION=$(
+  curl -s https://api.github.com/repos/golang/go/branches |
+    python -c 'import sys, json; releases = map(lambda x: x[17:].encode("ascii"), filter(lambda x: x.startswith("release-branch.go"), [r["name"] for r in json.load(sys.stdin)])); print releases[-1]'
+)
+
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+GO_WORKSPACE="${HOME}/go"
+
+DOWNLOAD_DIR="${HOME}/downloads"
+mkdir -p "${DOWNLOAD_DIR}"
+
+FILENAME="go${GO_VERSION}.linux-amd64.tar.gz"
+URL="https://storage.googleapis.com/golang/${FILENAME}"
+
+source "${CURRDIR}/utils.sh"
+
+echo "Ensure go projects dirs: ${GO_WORKSPACE} and ${GO_WORKSPACE}/src"
+mkdir -p "${GO_WORKSPACE}/src"
+
+echo "Remove old installation (dir /usr/local/go)"
+sudo /bin/rm -rf "/usr/local/go"
+
+echo "Downloading ${URL}"
+wget -N -P "${DOWNLOAD_DIR}" "${URL}"
+
+echo "Extract ${DOWNLOAD_DIR}/${FILENAME} -> /usr/local"
+sudo tar -C /usr/local -xzf "${DOWNLOAD_DIR}/${FILENAME}"
+
+echo "Checking installation: $(go version) installed at $(command -v go)"

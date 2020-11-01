@@ -1,3 +1,5 @@
+# vim: set ft=gitconfig:
+
 [core]
   editor = 'vim'
 [color]
