@@ -12,10 +12,10 @@ repositories.
    install additional modules, otherwise it will install it.
 1. Install basic packages and symlink dotfiles: `./scripts/setup` (it will
    backup existing dotfiles if any).
-1. Install docker and docker-compose
+1. **Docker and docker-compose**
    * `./scripts/docker` will install Docker from the official Docker apt
-     repository, so later it will be updated by `apt-get upgrade`
+     repository, so later it can be updated with `apt-get upgrade`
    * `./scripts/docker-compose` will install the latest docker-compose from
-     the website, and the same script will be used for updating later
+     the official website, and the same script can be used for updating it later
 1. **mosh**: the mobile shell (<https://mosh.org>), for more flexible SSH
    sessions on flaky connections: `./scripts/mosh`
