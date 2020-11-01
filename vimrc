@@ -1235,26 +1235,9 @@ function! BE_Statusline(active)
   if &filetype ==? 'netrw'  | return | endif
 
   if a:active == 1
-    let &l:statusline=' %{g:be_modes[mode()]}%{&paste ? "(PASTE)" : ""} | %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
+    let &l:statusline=' %{g:be_modes[mode()]}%{&paste ? "(PASTE)" : ""} | %<%f %m%r%h%w %=%l:%c/%L (%P)'
   else
     let &l:statusline=' %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
-  endif
-endfunction
-
-function! BE_QuickfixStatusline()
-  let l:qf_win_nr = winnr()
-  let l:qf_win_info = {}
-  for win_info in getwininfo()
-    if win_info.winnr == l:qf_win_nr
-      let l:qf_win_info = win_info
-      break
-    endif
-  endfor
-
-  if l:qf_win_info['loclist'] == 1
-    let &l:statusline='Location list (%L entries)'
-  else
-    let &l:statusline='Quickfix list (%L entries)'
   endif
 endfunction
 
@@ -1262,7 +1245,7 @@ augroup StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
-    autocmd FileType              qf        call BE_QuickfixStatusline()
+    autocmd FileType              qf        setlocal statusline=%q\ (%l/%L)
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
