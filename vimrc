@@ -251,8 +251,6 @@ set splitbelow
 set splitright
 
 " Cycle throuh buffers with tab / shift-tab
-nmap <Tab> :bnext<CR>
-nmap <S-Tab> :bprev<CR>
 nmap <C-K> :bnext<CR>
 nmap <C-J> :bprev<CR>
 
@@ -368,16 +366,20 @@ autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
 " multiple lines down beyond the bottom.
 nnoremap <C-Down> :m .+1<CR>
 nnoremap <C-Up> :m .-2<CR>
-nnoremap <C-j> :m .+1<CR>
-nnoremap <C-k> :m .-2<CR>
 vnoremap <C-Down> :m '>+1<CR>gv
 vnoremap <C-Up> :m '<-2<CR>gv
-vnoremap <C-j> :m '>+1<CR>gv
-vnoremap <C-k> :m '<-2<CR>gv
 inoremap <C-Down> <ESC>:m .+1<CR>gi
 inoremap <C-Up> <ESC>:m .-2<CR>gi
-inoremap <C-j> <ESC>:m .+1<CR>gi
-inoremap <C-k> <ESC>:m .-2<CR>gi
+" The following mappings have been disabled to allow the use of C-J and C-K
+" to cycle through buffers as if they were tabs in more UI-oriented editor.
+" Cycling through buffers is important for new Vim users, and it's been one
+" of the most requested features.
+" nnoremap <C-j> :m .+1<CR>
+" nnoremap <C-k> :m .-2<CR>
+" vnoremap <C-j> :m '>+1<CR>gv
+" vnoremap <C-k> :m '<-2<CR>gv
+" inoremap <C-j> <ESC>:m .+1<CR>gi
+" inoremap <C-k> <ESC>:m .-2<CR>gi
 
 " ------------------ "
 " --- Whitespace --- "
