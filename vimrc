@@ -31,6 +31,7 @@ Plug 'elzr/vim-json'
 Plug 'vim-syntastic/syntastic'
 
 Plug 'majutsushi/tagbar'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
