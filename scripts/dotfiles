@@ -12,16 +12,16 @@ CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
 source "${CURRDIR}/utils.sh"
 
-backup_and_symlink $ROOTDIR/gitconfig_addons_pgtech $HOME/.gitconfig_addons_pgtech
-backup_and_symlink $ROOTDIR/bash_aliases_addons_pgtech $HOME/.bash_aliases_addons_pgtech
-backup_and_symlink $ROOTDIR/bashrc_addons_pgtech $HOME/.bashrc_addons_pgtech
+backup_and_symlink $ROOTDIR/gitconfig_addons_bravoecho $HOME/.gitconfig_addons_bravoecho
+backup_and_symlink $ROOTDIR/bash_aliases_addons_bravoecho $HOME/.bash_aliases_addons_bravoecho
+backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoecho
 backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
 
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_pgtech" ]] && source ~/.bashrc_addons_pgtech'
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_pgtech" ]] && source ~/.bash_aliases_addons_pgtech'
+append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
+append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
 
 # Allow to further customise aliases without the need to make changes to the provided setup.
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
 
-git config --global include.path .gitconfig_addons_pgtech
+git config --global include.path .gitconfig_addons_bravoecho
