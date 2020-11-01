@@ -2,19 +2,24 @@
 
 set -e
 
-if [[ -z $(command -v git) ]]; then
-  echo "Please install git first"
-  exit 1
-fi
-
-ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+# If tzdata needs to be installed, this will avoid prompting the user to
+# configure it.
+export ENV DEBIAN_FRONTEND=noninteractive
 
 source "${CURRDIR}/utils.sh"
 
+# Make sure that no targets of the installation are skipped (for example manpages)
+sudo rm -fv /etc/dpkg/dpkg.cfg.d/excludes
+
 sudo apt-get update -q
 
-sudo apt-get install -y \
+sudo apt-get install man manpages -yq
+
+sudo apt-get dist-upgrade -yq
+
+sudo apt-get install -yq \
   bash-completion \
   build-essential \
   coreutils \
@@ -25,12 +30,23 @@ sudo apt-get install -y \
   lsof \
   man \
   manpages \
+  mtr-tiny \
   nmap \
   make \
   openssl \
+  postgresql-client \
   ruby \
   silversearcher-ag \
   tmux \
+  tzdata \
   unzip \
   vim-nox \
   wget \
+
+sudo apt-get autoremove --purge -y
+
+sudo apt-get autoclean
+
+sudo ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime
+
+sudo dpkg-reconfigure --frontend noninteractive tzdata
