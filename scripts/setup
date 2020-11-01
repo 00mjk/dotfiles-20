@@ -31,7 +31,7 @@ sudo apt-get install -y \
 	nodejs \
 	build-essential \
 
-npm install eslint --global
+sudo npm install eslint --global
 
 # Dotfiles
 backup_and_symlink $ROOTDIR/gitconfig_addons $HOME/.gitconfig_addons
