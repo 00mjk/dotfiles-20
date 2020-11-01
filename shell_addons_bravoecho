@@ -201,8 +201,8 @@ alias gsd='git diff --staged'
 
 # --- ls --- #
 
-alias ll='ls -lA'
-alias la='ls -la'
+alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --quoting-style=escape --group-directories-first'
+alias la='ls -lA'
 
 # --- bundler --- #
 
