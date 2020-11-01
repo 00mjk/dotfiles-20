@@ -516,6 +516,7 @@ let g:ctrlp_abbrev = {
 
 " use ctrlp in a single shortcut to navigate buffers
 noremap <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_switch_buffer = 0
 
 " ---------------------- "
 " --- vim-commentary --- "
