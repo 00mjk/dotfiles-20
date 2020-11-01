@@ -47,12 +47,12 @@ TERM xterm*
 #
 #   00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 #
-# Text color codes, respectively normal and bright:
+# Foreground (normal/bright):
 #
-#   Foreground
 #   30/90=black 31/91=red 32/92=green 33/93=yellow 34/94=blue 35/95=magenta 36/96=cyan 37/97=white
 #
-#   Background
+# Background (normal/bright):
+#
 #   40/100=black 41/101=red 42/102=green 44/104=yellow 44/104=blue 45/105=magenta 46/106=cyan 47/107=white
 #
 
@@ -104,52 +104,52 @@ STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
 # --- Archives --- #
 # ---------------- #
 
-.tar 90
-.tgz 90
-.arc 90
-.arj 90
-.taz 90
-.lha 90
-.lz4 90
-.lzh 90
-.lzma 90
-.tlz 90
-.txz 90
-.tzo 90
-.t7z 90
-.zip 90
-.z 90
-.dz 90
-.gz 90
-.lrz 90
-.lz 90
-.lzo 90
-.xz 90
-.zst 90
-.tzst 90
-.bz2 90
-.bz 90
-.tbz 90
-.tbz2 90
-.tz 90
-.deb 90
-.rpm 90
-.jar 90
-.war 90
-.ear 90
-.sar 90
-.rar 90
-.alz 90
-.ace 90
-.zoo 90
-.cpio 90
-.7z 90
-.rz 90
-.cab 90
-.wim 90
-.swm 90
-.dwm 90
-.esd 90
+.tar 36
+.tgz 36
+.arc 36
+.arj 36
+.taz 36
+.lha 36
+.lz4 36
+.lzh 36
+.lzma 36
+.tlz 36
+.txz 36
+.tzo 36
+.t7z 36
+.zip 36
+.z 36
+.dz 36
+.gz 36
+.lrz 36
+.lz 36
+.lzo 36
+.xz 36
+.zst 36
+.tzst 36
+.bz2 36
+.bz 36
+.tbz 36
+.tbz2 36
+.tz 36
+.deb 36
+.rpm 36
+.jar 36
+.war 36
+.ear 36
+.sar 36
+.rar 36
+.alz 36
+.ace 36
+.zoo 36
+.cpio 36
+.7z 36
+.rz 36
+.cab 36
+.wim 36
+.swm 36
+.dwm 36
+.esd 36
 
 # -------------- #
 # --- Images --- #
@@ -236,25 +236,26 @@ STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
 # --- Unimportant files --- #
 # ------------------------- #
 
-*~ 92
-*# 92
-.log 92
-.tmp 92
-.bak 92
-.bak 92
-.BAK 92
-.old 92
-.OLD 92
-.org_archive 92
-.off 92
-.OFF 92
-.dist 92
-.DIST 92
-.orig 92
-.ORIG 92
-.swp 92
-.swo 92
-*.v 92
+*~ 90
+*# 90
+.log 90
+.tmp 90
+.bak 90
+.bkp 90
+.BAK 90
+.BKP 90
+.old 90
+.OLD 90
+.org_archive 90
+.off 90
+.OFF 90
+.dist 90
+.DIST 90
+.orig 90
+.ORIG 90
+.swp 90
+.swo 90
+*.v 90
 
 # ------------------- #
 # --- For testing --- #
