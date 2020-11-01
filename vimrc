@@ -449,6 +449,21 @@ inoremap <F6> <Esc>:setlocal spell!<CR>
 autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
 
+" ---------------- "
+" --- Markdown --- "
+" ---------------- "
+
+let g:markdown_fenced_languages = [
+      \ 'html',
+      \ 'python',
+      \ 'bash=sh',
+      \ 'ruby',
+      \ 'go',
+      \ 'golang=go',
+\]
+let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 100
+
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
 " ---------------------------------------- "
