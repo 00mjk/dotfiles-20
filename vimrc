@@ -1192,3 +1192,12 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
 highlight! StatusLineNC cterm=none ctermfg=7 ctermbg=8
+
+" ------------------------- "
+" --- Diff highlighting --- "
+" ------------------------- "
+
+highlight DiffAdd cterm=none,bold ctermfg=2 ctermbg=15
+highlight DiffDelete cterm=none ctermfg=13 ctermbg=15
+highlight DiffChange cterm=none ctermfg=8 ctermbg=15
+highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
