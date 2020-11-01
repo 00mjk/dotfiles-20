@@ -47,6 +47,8 @@ set noundofile
 " --- Leader key alternatives --- "
 " ------------------------------- "
 
+" They preserve the native leader key.
+
 nmap , \
 vmap , \
 
@@ -59,7 +61,7 @@ vmap <space> \
 
 " shift-C changes till the end of line, and shift-D deletes till the of the line.
 " shift-Y breaks the pattern, and it's an alias for `yy'.
-" This was initially in from vim-sensible but then removed.
+" This was initially in vim-sensible but then removed.
 nnoremap Y y$
 
 " ---------------------- "
@@ -261,6 +263,19 @@ nmap <Leader>s :w<CR>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 inoremap <F1> <ESC>
+
+" -------------------------- "
+" --- Intuitive home key --- "
+" -------------------------- "
+
+" 1. Fix the home inside tmux
+if &term =~ '^screen'
+  exec "set <Home>=\e[1~"
+endif
+" 2. remap the home key to toggle between first character and beginning of line
+noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+" 3. also support insert mode
+imap <silent> <Home> <C-O><Home>
 
 " ------------------------------ "
 " --- Move lines up and down --- "
