@@ -17,7 +17,7 @@
   ft = fetch
   l = log
   p = pull
-  pf = push origin HEAD -u
+  pt = push origin HEAD -u
   ps = push
   s = status -sb
   sd = diff --staged
