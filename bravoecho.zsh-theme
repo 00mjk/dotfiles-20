@@ -1,11 +1,13 @@
+# vim: set ft=zsh:
+
 # bravoecho.zsh-theme
-# 
-# A fork of kphoen that doesn't use the git plugin, and only prints the current 
+#
+# A fork of kphoen that doesn't use the git plugin, and only prints the current
 # branch, no info about the status.
-# 
+#
 # This is because the `git_prompt_info` function from the git plugin is very
 # slow on large repositories.
-# 
+#
 # See https://github.com/win0err/aphrodite-terminal-theme for improvements on
 # this basic effort.
 

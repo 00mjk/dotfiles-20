@@ -169,6 +169,8 @@ export FZF_DEFAULT_OPTS="
 
 # --- shell --- #
 
+# completely wipe the content of the shell buffer, instead of just scrolling 
+# the prompt to the top
 alias cls="clear && printf '\e[3J'"
 
 # --- git --- #
