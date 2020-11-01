@@ -1,11 +1,13 @@
 # vim: set ft=zsh:
 
-setopt HISTIGNOREDUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt GLOBDOTS
-setopt GLOB_COMPLETE
+setopt histignoredups
+setopt hist_ignore_all_dups
+# autocomplete hidden files...
+setopt glob_dots
+# ...but exclude "." and ".."
+zstyle ':completion:*' special-dirs false
 # prevents you from accidentally overwriting an existing file.
-setopt NOCLOBBER
+setopt noclobber
 
 ZSH_CUSTOM=~/.zsh_custom
 ZSH_THEME="bravoecho"
