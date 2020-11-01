@@ -260,6 +260,10 @@ if !has('nvim')
   end
 end
 
+set ttyfast          " Send more characters for redraws (faster scrolling)
+set mousehide        " Hide mouse pointer while typing
+set mousemodel=popup
+
 " -------------------------- "
 " --- Tabs (indentation) --- "
 " -------------------------- "
