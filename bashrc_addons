@@ -1,0 +1,6 @@
+# vim: set ft=sh:
+
+# Prevent CTRL-S from suspending the output stream
+stty stop '' -ixoff
+# Prevent CTRL-Q from waking up the output stream
+stty start '' -ixon
