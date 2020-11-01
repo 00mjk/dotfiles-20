@@ -45,8 +45,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # disable it
 unsetopt COMPLETE_ALIASES
 
-# this is already done by oh-my-zsh
-# autoload -Uz compinit && compinit -i
+# this is already done by oh-my-zsh but some apps still need it again
+autoload -Uz compinit && compinit -i
 
 compdef ll='ls'
 compdef la='ls'
@@ -98,6 +98,8 @@ fi
 #   * displays the current path
 #   * displays the current git branch if it's in a repo
 #   * puts the cursor into a new line
+#
+# Requires oh-my-zsh (for now).
 #
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   function _bravoecho_git_branch() {
