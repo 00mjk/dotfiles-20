@@ -34,6 +34,7 @@ Plug 'majutsushi/tagbar'
 Plug 'udalov/kotlin-vim'
 Plug 'godlygeek/tabular'
 Plug 'kchmck/vim-coffee-script'
+Plug 'udalov/kotlin-vim'
 
 Plug 'altercation/vim-colors-solarized'
 
