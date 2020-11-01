@@ -56,13 +56,13 @@ autocmd BufReadPost *
   \ endif
 
 " Set folding to leader-L
-" zr to unfold and zm to fold. zR to unfold all and zM to fold all 
+" zr to unfold and zm to fold. zR to unfold all and zM to fold all
 nmap <Leader>l :set foldmethod=syntax<CR>
 
 " Remap jj to escape insert mode
 inoremap jj <ESC>
 
-" Map leader-S to save file 
+" Map leader-S to save file
 nmap <Leader>s :w<CR>
 
 " Map leader-q to quit vim
@@ -78,6 +78,13 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Ack
 nnoremap <Leader>a :Ack!<space>
+
+" NERDTree
+let NERDTreeMinimalUI=1
+" Shortcut to open/close
+map <Leader>n :NERDTreeToggle<CR>
+" Highlight the current buffer (think of 'find')
+map <Leader>f :NERDTreeFind<CR>
 
 " Search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
@@ -102,6 +109,22 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,
- \ markdown,php,puppet,python,ruby,scss,sh,sql,text,typescript,vim,yaml
- \ autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+set noerrorbells visualbell t_vb=    " Disable all bells
+set autoindent                       " remember indent after going to the next line
+set showcmd                          " show command that is being entered in the lower right
+set backspace=indent,eol,start       " Allow extended backspace behaviour
+set virtualedit=block                " allow placing the cursor after the last char
+
+" Use 2-space soft tabs by defaults
+" (it's overriden for some some languages with different conventions).
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+" Allow enter to chose from the omnicompletion window, instead of <C-y>
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+set pastetoggle=<F3>
