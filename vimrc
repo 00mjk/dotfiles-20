@@ -205,6 +205,7 @@ endif
 highlight VertSplit cterm=none,reverse ctermbg=8 ctermfg=8
 highlight EndOfBuffer cterm=none ctermfg=15
 highlight ColorColumn ctermbg=15
+highlight WildMenu cterm=bold ctermfg=0 ctermbg=11
 
 " ---------------------- "
 " --- Search options --- "
