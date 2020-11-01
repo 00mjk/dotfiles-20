@@ -14,12 +14,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
+
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -64,6 +67,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+" Allow to open a different buffer in the same window of a modified buffer
+set hidden
+
 " position of the new split panes
 set splitbelow
 set splitright
@@ -106,10 +112,27 @@ nmap <Leader>s :w<CR>
 " Map leader-q to quit vim
 nmap <Leader>q :qa!<CR>
 
-" vim-airline
+" Move lines up and down with Ctrl-arrowup/down and Ctrl-j/k (in normal, visual and insert mode)
+" Note: only meant for small selections and small movements, will break moving
+" multiple lines down beyond the bottom.
+nnoremap <C-Down> :m .+1<CR>
+nnoremap <C-Up> :m .-2<CR>
+nnoremap <C-j> :m .+1<CR>
+nnoremap <C-k> :m .-2<CR>
+vnoremap <C-Down> :m '>+1<CR>gv
+vnoremap <C-Up> :m '<-2<CR>gv
+vnoremap <C-j> :m '>+1<CR>gv
+vnoremap <C-k> :m '<-2<CR>gv
+inoremap <C-Down> <ESC>:m .+1<CR>gi
+inoremap <C-Up> <ESC>:m .-2<CR>gi
+inoremap <C-j> <ESC>:m .+1<CR>gi
+inoremap <C-k> <ESC>:m .-2<CR>gi
+
+" -------------------
+" --- vim-airline ---
+" -------------------
 
 let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creation of a 16-color colorscheme)
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
@@ -224,7 +247,7 @@ endfun
 
 autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-" Allow enter to chose from the omnicompletion window, instead of <C-y>
+" Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
