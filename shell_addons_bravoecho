@@ -21,7 +21,8 @@ export LS_COLORS
 
 # -i smart-case insensitive search
 # -R render colours
-export LESS="iR"
+# -x4 render tabs with 2 spaces
+export LESS="iRx2"
 
 # # -----------
 # # --- GPG ---
