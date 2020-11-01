@@ -407,6 +407,9 @@ autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java
 " --- Omnicomplete --- "
 " -------------------- "
 
+" Enable syntax-based for natively supported languages, and using ctags when
+" available.
+set omnifunc=syntaxcomplete#Complete
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
