@@ -15,7 +15,7 @@ if [[ $(uname -s) == 'Linux' ]]; then
   sudo apt-get remove --purge -y google-cloud-sdk
 
   sudo apt-get update
-  sudo apt-get install -y wget unzip
+  sudo apt-get install -y wget unzip python-pip
 fi
 
 DOWNLOAD_DIR="${HOME}/downloads"
@@ -37,3 +37,6 @@ unzip "${DOWNLOAD_DIR}/${FILENAME}" -d "${HOME}"
   --command-completion false \
   --path-update false \
   --additional-components kubectl app-engine-python beta alpha
+
+# https://github.com/GoogleCloudPlatform/gsutil/issues/378
+pip install google-compute-engine
