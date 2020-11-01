@@ -523,9 +523,12 @@ noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^
 " 3. also support insert mode
 imap <silent> <Home> <C-O><Home>
 
-" ------------------------------ "
-" --- Quickfix list mappings --- "
-" ------------------------------ "
+" ---------------- "
+" --- Quickfix --- "
+" ---------------- "
+
+" force quickfix to always use the full width of the terminal
+au FileType qf wincmd J
 
 " Navigation
 " ----------
