@@ -36,7 +36,7 @@ Plug 'godlygeek/tabular'
 Plug 'kchmck/vim-coffee-script'
 Plug 'udalov/kotlin-vim'
 Plug 'SirVer/ultisnips'
-Plug 'mzlogin/vim-markdown-toc'
+Plug 'bravoecho/vim-markdown-toc'
 
 Plug 'altercation/vim-colors-solarized'
 
