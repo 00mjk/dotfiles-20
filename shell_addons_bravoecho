@@ -220,6 +220,11 @@ alias gsd='git diff --staged'
 alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --quoting-style=escape --group-directories-first'
 alias la='ls -lA'
 
+# --- tree --- #
+
+# -F will prints markers for dirs, executables and other special files, like 'ls -F'
+alias tree='command tree --dirsfirst -F'
+
 # --- bundler --- #
 
 alias be='bundle exec'
