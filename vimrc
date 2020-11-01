@@ -13,6 +13,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+Plug 'tmux-plugins/vim-tmux'
 
 call plug#end()
 
