@@ -29,6 +29,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'vim-syntastic/syntastic'
+Plug 'posva/vim-vue'
 
 Plug 'majutsushi/tagbar'
 Plug 'dhruvasagar/vim-table-mode'
