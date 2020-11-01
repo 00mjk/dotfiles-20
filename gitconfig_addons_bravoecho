@@ -6,7 +6,7 @@
 [submodule]
 	recurse = true
 [init]
-	templatedir = ~/.git-template
+	defaultBranch = main
 [color]
   ui = true
 [alias]
