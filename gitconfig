@@ -1,0 +1,38 @@
+[core]
+  editor = 'vim'
+[color]
+  ui = true
+[alias]
+  a = add
+  br = branch
+  c = commit
+  ci = commit
+  co = checkout
+  d = diff
+  ds = diff --staged
+  f = fetch
+  ft = fetch
+  l = log
+  p = pull
+  pf = push origin HEAD -u
+  ps = push
+  s = status -sb
+  sd = diff --staged
+  st = status
+  sb = status -sb
+ 
+  unstage = reset HEAD --
+  undo = reset --soft HEAD^
+  ignored-update = "!git rm --cached -r . ; git add . "
+  ds = diff --staged
+  s = status
+  co = checkout
+  hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  stash-all = stash save --include-untracked
+  remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
+  amend = commit --amend --no-edit
+
+[diff]
+  tool = vimdiff
+[push]
+  default = simple
