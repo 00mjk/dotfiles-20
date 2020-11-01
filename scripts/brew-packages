@@ -12,10 +12,15 @@ if [[ -z $(command -v brew) ]]; then
   exit 1
 fi
 
-ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
-
 source "${CURRDIR}/utils.sh"
+
+# ---------------- #
+# --- Formulae --- #
+# ---------------- #
+
+# NOTE: docker is installed as cask (desktop app), because even if a docker
+# formulae exists, that requires VirtualBox.
 
 brew install \
   bash \
@@ -77,7 +82,12 @@ brew install \
   wget \
   zsh
 
+# universal-ctags is a head-only formula until considered stable
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+
+# --------------------------------- #
+# --- Post install for formulae --- #
+# --------------------------------- #
 
 printf "\n===> Configuring fzf\n"
 set -x
@@ -88,6 +98,10 @@ printf "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
 
+# ------------- #
+# --- Casks --- #
+# ------------- #
+
 brew cask install \
   docker \
   firefox \
@@ -96,14 +110,22 @@ brew cask install \
   rectangle \
   visual-studio-code
 
+# ------------------------------ #
+# --- Post install for casks --- #
+# ------------------------------ #
+
 ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
-if [[ "$(uname -s)" =~ Darwin && -d "${ZSH_SITE_FUNCTIONS}" ]]; then
+if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
   ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion _docker
   ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion _docker-compose
   popd
 fi
+
+# ------------------ #
+# --- Next steps --- #
+# ------------------ #
 
 echo "
 
@@ -130,6 +152,6 @@ NOTES
   - virtualbox
   - virtualbox-extension-pack
   - vagrant
-  - copyq
+  - copyq (clipboard manager that supports images)
   - vlc
 "
