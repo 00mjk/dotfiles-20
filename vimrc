@@ -295,11 +295,12 @@ nnoremap < <<
 
 " Ensure some formatting options, some of which may already be enabled by
 " default, depending on the version of Vim.
-" Wrap text automatically both for text (t) and comments (c).
-" Auto-add current comment leader on new lines both in insert mode (r) and
-" normal mode (o).
-" Remove the comment characters when joining lines (j).
-" Allow formatting of comments with 'gq' (q).
+"
+" * Wrap text automatically both for text (t) and comments (c).
+" * Auto-add current comment leader on new lines both in insert mode (r) and
+" * normal mode (o).
+" * Remove the comment characters when joining lines (j).
+" * Allow formatting of comments with 'gq' (q).
 set formatoptions+=jtcroq
 " For auto-formatting of text (not just comments) to work, textwidth must be
 " explicitly set (it's 0 by default).
@@ -462,7 +463,7 @@ autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
 " ------------------------------ "
 
 " Move lines up and down with Ctrl-arrowup/down and Ctrl-j/k (in normal, visual and insert mode)
-" Note: only meant for small selections and small movements, will break moving
+" NOTE: only meant for small selections and small movements, will break moving
 " multiple lines down beyond the bottom.
 nnoremap <C-Down> :m .+1<CR>
 nnoremap <C-Up> :m .-2<CR>
