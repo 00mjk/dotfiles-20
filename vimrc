@@ -11,6 +11,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
