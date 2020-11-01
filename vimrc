@@ -279,10 +279,6 @@ set hidden
 set splitbelow
 set splitright
 
-" Cycle throuh buffers with tab / shift-tab
-nmap <C-K> :bnext<CR>
-nmap <C-J> :bprev<CR>
-
 " Close the current buffer without closing the window
 " <http://stackoverflow.com/a/8585343/417375>
 nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -399,16 +395,13 @@ vnoremap <C-Down> :m '>+1<CR>gv
 vnoremap <C-Up> :m '<-2<CR>gv
 inoremap <C-Down> <ESC>:m .+1<CR>gi
 inoremap <C-Up> <ESC>:m .-2<CR>gi
-" The following mappings have been disabled to allow the use of C-J and C-K
-" to cycle through buffers as if they were tabs in more UI-oriented editor.
-" Cycling through buffers is important for new Vim users, and it's been one
-" of the most requested features.
-" nnoremap <C-j> :m .+1<CR>
-" nnoremap <C-k> :m .-2<CR>
-" vnoremap <C-j> :m '>+1<CR>gv
-" vnoremap <C-k> :m '<-2<CR>gv
-" inoremap <C-j> <ESC>:m .+1<CR>gi
-" inoremap <C-k> <ESC>:m .-2<CR>gi
+" For terminals where Ctrl-arrows are captured by the system.
+nnoremap <C-j> :m .+1<CR>
+nnoremap <C-k> :m .-2<CR>
+vnoremap <C-j> :m '>+1<CR>gv
+vnoremap <C-k> :m '<-2<CR>gv
+inoremap <C-j> <ESC>:m .+1<CR>gi
+inoremap <C-k> <ESC>:m .-2<CR>gi
 
 " ------------------ "
 " --- Whitespace --- "
