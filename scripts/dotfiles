@@ -31,6 +31,8 @@ backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
 
 backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoecho
 backup_and_symlink $ROOTDIR/zshrc_addons_bravoecho $HOME/.zshrc_addons_bravoecho
+backup_and_symlink $ROOTDIR/bravoecho.zsh-theme $HOME/.zsh_custom/themes/bravoecho.zsh-theme
+
 backup_and_symlink $ROOTDIR/shell_addons_bravoecho $HOME/.shell_addons_bravoecho
 backup_and_symlink $ROOTDIR/shell_addons_mac_bravoecho $HOME/.shell_addons_mac_bravoecho
 
@@ -44,6 +46,7 @@ function enable_shell_addon() {
 }
 
 enable_shell_addon zshrc "zshrc_addons_bravoecho"
+mkdir -p ~/.zsh_custom
 
 # configuration compatible with both zsh and bash
 function configure_shell_addons() {
