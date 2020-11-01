@@ -191,6 +191,11 @@ nmap <Leader>s :w<CR>
 " Map leader-q to quit vim
 nmap <Leader>q :qa!<CR>
 
+" Map F1 key (main vim help) to ESC to avoid bringing it up by mistake.
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+inoremap <F1> <ESC>
+
 " ------------------------------ "
 " --- Move lines up and down --- "
 " ------------------------------ "
