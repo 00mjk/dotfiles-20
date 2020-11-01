@@ -39,6 +39,8 @@
   force = push --force-with-lease
   amend = commit --amend --no-edit
 
+  new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
+
 [color]
   ui = true
 
