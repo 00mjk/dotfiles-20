@@ -43,6 +43,7 @@ Plug 'rodjek/vim-puppet'
 Plug 'mustache/vim-mustache-handlebars'
 " Reveal syntax highlighting group under the cursor
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'keith/swift.vim'
 
 Plug 'altercation/vim-colors-solarized'
 
