@@ -44,18 +44,16 @@ function enable_shell_addon() {
   local rcfile=$1
   local addon_file=$2
 
-  if [[ -f "${HOME}/.${rcfile}" ]]; then
-    append_if_missing "$HOME/.${rcfile}" "[[ -e \"\${HOME}/.${addon_file}\" ]] && source ~/.${addon_file}"
-  fi
+  [[ -f "${HOME}/.${rcfile}" ]] || touch "${HOME}/.${rcfile}"
+  append_if_missing "$HOME/.${rcfile}" "[[ -e \"\${HOME}/.${addon_file}\" ]] && source ~/.${addon_file}"
 }
-
-enable_shell_addon zshrc "zshrc_addons_bravoecho"
 
 # configuration compatible with both zsh and bash
 function configure_shell_addons() {
   local rcfile=$1
 
   enable_shell_addon "${rcfile}" "shell_addons_bravoecho"
+  enable_shell_addon "${rcfile}" "${rcfile}_addons_bravoecho"
 
   if [[ "$(uname -s)" == "Darwin" ]]; then
     enable_shell_addon "${rcfile}" "shell_addons_mac_bravoecho"
