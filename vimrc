@@ -997,7 +997,7 @@ if exists(":Grepper")
   let g:grepper.open = 0
   autocmd User Grepper copen
 
-  let g:grepper.prompt_text = '$t > ' " don't show the underlying search command, only the tool
+  let g:grepper.prompt_text = ' ❯❯ ' " only show a prompt, not the underlying search command
   let g:grepper.highlight = 1 " highlight matches
   let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
 
