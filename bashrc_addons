@@ -84,7 +84,9 @@ fi
 # --- Kubernetes CLI autocomplete --- #
 # ----------------------------------- #
 
-source <(kubectl completion bash)
+if [[ -n "$(command -v kubectl)" ]]; then
+  source <(kubectl completion bash)
+fi
 
 # ----------------
 # --- Minikube ---
