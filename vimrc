@@ -1056,9 +1056,13 @@ let g:fzf_layout = { 'down': '~30%' }
 " command to generate tags file
 let g:fzf_tags_command = 'ctags -R'
 " disable the preview window
-let g:fzf_preview_window = ''
+let g:fzf_preview_window = []
 " do not jump to the existing window if the buffer is already visible
 let g:fzf_buffers_jump = 0
+" set fzf history specifically for use within Vim, separately from the global fzf history
+let s:fzf_history_dir = $HOME . "/.vim/fzf-history//"
+if !isdirectory(s:fzf_history_dir) | call mkdir(s:fzf_history_dir, "p", 0755) | endif
+let g:fzf_history_dir = s:fzf_history_dir
 
 " same keybindings used for CtrlP
 nmap <C-p> :Files<CR>
