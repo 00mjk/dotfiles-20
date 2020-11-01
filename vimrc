@@ -324,7 +324,7 @@ nnoremap < <<
 " --- Folding --- "
 " --------------- "
 
-autocmd FileType python setlocal foldmethod=indent
+" autocmd FileType python setlocal foldmethod=indent
 
 " -------------------------- "
 " --- Formatting options --- "
@@ -946,6 +946,7 @@ let s:rgignore =
       \ " --glob='!**/node_modules/'".
       \ " --glob='!**/speter.net/'".
       \ " --glob='!**/vendor/'".
+      \ " --glob='!**/venv*/'".
       \ " --glob='!*.class'".
       \ " --glob='!*.dll'".
       \ " --glob='!*.exe'".
