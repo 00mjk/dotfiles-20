@@ -1,5 +1,11 @@
 # vim: set ft=sh:
 
+# -----------
+# --- GPG ---
+# -----------
+
+export GPG_TTY=$(tty)
+
 # --------------
 # --- Golang ---
 # --------------
@@ -66,11 +72,20 @@ if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
  source $HOME/google-cloud-sdk/completion.bash.inc
 fi
 
-# ----------------------------------- #
-# --- Kubernetes CLI autocomplete --- #
-# ----------------------------------- #
+# ----------------
+# --- Minikube ---
+# ----------------
 
-source <(kubectl completion bash)
+export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
+export MINIKUBE_HOME=$HOME
+export CHANGE_MINIKUBE_NONE_USER=true
+
+mkdir -p $HOME/.kube
+touch $HOME/.kube/config
+
+export KUBECONFIG=$HOME/.kube/config
 
 # -------------
 # --- rbenv ---
@@ -200,7 +215,3 @@ my_custom_prompt () {
 }
 
 my_custom_prompt
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/developer/.sdkman"
-[[ -s "/home/developer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/developer/.sdkman/bin/sdkman-init.sh"
