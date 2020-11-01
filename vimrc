@@ -113,12 +113,17 @@ set showmatch " highlight matching parentheses
 set matchtime=0 " ...but stay out of the way (do not jump around)
 
 filetype plugin indent on " automatically detect file types.
-syntax on  " syntax highlighting
+syntax on " syntax highlighting
 
 set noerrorbells visualbell t_vb= " disable all bells
 set showcmd                       " show command that is being entered in the lower right
 set backspace=indent,eol,start    " allow extended backspace behaviour
 set virtualedit=block             " allow placing the cursor after the last char
+set scrolloff=3                   " number of lines visible when scrolling
+set sidescroll=3
+set sidescrolloff=3
+set splitright                    " position of the new split panes
+set splitbelow
 
 if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
