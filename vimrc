@@ -552,12 +552,11 @@ nmap ]q :cnext<CR>
 
 " Close quickfix list with Q like some plugins do
 " -----------------------------------------------
-if has('localmap')
-  " simply execute ':q<enter>' because both quickfix list and location list are
-  " of type qf, and if we use cclose in a location list it will try to close
-  " the quickfix if open in another window, not the current location list
-  autocmd FileType qf nnoremap <buffer> <silent> q :q<CR>
-endif
+
+" simply execute ':q<enter>' because both quickfix list and location list are
+" of type qf, and if we use cclose in a location list it will try to close
+" the quickfix if open in another window, not the current location list
+autocmd FileType qf nnoremap <buffer> <silent> q :q<CR>
 
 " Open quickfix results in vertical and horizontal splits
 " -------------------------------------------------------
