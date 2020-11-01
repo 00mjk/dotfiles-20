@@ -1,6 +1,13 @@
 # vim: set ft=zsh:
 
+setopt HISTIGNOREDUPS
 setopt HIST_IGNORE_ALL_DUPS
+setopt CORRECT
+setopt CORRECT_ALL
+setopt GLOBDOTS
+# prevents you from accidentally overwriting an existing file.
+setopt NOCLOBBER
+
 ZSH_CUSTOM=~/.zsh_custom
 ZSH_THEME="bravoecho"
 export ZSH="${HOME}/.oh-my-zsh"
