@@ -55,6 +55,7 @@ brew install \
   kubectx \
   less \
   lf \
+  libpq \
   libxml2 \
   lsof \
   make \
