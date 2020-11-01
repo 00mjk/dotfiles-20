@@ -541,9 +541,20 @@ inoremap <C-k> <ESC>:m .-2<CR>gi
 " ------------------ "
 
 " --- Visualise whitespace ---
-set listchars=tab:»·,trail:·,extends:>,precedes:<
+set listchars=tab:▸·,trail:·,extends:>,precedes:<
 " toggle hidden characters highlighting:
 nmap <silent> <Leader>w :set nolist!<CR>
+
+" --- highlight unwanted trailing whitespace --- "
+" <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
+"
+" only in normal mode
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " --- Strip whitespace ---
 
