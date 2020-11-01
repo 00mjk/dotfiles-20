@@ -17,3 +17,5 @@ repositories.
      repository, so later it will be updated by `apt-get upgrade`
    * `./scripts/docker-compose` will install the latest docker-compose from
      the website, and the same script will be used for updating later
+1. **mosh**: the mobile shell (<https://mosh.org>), for more flexible SSH
+   sessions on flaky connections: `./scripts/mosh`
