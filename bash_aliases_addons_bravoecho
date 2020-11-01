@@ -10,7 +10,7 @@ alias cls="clear && printf '\e[3J'"
 # --- ssh ---
 # -----------
 
-alias sshagentfw='declare -x SSH_AUTH_SOCK="$(find /tmp -type s -path '*ssh*' 2>/dev/null | head -n1)"'
+# alias sshagentfw='declare -x SSH_AUTH_SOCK="$(find /tmp -type s -path '*ssh*' 2>/dev/null | head -n1)"'
 
 # -----------
 # --- git ---

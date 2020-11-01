@@ -1,16 +1,16 @@
 # vim: set ft=sh:
 
-# -----------
-# --- GPG ---
-# -----------
-
-export GPG_TTY=$(tty)
-# This create-socketdir command is only required if a non default home
-# directory is used and the /run based sockets shall be used. For the default
-# home directory GnUPG creates a directory on the fly.
-if [[ ! -d $HOME/.gnupg && ( -d /run/user || -d /var/run/user ) ]]; then
-  gpgconf --create-socketdir
-fi
+# # -----------
+# # --- GPG ---
+# # -----------
+#
+# export GPG_TTY=$(tty)
+# # This create-socketdir command is only required if a non default home
+# # directory is used and the /run based sockets shall be used. For the default
+# # home directory GnUPG creates a directory on the fly.
+# if [[ ! -d $HOME/.gnupg && ( -d /run/user || -d /var/run/user ) ]]; then
+#   gpgconf --create-socketdir
+# fi
 
 # --------------
 # --- Golang ---
@@ -46,63 +46,65 @@ else
 
 fi
 
-update_auth_sock() {
-  SOCK="/tmp/ssh-agent-$USER-screen"
-
-  if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
-  then
-    rm -f /tmp/ssh-agent-$USER-screen
-    ln -sf $SSH_AUTH_SOCK $SOCK
-    export SSH_AUTH_SOCK=$SOCK
-  fi
-}
-
-update_auth_sock()
-
-# ------------------------
-# --- Google Cloud SDK ---
-# ------------------------
-
-# The next line updates PATH for the Google Cloud SDK.
-if [[ -f $HOME/.google-cloud-sdk/path.bash.inc ]]; then
-  source $HOME/.google-cloud-sdk/path.bash.inc
-fi
-
-if [[ -f $HOME/google-cloud-sdk/path.bash.inc ]]; then
-  source $HOME/google-cloud-sdk/path.bash.inc
-fi
-
-# The next line enables bash completion for gcloud.
-if [[ -f $HOME/.google-cloud-sdk/completion.bash.inc ]]; then
-  source $HOME/.google-cloud-sdk/completion.bash.inc
-fi
-
-if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
-  source $HOME/google-cloud-sdk/completion.bash.inc
-fi
-
-# ----------------------------------- #
-# --- Kubernetes CLI autocomplete --- #
-# ----------------------------------- #
-
-if [[ -n "$(command -v kubectl)" ]]; then
-  source <(kubectl completion bash)
-fi
-
-# ----------------
-# --- Minikube ---
-# ----------------
-
-export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
-export MINIKUBE_WANTUPDATENOTIFICATION=false
-export MINIKUBE_WANTREPORTERRORPROMPT=false
-export MINIKUBE_HOME=$HOME
-export CHANGE_MINIKUBE_NONE_USER=true
-
-mkdir -p $HOME/.kube
-touch $HOME/.kube/config
-
-export KUBECONFIG=$HOME/.kube/config
+# update_auth_sock() {
+#   SOCK="/tmp/ssh-agent-$USER-screen"
+#
+#   if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+#   then
+#     rm -f /tmp/ssh-agent-$USER-screen
+#     ln -sf $SSH_AUTH_SOCK $SOCK
+#     export SSH_AUTH_SOCK=$SOCK
+#   fi
+# }
+#
+# update_auth_sock()
+#
+# # ------------------------
+# # --- Google Cloud SDK ---
+# # ------------------------
+#
+# # The next line updates PATH for the Google Cloud SDK.
+# if [[ -f $HOME/.google-cloud-sdk/path.bash.inc ]]; then
+#   source $HOME/.google-cloud-sdk/path.bash.inc
+# fi
+#
+# if [[ -f $HOME/google-cloud-sdk/path.bash.inc ]]; then
+#   source $HOME/google-cloud-sdk/path.bash.inc
+# fi
+#
+# # The next line enables bash completion for gcloud.
+# if [[ -f $HOME/.google-cloud-sdk/completion.bash.inc ]]; then
+#   source $HOME/.google-cloud-sdk/completion.bash.inc
+# fi
+#
+# if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
+#   source $HOME/google-cloud-sdk/completion.bash.inc
+# fi
+#
+# # ----------------------------------- #
+# # --- Kubernetes CLI autocomplete --- #
+# # ----------------------------------- #
+#
+# # TODO: this is very slow, because `kubectl completion bash` is slow,
+# #       replace with a file containing the output of the kubectl command
+# if [[ -n "$(command -v kubectl)" ]]; then
+#   source <(kubectl completion bash)
+# fi
+#
+# # ----------------
+# # --- Minikube ---
+# # ----------------
+#
+# export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
+# export MINIKUBE_WANTUPDATENOTIFICATION=false
+# export MINIKUBE_WANTREPORTERRORPROMPT=false
+# export MINIKUBE_HOME=$HOME
+# export CHANGE_MINIKUBE_NONE_USER=true
+#
+# mkdir -p $HOME/.kube
+# touch $HOME/.kube/config
+#
+# export KUBECONFIG=$HOME/.kube/config
 
 # -------------
 # --- rbenv ---
@@ -116,123 +118,123 @@ fi
 # -------------------------------------
 # --- Prompt (with git integration) ---
 # -------------------------------------
+#
+# parse_git_branch() {
+#   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+# }
+#
+# # http://stackoverflow.com/a/5947802
+# # Black        0;30     Dark Gray     1;30
+# # Red          0;31     Light Red     1;31
+# # Green        0;32     Light Green   1;32
+# # Brown/Orange 0;33     Yellow        1;33
+# # Blue         0;34     Light Blue    1;34
+# # Purple       0;35     Light Purple  1;35
+# # Cyan         0;36     Light Cyan    1;36
+# # Light Gray   0;37     White         1;37
+#
+# parse_git_status(){
+#   local        BLACK='\033[0;30m'
+#   local    DARK_GRAY='\033[1;30m'
+#   local         BLUE='\033[0;34m'
+#   local   LIGHT_BLUE='\033[1;34m'
+#   local        GREEN='\033[0;32m'
+#   local  LIGHT_GREEN='\033[1;32m'
+#   local         CYAN='\033[0;36m'
+#   local   LIGHT_CYAN='\033[1;36m'
+#   local          RED='\033[0;31m'
+#   local    LIGHT_RED='\033[1;31m'
+#   local       PURPLE='\033[0;35m'
+#   local LIGHT_PURPLE='\033[1;35m'
+#   local        BROWN='\033[0;33m'
+#   local       YELLOW='\033[1;33m'
+#   local   LIGHT_GRAY='\033[0;37m'
+#   local        WHITE='\033[1;37m'
+#   local           NC='\033[0m'
+#
+#   # Are there changes to the tree?
+#   local fullstatus="$(git status -sb 2>/dev/null)"
+#
+#   if [[ -z "${fullstatus}" ]]; then
+#     return
+#   fi
+#
+#   local indicator=
+#   if [[ -z "${fullstatus}" ]]; then
+#     indicator=""
+#   elif [[ $(echo "${fullstatus}"| wc -l) > 1 ]]; then
+#     indicator="${RED}!!!${NC}"
+#   else
+#     indicator="${GREEN}===${NC}"
+#   fi
+#
+#   local statusheader="$(echo "${fullstatus}" | head -n1)"
+#
+#   # Is the tip in sync with the tracking remote?
+#   local patt=
+#
+#   local is_not_synced=
+#   patt="\[(ahead|behind).+\]$"
+#   if [[ "${statusheader}" =~ $patt ]]; then
+#     is_not_synced=true
+#   fi
+#
+#   local is_tracking_remote=
+#   patt="\.\.\."
+#   if [[ "${statusheader}" =~ $patt ]]; then
+#     is_tracking_remote=true
+#   fi
+#
+#   local sync_state=
+#   if [[ $is_tracking_remote && $is_not_synced ]]; then
+#     # ## master...origin/master [behind 2] => [behind 2]
+#     sync_state="${RED}$(echo "${statusheader}" | sed -re 's|^.*(\[.*)$|\1|')${NC}"
+#   elif [[ $is_tracking_remote ]]; then
+#     sync_state="${GREEN}[synced]${NC}"
+#   else
+#     sync_state="${RED}[not tracking]${NC}"
+#   fi
+#
+#   echo -e "${indicator} ${sync_state}"
+# }
+#
+# my_custom_prompt () {
+#   local        BLACK="\[\033[0;30m\]"
+#   local    DARK_GRAY="\[\033[1;30m\]"
+#   local         BLUE="\[\033[0;34m\]"
+#   local   LIGHT_BLUE="\[\033[1;34m\]"
+#   local        GREEN="\[\033[0;32m\]"
+#   local  LIGHT_GREEN="\[\033[1;32m\]"
+#   local         CYAN="\[\033[0;36m\]"
+#   local   LIGHT_CYAN="\[\033[1;36m\]"
+#   local          RED="\[\033[0;31m\]"
+#   local    LIGHT_RED="\[\033[1;31m\]"
+#   local       PURPLE="\[\033[0;35m\]"
+#   local LIGHT_PURPLE="\[\033[1;35m\]"
+#   local        BROWN="\[\033[0;33m\]"
+#   local       YELLOW="\[\033[1;33m\]"
+#   local   LIGHT_GRAY="\[\033[0;37m\]"
+#   local        WHITE="\[\033[1;37m\]"
+#   local           NC="\[\033[0m\]"
+#
+#   case $TERM in
+#     xterm*)
+#       TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+#       ;;
+#     *)
+#       TITLEBAR=""
+#       ;;
+#   esac
+#
+#   PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w$BLUE \$(parse_git_branch) \$(parse_git_status)$NC\n$NC\$ "
+#
+#   PS2='> '
+#
+#   PS4='+ '
+# }
+#
+# my_custom_prompt
 
-parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
-# http://stackoverflow.com/a/5947802
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
-
-parse_git_status(){
-  local        BLACK='\033[0;30m'
-  local    DARK_GRAY='\033[1;30m'
-  local         BLUE='\033[0;34m'
-  local   LIGHT_BLUE='\033[1;34m'
-  local        GREEN='\033[0;32m'
-  local  LIGHT_GREEN='\033[1;32m'
-  local         CYAN='\033[0;36m'
-  local   LIGHT_CYAN='\033[1;36m'
-  local          RED='\033[0;31m'
-  local    LIGHT_RED='\033[1;31m'
-  local       PURPLE='\033[0;35m'
-  local LIGHT_PURPLE='\033[1;35m'
-  local        BROWN='\033[0;33m'
-  local       YELLOW='\033[1;33m'
-  local   LIGHT_GRAY='\033[0;37m'
-  local        WHITE='\033[1;37m'
-  local           NC='\033[0m'
-
-  # Are there changes to the tree?
-  local fullstatus="$(git status -sb 2>/dev/null)"
-
-  if [[ -z "${fullstatus}" ]]; then
-    return
-  fi
-
-  local indicator=
-  if [[ -z "${fullstatus}" ]]; then
-    indicator=""
-  elif [[ $(echo "${fullstatus}"| wc -l) > 1 ]]; then
-    indicator="${RED}!!!${NC}"
-  else
-    indicator="${GREEN}===${NC}"
-  fi
-
-  local statusheader="$(echo "${fullstatus}" | head -n1)"
-
-  # Is the tip in sync with the tracking remote?
-  local patt=
-
-  local is_not_synced=
-  patt="\[(ahead|behind).+\]$"
-  if [[ "${statusheader}" =~ $patt ]]; then
-    is_not_synced=true
-  fi
-
-  local is_tracking_remote=
-  patt="\.\.\."
-  if [[ "${statusheader}" =~ $patt ]]; then
-    is_tracking_remote=true
-  fi
-
-  local sync_state=
-  if [[ $is_tracking_remote && $is_not_synced ]]; then
-    # ## master...origin/master [behind 2] => [behind 2]
-    sync_state="${RED}$(echo "${statusheader}" | sed -re 's|^.*(\[.*)$|\1|')${NC}"
-  elif [[ $is_tracking_remote ]]; then
-    sync_state="${GREEN}[synced]${NC}"
-  else
-    sync_state="${RED}[not tracking]${NC}"
-  fi
-
-  echo -e "${indicator} ${sync_state}"
-}
-
-my_custom_prompt () {
-  local        BLACK="\[\033[0;30m\]"
-  local    DARK_GRAY="\[\033[1;30m\]"
-  local         BLUE="\[\033[0;34m\]"
-  local   LIGHT_BLUE="\[\033[1;34m\]"
-  local        GREEN="\[\033[0;32m\]"
-  local  LIGHT_GREEN="\[\033[1;32m\]"
-  local         CYAN="\[\033[0;36m\]"
-  local   LIGHT_CYAN="\[\033[1;36m\]"
-  local          RED="\[\033[0;31m\]"
-  local    LIGHT_RED="\[\033[1;31m\]"
-  local       PURPLE="\[\033[0;35m\]"
-  local LIGHT_PURPLE="\[\033[1;35m\]"
-  local        BROWN="\[\033[0;33m\]"
-  local       YELLOW="\[\033[1;33m\]"
-  local   LIGHT_GRAY="\[\033[0;37m\]"
-  local        WHITE="\[\033[1;37m\]"
-  local           NC="\[\033[0m\]"
-
-  case $TERM in
-    xterm*)
-      TITLEBAR='\[\033]0;\u@\h:\w\007\]'
-      ;;
-    *)
-      TITLEBAR=""
-      ;;
-  esac
-
-  PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w$BLUE \$(parse_git_branch) \$(parse_git_status)$NC\n$NC\$ "
-
-  PS2='> '
-
-  PS4='+ '
-}
-
-my_custom_prompt
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/developer/.sdkman"
-[[ -s "/home/developer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/developer/.sdkman/bin/sdkman-init.sh"
+# #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# export SDKMAN_DIR="/home/developer/.sdkman"
+# [[ -s "/home/developer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/developer/.sdkman/bin/sdkman-init.sh"
