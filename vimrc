@@ -102,15 +102,6 @@ vmap , \
 nmap <space> \
 vmap <space> \
 
-" -------------------------------------------------------- "
-" --- Make shift-Y consistent with shift-C and shift-D --- "
-" -------------------------------------------------------- "
-
-" shift-C changes till the end of line, and shift-D deletes till the of the line.
-" shift-Y breaks the pattern, and it's an alias for `yy'.
-" This was initially in vim-sensible but then removed.
-nnoremap Y y$
-
 " ---------------------- "
 " --- Visual options --- "
 " ---------------------- "
@@ -489,6 +480,12 @@ set pastetoggle=<F3>
 " y   -> copy it again
 " `>  -> jump to the last character of the visual selection (built-in mark)
 vnoremap <Leader>p pgvy`>
+
+" --- Make shift-Y consistent with shift-C and shift-D --- "
+" shift-C changes till the end of line, and shift-D deletes till the of the line.
+" shift-Y breaks the pattern, and it's an alias for `yy'.
+" This was once in vim-sensible but then removed.
+nnoremap Y y$
 
 " ------------------- "
 " --- Real delete --- "
