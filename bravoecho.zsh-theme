@@ -12,8 +12,10 @@
 # this basic effort.
 
 function _bravoecho_git_branch() {
-  if [[ -d "$(pwd)/.git" ]]; then
-    echo " on %{$fg[green]%}$(git rev-parse --abbrev-ref HEAD)%{$reset_color%}"
+  local branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+  if [[ -n "${branch_name}" ]]; then
+    echo " on %{$fg[green]%}${branch_name}%{$reset_color%}"
   fi
 }
 
