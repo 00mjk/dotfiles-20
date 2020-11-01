@@ -147,7 +147,7 @@ noremap <Leader>b :CtrlPBuffer<CR>
 " use ag (https://robots.thoughtbot.com/faster-grepping-in-vim),
 " because faster and respects .gitignore
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
 " Search and replace current word
