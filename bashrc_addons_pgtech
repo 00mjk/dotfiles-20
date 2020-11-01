@@ -47,18 +47,13 @@ else
 fi
 
 update_auth_sock() {
-  local socket_path="$(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')"
+  SOCK="/tmp/ssh-agent-$USER-screen"
 
-  if [[ -n "$TMUX" ]]; then
-    echo "not in a tmux session" >&2
-    return 1
-  fi
-
-  if [[ -n "$socket_path" ]]; then
-    echo "no socket path" >&2
-    return 1
-  else
-    export SSH_AUTH_SOCK="$socket_path"
+  if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+  then
+    rm -f /tmp/ssh-agent-$USER-screen
+    ln -sf $SSH_AUTH_SOCK $SOCK
+    export SSH_AUTH_SOCK=$SOCK
   fi
 }
 
