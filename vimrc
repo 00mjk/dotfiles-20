@@ -188,6 +188,10 @@ set expandtab
 " --- Buffer management --- "
 " ------------------------- "
 
+" Reuse buffers: if a buffer is already open in another window, jump to it
+" instead of opening a new window.
+set switchbuf=useopen
+
 " Allow to open a different buffer in the same window of a modified buffer
 set hidden
 
@@ -195,14 +199,15 @@ set hidden
 set splitbelow
 set splitright
 
-" Remap leader-d to delete buffer
-nmap <Leader>d :bd
-
 " Cycle throuh buffers with tab / shift-tab
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprev<CR>
 nmap <C-K> :bnext<CR>
 nmap <C-J> :bprev<CR>
+
+" Close the current buffer without closing the window
+" <http://stackoverflow.com/a/8585343/417375>
+nnoremap <Leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " ---------------- "
 " --- Wrapping --- "
