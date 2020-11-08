@@ -96,6 +96,9 @@ brew install \
 # universal-ctags is a head-only formula until considered stable
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
+# until Neovim 0.5 is released, the HEAD version is required for LSP support
+brew install --HEAD neovim
+
 # --------------------------------- #
 # --- Post install for formulae --- #
 # --------------------------------- #
@@ -103,6 +106,7 @@ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 brew link --overwrite --force python@3.9
 
 python3 -m pip install ydiff
+python3 -m pip install --user --upgrade pynvim
 
 printf "\n===> Configuring fzf\n"
 set -x

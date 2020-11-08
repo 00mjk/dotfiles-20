@@ -14,7 +14,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+if !has('nvim')
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+endif
+if has('nvim')
+  Plug 'neovim/nvim-lspconfig'
+endif
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -24,7 +29,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
-Plug 'dense-analysis/ale'
+if !has('nvim')
+  Plug 'dense-analysis/ale'
+endif
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
@@ -175,6 +182,11 @@ vmap <space> \
 " ---------------------- "
 " --- Visual options --- "
 " ---------------------- "
+
+if has('nvim')
+  " reset to default, so it will show as normally does in Vim
+  set guicursor=
+endif
 
 set number " show line numbers
 
@@ -330,8 +342,9 @@ nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " see also <http://usevim.com/2012/05/16/mouse/>
 
+set mouse=a " enable mouse mode
+
 if !has('nvim')
-  set mouse=a " enable mouse mode
   if has("mouse_sgr")
     set ttymouse=sgr
   else
@@ -721,11 +734,13 @@ nnoremap <Leader>o :call InsertPasteNewLine()<CR>
 " Delete without yanking, send the deleted content to the 'black hole' register.
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
-if !has('nvim') && has('linux')
-  set <M-d>=d
-elseif has('osxdarwin')
-  set <M-d>=∂
-end
+if !has('nvim')
+  if has('linux')
+    set <M-d>=d
+  elseif has('osxdarwin')
+    set <M-d>=∂
+  endif
+endif
 
 " ...then, the actual mapping:
 " current line in normal and insert mode
@@ -1154,6 +1169,61 @@ autocmd FileType go nnoremap <Leader>t <Plug>(go-test)
 " -------------------------------------- "
 " --- Ale (Asynchronous Lint Engine) --- "
 " -------------------------------------- "
+" ----------------------------------- "
+" --- Golang/Neovim setup for LSP --- "
+" ----------------------------------- "
+
+if has('nvim')
+lua <<EOF
+  nvim_lsp = require "nvim_lsp"
+  nvim_lsp.gopls.setup {
+    cmd = {"gopls", "serve"},
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  }
+
+  function goimports(timeoutms)
+    local context = { source = { organizeImports = true } }
+    vim.validate { context = { context, "t", true } }
+
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
+
+    local method = "textDocument/codeAction"
+    local resp = vim.lsp.buf_request_sync(0, method, params, timeoutms)
+    if resp and resp[1] then
+      local result = resp[1].result
+      if result and result[1] then
+        local edit = result[1].edit
+        vim.lsp.util.apply_workspace_edit(edit)
+      end
+    end
+
+    vim.lsp.buf.formatting()
+  end
+EOF
+
+  "  local nvim_lsp = require 'nvim_lsp'
+  "  nvim_lsp.gopls.setup{
+  "    cmd = {"gopls"};
+  "    filetypes = {"go"};
+  "    root_dir = nvim_lsp.util.root_pattern("go.mod", ".git");
+  "    log_level = vim.lsp.protocol.MessageType.Log;
+  "    settings = {}
+  "  }
+
+  autocmd BufWritePre *.go lua goimports(1000)
+  nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+
+  autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+endif
+
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
