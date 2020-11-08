@@ -206,6 +206,7 @@ alias utcnow='date -u +"%Y-%m-%dT%H-%M-%SZ"'
 alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
 
 alias gti='git'
+
 alias g='git'
 alias ga='git add'
 alias gaa='git add $(git rev-parse --show-toplevel)'
@@ -228,6 +229,7 @@ alias gss='git status -sb'
 alias gst='git status -sb'
 alias gsm='git submodule update --init --recursive'
 alias gsd='git diff --staged'
+alias gta='git stash --include-untracked'
 
 # --- ls --- #
 
