@@ -26,6 +26,20 @@ git config --global include.path .gitconfig_addons_bravoecho
 
 backup_and_symlink "${ROOTDIR}/tmux.conf" "${HOME}/.tmux.conf"
 
+# ------------------- #
+# --- miscellanea --- #
+# ------------------- #
+
+# --- global fd ignore --- #
+
+fd_global_ignore_path=
+if [[ -n "${XDG_CONFIG_HOME}" ]]; then
+  fd_global_ignore_path="${XDG_CONFIG_HOME}"
+else
+  fd_global_ignore_path="${HOME}/.config"
+fi
+backup_and_symlink "${ROOTDIR}/dotfiles/fdignore" "${fd_global_ignore_path}/fd/ignore"
+
 # -------------- #
 # --- shells --- #
 # -------------- #

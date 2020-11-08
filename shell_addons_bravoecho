@@ -172,7 +172,8 @@ export FZF_DEFAULT_OPTS="
 "
 
 # if available, use fd to feed fzf
-[ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always -E '.git'  -E '.hg' -E '.svn' -E '_quarantine' -E 'bundle' -E 'code.google.com' -E 'cuelang.org' -E 'cloud.google.com' -E 'git' -E 'github.com' -E 'google.golang.org' -E 'golang.org' -E 'gopkg.in' -E 'node_modules' -E 'pkg/mod/cache' -E 'vendor' -E '*.class' -E '*.dll' -E '*.exe' -E '*.pyc' -E '*.so' -E 'venv*/' --no-ignore-vcs"
+# see also the global fd ignore file
+[ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always --no-ignore-vcs"
 
 [ -n "${FZF_DEFAULT_COMMAND}" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
