@@ -189,6 +189,12 @@ FZF_COMPLETION_TRIGGER='~~'
 # FZF_ALT_C_OPTS
 # FZF_COMPLETION_OPTS='+c -x'
 
+# -------------------- #
+# --- RG (RIPGREP) --- #
+# -------------------- #
+
+RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+
 # --------------- #
 # --- Aliases --- #
 # --------------- #

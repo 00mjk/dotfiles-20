@@ -1,5 +1,7 @@
 # Dirs
 
+.bin
+.bundle
 .git
 .hg
 .svn
@@ -17,6 +19,7 @@ google.golang.org
 gopkg.in
 honnef.co
 launchpad.net
+log
 node_modules
 pkg/mod/cache
 speter.net
@@ -31,3 +34,4 @@ venv*/
 *.exe
 *.pyc
 *.so
+tags

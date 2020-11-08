@@ -40,6 +40,10 @@ else
 fi
 backup_and_symlink "${ROOTDIR}/dotfiles/fdignore" "${fd_global_ignore_path}/fd/ignore"
 
+# --- global ripgrep config --- #
+
+backup_and_symlink "${ROOTDIR}/dotfiles/ripgreprc" "${HOME}/.ripgreprc"
+
 # -------------- #
 # --- shells --- #
 # -------------- #
