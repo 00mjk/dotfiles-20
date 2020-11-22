@@ -193,7 +193,7 @@ FZF_COMPLETION_TRIGGER='~~'
 # --- RG (RIPGREP) --- #
 # -------------------- #
 
-RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 
 # --------------- #
 # --- Aliases --- #
@@ -266,3 +266,8 @@ alias rmcontainers='docker rm $(docker ps -a -f status=exited -q)'
 alias dkcont-nuke='docker ps -aq | xargs --no-run-if-empty docker stop | xargs --no-run-if-empty docker rm -v'
 alias dkimg-nuke=$'docker ps --filter=status=exited --quiet  | xargs --no-run-if-empty docker rm && docker images --filter=dangling=true --quiet | xargs --no-run-if-empty docker rmi && docker volume ls --filter=dangling=true --quiet | awk \'$0 ~ "^[0-9a-f]{64}$"\' | xargs --no-run-if-empty docker volume rm'
 alias rmkube='docker stop $(docker ps -q --filter name=k8s); docker rm $(docker ps -aq --filter name=k8s)'
+
+# --- kubernetes --- #
+
+alias k='kubectl'
+alias kc='kubectx'
