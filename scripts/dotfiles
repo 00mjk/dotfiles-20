@@ -9,6 +9,7 @@ fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
 
@@ -16,7 +17,7 @@ source "${CURRDIR}/utils.sh"
 # --- git --- #
 # ----------- #
 
-backup_and_symlink "${ROOTDIR}/gitconfig_addons_bravoecho" "${HOME}/.gitconfig_addons_bravoecho"
+backup_and_symlink "${DOTFILES_DIR}/gitconfig_addons_bravoecho" "${HOME}/.gitconfig_addons_bravoecho"
 
 git config --global include.path .gitconfig_addons_bravoecho
 
@@ -24,7 +25,7 @@ git config --global include.path .gitconfig_addons_bravoecho
 # --- tmux --- #
 # ------------ #
 
-backup_and_symlink "${ROOTDIR}/tmux.conf" "${HOME}/.tmux.conf"
+backup_and_symlink "${DOTFILES_DIR}/tmux.conf" "${HOME}/.tmux.conf"
 
 # ------------------- #
 # --- miscellanea --- #
@@ -39,28 +40,28 @@ fi
 
 # --- global fd ignore --- #
 
-backup_and_symlink "${ROOTDIR}/dotfiles/fdignore" "${global_config_path}/fd/ignore"
+backup_and_symlink "${DOTFILES_DIR}/fdignore" "${global_config_path}/fd/ignore"
 
 # --- global ripgrep config --- #
 
-backup_and_symlink "${ROOTDIR}/dotfiles/ripgreprc" "${HOME}/.ripgreprc"
+backup_and_symlink "${DOTFILES_DIR}/ripgreprc" "${HOME}/.ripgreprc"
 
 # --- htop --- #
 
-backup_and_symlink "${ROOTDIR}/dotfiles/htoprc" "${global_config_path}/htop/htoprc"
+backup_and_symlink "${DOTFILES_DIR}/htoprc" "${global_config_path}/htop/htoprc"
 
 # -------------- #
 # --- shells --- #
 # -------------- #
 
-backup_and_symlink "${ROOTDIR}/bashrc_addons_bravoecho" "${HOME}/.bashrc_addons_bravoecho"
-backup_and_symlink "${ROOTDIR}/zshrc_addons_bravoecho" "${HOME}/.zshrc_addons_bravoecho"
-backup_and_symlink "${ROOTDIR}/shell_addons_bravoecho" "${HOME}/.shell_addons_bravoecho"
+backup_and_symlink "${DOTFILES_DIR}/bashrc_addons_bravoecho" "${HOME}/.bashrc_addons_bravoecho"
+backup_and_symlink "${DOTFILES_DIR}/zshrc_addons_bravoecho" "${HOME}/.zshrc_addons_bravoecho"
+backup_and_symlink "${DOTFILES_DIR}/shell_addons_bravoecho" "${HOME}/.shell_addons_bravoecho"
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
   # prevent the "last login" message on macOS
   touch ~/.hushlogin
-  backup_and_symlink "${ROOTDIR}/shell_addons_mac_bravoecho" "${HOME}/.shell_addons_mac_bravoecho"
+  backup_and_symlink "${DOTFILES_DIR}/shell_addons_mac_bravoecho" "${HOME}/.shell_addons_mac_bravoecho"
 fi
 
 function enable_shell_addon() {
@@ -75,8 +76,10 @@ function enable_shell_addon() {
 function configure_shell_addons() {
   local rcfile=$1
 
-  enable_shell_addon "${rcfile}" "shell_addons_bravoecho"
+  # it's important that the addons for the specific shell are loaded first, or
+  # some tools won't be configured correctly (like fzf for example)
   enable_shell_addon "${rcfile}" "${rcfile}_addons_bravoecho"
+  enable_shell_addon "${rcfile}" "shell_addons_bravoecho"
 
   if [[ "$(uname -s)" == "Darwin" ]]; then
     enable_shell_addon "${rcfile}" "shell_addons_mac_bravoecho"

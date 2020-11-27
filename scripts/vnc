@@ -4,6 +4,7 @@ set -e
 
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
 
@@ -16,7 +17,7 @@ sudo apt-get install -yq \
   chromium-browser \
   lxterminal \
 
-backup_and_symlink $ROOTDIR/xstartup $HOME/.vnc/xstartup
+backup_and_symlink "${DOTFILES_DIR}/xstartup" "${HOME}/.vnc/xstartup"
 
 echo "
 You can now start the VNC server with

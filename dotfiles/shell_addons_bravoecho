@@ -158,17 +158,17 @@ export VISUAL=$(command -v vim)
 # keybind (Ctrl-/ while in the fzf results)
 #
 # Also set custom colorscheme for ANSI colours.
-export FZF_DEFAULT_OPTS="
---extended
---history=$HOME/.fzf_history
---reverse
---info=inline
---bind='ctrl-/:toggle-preview'
---preview-window=hidden
---preview='[ -f {} ] && head -n 200 {}'
---ansi
---color='bg:-1,bg+:15,fg:8,fg+:-1,hl:12,hl+:4,info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6'
---color='info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6'
+export FZF_DEFAULT_OPTS="\
+--extended \
+--history=$HOME/.fzf_history \
+--reverse \
+--info=inline \
+--bind='ctrl-/:toggle-preview' \
+--preview-window=hidden \
+--preview='[ -f {} ] && head -n 200 {}' \
+--ansi \
+--color='bg:-1,bg+:15,fg:8,fg+:-1,hl:12,hl+:4,info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
+--color='info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
 "
 
 # if available, use fd to feed fzf
@@ -194,6 +194,12 @@ FZF_COMPLETION_TRIGGER='~~'
 # -------------------- #
 
 export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+
+# ----------- #
+# --- BAT --- #
+# ----------- #
+
+export BAT_THEME=GitHub
 
 # --------------- #
 # --- Aliases --- #
