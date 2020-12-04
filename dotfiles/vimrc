@@ -453,29 +453,29 @@ xnoremap <End>  g<End>
 " popups
 " <https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping>
 " command Wrap call Wrap()
-" noremap <silent> <Leader>w :call Wrap()<CR>
-" 
-" function Wrap()
-"   if &wrap
-"     echo "Wrap OFF"
-"     setlocal nowrap
-"     set virtualedit=block
-"     silent! iunmap <buffer> <Up>
-"     silent! iunmap <buffer> <Down>
-"     silent! iunmap <buffer> <Home>
-"     silent! iunmap <buffer> <End>
-"   else
-"     echo "Wrap ON"
-"     setlocal wrap linebreak nolist
-"     " TODO: save the previous state of virtualedit if any
-"     set virtualedit=
-"     setlocal display+=lastline
-"     inoremap <buffer> <silent> <Up>   <C-o>gk
-"     inoremap <buffer> <silent> <Down> <C-o>gj
-"     inoremap <buffer> <silent> <Home> <C-o>g<Home>
-"     inoremap <buffer> <silent> <End>  <C-o>g<End>
-"   endif
-" endfunction
+noremap <silent> <Leader>w :call Wrap()<CR>
+
+function Wrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=block
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    " TODO: save the previous state of virtualedit if any
+    set virtualedit=
+    setlocal display+=lastline
+    inoremap <buffer> <silent> <Up>   <C-o>gk
+    inoremap <buffer> <silent> <Down> <C-o>gj
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
+  endif
+endfunction
 
 " ------------------------------------------------------------------- "
 " --- Support vim options in individual files with magic comments --- "
@@ -524,15 +524,33 @@ endif
 " ---------------------------------------- "
 
 " http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
-if !exists(":W")   | command W   w   | endif
-if !exists(":Wa")  | command Wa  wa  | endif
-if !exists(":WA")  | command WA  wa  | endif
-if !exists(":Q")   | command Q   q   | endif
-if !exists(":Qa")  | command Qa  qa  | endif
-if !exists(":QA")  | command QA  qa  | endif
-if !exists(":Wq")  | command Wq  wq  | endif
-if !exists(":Wqa") | command Wqa wqa | endif
-if !exists(":Xa")  | command Xa  xa  | endif
+if !exists(":W")
+  command W   w
+endif
+if !exists(":Wa")
+  command Wa  wa
+endif
+if !exists(":WA")
+  command WA  wa
+endif
+if !exists(":Q")
+  command Q   q
+endif
+if !exists(":Qa")
+  command Qa  qa
+endif
+if !exists(":QA")
+  command QA  qa
+endif
+if !exists(":Wq")
+  command Wq  wq
+endif
+if !exists(":Wqa")
+  command Wqa wqa
+endif
+if !exists(":Xa")
+  command Xa  xa
+endif
 
 " -------------------------- "
 " --- Intuitive home key --- "
