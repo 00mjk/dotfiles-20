@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -e
 
@@ -24,64 +24,84 @@ ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 # NOTE: docker is installed as cask (desktop app), because even if a docker
 # formulae exists, that requires VirtualBox.
 
+# GNU utilities
+
 brew install --formulae --quiet \
-  bash \
-  bat \
-  bmon \
-  cmark \
-  colordiff \
   coreutils \
   diffutils \
-  direnv \
-  fd \
-  ffmpeg \
   findutils \
-  fzf \
   gawk \
-  git \
   gnu-getopt \
   gnu-indent \
   gnu-sed \
   gnu-tar \
   gnu-time \
   gnu-which \
+  gpatch \
+  grep \
+  gzip \
+  inetutils \
+  screen \
+
+# Other common GNU utilities are
+
+# autoconf
+# binutils
+# ed
+# flex
+# m4
+# util-linux
+
+# Updated versions of existing tools
+
+brew install --formulae --quiet \
+  bash \
+  git \
+  less \
+  libxml2 \
+  make \
+  nano \
+  openssh \
+  perl \
+  python \
+  rsync \
+  sqlite \
+  zsh \
+
+# Other utilities missing on macOS
+
+brew install --formulae --quiet \
+  bat \
+  bmon \
+  cmark \
+  colordiff \
+  direnv \
+  fd \
+  ffmpeg \
+  fzf \
   gnupg \
   go \
   golangci/tap/golangci-lint \
-  gpatch \
   graphviz \
-  grep \
-  gzip \
   htop \
   httpie \
   imagemagick \
-  inetutils \
   jq \
   kubectx \
-  less \
   lf \
   libpq \
-  libxml2 \
   lsof \
-  make \
   mosh \
   mtr \
-  nano \
   nethogs \
   nload \
   nmap \
-  openssh \
-  perl \
   pre-commit \
-  python@3.8 \
-  python@3.9 \
   ranger \
   rbenv \
   ripgrep \
-  rsync \
   ruby-install \
   slurm \
-  sqlite \
   the_silver_searcher \
   tmux \
   trash \
@@ -91,7 +111,6 @@ brew install --formulae --quiet \
   wdiff \
   wget \
   yq \
-  zsh
 
 brew install --formulae --quiet node yarn
 
@@ -156,6 +175,9 @@ if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   kubectl completion zsh > _kubectl
   popd
 fi
+
+# TODO: Link Chrome Dictionary to Dropbox
+# $HOME/Library/Application\ Support/Google/Chrome/Default/Custom\ Dictionary.txt
 
 # ------------------ #
 # --- Next steps --- #
