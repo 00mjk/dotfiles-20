@@ -76,6 +76,8 @@ function enable_shell_addon() {
 function configure_shell_addons() {
   local rcfile=$1
 
+  append_if_missing "$HOME/.${rcfile}" "# Shell addons must be in order 1. shell specific 2. generic 3. OS specific 4. local"
+
   # it's important that the addons for the specific shell are loaded first, or
   # some tools won't be configured correctly (like fzf for example)
   enable_shell_addon "${rcfile}" "${rcfile}_addons_bravoecho"
