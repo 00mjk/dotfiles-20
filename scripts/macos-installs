@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -e
+set -ex
 
 if [[ ! "$(uname -s)" =~ Darwin ]]; then
   echo "Only needed on macOS, all done"
@@ -12,7 +12,7 @@ if [[ -z $(command -v brew) ]]; then
   exit 1
 fi
 
-CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
 ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
@@ -130,9 +130,7 @@ python3 -m pip install ydiff
 python3 -m pip install --user --upgrade pynvim
 
 printf "\n===> Configuring fzf\n"
-set -x
 /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
-set +x
 
 echo "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
@@ -184,9 +182,9 @@ fi
 # ------------------------------- #
 
 pushd ~
-go get -u mvdan.cc/gofumpt
-go get -u mvdan.cc/gofumpt/gofumports
-go get -u honnef.co/go/tools/cmd/staticcheck
+GO111MODULE=on go get -u mvdan.cc/gofumpt
+GO111MODULE=on go get -u mvdan.cc/gofumpt/gofumports
+GO111MODULE=on go get -u honnef.co/go/tools/cmd/staticcheck
 popd
 
 # ------------------ #
