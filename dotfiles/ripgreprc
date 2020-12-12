@@ -1,6 +1,4 @@
-# run {{script}} to update this file
 --no-ignore-vcs
---ignore-file={{home}}/.rgignore
 --hidden
 --no-heading
 --line-number
