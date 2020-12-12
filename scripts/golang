@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -e
 
@@ -10,7 +10,7 @@ GO_VERSION=$(
     | sed -E 's/.*https:\/\/.+\/go(.+)\.linux-amd64\.tar\.gz.*/\1/'
 )
 
-CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 GO_WORKSPACE="${HOME}/go"
 
 DOWNLOAD_DIR="${HOME}/Downloads"

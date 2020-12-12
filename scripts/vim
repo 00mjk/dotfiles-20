@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -e
 
@@ -13,7 +13,7 @@ if [[ -z $(command -v curl) ]]; then
 fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
-CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"

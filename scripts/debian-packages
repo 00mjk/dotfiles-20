@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -e
 
-CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 
 # If tzdata needs to be installed, this will avoid prompting the user to
 # configure it.
