@@ -179,6 +179,7 @@ set sidescroll=3
 set sidescrolloff=3
 set splitright                    " position of the new split panes
 set splitbelow
+set shortmess-=S                  " show match count in searches
 
 if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
