@@ -819,15 +819,14 @@ let g:vim_markdown_new_list_item_indent = 0
 " Autoformat JSON with jq
 " -M  monochrome
 " -r raw output
-autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
+if executable('jq')
+  autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
+endif
 
 " Autoformat XML and HTML with xmllint
-autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
-
-" --- Special syntax highlight --- "
-" TODO:
-" autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|BUG\|HACK\)')
-" autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+if executable('xmllint')
+  autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
+endif
 
 " ---------------- "
 " --- vim-ruby --- "
