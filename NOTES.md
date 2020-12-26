@@ -71,6 +71,23 @@ Markdown syntax
 * <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
 * <https://github.com/plasticboy/vim-markdown>
 
+Native markdown configuration
+
+    " Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
+    " highligting is basic in terms of styles, and does not support several valid
+    " markdown features
+    "
+    " to activate it:
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+    " treat .txt files as markdown
+    autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
+
+    " its options are:
+    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+    let g:markdown_syntax_conceal = 0
+    let g:markdown_minlines = 100
+
 ### Alternate JSON formatting, doesn't respect order
 
     autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
