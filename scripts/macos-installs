@@ -145,20 +145,21 @@ fi
 # --- Casks --- #
 # ------------- #
 
+brew tap homebrew/cask-fonts
+
 brew install --casks --quiet \
   alacritty \
   docker \
   drawio \
   firefox \
+  font-go \
   font-inconsolata \
+  font-juliamono \
   iterm2 \
   middle \
   rectangle \
   sdformatter \
   visual-studio-code
-
-brew tap homebrew/cask-fonts
-brew install --casks --quiet font-juliamono
 
 # ------------------------------ #
 # --- Post install for casks --- #
