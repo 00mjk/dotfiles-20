@@ -71,22 +71,25 @@ Markdown syntax
 * <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
 * <https://github.com/plasticboy/vim-markdown>
 
-Native markdown configuration
+Plasticboy's Markdown config
 
-    " Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
-    " highligting is basic in terms of styles, and does not support several valid
-    " markdown features
-    "
-    " to activate it:
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+This plugin has much better syntax highlighting, but it messes with
+autoformatting in several ways, it's bad enough to be unusable.
 
-    " treat .txt files as markdown
-    autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
 
-    " its options are:
-    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-    let g:markdown_syntax_conceal = 0
-    let g:markdown_minlines = 100
+    " plasticboy/vim-markdown
+    " -----------------------
+
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_no_default_key_mappings = 1
+    let g:vim_markdown_toc_autofit = 1
+    let g:vim_markdown_conceal = 0
+    let g:vim_markdown_conceal_code_blocks = 0
+    let g:vim_markdown_new_list_item_indent = 0
+    " we cannot disable auto-bullets because it breaks formatlistpat
+    " let g:vim_markdown_auto_insert_bullets = 0
 
 ### Alternate JSON formatting, doesn't respect order
 
