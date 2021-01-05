@@ -137,6 +137,13 @@ echo "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
 
+echo "\n===> Install Oh My ZSH"
+
+touch "${HOME}/.zshrc"
+ohmyzsh_install="/tmp/install-ohmyzsh.sh"
+curl -o "${ohmyzsh_install}" -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+KEEP_ZSHRC=yes sh /tmp/install-ohmyzsh.sh
+
 # ------------- #
 # --- Casks --- #
 # ------------- #
