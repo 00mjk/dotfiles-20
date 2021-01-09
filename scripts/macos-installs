@@ -148,11 +148,11 @@ KEEP_ZSHRC=yes sh /tmp/install-ohmyzsh.sh
 
 echo "\n===> Install dotfiles"
 
-"${CURRDIR}"/dotfiles
+"${CURRDIR}/dotfiles"
 
 echo "\n===> Set up Vim"
 
-"${CURRDIR}"/vim
+"${CURRDIR}/vim"
 
 # ------------- #
 # --- Casks --- #
@@ -197,11 +197,7 @@ fi
 # --- Other non-brew installs --- #
 # ------------------------------- #
 
-pushd ~
-GO111MODULE=on go get -u mvdan.cc/gofumpt
-GO111MODULE=on go get -u mvdan.cc/gofumpt/gofumports
-GO111MODULE=on go get -u honnef.co/go/tools/cmd/staticcheck
-popd
+"${CURRDIR}/golang-packages"
 
 # ------------------ #
 # --- Next steps --- #
