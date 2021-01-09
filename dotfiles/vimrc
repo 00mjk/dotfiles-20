@@ -34,8 +34,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-grepper'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" this way of installing markdown-preview assumes that node and yarn are available
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'fourjay/vim-yamsong'
+Plug 'aklt/plantuml-syntax'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
