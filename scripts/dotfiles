@@ -69,28 +69,31 @@ function enable_shell_addon() {
   local rcfile=$1
   local addon_file=$2
 
-  [[ -f "${HOME}/.${rcfile}" ]] || touch "${HOME}/.${rcfile}"
-  append_if_missing "$HOME/.${rcfile}" "[[ -e \"\${HOME}/.${addon_file}\" ]] && source ~/.${addon_file}"
+  [[ -f $rcfile ]] || touch $rcfile
+  append_if_missing $rcfile "[[ -e \"\${HOME}/.${addon_file}\" ]] && source ~/.${addon_file}"
 }
 
 # configuration compatible with both zsh and bash
 function configure_shell_addons() {
-  local rcfile=$1
+  local shell_name=$1
+  local rcfile="${HOME}/.${shell_name}rc"
 
-  append_if_missing "$HOME/.${rcfile}" "# Shell addons must be in order 1. shell specific 2. generic 3. OS specific 4. local"
+  append_if_missing $rcfile "# Shell addons must be in order 1. shell specific 2. generic 3. OS specific 4. local"
 
   # it's important that the addons for the specific shell are loaded first, or
   # some tools won't be configured correctly (like fzf for example)
-  enable_shell_addon "${rcfile}" "${rcfile}_addons_bravoecho"
+  enable_shell_addon "${rcfile}" "${shell_name}rc_addons_bravoecho"
   enable_shell_addon "${rcfile}" "shell_addons_bravoecho"
 
   if [[ "$(uname -s)" == "Darwin" ]]; then
-    enable_shell_addon "${rcfile}" "shell_addons_mac_bravoecho"
+    enable_shell_addon $rcfile "shell_addons_mac_bravoecho"
   fi
 
   # Allow to further customise without the need to make changes to the provided setup.
   enable_shell_addon "${rcfile}" "shell_addons_local"
+
+  append_if_missing $rcfile "[[ -n \"\$(command -v direnv)\" ]] && eval \"\$(direnv hook ${shell_name})\" # the direnv hook must be at the end of the rc file"
 }
 
-configure_shell_addons "bashrc"
-configure_shell_addons "zshrc"
+configure_shell_addons "bash"
+configure_shell_addons "zsh"
