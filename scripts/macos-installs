@@ -87,6 +87,7 @@ brew install --formulae --quiet \
   nethogs \
   nload \
   nmap \
+  plantuml \
   pipx \
   pre-commit \
   pyenv \
@@ -167,6 +168,7 @@ brew install --casks --quiet \
   font-go \
   font-inconsolata \
   font-juliamono \
+  google-chrome \
   iterm2 \
   middle \
   rectangle \
