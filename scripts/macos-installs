@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-set -ex
+set -exu
+set -o pipefail
 
 if [[ ! "$(uname -s)" =~ Darwin ]]; then
   echo "Only needed on macOS, all done"
@@ -40,17 +41,7 @@ brew install --formulae --quiet \
   gpatch \
   grep \
   gzip \
-  inetutils \
-  screen \
-
-# Other common GNU utilities are
-
-# autoconf
-# binutils
-# ed
-# flex
-# m4
-# util-linux
+  inetutils
 
 # Updated versions of existing tools
 
@@ -66,7 +57,7 @@ brew install --formulae --quiet \
   python \
   rsync \
   sqlite \
-  zsh \
+  zsh
 
 # Other utilities missing on macOS
 
@@ -112,15 +103,21 @@ brew install --formulae --quiet \
   watch \
   wdiff \
   wget \
-  yq \
+  yq
 
-brew install --formulae --quiet node yarn
+brew install --formulae --quiet \
+  node \
+  yarn
 
 # universal-ctags is a head-only formula until considered stable
-brew install --formulae --quiet --HEAD universal-ctags/universal-ctags/universal-ctags
+brew install --formulae --quiet \
+  --HEAD \
+  universal-ctags/universal-ctags/universal-ctags
 
 # until Neovim 0.5 is released, the HEAD version is required for LSP support
-brew install --formulae --quiet --HEAD neovim
+brew install --formulae --quiet \
+  --HEAD \
+  neovim
 
 # --------------------------------- #
 # --- Post install for formulae --- #
@@ -137,6 +134,9 @@ printf "\n===> Configuring fzf\n"
 echo "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
+
+echo "\n===> Changing default shell to brew-installed zsh (requires sudo pass)"
+chsh -s /usr/local/bin/zsh
 
 echo "\n===> Install Oh My ZSH"
 
@@ -214,16 +214,18 @@ echo "
 * Many packages installed depend on the shell configuration provided.
   Run './scripts/dotfiles' to install it.
 
-* Other packages that are commonly useful:
+* Other common GNU utilities are
 
+  - autoconf
   - binutils
   - ed
   - emacs
+  - flex
   - gdb
   - gnu-units
+  - m4
   - screen
-  - unrar
-  - unzip
+  - util-linux
 
 * Other casks that could be useful:
 
