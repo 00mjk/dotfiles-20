@@ -21,6 +21,15 @@
        " Remap jj to escape insert mode
        inoremap jj <ESC>
 
+Some useful .vimrc.after customisations
+---------------------------------------
+
+    " A.L.E. local customisations
+    " ---------------------------
+    let g:ale_linters = {'go': ['golangci-lint', 'govet']}
+    let g:ale_go_golangci_lint_options = '' " only use defaults
+    let g:ale_go_govet_options = '-composites=false'
+
 Miscellanea
 -----------
 
