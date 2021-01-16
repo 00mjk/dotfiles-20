@@ -38,6 +38,9 @@ Plug 'mhinz/vim-grepper'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'fourjay/vim-yamsong'
 Plug 'aklt/plantuml-syntax'
+" Tim Pope's Markdown plugin is included in Vim, but we want the latest
+" version.
+Plug 'tpope/vim-markdown'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
