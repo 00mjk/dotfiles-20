@@ -79,6 +79,7 @@ Markdown syntax
 
 * <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
 * <https://github.com/plasticboy/vim-markdown>
+* <https://github.com/rhysd/vim-gfm-syntax>
 
 Plasticboy's Markdown config
 
