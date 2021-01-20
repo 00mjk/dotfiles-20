@@ -859,7 +859,6 @@ augroup pandoc_syntax
 augroup END
 
 let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#syntax#style#emphases = 0
 let g:pandoc#syntax#style#underline_special = 0
 let g:pandoc#syntax#style#use_definition_lists = 0
 
