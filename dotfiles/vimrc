@@ -7,48 +7,78 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
 
+" --- General power-ups
+
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-dispatch'
-Plug 'vim-ruby/vim-ruby'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ervandew/supertab'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'majutsushi/tagbar'
-Plug 'SirVer/ultisnips'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'tpope/vim-abolish'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'AndrewRadev/splitjoin.vim'
+
+" --- Search (files and code)
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-grepper'
-" this way of installing markdown-preview assumes that node and yarn are available
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'fourjay/vim-yamsong'
+
+" --- Navigate (files and code)
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+
+" --- Language support (including special config syntaxes)
+
 Plug 'aklt/plantuml-syntax'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'elzr/vim-json'
+" transparently edit JSON files in YAML format
+Plug 'fourjay/vim-yamsong'
+Plug 'pangloss/vim-javascript'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'vim-ruby/vim-ruby'
+
+if !has('nvim')
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+endif
+
+" --- Markdown
+
 " Tim Pope's Markdown plugin is included in Vim, but we want the latest
 " version.
 Plug 'tpope/vim-markdown'
+
+" Tim Pope's Markdown plugin is the only one we know of that respects Vim
+" formatting abilities (namely: correct recognition of paragraphs and lists),
+" but its syntax highlight is often incorrect. vim-pandoc-syntax supports
+" a superset of markdown.
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
+" this way of installing markdown-preview assumes that node and yarn are available
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" generate inline TOCs; for tagbar TOC support see TagBar config below
+Plug 'mzlogin/vim-markdown-toc'
+
+" --- Language Server Protocol support
+"
+" for linting and IDE-like features
+
 if has('nvim')
+  " requires Neovim 0.5+
   Plug 'neovim/nvim-lspconfig'
 endif
 
 if !has('nvim')
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'dense-analysis/ale'
 endif
 
