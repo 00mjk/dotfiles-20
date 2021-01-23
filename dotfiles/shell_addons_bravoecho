@@ -291,3 +291,7 @@ alias rmkube='docker stop $(docker ps -q --filter name=k8s); docker rm $(docker 
 
 alias k='kubectl'
 alias kc='kubectx'
+
+# --- glow --- #
+
+alias glow='glow --pager'
