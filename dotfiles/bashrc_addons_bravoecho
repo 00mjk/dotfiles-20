@@ -121,3 +121,11 @@ _custom_bash_prompt () {
 }
 
 _custom_bash_prompt
+
+# ----------- #
+# --- FZF --- #
+# ----------- #
+
+# fzf widgets should be loaded as last, to ensure they are not overridden by
+# native shell functionality
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
