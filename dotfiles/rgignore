@@ -1,8 +1,12 @@
+.Trash/
 .bin/
 .bundle/
 .git/
 .hg/
 .svn/
+.vscode-insiders/
+.vscode/
+Library/
 _quarantine/
 bitbucket.org/
 bundle/
