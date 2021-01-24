@@ -80,16 +80,13 @@ function configure_shell_addons() {
   local shell_name=$1
   local rcfile="${HOME}/.${shell_name}rc"
 
-  enable_shell_addon "${rcfile}" "shell_addons"
-
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    enable_shell_addon $rcfile "shell_addons_mac"
-  fi
-
+  # 1 - OS
+  [[ "$(uname -s)" == "Darwin" ]] && enable_shell_addon $rcfile "shell_addons_mac"
+  # 2 - Specific shell
   enable_shell_addon "${rcfile}" "${shell_name}rc_addons"
-
-  # Allow to further customise without the need to make changes to the provided
-  # setup.
+  # 3 - Generic shell
+  enable_shell_addon "${rcfile}" "shell_addons"
+  # 4 - Local, additional
   enable_shell_addon "${rcfile}" "shell_addons_local"
 
   append_if_missing $rcfile "[[ -n \"\$(command -v direnv)\" ]] && eval \"\$(direnv hook ${shell_name})\" # the direnv hook must be at the end of the rc file"
