@@ -1,3 +1,8 @@
+*.class
+*.dll
+*.exe
+*.pyc
+*.so
 .Trash/
 .bin/
 .bundle/
@@ -15,8 +20,8 @@ code.google.com/
 cuelang.org/
 git/
 github.com/
-go4.org/
 go.mongodb.org/
+go4.org/
 golang.org/
 google.golang.org/
 gopkg.in/
@@ -26,11 +31,6 @@ node_modules/
 pkg/mod/
 speter.net/
 stathat.com/
+tags
 vendor/
 venv*/
-*.class
-*.dll
-*.exe
-*.pyc
-*.so
-tags
