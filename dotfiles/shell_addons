@@ -12,7 +12,7 @@ PATH="${PATH}:${HOME}/.local/bin"
 
 # Generated from a custom dircolors file
 #
-#   :r !dircolors dircolors/dircolors_bravoecho
+#   :r !dircolors dotfiles/dircolors
 #
 # To customise further, open the dircolors file in Vim, which will display the
 # codes in the corresponding color, and replace these lines by re-running the
