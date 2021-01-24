@@ -68,8 +68,8 @@ MULTIHARDLINK 00 # regular file with more than one link
 LINK 32 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 FIFO 97;104 # pipe
-SOCK 90;102 # socket
-DOOR 90;102 # door
+SOCK 97;102 # socket
+DOOR 97;102 # door
 BLK 105;97 # block device driver
 CHR 105;97 # character device driver
 
@@ -261,19 +261,22 @@ STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
 # --- For testing --- #
 # ------------------- #
 
-.ANSI-30-black 30
-.ANSI-01;30-bdblack 01;30
-.ANSI-31-red 31
-.ANSI-01;31-bdred 01;31
-.ANSI-32-green 32
-.ANSI-01;32-bdgreen 01;32
-.ANSI-33-yellow 33
-.ANSI-01;33-bdyellow 01;33
-.ANSI-34-blue 34
-.ANSI-01;34-bdblue 01;34
-.ANSI-35-magenta 35
-.ANSI-01;35-bdmagenta 01;35
-.ANSI-36-cyan 36
-.ANSI-01;36-bdcyan 01;36
-.ANSI-37-white 37
-.ANSI-01;37-bdwhite 01;37
+# .ANSI-something 97;40
+# .ANSI-something 97;100
+
+# .ANSI-30-black 30
+# .ANSI-01;30-bdblack 01;30
+# .ANSI-31-red 31
+# .ANSI-01;31-bdred 01;31
+# .ANSI-32-green 32
+# .ANSI-01;32-bdgreen 01;32
+# .ANSI-33-yellow 33
+# .ANSI-01;33-bdyellow 01;33
+# .ANSI-34-blue 34
+# .ANSI-01;34-bdblue 01;34
+# .ANSI-35-magenta 35
+# .ANSI-01;35-bdmagenta 01;35
+# .ANSI-36-cyan 36
+# .ANSI-01;36-bdcyan 01;36
+# .ANSI-37-white 37
+# .ANSI-01;37-bdwhite 01;37
