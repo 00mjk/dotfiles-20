@@ -498,14 +498,14 @@ nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
 nnoremap <Home> g<Home>
-nnoremap <End>  g<End>
+" nnoremap <End>  g<End>
 
 xnoremap j gj
 xnoremap k gk
 xnoremap <Down> gj
 xnoremap <Up> gk
 xnoremap <Home> g<Home>
-xnoremap <End>  g<End>
+" xnoremap <End>  g<End>
 
 " inoremap <Down> <C-o>gj
 " inoremap <Up> <C-o>gk
