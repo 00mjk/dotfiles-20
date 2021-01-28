@@ -298,3 +298,8 @@ alias kc='kubectx'
 # --- glow --- #
 
 alias glow='glow --pager'
+
+# --- PlantUML server --- #
+
+alias umlup='docker run --name plantuml --rm -d -p 8080:8080 plantuml/plantuml-server:jetty'
+alias umldown='docker stop plantuml'

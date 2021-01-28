@@ -910,6 +910,19 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 1
 
+" Do not use the public PlantUML server.
+" Instead, run it locally with
+"
+"    docker run --rm -d -p 8080:8080 plantuml/plantuml-server:jetty
+"
+" For more options, see <https://github.com/gmunguia/markdown-it-plantuml#advanced-usage>
+" which is the underlying Node.js app that handles the connection to the
+" PlantUML server.
+"
+let g:mkdp_preview_options = {
+\  'uml': {'server': 'http://localhost:8080'},
+\}
+
 " ----------------------- "
 " --- Auto-formatting --- "
 " ----------------------- "
