@@ -159,6 +159,10 @@ set history=1000
 " :   max number of entries in the command history
 set viminfo=!,'100,<50,s10,h,:1000
 
+" --- jumping between pairs ---
+
+set matchpairs+=<:>
+
 " ------------------------------- "
 " --- Leader key alternatives --- "
 " ------------------------------- "
