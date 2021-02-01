@@ -34,22 +34,18 @@ Plug 'mhinz/vim-grepper'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 
 " --- Language support (including special config syntaxes)
 
 Plug 'aklt/plantuml-syntax'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-" transparently edit JSON files in YAML format
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'fourjay/vim-yamsong'
 Plug 'pangloss/vim-javascript'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-ruby/vim-ruby'
-
-if !has('nvim')
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-endif
 
 " --- Markdown
 
@@ -71,21 +67,15 @@ Plug 'mzlogin/vim-markdown-toc'
 
 " --- Language Server Protocol support
 "
-" for linting and IDE-like features
+" for linting and other IDE-like features
 
-if has('nvim')
-  " requires Neovim 0.5+
-  Plug 'neovim/nvim-lspconfig'
-endif
-
-if !has('nvim')
-  Plug 'dense-analysis/ale'
-endif
+Plug 'dense-analysis/ale'
 
 " --- Colorschemes
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
+" nord-vim only works if the terminal itself is using the 16-color Nord theme
 Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
