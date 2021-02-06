@@ -475,6 +475,19 @@ Default section definitions
     section_Y = %{airline#util#wrap(airline#parts#ffenc(),0)}
     section_Z = %p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v
 
+Other Vim settings
+------------------
+
+### Paste customisations
+
+This will break `gP`, by pasting the new content inside the original one.
+
+    " --- Copy visual selection without loosing cursor position
+    "
+    " this assumes that most of the times we will select from top to bottom,
+    " keeping the cursor at the bottom of the visual selection after yanking
+    vmap y ygv<Esc>
+
 Golang/Neovim setup for LSP
 ---------------------------
 

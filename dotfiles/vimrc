@@ -90,7 +90,7 @@ call plug#end()
 " possible to summon it with the Vim-native :<C-f>
 map q: <Nop>
 " disable interactive ex-mode
-nnoremap Q <nop>
+nnoremap Q <Nop>
 " disable compatibility with old vi
 set nocompatible
 
@@ -810,12 +810,6 @@ endfunction
 
 nnoremap <Leader>i :call InsertPaste()<CR>
 nnoremap <Leader>o :call InsertPasteNewLine()<CR>
-
-" --- Copy visual selection without loosing cursor position
-"
-" this assumes that most of the times we will select from top to bottom,
-" keeping the cursor at the bottom of the visual selection after yanking
-vmap y ygv<Esc>
 
 " ------------------- "
 " --- Real delete --- "
