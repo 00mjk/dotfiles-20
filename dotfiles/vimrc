@@ -23,6 +23,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'luochen1990/rainbow'
+Plug 'ryanoasis/vim-devicons'
 
 " --- Search (files and code)
 
@@ -78,6 +81,8 @@ Plug 'rakr/vim-one'
 " nord-vim only works if the terminal itself is using the 16-color Nord theme
 Plug 'arcticicestudio/nord-vim'
 
+Plug 'jparise/vim-graphql'
+
 call plug#end()
 
 " ------------------------------- "
@@ -93,6 +98,8 @@ map q: <Nop>
 nnoremap Q <Nop>
 " disable compatibility with old vi
 set nocompatible
+
+set encoding=UTF-8
 
 " ------------------- "
 " --- Colorscheme --- "
@@ -1163,6 +1170,8 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " -------------- "
 
 let g:go_fmt_command = 'gopls'
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 
@@ -1490,3 +1499,19 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 if filereadable(glob("~/.vimrc.after"))
   source ~/.vimrc.after
 endif
+
+" ------------------------------------- "
+" --- Brians Make a wish Foundation --- "
+" ------------------------------------- "
+imap jk <Esc>
+
+" ------------------------------------- "
+" --- Black Python Formatter --- "
+" ------------------------------------- "
+autocmd BufWritePre *.py execute ':Black'
+
+" ------------------------------------- "
+"  --- Terminal Icon Highlighting ----- "
+" --------------------------------------"
+" adding the flags to NERDTree
+let g:webdevicons_enable_nerdtree = 1

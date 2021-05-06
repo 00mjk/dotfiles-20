@@ -10,8 +10,6 @@ source "${CURRDIR}/utils.sh"
 sudo apt-get update -qq
 sudo apt-get install -y software-properties-common
 
-sudo add-apt-repository -yu ppa:neovim-ppa/stable
-
 # Prerequisites for Python modules
 sudo apt-get install -y \
   python-dev \
