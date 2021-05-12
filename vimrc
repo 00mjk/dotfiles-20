@@ -128,6 +128,7 @@ set splitbelow
 
 if exists('+colorcolumn')
   set colorcolumn=81,101 " display vertical rulers for line length
+  autocmd FileType qf set colorcolumn=
 endif
 
 hi Visual
