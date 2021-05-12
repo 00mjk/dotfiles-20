@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 function go_install() {
+  echo "--- ${1} ---"
   go install "${1}@latest"
 }
 
