@@ -49,6 +49,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 Plug 'ollykel/v-vim'
 Plug 'tpope/vim-git'
+Plug 'gisphm/vim-gitignore'
 
 " --- Markdown
 
