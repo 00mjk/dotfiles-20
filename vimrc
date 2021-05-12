@@ -115,16 +115,13 @@ let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|bbin|node_modules)$',
   \ 'file': '\v\.(exe|so|dll|class|pyc)$',
   \ }
-  " \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 
 " use ctrlp in a single shortcut to navigate buffers
 noremap <Leader>b :CtrlPBuffer<CR>
 
-" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim)
-" * faster and respects .gitignore
-" * ag is fast enough that CtrlP doesn't need to cache
+" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim), 
+" because faster and respects .gitignore
 if executable('ag')
-	" let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
