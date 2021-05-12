@@ -187,6 +187,7 @@ brew install --casks --quiet \
   slack \
   visual-studio-code \
   vlc \
+  whatsapp \
   zoom
 
 # ------------------------------ #
