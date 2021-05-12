@@ -695,16 +695,27 @@ nmap <M-l> :call TmuxWinCmd('l')<CR>
 " --- vim-airline --- "
 " ------------------- "
 
-let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creation of a 16-color colorscheme)
+" Airline is included despite of how heavily it clutters the UI, for a few
+" reasons...
+"
+" * it's hugely popular
+" * it provides a 'tab bar' functionality, which is considered useful for users
+"   coming from GUI editors; this works really welle and can be displayed with
+"   the custom :ToggleTablineWithBuffers command
+" * some parts of the status bar are actually helpeful (in particular the Vim
+"   mode and how it's formatted)
+"
+" However, to prevent a cognitive storm, it's been heavily streamlined.
+
+let g:airline_theme = 'base16_default' " Milder colorscheme (pending the creation of a true 16-color colorscheme)
+let g:airline_symbols_ascii = 1
+
+" --- tabline --- "
+
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
-
-" TODO: Hide the '[No Name]' buffer
-" let g:airline#extensions#tabline#excludes = [
-"   \]
-
-" Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
+au VimEnter * :set showtabline=0 " Keep the tabline hidden by default
 function! s:ToggleTablineWithBuffers()
   if &showtabline
     set showtabline=0
@@ -715,16 +726,33 @@ endfunction
 
 command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
 
-" Keep the tabline hidden by default
-au VimEnter * :set showtabline=0
-
 " --- Streamline the status bar
-" Disable branch display
+
+" More extensions might need to be disabled if additional plugins are installed
+" and have a correspoding builtin extension.
+
+" let g:airline#extensions#quickfix#enabled = 0
 let g:airline#extensions#branch#enabled = 0
-" TODO:
-" disable mode display
-" disable word count
-" show default line count + line number
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#fugitiveline#enabled = 0
+let g:airline#extensions#fzf#enabled = 0
+let g:airline#extensions#keymap#enabled = 0
+let g:airline#extensions#netrw#enabled = 0
+let g:airline#extensions#po#enabled = 0
+let g:airline#extensions#searchcount#enabled = 0
+let g:airline#extensions#syntastic#enabled = 0
+let g:airline#extensions#term#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#wordcount#enabled = 0
+
+" customise the airline layout:
+" - remove section X (filetype)
+" - remove section Y (file encoding and fileformat)
+" - remove section B (git branch etc.)
+let g:airline#extensions#default#layout = [
+  \ [ 'a', 'c' ],
+  \ [ 'z', 'error', 'warning', 'statistics' ]
+\ ]
 
 " ---------------- "
 " --- agignore --- "
