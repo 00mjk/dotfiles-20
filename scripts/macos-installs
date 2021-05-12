@@ -160,6 +160,7 @@ echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
 brew install --casks --quiet \
+  adoptopenjdk \
   alacritty \
   authy \
   calibre \

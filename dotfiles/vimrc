@@ -40,6 +40,11 @@ Plug 'preservim/nerdtree'
 " --- Language support (including special config syntaxes)
 
 Plug 'aklt/plantuml-syntax'
+Plug 'tyru/open-browser.vim'
+" plantuml-previewer.vim requires adoptopenjdk
+" (https://github.com/weirongxu/plantuml-previewer.vim/issues/40)
+Plug 'weirongxu/plantuml-previewer.vim'
+
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -930,15 +935,20 @@ let g:mkdp_refresh_slow = 1
 " Do not use the public PlantUML server.
 " Instead, run it locally with
 "
-"    docker run --rm -d -p 8080:8080 plantuml/plantuml-server:jetty
+"    docker run --rm -d -p 56789:56789 plantuml/plantuml-server:jetty
 "
 " For more options, see <https://github.com/gmunguia/markdown-it-plantuml#advanced-usage>
 " which is the underlying Node.js app that handles the connection to the
 " PlantUML server.
 "
+
+let g:mkdp_filetypes = ['markdown', 'markdown.pandoc']
+
 let g:mkdp_preview_options = {
-\  'uml': {'server': 'http://localhost:8080'},
+\  'uml': {'server': 'http://localhost:56789'},
 \}
+
+command! MarkdownPlantUMLServer :execute ':silent !docker run --rm -d -p 56789:56789 plantuml/plantuml-server:jetty'
 
 " ---------------------- "
 " --- vim-table-mode --- "
