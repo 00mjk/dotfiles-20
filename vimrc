@@ -44,6 +44,7 @@ Plug 'mustache/vim-mustache-handlebars'
 " Reveal syntax highlighting group under the cursor
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'keith/swift.vim'
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'altercation/vim-colors-solarized'
 
