@@ -15,6 +15,8 @@ fi
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
+ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
+
 # ---------------- #
 # --- Formulae --- #
 # ---------------- #
@@ -88,6 +90,7 @@ brew install \
   watch \
   wdiff \
   wget \
+  yq \
   zsh
 
 # universal-ctags is a head-only formula until considered stable
@@ -106,9 +109,14 @@ set -x
 /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
 set +x
 
-printf "\n===> Enabling brew-installed shells\n\n"
+echo "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
+
+echo -e "\n===> Configuring yq completion\n\n"
+if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
+  yq shell-completion > $ZSH_SITE_FUNCTIONS/_yq
+fi
 
 # ------------- #
 # --- Casks --- #
@@ -133,8 +141,6 @@ brew cask install font-juliamono
 # ------------------------------ #
 
 # --- autocompletions
-
-ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
