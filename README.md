@@ -3,7 +3,7 @@
 Only for Ubuntu / Debian, and only the versions supported by the Node.js apt
 repositories.
 
-1. Install git if not already used to clone the repo.
+1. Make sure `git` is already installed.
 1. Golang: `./scripts/golang`. It will remove the current `go` runtime if
    present. Run it before `./scripts/setup` if you want to have vim-go support
    correctly set up.
@@ -12,3 +12,8 @@ repositories.
    install additional modules, otherwise it will install it.
 1. Install basic packages and symlink dotfiles: `./scripts/setup` (it will
    backup existing dotfiles if any).
+1. Install docker and docker-compose
+   * `./scripts/docker` will install Docker from the official Docker apt
+     repository, so later it will be updated by `apt-get upgrade`
+   * `./scripts/docker-compose` will install the latest docker-compose from
+     the website, and the same script will be used for updating later
