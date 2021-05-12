@@ -580,6 +580,9 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 inoremap <F1> <ESC>
 
+" copy current file and line to the system clipboard
+nnoremap <leader>y :let @+=expand("%:p") . ':' . line(".")<CR>
+
 " ---------------------- "
 " --- Save with sudo --- "
 " ---------------------- "
