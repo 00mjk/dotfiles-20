@@ -2,6 +2,8 @@
 
 # NOTE: Vanilla latest zsh and oh-my-zsh installations are assumed.
 
+plugins=(golang)
+
 # don't add history entry if it's a duplicate of the previous command (and only
 # if it's exactly the previous one, older duplicates don't count)
 setopt HIST_IGNORE_DUPS
@@ -90,6 +92,14 @@ fi
 # fix the Alt-C (Option-C) keybinding for FZF cd to directory
 if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget
+fi
+
+if [[ -n "$(command -v kubectl)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectl" ]]; then
+  compdef k='kubectl'
+fi
+
+if [[ -n "$(command -v kubectx)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectx" ]]; then
+  compdef kc='kubectx'
 fi
 
 # Lightweight prompt that:

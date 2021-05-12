@@ -14,12 +14,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
-if !has('nvim')
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-endif
-if has('nvim')
-  Plug 'neovim/nvim-lspconfig'
-endif
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -29,11 +23,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
-if !has('nvim')
-  Plug 'dense-analysis/ale'
-endif
 Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-abolish'
@@ -42,7 +32,17 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-grepper'
+
+if has('nvim')
+  Plug 'neovim/nvim-lspconfig'
+endif
+
+if !has('nvim')
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  Plug 'dense-analysis/ale'
+endif
 
 " -------------------- "
 " --- Colorschemes --- "
@@ -149,7 +149,7 @@ set completeopt-=preview " do not open Preview split with docs for completion en
 " --- history --- "
 set history=1000
 
-" there is another setting that my override the history size, so we ensure to
+" there is another setting that might override the history size, so we ensure to
 " set that too; see "h 'viminfo'" (with quotes)
 "
 " default options:
@@ -465,6 +465,10 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
+inoremap <Down> gj
+inoremap <Up> gk
+xnoremap <Down> gj
+xnoremap <Up> gk
 
 " ------------------------------------------------------------------- "
 " --- Support vim options in individual files with magic comments --- "
