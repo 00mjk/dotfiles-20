@@ -49,6 +49,10 @@ git config --global include.path .gitconfig_addons
 
 source $ROOTDIR/scripts/vim
 
+touch ~/.gitconfig
+mkdir -p ~/.config
+sudo chown -R developer.developer ~/.gitconfig ~/.config
+
 echo "
 
 Installation complete, please restart your session.
