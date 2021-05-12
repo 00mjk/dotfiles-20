@@ -1192,72 +1192,81 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
 nnoremap <Leader>tt :TagbarToggle<CR>
 let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
-" ------------------------------------- "
-" --- Load additional configuration --- "
-" ------------------------------------- "
-
-" You can put here any further customisations or overrides.
-
-if filereadable(glob("~/.vimrc.after"))
-  source ~/.vimrc.after
-endif
-
-" ---------------------------------- "
-" --- Reload vimrc automatically --- "
-" ---------------------------------- "
-
-" <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
-" TODO: fix vimrc auto-reload because this doesn't work
-autocmd! bufwritepost $MYVIMRC source $MYVIMRC
-
 " ------------------------- "
 " --- Diff highlighting --- "
 " ------------------------- "
 
-" use simple ansi-colours for readability in any terminal with a sensible
-" palette
-highlight DiffAdd cterm=none,bold ctermfg=2 ctermbg=15
-highlight DiffDelete cterm=none ctermfg=13 ctermbg=15
-highlight DiffChange cterm=none ctermfg=8 ctermbg=15
-highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
+" use simple ansi-colours for readability in any terminal with an ANSI palette
+highlight DiffAdd     cterm=none,bold ctermfg=2   ctermbg=15
+highlight DiffDelete  cterm=none      ctermfg=13  ctermbg=15
+highlight DiffChange  cterm=none      ctermfg=8   ctermbg=15
+highlight DiffText    cterm=none,bold ctermfg=4   ctermbg=15
 
 " ------------------ "
 " --- Statusline --- "
 " ------------------ "
 
-highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
-highlight! StatusLineNC cterm=none ctermfg=15 ctermbg=8
-
-highlight BE_ModeNormal cterm=bold ctermfg=none ctermbg=10
-highlight BE_ModeVisual cterm=reverse,bold ctermfg=12 ctermbg=none
-highlight BE_ModeInsert cterm=bold ctermfg=none ctermbg=11
-highlight BE_ModeOther cterm=bold ctermfg=7 ctermbg=1
-highlight BE_StatuslineCursorPosition cterm=bold ctermfg=0 ctermbg=11
-highlight BE_StatuslineCursorPercent cterm=bold ctermfg=15 ctermbg=3
-
+" vim switches into command mode when searching or replacing, but not other
+" commands, we disable the specific visualisation until we manage to achieve
+" consistency
+" \ 'c'      : { 'highlight': 'BE_ModeOther',   'name': 'COMMAND'    },
 let g:be_modes = {
-  \ 'n'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'              },
-  \ 'no'     : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL (OP PENDING)' },
-  \ 'i'      : { 'highlight': 'BE_ModeInsert',  'name': 'INSERT'              },
-  \ 'R'      : { 'highlight': 'BE_ModeInsert',  'name': 'REPLACE'             },
-  \ 'v'      : { 'highlight': 'BE_ModeVisual',  'name': 'VISUAL'              },
-  \ 'V'      : { 'highlight': 'BE_ModeVisual',  'name': 'V-LINE'              },
-  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual',  'name': 'V-BLOCK'             },
-  \ 'Rv'     : { 'highlight': 'BE_ModeInsert',  'name': 'V-REPLACE'           },
-  \ 's'      : { 'highlight': 'BE_ModeOther',   'name': 'SELECT'              },
-  \ 'S'      : { 'highlight': 'BE_ModeOther',   'name': 'S-LINE'              },
-  \ "\<C-s>" : { 'highlight': 'BE_ModeOther',   'name': 'S-BLOCK'             },
-  \ 'c'      : { 'highlight': 'BE_ModeOther',   'name': 'COMMAND'             },
-  \ 'cv'     : { 'highlight': 'BE_ModeOther',   'name': 'VIM-EX'              },
-  \ 'ce'     : { 'highlight': 'BE_ModeOther',   'name': 'EX'                  },
-  \ 'r'      : { 'highlight': 'BE_ModeOther',   'name': 'PROMPT'              },
-  \ 'rm'     : { 'highlight': 'BE_ModeOther',   'name': 'MORE'                },
-  \ 'r?'     : { 'highlight': 'BE_ModeOther',   'name': 'CONFIRM'             },
-  \ '!'      : { 'highlight': 'BE_ModeOther',   'name': 'SHELL'               },
-  \ 't'      : { 'highlight': 'BE_ModeOther',   'name': 'TERMINAL'            },
+  \ 'n'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'     },
+  \ 'no'     : { 'highlight': 'BE_ModeNormal',  'name': 'N-PENDING)' },
+  \ 'i'      : { 'highlight': 'BE_ModeInsert',  'name': 'INSERT'     },
+  \ 'R'      : { 'highlight': 'BE_ModeInsert',  'name': 'REPLACE'    },
+  \ 'v'      : { 'highlight': 'BE_ModeVisual',  'name': 'VISUAL'     },
+  \ 'V'      : { 'highlight': 'BE_ModeVisual',  'name': 'V-LINE'     },
+  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual',  'name': 'V-BLOCK'    },
+  \ 'Rv'     : { 'highlight': 'BE_ModeInsert',  'name': 'V-REPLACE'  },
+  \ 's'      : { 'highlight': 'BE_ModeOther',   'name': 'SELECT'     },
+  \ 'S'      : { 'highlight': 'BE_ModeOther',   'name': 'S-LINE'     },
+  \ "\<C-s>" : { 'highlight': 'BE_ModeOther',   'name': 'S-BLOCK'    },
+  \ 'c'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'     },
+  \ 'cv'     : { 'highlight': 'BE_ModeOther',   'name': 'VIM-EX'     },
+  \ 'ce'     : { 'highlight': 'BE_ModeOther',   'name': 'EX'         },
+  \ 'r'      : { 'highlight': 'BE_ModeOther',   'name': 'PROMPT'     },
+  \ 'rm'     : { 'highlight': 'BE_ModeOther',   'name': 'MORE'       },
+  \ 'r?'     : { 'highlight': 'BE_ModeOther',   'name': 'CONFIRM'    },
+  \ '!'      : { 'highlight': 'BE_ModeOther',   'name': 'SHELL'      },
+  \ 't'      : { 'highlight': 'BE_ModeOther',   'name': 'TERMINAL'   },
 \}
 
-let g:BE_statusline_right_end = '%10(%l/%L%):%-3c%7.7((%p%%)%)'
+" highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
+highlight StatusLine    cterm=none ctermfg=15 ctermbg=8
+highlight StatusLineNC  cterm=none ctermfg=15 ctermbg=8
+
+" highlight BE_ModeNormal         cterm=bold          ctermfg=none  ctermbg=10
+highlight BE_ModeNormal         cterm=bold,reverse  ctermfg=10  ctermbg=none
+" highlight BE_ModeNormal_centre  cterm=bold          ctermfg=15    ctermbg=2
+highlight BE_ModeNormal_centre  cterm=bold,reverse  ctermfg=2    ctermbg=none
+
+highlight BE_ModeVisual         cterm=bold,reverse  ctermfg=12    ctermbg=none
+highlight BE_ModeVisual_centre  cterm=bold,reverse  ctermfg=4     ctermbg=none
+
+" yellow insert
+" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=11
+" highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=3     ctermbg=none
+
+" cyan insert
+" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=14
+" highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=6     ctermbg=none
+
+" magenta insert
+" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=13
+highlight BE_ModeInsert         cterm=bold,reverse  ctermfg=13     ctermbg=none
+highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=5     ctermbg=none
+
+" red other
+" highlight BE_ModeOther          cterm=bold,reverse  ctermfg=9     ctermbg=none
+" highlight BE_ModeOther_centre   cterm=bold,reverse  ctermfg=1     ctermbg=none
+
+" cyan other
+highlight BE_ModeOther          cterm=bold,reverse  ctermfg=14  ctermbg=none
+highlight BE_ModeOther_centre   cterm=bold,reverse  ctermfg=6     ctermbg=none
+
+let g:BE_statusline_centre = ' %<%f %m%r%h%w%q %='
+let g:BE_statusline_right = ' %10(%l/%L%):%-3c%7.7((%p%%)%)'
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
@@ -1273,17 +1282,21 @@ function! BE_Statusline(active)
 endfunction
 
 function! BE_ActiveStatusline()
-  let l:stl  = "%#".g:be_modes[mode()].highlight."# "
-  let l:stl .= "%{g:be_modes[mode()].name}%{&paste ? '\ \ (PASTE)' : ''} %* "
-  let l:stl .= "%<%f %m%r%h%w "
-  let l:stl .= "%=%#".g:be_modes[mode()].highlight."# "
-  let l:stl .= g:BE_statusline_right_end
+  let l:mode_name   = g:be_modes[mode()]['name']
+  let l:mode_colour = g:be_modes[mode()]['highlight']
+
+  let l:stl  = '%#'.l:mode_colour.'#'
+  let l:stl .= ' '.l:mode_name.'%{&paste ? "\ \ (PASTE)" : ""} '
+  let l:stl .= '%#'.l:mode_colour.'_centre#'
+  let l:stl .= g:BE_statusline_centre
+  let l:stl .= '%#'.l:mode_colour.'#'
+  let l:stl .= g:BE_statusline_right
   return l:stl
 endfunction
 
 function! BE_InactiveStatusline()
-  let l:stl  = ' %<%f %m%r%h%w%q %='
-  let l:stl .= g:BE_statusline_right_end
+  let l:stl  = g:BE_statusline_centre
+  let l:stl .= g:BE_statusline_right
   return l:stl
 endfunction
 
@@ -1297,3 +1310,20 @@ augroup BE_StatuslineEvents
 augroup END
 
 set noshowmode " the mode is already shown in the statusline
+
+" ---------------------------------- "
+" --- Reload vimrc automatically --- "
+" ---------------------------------- "
+
+" <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
+" ------------------------------------- "
+" --- Load additional configuration --- "
+" ------------------------------------- "
+
+" You can put here any further customisations or overrides.
+
+if filereadable(glob("~/.vimrc.after"))
+  source ~/.vimrc.after
+endif
