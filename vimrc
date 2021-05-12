@@ -41,6 +41,8 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-abolish'
 Plug 'rodjek/vim-puppet'
 Plug 'mustache/vim-mustache-handlebars'
+" Reveal syntax highlighting group under the cursor
+Plug 'gerw/vim-HiLinkTrace'
 
 Plug 'altercation/vim-colors-solarized'
 
