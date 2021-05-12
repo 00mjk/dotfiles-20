@@ -260,6 +260,8 @@ echo "
   - mdrp
   - devdocs
   - istat-menus
+  - homebrew/cask-drivers/logitech-camera-settings
+  - onedrive
   - signal
   - slack
   - telegram
