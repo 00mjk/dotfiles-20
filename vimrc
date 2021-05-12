@@ -48,6 +48,7 @@ call plug#end()
 " --- General options --- "
 " ----------------------- "
 
+set wildmode=list:full " open a list of all the matches (list) *and* cycle through them (full)
 set wildignore+=*.swp,*/tmp/
 set noswapfile
 set noundofile
@@ -456,6 +457,7 @@ autocmd FileType gitcommit setlocal spell
 let g:markdown_fenced_languages = [
       \ 'html',
       \ 'python',
+      \ 'sh',
       \ 'bash=sh',
       \ 'ruby',
       \ 'go',
