@@ -427,20 +427,55 @@ set nowrap " Do not visually wrap lines by default.
 
 set breakindent " Align visually wrapped lines with the original indentation.
 set linebreak " Break between words when wrapping (don't break within words).
-" toggle wrapping with leader-ww
-nmap <silent> <leader>ww :set wrap!<CR>
+
+" toggle wrapping with leader-w
+" nmap <silent> <Leader>w :set wrap!<CR>
+
 " allow navigating 'visual lines' with j/k and up/down, instead of actual lines
-" for insert mode, more work is required:
-" <https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping>
 nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
+nnoremap <Home> g<Home>
+nnoremap <End>  g<End>
 
 xnoremap j gj
 xnoremap k gk
 xnoremap <Down> gj
 xnoremap <Up> gk
+xnoremap <Home> g<Home>
+xnoremap <End>  g<End>
+
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
+
+" insert mode needs special settings because it can break autocomplete and
+" popups
+" <https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping>
+" command Wrap call Wrap()
+" noremap <silent> <Leader>w :call Wrap()<CR>
+" 
+" function Wrap()
+"   if &wrap
+"     echo "Wrap OFF"
+"     setlocal nowrap
+"     set virtualedit=block
+"     silent! iunmap <buffer> <Up>
+"     silent! iunmap <buffer> <Down>
+"     silent! iunmap <buffer> <Home>
+"     silent! iunmap <buffer> <End>
+"   else
+"     echo "Wrap ON"
+"     setlocal wrap linebreak nolist
+"     " TODO: save the previous state of virtualedit if any
+"     set virtualedit=
+"     setlocal display+=lastline
+"     inoremap <buffer> <silent> <Up>   <C-o>gk
+"     inoremap <buffer> <silent> <Down> <C-o>gj
+"     inoremap <buffer> <silent> <Home> <C-o>g<Home>
+"     inoremap <buffer> <silent> <End>  <C-o>g<End>
+"   endif
+" endfunction
 
 " ------------------------------------------------------------------- "
 " --- Support vim options in individual files with magic comments --- "
@@ -489,33 +524,15 @@ endif
 " ---------------------------------------- "
 
 " http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
-if !exists(":W")
-  command W w
-endif
-if !exists(":Wa")
-  command Wa wa
-endif
-if !exists(":WA")
-  command WA wa
-endif
-if !exists(":Q")
-  command Q q
-endif
-if !exists(":Qa")
-  command Qa qa
-endif
-if !exists(":QA")
-  command QA qa
-endif
-if !exists(":Wq")
-  command Wq wq
-endif
-if !exists(":Wqa")
-  command Wqa wqa
-endif
-if !exists(":Xa")
-  command Xa xa
-endif
+if !exists(":W")   | command W   w   | endif
+if !exists(":Wa")  | command Wa  wa  | endif
+if !exists(":WA")  | command WA  wa  | endif
+if !exists(":Q")   | command Q   q   | endif
+if !exists(":Qa")  | command Qa  qa  | endif
+if !exists(":QA")  | command QA  qa  | endif
+if !exists(":Wq")  | command Wq  wq  | endif
+if !exists(":Wqa") | command Wqa wqa | endif
+if !exists(":Xa")  | command Xa  xa  | endif
 
 " -------------------------- "
 " --- Intuitive home key --- "
@@ -609,7 +626,7 @@ inoremap <C-k> <ESC>:m .-2<CR>gi
 " --- Visualise whitespace ---
 set listchars=tab:▸·,trail:·,extends:>,precedes:<
 " toggle hidden characters highlighting:
-nmap <silent> <Leader>w :set nolist!<CR>
+nmap <silent> <Leader>ww :set nolist!<CR>
 
 " --- highlight unwanted trailing whitespace --- "
 " <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
