@@ -154,20 +154,30 @@ export VISUAL=$(command -v vim)
 [[ $SHELL =~ zsh ]] && [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ $SHELL =~ bash ]] && [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# This also enables the preview in fzf (using a Ctrl-/ keybinding when in the
-# fzf results)
+# The preview is set to be hidden by default, but available with a custom
+# keybind (Ctrl-/ while in the fzf results)
 #
-# NOTE: the preview will be hidden, but enabled, however some FZF helpers in
-# Vim don't respect it, so you may want to remove the parts related to the
-# preview.
-export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline --bind 'ctrl-/:toggle-preview' --preview-window hidden --preview '[ -f {} ] && head -n 200 {}'"
+# Also set custom colorscheme for ANSI colours.
+export FZF_DEFAULT_OPTS="
+--extended
+--history=$HOME/.fzf_history
+--reverse
+--info=inline
+--bind='ctrl-/:toggle-preview'
+--preview-window=hidden
+--preview='[ -f {} ] && head -n 200 {}'
+--ansi
+--color='bg:-1,bg+:15,fg:8,fg+:-1,hl:12,hl+:4,info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6'
+--color='info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6'
+"
 
 # if available, use fd to feed fzf
 [ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always -E '.git'  -E '.hg' -E '.svn' -E '_quarantine' -E 'bundle' -E 'code.google.com' -E 'cloud.google.com' -E 'git' -E 'github.com' -E 'google.golang.org' -E 'golang.org' -E 'gopkg.in' -E 'node_modules' -E 'pkg/mod/cache' -E 'vendor' -E '*.class' -E '*.dll' -E '*.exe' -E '*.pyc' -E '*.so' -E 'venv*/' --no-ignore-vcs"
 
 [ -n "${FZF_DEFAULT_COMMAND}" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# the `~` key is normally easier to reach on both US and UK keyboards, PC and Mac
+# the `~` key is normally easier to reach on both US and UK keyboards, PC and
+# Mac than the default '**'
 FZF_COMPLETION_TRIGGER='~~'
 
 # some other supported options (not an exhaustive list)
