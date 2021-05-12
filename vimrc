@@ -397,6 +397,13 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 inoremap <F1> <ESC>
 
+" ---------------------- "
+" --- Save with sudo --- "
+" ---------------------- "
+
+" http://www.commandlinefu.com/commands/view/1204/save-a-file-you-edited-in-vim-without-the-needed-permissions
+command Sudow :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
 " -------------------------- "
 " --- Intuitive home key --- "
 " -------------------------- "
