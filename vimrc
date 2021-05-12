@@ -110,6 +110,10 @@ set wildignore+=*.swp,*/tmp/
 set noswapfile
 set noundofile
 
+" --- reduce the command timeout --- "
+" (default 1000)
+set timeoutlen=350
+
 " ------------------------------- "
 " --- Leader key alternatives --- "
 " ------------------------------- "
