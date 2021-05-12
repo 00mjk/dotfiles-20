@@ -224,6 +224,16 @@ export BAT_THEME=GitHub
 
 PATH="$PATH:$HOME/.cargo/bin"
 
+# ------------------------ #
+# --- fff file manager --- #
+# ------------------------ #
+
+# export FFF_CD_ON_EXIT=1
+export FFF_HIDDEN=1 # show hidden files by default
+export FFF_COL2=7 # status line background
+export FFF_COL5=9 # status line foreground
+export FFF_COL4=9 # cursor (invert)
+
 # --------------- #
 # --- Aliases --- #
 # --------------- #
