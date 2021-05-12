@@ -53,6 +53,10 @@ backup_and_symlink "${DOTFILES_DIR}/rgignore" "${HOME}/.rgignore"
 
 backup_and_symlink "${DOTFILES_DIR}/htoprc" "${global_config_path}/htop/htoprc"
 
+# --- sqlite -- #
+
+backup_and_symlink "${DOTFILES_DIR}/sqliterc" "${HOME}/.sqliterc"
+
 # -------------- #
 # --- shells --- #
 # -------------- #
