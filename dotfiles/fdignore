@@ -1,10 +1,27 @@
 # Dirs
 
+**/go/pkg/mod
+**/target/debug
+.Trash
 .bin
+.build
 .bundle
+.cargo
+.dropbox
+.fingerprint
 .git
+.gobrew
+.goenv
 .hg
+.oh-my-zsh
+.rbenv
+.rustup
 .svn
+.terraform
+.terraform.d
+.vim
+Library/
+Pictures/Photos Library.photoslibrary
 _quarantine
 bitbucket.org
 bundle
@@ -14,6 +31,7 @@ cuelang.org
 git
 github.com
 go.mongodb.org
+go/pkg/mod
 golang.org
 google.golang.org
 gopkg.in
@@ -21,7 +39,6 @@ honnef.co
 launchpad.net
 log
 node_modules
-pkg/mod/cache
 speter.net
 stathat.com
 vendor
