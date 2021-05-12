@@ -19,7 +19,7 @@ export LS_COLORS
 # --- LESS --- #
 # ------------ #
 
-export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3"
+export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 --LONG-PROMPT --shift=3"
 
 # # -----------
 # # --- GPG ---
