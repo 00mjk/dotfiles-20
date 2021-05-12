@@ -39,6 +39,7 @@
   # date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/ 
   force = push --force-with-lease
   amend = commit --amend --no-edit
+  cb = rev-parse --abbrev-ref HEAD
 
   new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
 
