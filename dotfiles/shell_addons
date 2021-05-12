@@ -250,6 +250,20 @@ f() {
     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 }
 
+# ------------------------ #
+# --- nnn file manager --- #
+# ------------------------ #
+
+# -e: open text files in $VISUAL (else $EDITOR, fallback vi) [preferably CLI]
+# -C: simpler colorscheme
+# -H: show hidden files
+# -J: disable auto-proceed on select
+# -o: open files only on Enter key
+# -R: disable roll-over at edges
+# -x: show notice on selection cp, mv, rm completion, copy path to system clipboard on select
+
+export NNN_OPTS="CHoRe"
+
 # --------------- #
 # --- Aliases --- #
 # --------------- #
