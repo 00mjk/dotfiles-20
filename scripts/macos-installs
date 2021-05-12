@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -exu
+set -eu
 set -o pipefail
 
 if [[ ! "$(uname -s)" =~ Darwin ]]; then
