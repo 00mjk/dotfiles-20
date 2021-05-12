@@ -923,6 +923,15 @@ nnoremap <F6> :setlocal spell!<CR>
 vnoremap <F6> :setlocal spell!<CR>
 inoremap <F6> <Esc>:setlocal spell!<CR>
 
+" Recompile the personal spell file if newer than the compiled version.
+" Useful when synchronising the spell file with Dropbox or git.
+" https://vi.stackexchange.com/a/5052
+for dict in glob('~/.vim/spell/*.add', 1, 1)
+  if filereadable(dict) && (!filereadable(dict . '.spl') || getftime(dict) > getftime(dict . '.spl'))
+    silent exec 'mkspell! ' . fnameescape(dict)
+  endif
+endfor
+
 " Automatically enable spell checking for some filetypes.
 " <http://robots.thoughtbot.com/vim-spell-checking>
 " autocmd BufRead,BufNewFile *.md setlocal spell
