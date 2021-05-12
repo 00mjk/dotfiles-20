@@ -31,6 +31,9 @@ setopt NO_HIST_IGNORE_ALL_DUPS
 # prevents accidentally overwriting an existing file
 setopt NO_CLOBBER
 
+# disable messing with redirection (treat redirection like bash)
+setopt NO_MULTIOS
+
 export COMPLETION_WAITING_DOTS="true"
 export HIST_STAMPS="yyyy-mm-dd"
 
