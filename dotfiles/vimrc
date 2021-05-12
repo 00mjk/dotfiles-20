@@ -213,7 +213,7 @@ set matchtime=0 " ...but stay out of the way (do not jump around)
 filetype plugin indent on " automatically detect file types.
 syntax on
 
-" show name of syntax element below cursor (https://vi.stackexchange.com/a/19043)
+" show name of syntax element under the cursor (https://vi.stackexchange.com/a/19043)
 command! SynName  echo synIDattr(synID(line("."), col("."), 1), "name")
 
 set noshowcmd                     " showcmd (on by default) is very noisy when running long commands, such as Ack
@@ -905,8 +905,8 @@ autocmd FileType gitcommit setlocal spell
 " ------------------------------------ "
 
 augroup pandoc_syntax
-    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-    au! BufNewFile,BufFilePre,BufRead *.txt set filetype=markdown.pandoc
+    autocmd! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+    autocmd! BufNewFile,BufFilePre,BufRead *.txt set filetype=markdown.pandoc
 augroup END
 
 let g:pandoc#syntax#conceal#use = 0
