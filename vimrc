@@ -426,21 +426,42 @@ inoremap <F1> <ESC>
 " ---------------------- "
 
 " http://www.commandlinefu.com/commands/view/1204/save-a-file-you-edited-in-vim-without-the-needed-permissions
-command Sudow :execute ':silent w !sudo tee % > /dev/null' | :edit!
+if !exists(":Sudow")
+  command Sudow :execute ':silent w !sudo tee % > /dev/null' | :edit!
+endif
 
 " ---------------------------------------- "
 " --- Command aliases for common typos --- "
 " ---------------------------------------- "
 
 " http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
-command W   w
-command Wa  wa
-command WA  wa
-command Q   q
-command Qa  quitall
-command QA  quitall
-command Wq  wq
-command Wqa wqa
+if !exists(":W")
+  command W w
+endif
+if exists(":Wa")
+  command Wa wa
+endif
+if exists(":WA")
+  command WA wa
+endif
+if exists(":Q")
+  command Q q
+endif
+if exists(":Qa")
+  command Qa qa
+endif
+if exists(":QA")
+  command QA qa
+endif
+if exists(":Wq")
+  command Wq wq
+endif
+if exists(":Wqa")
+  command Wqa wqa
+endif
+if exists(":Xa")
+  command Xa xa
+endif
 
 " -------------------------- "
 " --- Intuitive home key --- "
@@ -806,7 +827,9 @@ function! s:ToggleTablineWithBuffers()
   end
 endfunction
 
-command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
+if !exists(":ToggleTablineWithBuffers")
+  command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
+endif
 
 " --- Streamline the status bar
 
