@@ -1416,7 +1416,8 @@ highlight StatusLineNC            cterm=none          ctermfg=15    ctermbg=8
 
 " green
 " highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
-highlight BE_ModeNormal           cterm=bold          ctermfg=none  ctermbg=10
+" highlight BE_ModeNormal           cterm=bold          ctermfg=none  ctermbg=10
+highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
 highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2     ctermbg=none
 " blue
 highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12    ctermbg=none
@@ -1530,7 +1531,7 @@ function! BE_ActiveStatusline()
 endfunction
 
 function! BE_InactiveStatusline()
-  let l:stl  =  ' %<%f %m%r%h%w %='
+  let l:stl  =  ' %<%f %m%r %='
   let l:stl .= g:BE_statusline_right
   return l:stl
 endfunction
