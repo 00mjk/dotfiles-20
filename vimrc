@@ -543,6 +543,9 @@ let g:ctrlp_abbrev = {
 noremap <Leader>b :CtrlPBuffer<CR>
 let g:ctrlp_switch_buffer = 0
 
+" include the current file
+let g:ctrlp_match_current_file = 1
+
 " ---------------------- "
 " --- vim-commentary --- "
 " ---------------------- "
