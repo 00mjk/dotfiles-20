@@ -74,6 +74,7 @@ brew install --formulae --quiet \
   fff \
   ffmpeg \
   fzf \
+  git-delta \
   glow \
   gnupg \
   golangci/tap/golangci-lint \
