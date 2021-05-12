@@ -66,6 +66,9 @@ fpath+=~/.zfunc
 # this is already done by oh-my-zsh but some apps still need it again
 autoload -Uz compinit && compinit -i
 
+# only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+
 compdef ll='ls'
 compdef la='ls'
 
