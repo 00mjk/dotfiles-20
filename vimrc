@@ -128,7 +128,7 @@ set backup
 
 " --- reduce the command timeout --- "
 " (default 1000)
-set timeoutlen=350
+set timeoutlen=300
 
 " --- history --- "
 "
