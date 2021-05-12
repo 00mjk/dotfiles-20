@@ -69,6 +69,8 @@ else
   export TERM=xterm-256color
 fi
 
+alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux attach; else tmux; fi'
+
 # update_auth_sock() {
 #   SOCK="/tmp/ssh-agent-$USER-screen"
 #
@@ -81,7 +83,7 @@ fi
 # }
 #
 # update_auth_sock()
-#
+
 # # ------------------------
 # # --- Google Cloud SDK ---
 # # ------------------------
@@ -163,14 +165,13 @@ FZF_COMPLETION_TRIGGER='~~'
 # FZF_ALT_C_OPTS
 # FZF_COMPLETION_OPTS='+c -x'
 
-
 # --------------- #
 # --- Aliases --- #
 # --------------- #
 
 # --- shell --- #
 
-# completely wipe the content of the shell buffer, instead of just scrolling 
+# completely wipe the content of the shell buffer, instead of just scrolling
 # the prompt to the top
 alias cls="clear && printf '\e[3J'"
 
