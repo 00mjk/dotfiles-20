@@ -1216,14 +1216,14 @@ let g:go_imports_autosave = 1
 " --- vim-go: general options ---
 
 let g:go_code_completion_icase = 1
-let g:go_fillstruct_mode = 'gopls'
+" let g:go_fillstruct_mode = 'gopls' " disabled as currently broken (2021-03)
 let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
 
 " show information about the identifier under the cursor (funcions, vars..)...
 let g:go_auto_type_info = 1
-" ...after 400 ms instead of the default 800
-let g:go_updatetime=400
+" ...after 1000 ms instead of the default 800
+let g:go_updatetime=1000
 
 " --- vim-go: mappings ---
 
