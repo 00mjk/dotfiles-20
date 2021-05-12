@@ -2,11 +2,12 @@
 
 # PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
-export PATH="$(echo /usr/local/opt/*/libexec/gnubin | tr ' ' :):$PATH"
+PATH="$(echo /usr/local/opt/*/libexec/gnubin | tr ' ' :):$PATH"
 
 PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 PATH="/usr/local/opt/sqlite/bin:$PATH"
 PATH="/usr/local/opt/lsof/bin:$PATH"
 PATH="/usr/local/opt/libxml2/bin:$PATH"
+PATH="/usr/local/opt/libpq/bin:$PATH"
 
 MANPATH="/usr/local/share/man/:$MANPATH"
