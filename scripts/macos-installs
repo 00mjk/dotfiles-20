@@ -66,10 +66,12 @@ brew install --formulae --quiet \
   colordiff \
   direnv \
   fd \
+  fff \
   ffmpeg \
   fzf \
-  gnupg \
   glow \
+  gnupg \
+  go \
   golangci/tap/golangci-lint \
   graphviz \
   htop \
@@ -86,8 +88,8 @@ brew install --formulae --quiet \
   nload \
   nmap \
   nnn \
-  plantuml \
   pipx \
+  plantuml \
   pre-commit \
   pyenv \
   ranger \
