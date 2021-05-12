@@ -19,7 +19,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 vim +PlugInstall +qall
 
-if [[ -n "$(command -v go)" ]]; then
+if [[ -x /usr/local/go/bin/go || -n "$(command -v go)" ]]; then
   vim +GoInstallBinaries +qall
 else
   echo "Golang is not installed, skipping vim-go binaries"
