@@ -245,11 +245,10 @@ endfunction
 " --- Reselect last edited text --- "
 " --------------------------------- "
 
-" gp selects the just changed or pasted text
+" Leader-gv selects the just changed or pasted text, similar to how the native
+" gv reselects the last visual selection.
 " <http://vim.wikia.com/wiki/Selecting_your_pasted_text>
-" (it uses `gp` in the wiki, but conflicts with standard gp, which is paste
-" going to the end of the pasted text)
-nnoremap <expr> <Leader>v '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " --------------------- "
 " --- Mouse support --- "
