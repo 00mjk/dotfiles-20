@@ -37,7 +37,8 @@
   sd = diff --staged
   slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
   st = status
-  stash-all = stash save --include-untracked
+  sti = status --ignored
+  shall = stash save --include-untracked
   undo = reset --soft HEAD^
   unstage = reset HEAD --
 	root = rev-parse --show-toplevel
