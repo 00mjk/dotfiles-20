@@ -260,8 +260,11 @@ nnoremap < <<
 " Auto-add current comment leader on new lines both in insert mode (r) and
 " normal mode (o).
 " Remove the comment characters when joining lines (j).
-" Allow formatting of comments with 'gq' (q)
+" Allow formatting of comments with 'gq' (q).
 set formatoptions+=jtcroq
+" For auto-formatting of text (not just comments) to work, textwidth must be
+" explicitly set (it's 0 by default).
+set textwidth=79
 " Also wrap existing long lines when adding text to it (-l).
 " Respect new lines with a paragraph (-a).
 set formatoptions-=la
