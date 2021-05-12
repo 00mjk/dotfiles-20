@@ -3,8 +3,16 @@
 set -eu
 set -o pipefail
 
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+
+echo "[setup] Update natively installed Golang packages"
+~/workspace/dotfiles/scripts/golang-packages
+
+echo "[setup] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
-~/workspace/dotfiles/scripts/golang-packages
 vim +GoUpdateBinaries +qall
 "${CURRDIR}/vim-markdown-tagbar"
+
+echo "[setup] Update Rust"
+rustup update
