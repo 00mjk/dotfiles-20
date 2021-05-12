@@ -1218,6 +1218,10 @@ let g:go_highlight_variable_declarations = 1
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
+" merge the sign column and the number column, to avoid shifting the content
+" when signs are shown; instead, signs will replace the number on a given line
+set signcolumn=number
+
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
