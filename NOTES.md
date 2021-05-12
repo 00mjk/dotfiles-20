@@ -30,15 +30,14 @@ Some useful .vimrc.after customisations
     let g:ale_go_golangci_lint_options = '' " only use defaults
     let g:ale_go_govet_options = '-composites=false'
 
-Miscellanea
------------
-
-### Other plugins
+Other plugins
+-------------
 
 TODO: move language specific plugins and configuration to separate vimrc
 files to be loaded conditionally via a vimrc.before and vimrc.after mechanism
 
 TypeScript
+----------
 
     " ...syntax
     Plug 'HerringtonDarkholme/yats.vim'
@@ -46,11 +45,13 @@ TypeScript
     Plug 'Quramy/tsuquyomi'
 
 Statusline
+----------
 
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
 Other
+-----
 
     Plug 'dyng/ctrlsf.vim'
 
@@ -70,18 +71,21 @@ Other
     Plug 'mileszs/ack.vim'
 
 Markdown preview
+----------------
 
 * <https://github.com/greyblake/vim-preview>
 * <https://github.com/previm/previm/blob/master/README-en.mkd>
 * <https://github.com/suan/vim-instant-markdown>
 
 Markdown syntax
+---------------
 
 * <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
 * <https://github.com/plasticboy/vim-markdown>
 * <https://github.com/rhysd/vim-gfm-syntax>
 
 Plasticboy's Markdown config
+----------------------------
 
 This plugin has much better syntax highlighting, but it messes with
 autoformatting in several ways, it's bad enough to be unusable.
@@ -102,6 +106,14 @@ autoformatting in several ways, it's bad enough to be unusable.
     " let g:vim_markdown_auto_insert_bullets = 0
 
 PlantUML
+--------
+
+```plantuml
+@startuml
+Bob -> Alice : hello
+Alice -> Bob : ok
+@enduml
+```
 
 <https://github.com/aklt/plantuml-syntax> also adds a make target, so the PNG
 can be generated directly with `:Make` from inside a `.puml` file.
@@ -154,11 +166,13 @@ in fact PlantUML seems to throw exceptions for some state machine diagrams).
 preferably running in Docker, again to render in ASCII art format. Presumably
 having the same issues as with `vim-slumlord`.
 
-### Alternate JSON formatting, doesn't respect order
+Alternate JSON formatting, doesn't respect order
+------------------------------------------------
 
     autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
 
-### Airline
+Airline
+-------
 
 Sections
 
@@ -170,11 +184,14 @@ Sections
     section Z => %p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v
 
 Hide the '[No Name]' buffer
+---------------------------
 
     let g:airline#extensions#tabline#excludes = []
 
-Other colorschemes to derive the technique from, in order to create a
-Tango-like 16-color scheme.
+Other colorschemes
+------------------
+
+to derive the technique from, in order to create a Tango-like 16-color scheme.
 
 * `dark_minimal`
 * `solarized`
@@ -185,7 +202,8 @@ Tango-like 16-color scheme.
   highlighting groups
 * `monochrome`
 
-### Async search
+Async search
+-------------
 
 Our main requirements for search are:
 
@@ -227,7 +245,8 @@ Alternative solutions are
 * Ferret <https://github.com/wincent/ferret> looks very nice but again
   overfeatured
 
-### Get info about the window of the current buffer
+Get info about the window of the current buffer
+-----------------------------------------------
 
 * BAD
 
@@ -249,7 +268,8 @@ Alternative solutions are
 
         getwininfo(win_getid())[0].loclist != 1
 
-### Support for other Vim plugins
+Support for other Vim plugins
+-----------------------------
 
     " ----------------- "
     " --- Syntastic --- "
@@ -400,7 +420,8 @@ Alternative solutions are
       \ [ 'x', 'z', 'error', 'warning', 'statistics' ]
     \ ]
 
-### Brew packages to be reviewed
+Brew packages to be reviewed
+----------------------------
 
 * binutils
 * ed
