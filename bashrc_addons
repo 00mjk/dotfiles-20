@@ -5,7 +5,12 @@
 # -----------
 
 export GPG_TTY=$(tty)
-gpgconf --create-socketdir
+# This create-socketdir command is only required if a non default home
+# directory is used and the /run based sockets shall be used. For the default
+# home directory GnUPG creates a directory on the fly.
+if [[ ! -d $HOME/.gnupg && ( -d /run/user || -d /var/run/user ) ]]; then
+  gpgconf --create-socketdir
+fi
 
 # --------------
 # --- Golang ---
