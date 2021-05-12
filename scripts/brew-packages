@@ -52,6 +52,7 @@ brew install \
   imagemagick \
   inetutils \
   jq \
+  kubectx \
   less \
   lf \
   libxml2 \
@@ -62,6 +63,7 @@ brew install \
   nano \
   nethogs \
   nload \
+  nmap \
   openssh \
   perl \
   pre-commit \
@@ -115,12 +117,15 @@ brew cask install \
 # --- Post install for casks --- #
 # ------------------------------ #
 
+# --- autocompletions
+
 ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
   ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion _docker
   ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion _docker-compose
+  kubectl completion zsh > _kubectl
   popd
 fi
 
@@ -148,8 +153,8 @@ NOTES
 
 * Other casks that could be useful:
 
-  - google-drive-file-stream
-  - google-backup-and-sync
+  - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - google-backup-and-sync (for personal accounts, works with G Suite, but does not support Shared Drives)
   - virtualbox
   - virtualbox-extension-pack
   - vagrant
