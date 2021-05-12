@@ -459,6 +459,8 @@ function Wrap()
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
+    # TODO: restore a saved value of virtualedit (for now it's hardcoded to the
+    # same known global value)
     set virtualedit=block
     silent! iunmap <buffer> <Up>
     silent! iunmap <buffer> <Down>
@@ -1120,7 +1122,12 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " --- vim-go --- "
 " -------------- "
 
-let g:go_fmt_command = "goimports"
+if executable("gofumports")
+  let g:go_fmt_command = "gofumports"
+else
+  let g:go_fmt_command = "goimports"
+endif
+
 let g:go_list_type = "quickfix"
 let g:go_fmt_fail_silently = 1 " we have other means of showing syntax errors
 
