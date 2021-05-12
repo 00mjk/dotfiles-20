@@ -1186,18 +1186,57 @@ endif
 " TODO: fix vimrc auto-reload because this doesn't work
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
+" ------------------------- "
+" --- Diff highlighting --- "
+" ------------------------- "
+
+" use simple ansi-colours for readability in any terminal
+highlight DiffAdd cterm=none,bold ctermfg=2 ctermbg=15
+highlight DiffDelete cterm=none ctermfg=13 ctermbg=15
+highlight DiffChange cterm=none ctermfg=8 ctermbg=15
+highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
+
 " ------------------ "
 " --- Statusline --- "
 " ------------------ "
 
 highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
-highlight! StatusLineNC cterm=none ctermfg=7 ctermbg=8
+highlight! StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
-" ------------------------- "
-" --- Diff highlighting --- "
-" ------------------------- "
+let g:be_modes = {
+  \ 'n'      : 'NORMAL',
+  \ 'no'     : 'NORMAL (OP PENDING)',
+  \ 'v'      : 'VISUAL',
+  \ 'V'      : 'V-LINE',
+  \ "\<C-v>" : 'V-BLOCK',
+  \ 's'      : 'SELECT',
+  \ 'S'      : 'S-LINE',
+  \ "\<C-s>" : 'S-BLOCK',
+  \ 'i'      : 'INSERT',
+  \ 'R'      : 'REPLACE',
+  \ 'Rv'     : 'V-REPLACE',
+  \ 'c'      : 'COMMAND',
+  \ 'cv'     : 'VIM-EX',
+  \ 'ce'     : 'EX',
+  \ 'r'      : 'PROMPT',
+  \ 'rm'     : 'MORE',
+  \ 'r?'     : 'CONFIRM',
+  \ '!'      : 'SHELL',
+  \ 't'      : 'TERMINAL',
+\}
 
-highlight DiffAdd cterm=none,bold ctermfg=2 ctermbg=15
-highlight DiffDelete cterm=none ctermfg=13 ctermbg=15
-highlight DiffChange cterm=none ctermfg=8 ctermbg=15
-highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
+function BE_Statusline(active)
+  if &l:buftype ==# 'nofile' || &l:filetype ==# 'netrw'
+    let &l:statusline=' '
+  elseif a:active == 1
+    let &l:statusline=' %{g:be_modes[mode()]}%{&paste ? "(PASTE)" : ""} | %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
+  else
+    let &l:statusline=' %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
+  endif
+endfunction
+
+augroup StatuslineEvents
+    autocmd!
+    autocmd WinEnter,BufWinEnter  * call BE_Statusline(1)
+    autocmd WinLeave              * call BE_Statusline(0)
+augroup END
