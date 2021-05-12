@@ -1278,3 +1278,5 @@ augroup StatuslineEvents
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
+
+set noshowmode " the mode is already shown in the statusline
