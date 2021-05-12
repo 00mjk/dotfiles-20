@@ -91,6 +91,10 @@ mkdir -p "${HOME}/.local/bin"
 
 backup_and_symlink "${DOTFILES_DIR}/bat_config" "${HOME}/.config/bat/config"
 
+# --- direnv --- #
+
+backup_and_symlink "${DOTFILES_DIR}/direnvrc" "${HOME}/.direnvrc"
+
 # --- delta themes --- #
 
 "${CURRDIR}/delta-themes"

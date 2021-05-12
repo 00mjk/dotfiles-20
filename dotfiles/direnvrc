@@ -1,0 +1,13 @@
+# vim: set ft=bash:
+
+use_ruby() {
+  local ruby_dir=$HOME/.rubies/$1
+  load_prefix $ruby_dir
+  layout ruby
+}
+
+use_go() {
+  local go_dir=$HOME/.gos/$1
+  load_prefix $go_dir
+  layout go
+}
