@@ -52,6 +52,15 @@ vmap , \
 nmap <space> \
 vmap <space> \
 
+" -------------------------------------------------------- "
+" --- Make shift-Y consistent with shift-C and shift-D --- "
+" -------------------------------------------------------- "
+
+" shift-C changes till the end of line, and shift-D deletes till the of the line.
+" shift-Y breaks the pattern, and it's an alias for `yy'.
+" This was initially in from vim-sensible but then removed.
+nnoremap Y y$
+
 " ---------------------- "
 " --- Visual options --- "
 " ---------------------- "
