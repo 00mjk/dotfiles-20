@@ -158,7 +158,7 @@ my_custom_prompt () {
       ;;
   esac
 
-  PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w$BLUE\$(parse_git_branch)\$(parse_git_status)$NC\n$NC\$ "
+  PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w$BLUE \$(parse_git_branch) \$(parse_git_status)$NC\n$NC\$ "
 
   PS2='> '
 
