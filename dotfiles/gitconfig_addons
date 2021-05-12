@@ -1,12 +1,23 @@
 # vim: set ft=gitconfig:
 
+[include]
+  path = .config/delta/themes.gitconfig
 [core]
   editor = 'vim'
   pager = 'delta'
 [delta]
   line-numbers = true
-  ; side-by-side = true
   paging = always
+  features = tweaks
+  # side-by-side = false
+[delta "tweaks"]
+  # adjustments to the default style, which puts too much emphasis on the hunks
+  commit-decoration-style = ol bold blue
+  file-decoration-style = box blue
+  file-style = bold blue
+  hunk-header-line-number-style = blue bold
+  hunk-header-decoration-style =
+  hunk-header-style = syntax brightwhite line-number
 [pull]
 	ff = only
 [submodule]
