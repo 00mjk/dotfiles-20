@@ -277,6 +277,13 @@ noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^
 " 3. also support insert mode
 imap <silent> <Home> <C-O><Home>
 
+" -------------------------------- "
+" --- Quickfix list navigation --- "
+" -------------------------------- "
+" Useful for any type of search and command that populates the quickfix list.
+nmap [q :cprevious<CR>
+nmap ]q :cnext<CR>
+
 " ------------------------------ "
 " --- Move lines up and down --- "
 " ------------------------------ "
@@ -588,6 +595,12 @@ let g:syntastic_javascript_checkers=['eslint']
 " ---------------- "
 
 let g:vim_json_syntax_conceal = 0
+
+" ------------------------------------- "
+" --- Load additional configuration --- "
+" ------------------------------------- "
+
+" You can put here any further customisations or overrides.
 
 if filereadable(glob("~/.vimrc.after"))
   source ~/.vimrc.after
