@@ -44,6 +44,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'keith/swift.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " TypeScript
 " ...syntax
@@ -770,7 +771,7 @@ let g:go_auto_type_info = 1
 " ...after only 100 ms instead of the default 800
 set updatetime=100
 
-autocmd FileType go nnoremap <Leader>z :GoBuild<CR>
+autocmd FileType go nnoremap <Leader>z :GoDiagnostics!<CR>
 
 " ----------------- "
 " --- vim-RSpec --- "
@@ -823,19 +824,26 @@ highlight def link rubyRspec Function
 " ----------------- "
 
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_go_checkers=[
-  \ 'go',
-  \ 'govet',
-  \]
+" let g:syntastic_go_checkers=[
+"   \ 'go'
+"   \]
 
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list = 1
 
 " ---------------- "
 " --- vim-json --- "
 " ---------------- "
 
 let g:vim_json_syntax_conceal = 0
+
+" --------------------- "
+" --- rainbow pairs --- "
+" --------------------- "
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
 
 " ------------------------------------- "
 " --- Load additional configuration --- "
