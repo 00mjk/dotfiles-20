@@ -713,7 +713,16 @@ let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in stat
 "   \]
 
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
-nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
+function! s:ToggleTablineWithBuffers()
+  if &showtabline
+    set showtabline=0
+  else
+    set showtabline=2
+  end
+endfunction
+
+command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
+
 " Keep the tabline hidden by default
 au VimEnter * :set showtabline=0
 
@@ -922,6 +931,12 @@ let g:vim_json_syntax_conceal = 0
 
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
+
+" -------------- "
+" --- TagBar --- "
+" -------------- "
+
+nnoremap <Leader>t :TagbarToggle<CR>
 
 " ------------------------------------- "
 " --- Load additional configuration --- "
