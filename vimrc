@@ -1225,7 +1225,7 @@ let g:be_modes = {
   \ 't'      : 'TERMINAL',
 \}
 
-function BE_Statusline(active)
+function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
   if len(&buftype) != 0     | return | endif
   " unless it's the Explore window netrw
@@ -1238,10 +1238,28 @@ function BE_Statusline(active)
   endif
 endfunction
 
+function! BE_QuickfixStatusline()
+  let l:qf_win_nr = winnr()
+  let l:qf_win_info = {}
+  for win_info in getwininfo()
+    if win_info.winnr == l:qf_win_nr
+      let l:qf_win_info = win_info
+      break
+    endif
+  endfor
+
+  if l:qf_win_info['loclist'] == 1
+    let &l:statusline='Location list (%L entries)'
+  else
+    let &l:statusline='Quickfix list (%L entries)'
+  endif
+endfunction
+
 augroup StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
+    autocmd FileType              qf        call BE_QuickfixStatusline()
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
