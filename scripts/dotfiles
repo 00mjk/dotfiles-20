@@ -53,12 +53,12 @@ fi
 
 # --- global fd ignore --- #
 
-backup_and_symlink "${DOTFILES_DIR}/fdignore" "${global_config_path}/fd/ignore"
+backup_and_symlink "${DOTFILES_DIR}/ignore" "${global_config_path}/fd/ignore"
 
 # --- global ripgrep config --- #
 
 backup_and_symlink "${DOTFILES_DIR}/ripgreprc" "${HOME}/.ripgreprc"
-backup_and_symlink "${DOTFILES_DIR}/rgignore" "${HOME}/.rgignore"
+backup_and_symlink "${DOTFILES_DIR}/ignore" "${HOME}/.rgignore"
 
 # --- htop --- #
 

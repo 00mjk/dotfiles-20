@@ -1,0 +1,76 @@
+# vim: set ft=gitignore:
+# used for both ripgrep and fd
+
+# Dirs
+
+**/go/pkg/mod
+**/target/debug
+.Trash/
+.aws/
+.bin/
+.build/
+.bundle/
+.cache/
+.cargo/
+.cups/
+.docker/
+.dropbox/
+.dropbox.cache/
+.fingerprint/
+.git/
+.gobrew/
+.goenv/
+.hg/
+.jump/
+.local/
+.config/
+.ocean9/
+.oh-my-zsh/
+.rbenv/
+.rustup/
+.ssh/
+.svn/
+.terminfo/
+.terraform/
+.terraform.d/
+.vim/
+.vscode-insiders/
+.vscode/
+.zsh_sessions/
+Library/
+Pictures/Photos Library.photoslibrary
+_old/
+_quarantine/
+bundle/
+git/
+go/
+go/pkg/mod/
+log/
+node_modules/
+vendor/
+venv*/
+
+# Obsolete:
+#
+# bitbucket.org
+# cloud.google.com
+# code.google.com
+# cuelang.org
+# github.com
+# go.mongodb.org
+# golang.org
+# google.golang.org
+# gopkg.in
+# honnef.co
+# launchpad.net
+# speter.net
+# stathat.com
+
+# Files
+
+*.class
+*.dll
+*.exe
+*.pyc
+*.so
+tags
