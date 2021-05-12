@@ -29,6 +29,7 @@ brew install \
   cmark \
   coreutils \
   diffutils \
+  direnv \
   fd \
   ffmpeg \
   findutils \
@@ -108,6 +109,7 @@ append_if_missing /etc/shells "/usr/local/bin/zsh"
 # ------------- #
 
 brew cask install \
+  alacritty \
   docker \
   firefox \
   font-inconsolata \
