@@ -1,0 +1,6 @@
+set tab-size = 2
+
+set line-graphics = utf-8
+
+set main-view-commit-title-graph = v2
+set main-view-commit-title-refs = true

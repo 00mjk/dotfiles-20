@@ -61,6 +61,10 @@ backup_and_symlink "${DOTFILES_DIR}/sqliterc" "${HOME}/.sqliterc"
 
 backup_and_symlink "${DOTFILES_DIR}/lfrc" "${global_config_path}/lf/lfrc"
 
+#--- tig ---#
+
+backup_and_symlink "${DOTFILES_DIR}/tigrc" "${HOME}/.tigrc"
+
 # --- local bin --- #
 
 mkdir -p "${HOME}/.local/bin"
