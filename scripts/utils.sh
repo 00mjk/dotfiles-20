@@ -37,6 +37,7 @@ backup_and_symlink () {
 # it expands variables recursively
 # sudo bash -c "echo $CONTENT_LINE >> $TARGET_FILE"
 # Using sed instead, see <http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/#append_lines>
+# Also add a blank line before the new content.
 append_if_missing () {
   local TARGET_FILE=$1
   local CONTENT_LINE=$2
@@ -45,6 +46,7 @@ append_if_missing () {
     echo "-- line \"$CONTENT_LINE\" already in $TARGET_FILE"
   else
     sudo sed -i --follow-symlinks "$ a\
+
 $CONTENT_LINE" "$TARGET_FILE"
     echo "-- added \"$CONTENT_LINE\" to $TARGET_FILE"
   fi
