@@ -65,40 +65,12 @@ backup_and_symlink "${DOTFILES_DIR}/lfrc" "${global_config_path}/lf/lfrc"
 # --- shells --- #
 # -------------- #
 
-backup_and_symlink "${DOTFILES_DIR}/bashrc_addons" "${HOME}/.bashrc_addons"
-backup_and_symlink "${DOTFILES_DIR}/zshrc_addons" "${HOME}/.zshrc_addons"
 backup_and_symlink "${DOTFILES_DIR}/shell_addons" "${HOME}/.shell_addons"
+backup_and_symlink "${DOTFILES_DIR}/bashrc" "${HOME}/.bashrc"
+backup_and_symlink "${DOTFILES_DIR}/zshrc" "${HOME}/.zshrc"
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
   # prevent the "last login" message on macOS
   touch ~/.hushlogin
   backup_and_symlink "${DOTFILES_DIR}/shell_addons_mac" "${HOME}/.shell_addons_mac"
 fi
-
-function enable_shell_addon() {
-  local rcfile=$1
-  local addon_file=$2
-
-  [[ -f $rcfile ]] || touch $rcfile
-  append_if_missing $rcfile "[[ -e \"\${HOME}/.${addon_file}\" ]] && source ~/.${addon_file}"
-}
-
-# configuration compatible with both zsh and bash
-function configure_shell_addons() {
-  local shell_name=$1
-  local rcfile="${HOME}/.${shell_name}rc"
-
-  # 1 - OS
-  [[ "$(uname -s)" == "Darwin" ]] && enable_shell_addon $rcfile "shell_addons_mac"
-  # 2 - Specific shell
-  enable_shell_addon "${rcfile}" "${shell_name}rc_addons"
-  # 3 - Generic shell
-  enable_shell_addon "${rcfile}" "shell_addons"
-  # 4 - Local, additional
-  enable_shell_addon "${rcfile}" "shell_addons_local"
-
-  append_if_missing $rcfile "[[ -n \"\$(command -v direnv)\" ]] && eval \"\$(direnv hook ${shell_name})\" # the direnv hook must be at the end of the rc file"
-}
-
-configure_shell_addons "bash"
-configure_shell_addons "zsh"

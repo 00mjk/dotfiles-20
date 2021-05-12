@@ -39,6 +39,13 @@ export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 
 #   gpgconf --create-socketdir
 # fi
 
+# ------------ #
+# --- Ruby --- #
+# ------------ #
+
+# Use Brew-installed Ruby if available.
+[[ -d "/usr/local/opt/ruby" ]] && PATH="/usr/local/opt/ruby/bin:$PATH"
+
 # --------------
 # --- Golang ---
 # --------------
