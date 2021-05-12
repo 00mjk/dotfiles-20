@@ -84,6 +84,7 @@ brew install --formulae --quiet \
   imagemagick \
   jq \
   jump \
+  just \
   kubectx \
   lf \
   libpq \
