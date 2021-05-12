@@ -117,6 +117,7 @@ append_if_missing /etc/shells "/usr/local/bin/zsh"
 brew cask install \
   alacritty \
   docker \
+  drawio \
   firefox \
   font-inconsolata \
   iterm2 \
