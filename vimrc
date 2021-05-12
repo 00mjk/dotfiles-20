@@ -189,6 +189,19 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+" ----------------------------- "
+" --- Indentation shortcuts --- "
+" ----------------------------- "
+
+" Indent/Unindent visually selected lines without losing the selection.
+vnoremap > >gv
+vnoremap < <gv
+" Indent single lines with a single keystroke. The ability to specify a motion
+" is lost, but this caters for the more common use case, indent until the
+" desired level is obtained.
+nnoremap > >>
+nnoremap < <<
+
 " ------------------------- "
 " --- Buffer management --- "
 " ------------------------- "
