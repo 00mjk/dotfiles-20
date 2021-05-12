@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z $(command -v git) ]]; then
+  echo "Please install git first"
+  exit 1
+fi
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+backup_and_symlink $ROOTDIR/vimrc $HOME/.vimrc
+
+# Vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+vim +PlugInstall +qall
+
+if [[ -n "$(command -v go)" ]]; then
+  vim +GoInstallBinaries +qall
+else
+  echo "Golang is not installed, skipping vim-go binaries"
+fi
+
+
