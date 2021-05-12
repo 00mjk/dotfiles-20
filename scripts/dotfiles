@@ -29,6 +29,17 @@ git config --global core.excludesfile ~/.gitignore_global
 
 backup_and_symlink "${DOTFILES_DIR}/tmux.conf" "${HOME}/.tmux.conf"
 
+# Compile tmux specific terminfo profiles with "tic" to support italics inside
+# tmux.
+#
+# Some system might already have them, but in April 2021 most still don't
+# provide them.
+#
+# The profiles will be compiled to the "~/.terminfo" location.
+#
+tic "${ROOTDIR}/dotfiles/tmux.terminfo"
+tic "${ROOTDIR}/dotfiles/tmux-256color.terminfo"
+
 # ------------------- #
 # --- miscellanea --- #
 # ------------------- #
