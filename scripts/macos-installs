@@ -45,7 +45,7 @@ brew install --formulae --quiet \
   gzip \
   inetutils
 
-echo "[setup] Install modern versions of macOS built-in utilities"
+echo "[setup] Install recent versions of macOS built-in utilities"
 brew install --formulae --quiet \
   bash \
   git \
@@ -64,8 +64,8 @@ echo "[setup] Install extra utilities"
 brew install --formulae --quiet \
   bat \
   bmon \
-  cmark \
   cloc \
+  cmark \
   colordiff \
   direnv \
   fd \
@@ -164,6 +164,7 @@ brew tap homebrew/cask-fonts
 
 brew install --casks --quiet \
   alacritty \
+  calibre \
   discord \
   docker \
   drawio \
@@ -171,13 +172,16 @@ brew install --casks --quiet \
   firefox \
   font-go \
   font-inconsolata \
-  font-juliamono \
   font-jetbrains-mono \
+  font-juliamono \
   google-backup-and-sync \
   google-chrome \
   iterm2 \
-  middle \
+  libreoffice \
+  logitech-camera-settings \
   microsoft-teams \
+  middle \
+  pastebot \
   rectangle \
   sdformatter \
   slack \
@@ -240,10 +244,17 @@ echo "
   - screen
   - util-linux
 
-* Other casks that could be useful:
+* Other common casks:
 
-  - copyq (clipboard manager that supports images)
+  - dash
+  - devdocs
   - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - mdrp
+  - signal
+  - slack
+  - telegram
+  - thunderbird
+  - tunnelbear
   - vagrant
   - virtualbox
   - virtualbox-extension-pack
