@@ -8,9 +8,14 @@ if [[ ! "$(uname -s)" =~ Darwin ]]; then
   exit 0
 fi
 
+set +e
+echo "[setup] Install Command Line Tools for Xcode if not already present"
+xcode-select --install 2>&1
+set -e
+
+echo "[setup] Install Homebrew if not already present"
 if [[ -z $(command -v brew) ]]; then
-  echo "Please install Homebrew first"
-  exit 1
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
@@ -23,8 +28,7 @@ source "${CURRDIR}/utils.sh"
 # NOTE: docker is installed as cask (desktop app), because even if a docker
 # formulae exists, that requires VirtualBox.
 
-# GNU utilities
-
+echo "[setup] Install GNU utilities"
 brew install --formulae --quiet \
   coreutils \
   diffutils \
@@ -41,8 +45,7 @@ brew install --formulae --quiet \
   gzip \
   inetutils
 
-# Updated versions of existing tools
-
+echo "[setup] Install modern versions of macOS built-in utilities"
 brew install --formulae --quiet \
   bash \
   git \
@@ -57,8 +60,7 @@ brew install --formulae --quiet \
   sqlite \
   zsh
 
-# Other utilities missing on macOS
-
+echo "[setup] Install extra utilities"
 brew install --formulae --quiet \
   bat \
   bmon \
@@ -96,6 +98,8 @@ brew install --formulae --quiet \
   ranger \
   rbenv \
   ripgrep \
+  ruby \
+  ruby-build \
   ruby-install \
   slurm \
   the_silver_searcher \
@@ -108,6 +112,7 @@ brew install --formulae --quiet \
   wget \
   yq
 
+echo "[setup] Install Node.js"
 brew install --formulae --quiet \
   node \
   yarn
@@ -117,7 +122,7 @@ brew install --formulae --quiet \
   --HEAD \
   universal-ctags/universal-ctags/universal-ctags
 
-# until Neovim 0.5 is released, the HEAD version is required for LSP support
+# until Neovim 0.5 is released as stable, the HEAD version is required for LSP support
 brew install --formulae --quiet \
   --HEAD \
   neovim
@@ -126,37 +131,35 @@ brew install --formulae --quiet \
 # --- Post install for formulae --- #
 # --------------------------------- #
 
+echo "[setup] Python post-install setup"
 brew link --overwrite --force python@3.9
 
 python3 -m pip install ydiff
 python3 -m pip install --user --upgrade pynvim
 
-printf "\n===> Configuring fzf\n"
+echo "[setup] FZF post-install setup"
 /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
 
-echo "\n===> Enabling brew-installed shells\n\n"
+echo "[setup] Brew-installed shells post-install setup"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
 
-echo "\n===> Changing default shell to brew-installed zsh (requires sudo pass)"
 chsh -s /usr/local/bin/zsh
 
-echo "\n===> Install dotfiles"
-
+echo "[setup] Install dotfiles"
 "${CURRDIR}/dotfiles"
 
-echo "\n===> Set up Vim"
-
+echo "[setup] Install Vim configuration"
 "${CURRDIR}/vim"
 
-echo "\n===> Install oh-my-zsh"
-
+echo "[setup] Install Oh My Zsh"
 "$CURRDIR/ohmyzsh"
 
 # ------------- #
 # --- Casks --- #
 # ------------- #
 
+echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
 brew install --casks --quiet \
@@ -186,8 +189,7 @@ brew install --casks --quiet \
 # --- Post install for casks --- #
 # ------------------------------ #
 
-# --- autocompletions
-
+echo "[setup] Configure extra autocompletions"
 ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
@@ -206,24 +208,11 @@ fi
 # --- Other non-brew installs --- #
 # ------------------------------- #
 
-"${CURRDIR}/golang-packages"
+echo "[setup] Install Golang"
+"${CURRDIR}/golang"
 
-# ------------ #
-# --- Rust --- #
-# ------------ #
-
-brew install rustup-init rust-analyzer
-
-rustup-init --no-modify-path -y
-
-rustup component add rust-src
-
-rustup completions zsh >| /usr/local/share/zsh/site-functions/_rustup
-rustup completions zsh cargo >| /usr/local/share/zsh/site-functions/_cargo
-
-mkdir -p $(brew --prefix)/etc/bash_completion.d
-rustup completions bash > $(brew --prefix)/etc/bash_completion.d/rustup.bash-completion
-rustup completions bash cargo >> $(brew --prefix)/etc/bash_completion.d/cargo.bash-completion
+echo "[setup] Install Rust"
+"${CURRDIR}/rust"
 
 # ------------------ #
 # --- Next steps --- #
