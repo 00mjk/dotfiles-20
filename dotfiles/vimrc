@@ -34,7 +34,7 @@ Plug 'mhinz/vim-grepper'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdtree'
 
 " --- Language support (including special config syntaxes)
