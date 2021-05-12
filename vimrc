@@ -1179,9 +1179,6 @@ set updatetime=100
 autocmd FileType go nnoremap <Leader>z <Plug>(go-diagnostics)
 autocmd FileType go nnoremap <Leader>t <Plug>(go-test)
 
-" -------------------------------------- "
-" --- Ale (Asynchronous Lint Engine) --- "
-" -------------------------------------- "
 " ----------------------------------- "
 " --- Golang/Neovim setup for LSP --- "
 " ----------------------------------- "
@@ -1237,13 +1234,28 @@ EOF
   autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 endif
 
+" ---------------------------------------------- "
+" --- ALE (A.L.E., Asynchronous Lint Engine) --- "
+" ---------------------------------------------- "
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1 " it's the default, but let's make it explicit
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '•'
+
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
+let g:ale_sign_info = 'I'
+" other symbols to try ▶︎ ▷ • ‣ ■ □ ▢ ▪︎ ▲ ▴ ● ◯ ◼️ ☐
+
+" white on dark red
+highlight ALEErrorSign    cterm=reverse,bold ctermfg=1  ctermbg=none
+" white on dark yellow
+highlight ALEWarningSign  cterm=reverse,bold ctermfg=3  ctermbg=none
+" white on light blue
+highlight ALEInfoSign     cterm=reverse,bold ctermfg=12 ctermbg=none
+" black on bright yellow
+" highlight ALEWarningSign  cterm=bold         ctermfg=none ctermbg=11
 
 " disable all linters unless explicitly enabled
 " let g:ale_linters_explicit = 1
@@ -1255,6 +1267,7 @@ augroup CloseLoclistWindowGroup
   autocmd!
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
+" it will close anyway once all the issue have been addressed
 
 " ---------------- "
 " --- vim-json --- "
