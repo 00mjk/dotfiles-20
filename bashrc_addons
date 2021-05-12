@@ -5,6 +5,7 @@
 # -----------
 
 export GPG_TTY=$(tty)
+gpgconf --create-socketdir
 
 # --------------
 # --- Golang ---
