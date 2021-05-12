@@ -30,6 +30,41 @@ Interesting .vimrc files
 .vimrc.after customisations
 ---------------------------
 
+    " A.L.E. local customisations
+    " ---------------------------
+    let g:ale_linters = {
+    \   'go': ['govet'],
+    \   'python': ['flake8', 'pylint'],
+    \}
+    let g:ale_lint_on_save = 1
+
+    let g:ale_fixers = {
+    \    'python': ['yapf'],
+    \}
+    " let g:ale_fix_on_save = 1
+
+    let g:ale_go_golangci_lint_options = '' " only use defaults
+    let g:ale_go_govet_options = '-composites=false'
+
+    " vim-go local customisations
+    " ---------------------------
+
+    let g:go_gopls_local = 'bitbucket.example.com'
+
+    " let g:go_fmt_options = {
+    " \  'gofumpt': '-s',
+    " \  'gofmt': '-s',
+    " \  'goimports': '-local bitbucket.example.com -local some-backend',
+    " \}
+
+    " let g:go_gopls_local = 'bitbucket.example.com'
+
+    " let g:go_gopls_local = {
+    " \  $HOME.'/go/src/some-backend': 'some-backend',
+    " \  $HOME.'/go/src/some-backend/clients-service': 'some-backend',
+    " \  $HOME.'/projects/svc/adjust-events': 'bitbucket.example.com',
+    " \}
+
     " let g:ale_linters = {'go': ['golangci-lint', 'govet']}
     " let g:ale_linters = {'go': ['gopls']}
     " let g:ale_linters = {'go': ['staticcheck', 'govet']}
@@ -39,11 +74,11 @@ Interesting .vimrc files
     let g:ale_go_govet_options = '-composites=false'
     let g:go_fmt_options = {
     \  'gofmt': '-s',
-    \  'goimports': '-local bitbucket.glintpay.com -local glint-backend',
+    \  'goimports': '-local bitbucket.example.com -local some-backend',
     \}
 
-    " let g:go_gopls_local = 'glint-backend'
-    " let g:go_gopls_local = 'bitbucket.glintpay.com'
+    " let g:go_gopls_local = 'some-backend'
+    " let g:go_gopls_local = 'bitbucket.example.com'
     let g:go_gopls_local = {
     \  $HOME.'/go/src/some-project-in-gopath': 'some-project-in-gopath',
     \  $HOME.'/go/src/another-project-in-gopath': 'another-project-in-gopath',
