@@ -275,7 +275,7 @@ set formatoptions-=la
 
 " Disabling auto formatting for the following file types because the wrapping
 " also seems to be applied to code.
-autocmd FileType swift,erb set formatoptions-=t
+autocmd FileType swift,erb,sh set formatoptions-=t
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
