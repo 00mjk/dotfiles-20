@@ -19,3 +19,8 @@ repositories.
      the official website, and the same script can be used for updating it later
 1. **mosh**: the mobile shell (<https://mosh.org>), for more flexible SSH
    sessions on flaky connections: `./scripts/mosh`
+
+## The mob-programming script
+
+`./scripts/mob` will provide a handy pomodoro timer to take turns during mob
+programming sessions. Credits: @carloscalzo.
