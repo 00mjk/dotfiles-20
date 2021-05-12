@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
-set -e
+set -eu
+
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+source "${CURRDIR}/utils.sh"
 
 PLATFORM=
 if [[ "$(uname -s)" =~ Darwin ]]; then
@@ -43,3 +46,5 @@ echo "Extract ${DOWNLOAD_DIR}/${FILENAME} -> /usr/local"
 sudo tar -C /usr/local -xzf "${DOWNLOAD_DIR}/${FILENAME}"
 
 echo "Checking installation: $(go version) installed at $(command -v go)"
+
+"${CURRDIR}/golang-zsh-completion"

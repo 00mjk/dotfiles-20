@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+set -eu
+set -o pipefail
+
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+source "${CURRDIR}/utils.sh"
+
+echo "Installing zsh autocompletion"
+
+ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
+
+curl \
+  'https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang' \
+  -L \
+  --create-dirs \
+  -o "${ZSH_SITE_FUNCTIONS}/_golang"
