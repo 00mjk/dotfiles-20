@@ -262,7 +262,7 @@ f() {
 # -R: disable roll-over at edges
 # -x: show notice on selection cp, mv, rm completion, copy path to system clipboard on select
 
-export NNN_OPTS="CHoRe"
+export NNN_OPTS="CoRe"
 
 # --------------- #
 # --- Aliases --- #
@@ -273,6 +273,11 @@ export NNN_OPTS="CHoRe"
 # completely wipe the content of the shell buffer, instead of just scrolling
 # the prompt to the top
 alias cls="clear && printf '\e[3J'"
+
+# remove duplicates from a list, without sorting
+alias nauniq="awk '!seen[\$0]++'"
+
+# time shortcuts
 alias utcnow='date -u +"%Y-%m-%dT%H-%M-%SZ"'
 alias epoch_ms="perl -MTime::HiRes=time -e 'printf \"%.3f\n\", time'"
 
