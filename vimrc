@@ -116,7 +116,7 @@ nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":s
 
 " Ack
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case --ignore={log,tags}'
 endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
