@@ -25,6 +25,7 @@ sudo apt-get install -yq \
   coreutils \
   curl \
   exuberant-ctags \
+  gdebi-core \
   jq \
   less \
   lsof \
