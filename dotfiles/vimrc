@@ -215,7 +215,7 @@ endfunction
 
 augroup Todo_CustomKeywords
   autocmd!
-  autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG")
+  autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
 augroup END
 
 " ---------------------- "
