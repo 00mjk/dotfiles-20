@@ -140,13 +140,22 @@ set backup
 set timeoutlen=300
 
 " --- history --- "
+set history=1000
+
+" there is another setting that my override the history size, so we ensure to
+" set that too; see "h 'viminfo'" (with quotes)
 "
-" !   save and restore global variables that start with an uppercase letter (it was included in the defaults)
+" default options:
+"
+" !   save and restore global variables that start with an uppercase letter
 " '   max number of files to remember for marks
 " h   disable effect of 'hlsearch' when loading viminfo file
 " <   max number of lines saved per register
+" s   max size of each register item in Kbytes
+"
+" additional option:
+"
 " :   max number of entries in the command history
-" s   max size of register items in Kbytes
 set viminfo=!,'100,<50,s10,h,:1000
 
 " ------------------------------- "
