@@ -1213,7 +1213,7 @@ endif
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1 " it's the default, but let's make it explicit
+" let g:ale_lint_on_save = 0 " temporarily disable
 
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
@@ -1240,6 +1240,10 @@ augroup CloseLoclistWindowGroup
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 " it will close anyway once all the issue have been addressed
+
+let g:ale_linters = {'go': ['golangci-lint', 'govet']}
+let g:ale_go_golangci_lint_options = '' " only use defaults
+let g:ale_go_govet_options = '-composites=false'
 
 " ---------------- "
 " --- vim-json --- "
