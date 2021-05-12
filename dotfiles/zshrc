@@ -199,6 +199,12 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 
+#------------#
+#--- JUMP ---#
+#------------#
+
+eval "$(jump shell zsh)"
+
 # -------------------- #
 # --- Key bindings --- #
 # -------------------- #

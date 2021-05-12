@@ -130,6 +130,12 @@ _custom_bash_prompt
 # native shell functionality
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
+#------------#
+#--- JUMP ---#
+#------------#
+
+eval "$(jump shell)"
+
 # -------------------------------------- #
 # --- Additional shell configuration --- #
 # -------------------------------------- #
