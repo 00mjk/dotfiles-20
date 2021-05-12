@@ -214,15 +214,13 @@ endif
 
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
-highlight VertSplit cterm=none,reverse ctermbg=8 ctermfg=8
-highlight EndOfBuffer cterm=none ctermfg=15
-highlight ColorColumn ctermbg=15
-highlight WildMenu cterm=bold ctermfg=0 ctermbg=11
-
-" other higlights
-highlight CursorLineNr cterm=underline,bold ctermfg=none ctermbg=none
-highlight LineNr cterm=none ctermfg=8 ctermbg=none
-highlight SignColumn cterm=none ctermbg=none
+highlight VertSplit     cterm=none,reverse    ctermfg=8   ctermbg=8
+highlight EndOfBuffer   cterm=none            ctermfg=15
+highlight ColorColumn                                     ctermbg=15
+highlight WildMenu      cterm=bold            ctermfg=0   ctermbg=11
+highlight LineNr        cterm=none            ctermfg=7   ctermbg=none
+highlight CursorLineNr  cterm=none,underline  ctermfg=8   ctermbg=none
+highlight SignColumn    cterm=none                        ctermbg=none
 
 " ---------------------- "
 " --- Search options --- "
