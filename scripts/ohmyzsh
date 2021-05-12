@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-set -eu
+set -eux
 set -o pipefail
 
 if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
   touch "${HOME}/.zshrc"
   ohmyzsh_install="/tmp/install-ohmyzsh.sh"
   curl -o "${ohmyzsh_install}" -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-  KEEP_ZSHRC=yes sh /tmp/install-ohmyzsh.sh
+  sh "${ohmyzsh_install}" --unattended --keep-zshrc
 fi
