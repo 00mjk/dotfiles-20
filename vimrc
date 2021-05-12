@@ -14,59 +14,68 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
-Plug 'mileszs/ack.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
-Plug 'vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
-Plug 'posva/vim-vue'
 Plug 'majutsushi/tagbar'
-Plug 'udalov/kotlin-vim'
 Plug 'godlygeek/tabular'
-Plug 'kchmck/vim-coffee-script'
-Plug 'udalov/kotlin-vim'
 Plug 'SirVer/ultisnips'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-abolish'
-Plug 'rodjek/vim-puppet'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'keith/swift.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'arcticicestudio/nord-vim'
 Plug 'mhinz/vim-grepper'
 
-" TypeScript
-" ...syntax
-Plug 'HerringtonDarkholme/yats.vim'
-" ...dev tools (TSServer client)
-Plug 'Quramy/tsuquyomi'
+" -------------------- "
+" --- Colorschemes --- "
+" -------------------- "
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
+Plug 'arcticicestudio/nord-vim'
 
-" ------------------------------------------- "
-" --- Experimental or rarely used plugins --- "
-" ------------------------------------------- "
+" ------------------------- "
+" --- Secondary plugins --- "
+" ------------------------- "
+
+" TODO: move language specific plugins and configuration to separate vimrc
+" files to be loaded conditionally via a vimrc.before and vimrc.after mechanism
+
+" TypeScript
+" ...syntax
+" Plug 'HerringtonDarkholme/yats.vim'
+" ...dev tools (TSServer client)
+" Plug 'Quramy/tsuquyomi'
+
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'dyng/ctrlsf.vim'
 
 " Plug 'dhruvasagar/vim-table-mode'
 
 " Reveal syntax highlighting group under the cursor
 " Plug 'gerw/vim-HiLinkTrace'
+
+" Plug 'keith/swift.vim'
+" Plug 'mustache/vim-mustache-handlebars'
+" Plug 'rodjek/vim-puppet'
+" Plug 'udalov/kotlin-vim'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'posva/vim-vue'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'mxw/vim-jsx'
+" Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -748,14 +757,6 @@ let g:markdown_fenced_languages = [
 let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
 let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
 
-" -------------------- "
-" --- vim-dispatch --- "
-" -------------------- "
-
-" don't create shortcuts, as this is only installed to support Ack's
-" asynchronous behaviour
-let g:dispatch_no_maps = 1
-
 " ---------------- "
 " --- vim-ruby --- "
 " ---------------- "
@@ -858,85 +859,8 @@ nmap <M-h> :call TmuxWinCmd('h')<CR>
 nmap <M-l> :call TmuxWinCmd('l')<CR>
 
 " ------------------- "
-" --- vim-airline --- "
+" --- ag defaults --- "
 " ------------------- "
-
-" Airline is included despite of how heavily it clutters the UI, for a few
-" reasons...
-"
-" * it's hugely popular
-" * it provides a 'tab bar' functionality, which is considered useful for users
-"   coming from GUI editors; this works really well and can be displayed with
-"   the custom :ToggleTablineWithBuffers command
-" * some parts of the status bar are actually helpful (in particular the Vim
-"   mode and how it's formatted)
-"
-" However, to prevent a cognitive overload, it's been heavily streamlined.
-
-set noshowmode " showing the Vim mode twice is ugly
-
-let g:airline_theme = 'base16_default' " Milder colorscheme (pending the creation of a true 16-color colorscheme)
-
-let g:airline_symbols_ascii = 1
-
-" --- tabline --- "
-
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
-let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
-au VimEnter * :set showtabline=0 " Keep the tabline hidden by default
-function! s:ToggleTablineWithBuffers()
-  if &showtabline
-    set showtabline=0
-  else
-    set showtabline=2
-  end
-endfunction
-
-if !exists(":ToggleTablineWithBuffers")
-  command ToggleTablineWithBuffers call <SID>ToggleTablineWithBuffers()
-endif
-
-" --- Streamline the status bar
-
-" More extensions might need to be disabled if additional plugins are installed
-" and have a correspoding builtin extension.
-"
-" Run :AirlineExtensions to find which are enabled.
-
-" the built-in quickfix extension is lightweight and we can leave it on
-" let g:airline#extensions#quickfix#enabled = 0
-
-" unfortunately tagbar, because it's not asynchronous, can make this extension
-" quite slow, delaying the painting of the status bar
-let g:airline#extensions#tagbar#enabled = 0
-
-" other resource-intensive extensions are all better disabled
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#fugitiveline#enabled = 0
-let g:airline#extensions#fzf#enabled = 0
-let g:airline#extensions#keymap#enabled = 0
-let g:airline#extensions#netrw#enabled = 0
-let g:airline#extensions#po#enabled = 0
-let g:airline#extensions#searchcount#enabled = 0
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#term#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#ale#enabled = 0
-
-" customise the airline layout:
-" - remove section X (filetype)
-" - remove section Y (file encoding and fileformat)
-" - remove section B (git branch etc.)
-let g:airline#extensions#default#layout = [
-  \ [ 'a', 'c' ],
-  \ [ 'x', 'z', 'error', 'warning', 'statistics' ]
-\ ]
-
-" ---------------- "
-" --- agignore --- "
-" ---------------- "
 
 let s:ag_ignore =
       \' --ignore="_quarantine"'.
@@ -1185,18 +1109,6 @@ set updatetime=100
 
 autocmd FileType go nnoremap <Leader>z <Plug>(go-diagnostics)
 autocmd FileType go nnoremap <Leader>t <Plug>(go-test)
-
-" ----------------- "
-" --- Syntastic --- "
-" ----------------- "
-
-let g:syntastic_javascript_checkers=['eslint']
-" let g:syntastic_go_checkers=['go']
-
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list = 1
 
 " -------------------------------------- "
 " --- Ale (Asynchronous Lint Engine) --- "
