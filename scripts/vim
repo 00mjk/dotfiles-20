@@ -14,10 +14,11 @@ fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
 
-backup_and_symlink $ROOTDIR/vimrc $HOME/.vimrc
+backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -32,7 +33,7 @@ fi
 
 mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
 
-backup_and_symlink $ROOTDIR/dotfiles/init.vim $HOME/.config/nvim/init.vim
+backup_and_symlink "${DOTFILES_DIR}/init.vim" "${HOME}/.config/nvim/init.vim"
 
 # Add markdown support to TagBar
 mkd2ctags_path="${HOME}/.vim/tools/markdown2ctags"

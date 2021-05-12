@@ -34,6 +34,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-grepper'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
@@ -51,38 +52,6 @@ endif
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
-
-" ------------------------- "
-" --- Secondary plugins --- "
-" ------------------------- "
-
-" TODO: move language specific plugins and configuration to separate vimrc
-" files to be loaded conditionally via a vimrc.before and vimrc.after mechanism
-
-" TypeScript
-" ...syntax
-" Plug 'HerringtonDarkholme/yats.vim'
-" ...dev tools (TSServer client)
-" Plug 'Quramy/tsuquyomi'
-
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'dyng/ctrlsf.vim'
-
-" Plug 'dhruvasagar/vim-table-mode'
-
-" Reveal syntax highlighting group under the cursor
-" Plug 'gerw/vim-HiLinkTrace'
-
-" Plug 'keith/swift.vim'
-" Plug 'mustache/vim-mustache-handlebars'
-" Plug 'rodjek/vim-puppet'
-" Plug 'udalov/kotlin-vim'
-" Plug 'kchmck/vim-coffee-script'
-" Plug 'posva/vim-vue'
-" Plug 'vim-syntastic/syntastic'
-" Plug 'mxw/vim-jsx'
-" Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -461,12 +430,15 @@ set linebreak " Break between words when wrapping (don't break within words).
 " toggle wrapping with leader-ww
 nmap <silent> <leader>ww :set wrap!<CR>
 " allow navigating 'visual lines' with j/k and up/down, instead of actual lines
+" for insert mode, more work is required:
+" <https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping>
 nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
-inoremap <Down> gj
-inoremap <Up> gk
+
+xnoremap j gj
+xnoremap k gk
 xnoremap <Down> gj
 xnoremap <Up> gk
 
