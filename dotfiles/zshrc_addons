@@ -140,6 +140,29 @@ if [[ -n "$(command -v kubectx)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectx" ]]; then
   compdef kx='kubectx'
 fi
 
+function _bravoecho_git_branch() {
+  local branch_name=$(git branch --show-current 2>/dev/null)
+
+  if [[ -n "${branch_name}" ]]; then
+    echo " on %F{green}${branch_name}%f"
+  fi
+}
+
+# taken from oh-my-zsh
+# macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
+function _bravoecho_hostname() {
+  local short_host=
+  if [[ "$OSTYPE" = darwin* ]]; then
+    short_host=$(scutil --get ComputerName 2>/dev/null) || short_host=${HOST/.*/}
+  else
+    short_host=${HOST/.*/}
+  fi
+
+  echo $short_host
+}
+
+[[ -n "${COMPUTER_NAME}" ]] || export COMPUTER_NAME="$(_bravoecho_hostname)"
+
 # Lightweight prompt in pure zsh syntax that:
 #
 #   * colorises the info about user and host
@@ -147,21 +170,16 @@ fi
 #   * displays the current git branch if it's in a repo
 #   * puts the cursor into a new line
 #
-newline=$'\n'
 setopt PROMPT_SUBST # evaluate the shell expressions on every prompt
+prompt_newline=$'\n'
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
-  function _bravoecho_git_branch() {
-    local branch_name=$(git branch --show-current 2>/dev/null)
+  # %n = username
+  # %m = hostname, but we don't use because it changes with networks and VPNs
+  # %~ = pwd with tilde
 
-    if [[ -n "${branch_name}" ]]; then
-      # echo " on %{$fg[green]%}${branch_name}%{$reset_color%}"
-      echo " on %F{green}${branch_name}%f"
-    fi
-  }
-
-  PROMPT='[%F{red}%n%f@%F{magenta}%m%f:%F{blue}%~%f$(_bravoecho_git_branch)]${newline}%# '
+  PROMPT='[%F{red}%n%f@%F{magenta}${COMPUTER_NAME}%f:%F{blue}%~%f$(_bravoecho_git_branch)]${prompt_newline}%# '
 else
-  PROMPT='[%n@%m:%~]${newline}%# '
+  PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
 
 # ----------- #
