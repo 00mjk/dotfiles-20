@@ -34,6 +34,7 @@ Plug 'mhinz/vim-grepper'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdtree'
 
 " --- Language support (including special config syntaxes)
@@ -1365,6 +1366,12 @@ if filereadable(glob(g:markdown2ctags_path))
       \ 'sort': 0,
   \ }
 endif
+
+" ------------- "
+" --- Vista --- "
+" ------------- "
+
+let g:vista#renderer#enable_icon = 0
 
 " ------------------------- "
 " --- Diff highlighting --- "
