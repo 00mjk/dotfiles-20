@@ -344,7 +344,7 @@ nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":s
 " ----------- "
 
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case --skip-vcs-ignores'.
+  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores'.
         \' --ignore-dir=.git'.
         \' --ignore-dir=.hg'.
         \' --ignore-dir=.svn'.
