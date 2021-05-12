@@ -49,6 +49,21 @@ Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
+" --- Colorscheme --- "
+
+" Try to use 'peachpuff' if available, because it's adapts to dark and light
+" background terminals, at the same time, which is useful for pairing.
+try
+  colorscheme peachpuff
+  catch
+		echom "'peachpuff' colorscheme not available, defaulting to 'default'"
+  try
+    colorscheme default
+    catch
+			echom "'default' colorscheme not available, not setting the colorscheme"
+  endtry
+endtry
+
 " ----------------------- "
 " --- General options --- "
 " ----------------------- "
