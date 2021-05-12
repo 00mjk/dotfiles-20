@@ -12,4 +12,5 @@ go_install 'github.com/kyoh86/richgo'
 go_install 'github.com/asciimoo/wuzz'
 go_install 'golang.org/x/exp/cmd/modgraphviz'
 go_install 'github.com/mgechev/revive'
+go_install 'github.com/kevincobain2000/gobrew/cmd/gobrew'
 popd

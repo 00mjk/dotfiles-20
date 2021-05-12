@@ -33,7 +33,7 @@ Plug 'mhinz/vim-grepper'
 " --- Navigate (files and code)
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 " Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdtree'
 
@@ -941,20 +941,21 @@ let g:mkdp_preview_options = {
 " --- vim-table-mode --- "
 " ---------------------- "
 
-let g:table_mode_insert_column_before_map = '<Leader>tib'
+let g:table_mode_disable_mappings = 1
+" let g:table_mode_insert_column_before_map = '<Leader>tib'
 
 " ----------------------- "
 " --- Auto-formatting --- "
 " ----------------------- "
 
 " Autoformat JSON with jq
-" -M  monochrome
+" -M monochrome
 " -r raw output
 if executable('jq')
   autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
 endif
 
-" Autoformat XML and HTML with xmllint
+" Autoformat XML with xmllint
 if executable('xmllint')
   autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
 endif
@@ -1345,28 +1346,59 @@ let g:vim_json_syntax_conceal = 0
 " -------------- "
 
 nnoremap <Leader>tt :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
 " Add support for markdown files in tagbar with
-" <https://github.com/jszakmeister/markdown2ctags>
-let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
-if filereadable(glob(g:markdown2ctags_path))
-  let g:tagbar_type_markdown = {
-      \ 'ctagstype': 'markdown',
-      \ 'ctagsbin' : g:markdown2ctags_path,
-      \ 'ctagsargs' : '-f - --sort=yes --sro=»',
-      \ 'kinds' : [
-          \ 's:sections',
-          \ 'i:images'
-      \ ],
-      \ 'sro' : '»',
-      \ 'kind2scope' : {
-          \ 's' : 'section',
-      \ },
-      \ 'sort': 0,
-  \ }
-endif
+" " <https://github.com/jszakmeister/markdown2ctags>
+" let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
+" if filereadable(glob(g:markdown2ctags_path))
+"   let g:tagbar_type_markdown = {
+"       \ 'ctagstype': 'markdown',
+"       \ 'ctagsbin' : g:markdown2ctags_path,
+"       \ 'ctagsargs' : '-f - --sort=yes --sro=»',
+"       \ 'kinds' : [
+"           \ 's:sections',
+"           \ 'i:images'
+"       \ ],
+"       \ 'sro' : '»',
+"       \ 'kind2scope' : {
+"           \ 's' : 'section',
+"       \ },
+"       \ 'sort': 0,
+"   \ }
+" endif
+
+let g:tagbar_iconchars = ['▶', '◢']
+
+" https://github.com/preservim/tagbar/wiki#markdown
+let g:tagbar_type_markdown = {
+  \ 'ctagstype'  : 'markdown',
+  \ 'kinds'    : [
+    \ 'c:chapter:0:1',
+    \ 's:section:0:1',
+    \ 'S:subsection:0:1',
+    \ 't:subsubsection:0:1',
+    \ 'T:l4subsection:0:1',
+    \ 'u:l5subsection:0:1',
+  \ ],
+  \ 'sro'      : '""',
+  \ 'kind2scope'  : {
+    \ 'c' : 'chapter',
+    \ 's' : 'section',
+    \ 'S' : 'subsection',
+    \ 't' : 'subsubsection',
+    \ 'T' : 'l4subsection',
+  \ },
+  \ 'scope2kind'  : {
+    \ 'chapter' : 'c',
+    \ 'section' : 's',
+    \ 'subsection' : 'S',
+    \ 'subsubsection' : 't',
+    \ 'l4subsection' : 'T',
+  \ },
+\ }
 
 " ------------- "
 " --- Vista --- "

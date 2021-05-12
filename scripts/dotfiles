@@ -61,6 +61,14 @@ backup_and_symlink "${DOTFILES_DIR}/sqliterc" "${HOME}/.sqliterc"
 
 backup_and_symlink "${DOTFILES_DIR}/lfrc" "${global_config_path}/lf/lfrc"
 
+# --- local bin --- #
+
+mkdir -p "${HOME}/.local/bin"
+
+# --- install nnn plugins --- #
+
+"${CURRDIR}/nnn-plugins"
+
 # -------------- #
 # --- shells --- #
 # -------------- #

@@ -13,6 +13,8 @@ PATH="/usr/local/sbin:$PATH"
 
 MANPATH="/usr/local/share/man/:$MANPATH"
 
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"
+
 function brut() {
   local ts=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
   local logdir="$HOME/log"
@@ -29,8 +31,8 @@ function brut() {
 function _do_brew_upgrade() {
   echo "-------------- brew update ----------------"
   brew update 2>&1
-  # echo "-------------- brew outdated ---------------"
-  # brew outdated 2>&1
+  echo "-------------- brew outdated ---------------"
+  brew outdated 2>&1
   echo "-------------- brew upgrade ---------------"
   brew upgrade 2>&1
   echo "-------------- brew cleanup ---------------"

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+set -eux
+set -o pipefail
+
+curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh

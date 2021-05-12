@@ -165,6 +165,19 @@ alias _init_rbenv='eval "$(rbenv init -)"'
 # fi
 alias _init_pyenv='eval "$(pyenv init -)"'
 
+# ------------- #
+# --- goenv --- #
+# ------------- #
+
+# eval "$(goenv init -)"
+
+# -------------- #
+# --- gobrew --- #
+# -------------- #
+
+export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+export GOPATH="$HOME/.gobrew/current/go"
+
 # -------------- #
 # --- Editor --- #
 # -------------- #
@@ -254,7 +267,9 @@ f() {
 # --- nnn file manager --- #
 # ------------------------ #
 
+# -a: auto-setup temporary NNN_FIFO
 # -e: open text files in $VISUAL (else $EDITOR, fallback vi) [preferably CLI]
+# -E: use $EDITOR for internal undetached edits
 # -C: simpler colorscheme
 # -H: show hidden files
 # -J: disable auto-proceed on select
@@ -262,7 +277,8 @@ f() {
 # -R: disable roll-over at edges
 # -x: show notice on selection cp, mv, rm completion, copy path to system clipboard on select
 
-export NNN_OPTS="CoRe"
+export NNN_OPTS="CoRea"
+export NNN_PLUG='p:preview-tui-ext'
 
 # --------------- #
 # --- Aliases --- #
@@ -316,8 +332,7 @@ alias gta='git stash --include-untracked'
 
 # --- ls --- #
 
-alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --quoting-style=escape --group-directories-first'
-alias la='ls -lA'
+alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --group-directories-first'
 
 # --- tree --- #
 
