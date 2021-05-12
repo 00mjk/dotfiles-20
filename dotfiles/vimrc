@@ -705,10 +705,24 @@ inoremap <C-k> <ESC>:m .-2<CR>gi
 " --- Whitespace --- "
 " ------------------ "
 
+" noremap <silent> <Leader>w :call Wrap()<CR>
+
 " --- Visualise whitespace ---
-set listchars=tab:▸·,trail:·,extends:>,precedes:<
 " toggle hidden characters highlighting:
-nmap <silent> <Leader>ww :set nolist!<CR>
+
+set listchars=tab:▸·,trail:·,extends:>,precedes:<
+
+nmap <silent> <Leader>ww :call VisualizeWhitespace()<CR>
+
+function VisualizeWhitespace()
+  if &list
+    echo "Whitespace OFF"
+    set nolist
+  else
+    echo "Whitespace ON"
+    set list
+  endif
+endfunction
 
 " --- highlight unwanted trailing whitespace --- "
 " <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
