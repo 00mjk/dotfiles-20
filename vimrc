@@ -1152,7 +1152,7 @@ let g:go_fmt_fail_silently = 1 " we have other means of showing syntax errors
 " let g:go_addtags_transform = "snake_case"
 
 " highlight current identifier
-let g:go_auto_sameids = 1
+" let g:go_auto_sameids = 1
 
 " enable all syntax highlighting
 highlight link goBuiltins Keyword
