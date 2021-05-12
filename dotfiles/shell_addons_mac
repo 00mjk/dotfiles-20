@@ -34,5 +34,5 @@ function _do_brew_upgrade() {
   echo "-------------- brew upgrade ---------------"
   brew upgrade 2>&1
   echo "-------------- brew cleanup ---------------"
-  brew cleanup 2>&1
+  brew cleanup --prune=all 2>&1
 }
