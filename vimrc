@@ -79,6 +79,10 @@ set showcmd                          " show command that is being entered in the
 set backspace=indent,eol,start       " Allow extended backspace behaviour
 set virtualedit=block                " allow placing the cursor after the last char
 
+if exists('+colorcolumn')
+  set colorcolumn=81,101 " display vertical rulers for line length
+endif
+
 " --------------------- "
 " --- Mouse support --- "
 " --------------------- "
