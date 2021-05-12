@@ -840,6 +840,10 @@ nnoremap <Leader>d "_dd
 vnoremap <M-d> "_d
 vnoremap <Leader>d "_d
 
+" also prevent 'x' from overriding what's in the clipboard
+noremap x "_x
+noremap X "_x
+
 " ---------------------- "
 " --- Spell checking --- "
 " ---------------------- "
