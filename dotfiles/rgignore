@@ -1,3 +1,5 @@
+# vim: set ft=gitignore:
+
 *.class
 *.dll
 *.exe
