@@ -5,4 +5,5 @@ GO111MODULE=on go get -v -u mvdan.cc/gofumpt
 GO111MODULE=on go get -v -u honnef.co/go/tools/cmd/staticcheck
 GO111MODULE=on go get -v -u github.com/kyoh86/richgo
 GO111MODULE=on go get -v -u github.com/asciimoo/wuzz
+GO111MODULE=on go get -v -u golang.org/x/exp/cmd/modgraphviz
 popd
