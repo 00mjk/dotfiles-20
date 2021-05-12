@@ -746,8 +746,8 @@ autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhi
 " -------------------- "
 
 " Enable syntax-based for natively supported languages, and using ctags when
-" available.
-" Plugins will overwrite with more specific setups as appropriate (like vim-go).
+" available. Plugins will overwrite this with more specific setups as
+" appropriate (like vim-go).
 set omnifunc=syntaxcomplete#Complete
 
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
@@ -761,6 +761,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 set pastetoggle=<F3>
 
 " --- Paste over visual selection preserving the content of the paste buffer
+"
 " p   -> paste normally
 " gv  -> reselect the pasted text
 " y   -> copy it again
@@ -768,13 +769,17 @@ set pastetoggle=<F3>
 vnoremap <Leader>p pgvy`>
 
 " --- Make shift-Y consistent with shift-C and shift-D --- "
+"
 " shift-C changes till the end of line, and shift-D deletes till the of the line.
 " shift-Y breaks the pattern, and it's an alias for `yy'.
 " This was once in vim-sensible but then removed.
 nnoremap Y y$
 
+" --- Enter Insert mode directly in Paste mode
+"
 " 'borrowed' from
 " <https://github.com/zonk1024/vim_stuffs/blob/281b4dfe92d4883550659989c71ec72350f3dd10/vimrc#L129>
+
 " Turns on paste mode, puts you in insert mode then autocmds the cleanup
 function! InsertPaste() range
   set paste
@@ -784,6 +789,7 @@ function! InsertPaste() range
   augroup END
 endfunction
 
+" Same as above but on a new line
 function! InsertPasteNewLine() range
   set paste
   call append(line("."), "")
@@ -843,39 +849,9 @@ inoremap <F6> <Esc>:setlocal spell!<CR>
 " autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
 
-" ---------------- "
-" --- Markdown --- "
-" ---------------- "
-
-" " Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
-" " highligting is basic in terms of styles, and does not support several valid
-" " markdown features
-" "
-" " to activate it:
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-"
-" " treat .txt files as markdown
-" autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
-
-" its options are the following:
-
-" let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-" let g:markdown_fenced_languages = [
-" \  'go',
-" \  'ruby',
-" \  'bash=sh',
-" \  'zsh',
-" \  'plantuml',
-" \  'python',
-" \  'json',
-" \  'yaml',
-" \]
-" let g:markdown_syntax_conceal = 0
-" let g:markdown_minlines = 100
-
-" --------------------- "
-" --- Pandoc Syntax --- "
-" --------------------- "
+" ------------------------------------ "
+" --- Pandoc Syntax (for Markdown) --- "
+" ------------------------------------ "
 
 augroup pandoc_syntax
     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
@@ -895,6 +871,7 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 \  'python',
 \  'json',
 \  'yaml',
+\  'vim',
 \]
 
 " ----------------------------- "
@@ -1228,61 +1205,6 @@ autocmd FileType go nnoremap <Leader>z :GoDiagnostics<CR>
 autocmd FileType go nnoremap <Leader>t :GoTest<CR>
 autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
 
-" ----------------------------------- "
-" --- Golang/Neovim setup for LSP --- "
-" ----------------------------------- "
-
-if has('nvim')
-lua <<EOF
-  nvim_lsp = require "nvim_lsp"
-  nvim_lsp.gopls.setup {
-    cmd = {"gopls", "serve"},
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true,
-        },
-        staticcheck = true,
-      },
-    },
-  }
-
-  function goimports(timeoutms)
-    local context = { source = { organizeImports = true } }
-    vim.validate { context = { context, "t", true } }
-
-    local params = vim.lsp.util.make_range_params()
-    params.context = context
-
-    local method = "textDocument/codeAction"
-    local resp = vim.lsp.buf_request_sync(0, method, params, timeoutms)
-    if resp and resp[1] then
-      local result = resp[1].result
-      if result and result[1] then
-        local edit = result[1].edit
-        vim.lsp.util.apply_workspace_edit(edit)
-      end
-    end
-
-    vim.lsp.buf.formatting()
-  end
-EOF
-
-  "  local nvim_lsp = require 'nvim_lsp'
-  "  nvim_lsp.gopls.setup{
-  "    cmd = {"gopls"};
-  "    filetypes = {"go"};
-  "    root_dir = nvim_lsp.util.root_pattern("go.mod", ".git");
-  "    log_level = vim.lsp.protocol.MessageType.Log;
-  "    settings = {}
-  "  }
-
-  autocmd BufWritePre *.go lua goimports(1000)
-  nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-
-  autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
-endif
-
 " ---------------------------------------------- "
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
@@ -1327,13 +1249,6 @@ augroup END
 " ---------------- "
 
 let g:vim_json_syntax_conceal = 0
-
-" --------------------- "
-" --- rainbow pairs --- "
-" --------------------- "
-
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
 
 " -------------- "
 " --- TagBar --- "
@@ -1521,7 +1436,7 @@ function! BE_ActiveStatusline()
   let l:mode_colour = g:be_modes[mode()]['highlight']
 
   let l:stl  = '%#'.l:mode_colour.'#'
-  let l:stl .= ' '.l:mode_name.'%{&paste ? "\ \ (PASTE)" : ""} '
+  let l:stl .= ' '.l:mode_name.'%{&paste ? "\ (PASTE)" : ""} '
   let l:stl .= '%#'.l:mode_colour.'Centre#'
   " flags => m: modified, r: readonly, h: help, p: preview, y: filetype
   let l:stl .=  ' %<%f %m%r %='
