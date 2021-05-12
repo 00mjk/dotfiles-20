@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+set -eu
+set -o pipefail
+
+vim +PlugUpgrade +qall
+vim +PlugUpdate +qall
+~/workspace/dotfiles/scripts/golang-packages
+vim +GoUpdateBinaries +qall
