@@ -259,7 +259,7 @@ nnoremap < <<
 
 " Ensure some formatting options, some of which may already be enabled by
 " default, depending on the version of Vim.
-" Wrap text automatically (a), both for text (t) and comments (c).
+" Wrap text automatically both for text (t) and comments (c).
 " Auto-add current comment leader on new lines both in insert mode (r) and
 " normal mode (o).
 " Remove the comment characters when joining lines (j).
@@ -271,6 +271,10 @@ set textwidth=79
 " Also wrap existing long lines when adding text to it (-l).
 " Respect new lines with a paragraph (-a).
 set formatoptions-=la
+
+" Disabling auto formatting for the following file types because the wrapping
+" also seems to be applied to code.
+autocmd FileType swift,erb set formatoptions-=t
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
