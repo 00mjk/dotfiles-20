@@ -227,6 +227,12 @@ echo "[setup] Install Golang"
 echo "[setup] Install Rust"
 "${CURRDIR}/rust"
 
+echo "[setup] Install pipx packages"
+pipx install \
+  litecli \
+  pgcli \
+  glances
+
 # ---------------------------------------------------- #
 # --- Fix source code files appearing in Spotlight --- #
 # ---------------------------------------------------- #
