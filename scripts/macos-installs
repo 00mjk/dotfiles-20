@@ -148,6 +148,10 @@ echo "\n===> Set up Vim"
 
 "${CURRDIR}/vim"
 
+echo "\n===> Install oh-my-zsh"
+
+"$CURRDIR/ohmyzsh"
+
 # ------------- #
 # --- Casks --- #
 # ------------- #
