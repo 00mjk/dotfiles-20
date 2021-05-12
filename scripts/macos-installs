@@ -132,8 +132,8 @@ brew install --formulae --quiet \
 # --- Post install for formulae --- #
 # --------------------------------- #
 
-echo "[setup] Python post-install setup"
-brew link --overwrite --force python@3.9
+# echo "[setup] Python post-install setup"
+# brew link --overwrite --force python@3.9
 
 python3 -m pip install ydiff
 
