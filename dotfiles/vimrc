@@ -950,25 +950,44 @@ let g:mkdp_preview_options = {
 
 command! MarkdownPlantUMLServer :execute ':silent !docker run --rm -d -p 56789:56789 plantuml/plantuml-server:jetty'
 
+"--------------------"
+"--- open-browser ---"
+"--------------------"
+
+" let g:openbrowser_browser_commands = [{'background': 1, 'name': 'open', 'args': ['{browser}', '{uri}']}]
+
+" let g:openbrowser_browser_commands = [
+" \ {
+" \   'background': 1,
+" \   'name': 'open',
+" \   'args': [
+" \     '-a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
+" \     '{uri}',
+" \   ],
+" \ },
+" \]
+
 " ---------------------- "
 " --- vim-table-mode --- "
 " ---------------------- "
 
-let g:table_mode_disable_mappings = 1
+let g:table_mode_disable_mappings = 1 " this seems to have no effect
 " let g:table_mode_insert_column_before_map = '<Leader>tib'
 
-" ----------------------- "
-" --- Auto-formatting --- "
-" ----------------------- "
+"-----------------------"
+"--- Auto-formatting ---"
+"-----------------------"
 
-" Autoformat JSON with jq
-" -M monochrome
-" -r raw output
+"--- Autoformat JSON with jq ---"
+
 if executable('jq')
+  " -M monochrome
+  " -r raw output
   autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
 endif
 
-" Autoformat XML with xmllint
+"--- Autoformat XML with xmllint ---"
+
 if executable('xmllint')
   autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
 endif
