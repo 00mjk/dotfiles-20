@@ -627,27 +627,68 @@ let g:airline#extensions#branch#enabled = 0
 " ---------------- "
 
 let s:agignore =
-      \' --ignore-dir=.bin'.
-      \' --ignore-dir=.bundle'.
-      \' --ignore-dir=bundle'.
-      \' --ignore-dir=.git'.
-      \' --ignore-dir=.hg'.
-      \' --ignore-dir=.svn'.
-      \' --ignore-dir=log'.
-      \' --ignore-dir=node_modules'.
-      \' --ignore-dir=vendor'.
-      \' --ignore=*.class'.
-      \' --ignore=*.dll'.
-      \' --ignore=*.exe'.
-      \' --ignore=*.pyc'.
-      \' --ignore=*.so'.
-      \' --ignore=tags'
+      \' --ignore="_quarantine"'.
+      \' --ignore="bitbucket.org"'.
+      \' --ignore="cloud.google.com"'.
+      \' --ignore="code.google.com"'.
+      \' --ignore="github.com"'.
+      \' --ignore="golang.org"'.
+      \' --ignore="gopkg.in"'.
+      \' --ignore="launchpad.net"'.
+      \' --ignore="speter.net"'.
+      \' --ignore=".bin"'.
+      \' --ignore=".bundle"'.
+      \' --ignore="bundle"'.
+      \' --ignore=".git"'.
+      \' --ignore=".hg"'.
+      \' --ignore=".svn"'.
+      \' --ignore="log"'.
+      \' --ignore="node_modules"'.
+      \' --ignore="vendor"'.
+      \' --ignore="*.class"'.
+      \' --ignore="*.dll"'.
+      \' --ignore="*.exe"'.
+      \' --ignore="*.pyc"'.
+      \' --ignore="*.so"'.
+      \' --ignore="tags"'
+
+" ---------------- "
+" --- rgignore --- "
+" ---------------- "
+
+let s:rgignore =
+      \' --glob="!_quarantine/**"'.
+      \' --glob="!bitbucket.org/**"'.
+      \' --glob="!cloud.google.com/**"'.
+      \' --glob="!code.google.com/**"'.
+      \' --glob="!github.com/**"'.
+      \' --glob="!golang.org/**"'.
+      \' --glob="!gopkg.in/**"'.
+      \' --glob="!launchpad.net/**"'.
+      \' --glob="!speter.net/**"'.
+      \' --glob="!.bin/**"'.
+      \' --glob="!.bundle/**"'.
+      \' --glob="!bundle/**"'.
+      \' --glob="!.git/**"'.
+      \' --glob="!.hg/**"'.
+      \' --glob="!.svn/**"'.
+      \' --glob="!log/**"'.
+      \' --glob="!node_modules/**"'.
+      \' --glob="!vendor/**"'.
+      \' --glob="!*.class"'.
+      \' --glob="!*.dll"'.
+      \' --glob="!*.exe"'.
+      \' --glob="!*.pyc"'.
+      \' --glob="!*.so"'.
+      \' --glob="!tags"'
 
 " ----------- "
 " --- Ack --- "
 " ----------- "
 
-if executable('ag')
+if executable('rg')
+  let g:ackprg = 'rg --hidden --no-heading --line-number --follow --smart-case --no-ignore-vcs' . s:rgignore
+elseif executable('ag')
   let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
 endif
 " do no jump to the first result
