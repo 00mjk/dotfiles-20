@@ -142,17 +142,21 @@ fi
 # -------------
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-if [[ $(command -v rbenv) ]]; then
-  eval "$(rbenv init -)"
-fi
+# SLOW: rbenv init takes more than 150 ms. Use alias when needed.
+# if [[ $(command -v rbenv) ]]; then
+#   eval "$(rbenv init -)"
+# fi
+alias _init_rbenv='eval "$(rbenv init -)"'
 
 # ------------- #
 # --- pyenv --- #
 # ------------- #
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# SLOW: pyenv init takes more than 200 ms. Use alias when needed.
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
+alias _init_pyenv='eval "$(pyenv init -)"'
 
 # -------------- #
 # --- Editor --- #
@@ -244,6 +248,7 @@ export FFF_COL4=9 # cursor (invert)
 # the prompt to the top
 alias cls="clear && printf '\e[3J'"
 alias utcnow='date -u +"%Y-%m-%dT%H-%M-%SZ"'
+alias epoch_ms="perl -MTime::HiRes=time -e 'printf \"%.3f\n\", time'"
 
 # --- git --- #
 
