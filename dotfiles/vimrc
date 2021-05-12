@@ -272,9 +272,9 @@ set hlsearch    " highlight results
 " ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
 " Pastel...)
 " See the README/TODO for more options.
-highlight Search term=reverse cterm=reverse ctermfg=11 ctermbg=0
-highlight Todo term=reverse cterm=reverse,bold ctermfg=7 ctermbg=0
-highlight Visual term=reverse cterm=reverse ctermfg=7 ctermbg=0
+highlight Search  term=reverse cterm=reverse      ctermfg=11  ctermbg=0
+highlight Todo    term=reverse cterm=reverse,bold ctermfg=7   ctermbg=0
+highlight Visual  term=reverse cterm=reverse      ctermfg=7   ctermbg=0
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
@@ -732,7 +732,7 @@ endfunction
 " <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
 "
 " only in normal mode
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace cterm=reverse,bold ctermfg=1 ctermbg=none
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -741,7 +741,8 @@ autocmd BufWinLeave * call clearmatches()
 
 " --- Strip whitespace ---
 
-function! <SID>StripExtraWhitespace()
+" function! <SID>StripExtraWhitespace()
+function! BE_StripExtraWhitespace()
   " store the original position
   let l = line(".")
   let c = col(".")
@@ -751,11 +752,13 @@ function! <SID>StripExtraWhitespace()
   call cursor(l, c) " back to the original position
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash,dircolors,plantuml,cucumber autocmd BufWritePre <buffer> :call <SID>StripExtraWhitespace()
+" autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash,dircolors,plantuml,cucumber autocmd BufWritePre <buffer> :call <SID>StripExtraWhitespace()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh,bash,dircolors,plantuml,cucumber autocmd BufWritePre <buffer> :call BE_StripExtraWhitespace()
 
 " StripTrailingWhitespace will not remove multiple blank lines, for langagues
 " where that is the desired style.
-function! <SID>StripTrailingWhitespace()
+" function! <SID>StripTrailingWhitespace()
+function! BE_StripTrailingWhitespace()
   " store the original position
   let l = line(".")
   let c = col(".")
@@ -764,7 +767,12 @@ function! <SID>StripTrailingWhitespace()
   call cursor(l, c) " back to the original position
 endfun
 
-autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
+" autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
+autocmd FileType python autocmd BufWritePre <buffer> :call BE_StripTrailingWhitespace()
+
+" it is occasionally useful to be able to run whitespace removal manually
+command! WhitespaceAll      call BE_StripExtraWhitespace
+command! WhitespaceTrailing call BE_StripTrailingWhitespace
 
 " -------------------- "
 " --- Omnicomplete --- "
