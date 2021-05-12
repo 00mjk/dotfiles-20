@@ -106,17 +106,6 @@ if [[ -n "$(command -v docker-compose)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]
   compdef dc='docker-compose'
 fi
 
-# fix the Alt-C (Option-C) keybinding for FZF cd to directory
-if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
-  bindkey "ç" fzf-cd-widget
-fi
-
-# disable "history search" with arrow up/down (https://superuser.com/a/1494820)
-# has no effect because although the "widget" exists and is documented, it
-# doesn't seem to be available in practice
-bindkey '^[[A' up-line-or-history
-bindkey '^[[B' down-line-or-history
-
 if [[ -n "$(command -v kubectl)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectl" ]]; then
   compdef kc='kubectl'
 fi
@@ -165,3 +154,32 @@ fi
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+
+# -------------------- #
+# --- Key bindings --- #
+# -------------------- #
+
+# Use emacs keybindings; the full list can be seen with the command:
+# 'bindkey -M emacs'.
+#
+# Disable "history search" with arrow up/down (https://superuser.com/a/1494820)
+# in particular is already set in emacs mode.
+#
+# Unfortunately there are still many things that don't work out of the box as
+# they do in bash, so oh-my-zsh provides a large number of fixes:
+# <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/079e7bb5e0a79171f3356d55d3f6302a82645a39/lib/key-bindings.zsh>
+#
+# Here we attempt a more primitive solution, but in the long run it might just
+# make more sense to bring that file in.
+bindkey -e
+
+# Some Mac specific keybinding fixes
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  bindkey "ç" fzf-cd-widget # Alt-C (Option-C)
+  bindkey '∂' kill-word # Alt-D
+fi
+
+# ctrl arrow left/right: move by one word
+# note: this works for the xterm family of terminal emulators, including tmux
+bindkey '[1;5C' forward-word
+bindkey '[1;5D' backward-word
