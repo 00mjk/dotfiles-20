@@ -186,6 +186,8 @@ if exists('+colorcolumn')
   autocmd FileType qf set colorcolumn=
 endif
 
+" --- custom highlighting ---
+
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
 highlight VertSplit     cterm=none,reverse    ctermfg=8   ctermbg=8
@@ -464,8 +466,8 @@ function Wrap()
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
-    # TODO: restore a saved value of virtualedit (for now it's hardcoded to the
-    # same known global value)
+    " TODO: restore a saved value of virtualedit (for now it's hardcoded to the
+    " same known global value)
     set virtualedit=block
     silent! iunmap <buffer> <Up>
     silent! iunmap <buffer> <Down>
