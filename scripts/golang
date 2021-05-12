@@ -12,13 +12,18 @@ elif [[ "$(uname -s)" =~ Linux ]]; then
   PLATFORM='linux'
 fi
 
-# The Golang project does not use github releases properly (2017-10-28).
-# The most reliable way is currently to parse the official Golang downloads page.
-GO_VERSION=$(
-  curl -gsL golang.org/dl \
-    | grep -m1 "${PLATFORM}-amd64.tar.gz" \
-    | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-amd64.tar.gz\".+|\1|"
-)
+GO_VERSION=$1
+
+# If no version was specified use the latest available
+if [[ -z "$GO_VERSION" ]]; then
+  # The Golang project does not use github releases properly (2017-10-28).
+  # The most reliable way is currently to parse the official Golang downloads page.
+  GO_VERSION=$(
+    curl -gsL golang.org/dl \
+      | grep -m1 "${PLATFORM}-amd64.tar.gz" \
+      | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-amd64.tar.gz\".+|\1|"
+  )
+fi
 
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 GO_WORKSPACE="${HOME}/go"
