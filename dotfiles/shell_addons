@@ -103,31 +103,6 @@ fi
 # --- Tmux ---
 # ------------
 
-# Update April 2021
-# -----------------
-#
-# Although the tmux documentation still indicates that TERM inside a tmux
-# session should be of type "screen" or "tmux" (with or without 256color), in
-# practice it seems that xterm-256color works, while also supporting more
-# terminal emulator features, such as italics.
-#
-# iTerm and Gnome Terminal have long been reporting "xterm-256color" by
-# default.
-#
-# ----------------------------------------------------------------------------
-#
-# Ensures the correct TERM value inside tmux.
-# Requires to also set the following in tmux.conf:
-#
-#   # ~/.tmux.conf
-#   set -g default-terminal "screen-256color"
-#
-# if [[ -n "$TMUX" ]]; then
-#   export TERM=screen-256color
-# else
-#   export TERM=xterm-256color
-# fi
-
 # attach to current session if there is only one, or start a new one
 alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux attach; else tmux; fi'
 

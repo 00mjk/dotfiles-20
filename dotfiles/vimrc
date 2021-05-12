@@ -1084,10 +1084,12 @@ autocmd BufNewFile,BufReadPost {*zsh,*.zsh-theme} set filetype=zsh
 " --- Fix arrow key combos inside tmux --- "
 " ---------------------------------------- "
 
-" this enables to use native and custom key combos inside tmux,
-" as well as in standalone vim;
-" relies on the term being correctly set inside tmux
-if &term =~ '^screen'
+" this enables to use native and custom key combos inside tmux, as well as in
+" standalone vim; relies on the term being correctly set inside tmux
+"
+"     set -g default-terminal 'tmux-256color'
+"
+if &term =~ '^tmux'
   exec "set <xUp>=\e[1;*A"
   exec "set <xDown>=\e[1;*B"
   exec "set <xRight>=\e[1;*C"
