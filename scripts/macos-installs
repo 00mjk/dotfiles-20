@@ -85,6 +85,7 @@ brew install --formulae --quiet \
   nethogs \
   nload \
   nmap \
+  nnn \
   plantuml \
   pipx \
   pre-commit \
