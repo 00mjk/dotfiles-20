@@ -354,6 +354,11 @@ alias gta='git stash --include-untracked'
 
 alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --group-directories-first'
 
+#--- exa ---#
+
+alias e='exa --long --header --git --group-directories-first --classify --group --time-style=long-iso'
+alias ee='e --all'
+
 # --- tree --- #
 
 # -F will prints markers for dirs, executables and other special files, like 'ls -F'
