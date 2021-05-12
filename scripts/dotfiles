@@ -12,7 +12,7 @@ CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
 source "${CURRDIR}/utils.sh"
 
-backup_and_symlink $ROOTDIR/gitconfig_addons $HOME/.gitconfig_addons
+backup_and_symlink $ROOTDIR/gitconfig_addons_pgtech $HOME/.gitconfig_addons_pgtech
 backup_and_symlink $ROOTDIR/bash_aliases_addons_pgtech $HOME/.bash_aliases_addons_pgtech
 backup_and_symlink $ROOTDIR/bashrc_addons_pgtech $HOME/.bashrc_addons_pgtech
 backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
@@ -24,4 +24,4 @@ append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_pgtech" ]
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
 
-git config --global include.path .gitconfig_addons
+git config --global include.path .gitconfig_addons_pgtech
