@@ -139,3 +139,11 @@ else
   PROMPT='[%n@%m:%~]
 %# '
 fi
+
+# ----------- #
+# --- FZF --- #
+# ----------- #
+
+# fzf widgets should be loaded as last, to ensure they are not overridden by
+# native shell functionality
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh

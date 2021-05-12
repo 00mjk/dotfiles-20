@@ -165,8 +165,11 @@ export VISUAL=$(command -v vim)
 # --- FZF --- #
 # ----------- #
 
-[[ $SHELL =~ zsh ]] && [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-[[ $SHELL =~ bash ]] && [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+# Do not load fzf widgets here, but at the end of the configuration.
+# See addons for specific shells
+#
+# [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+# [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # The preview is set to be hidden by default, but available with a custom
 # keybind (Ctrl-/ while in the fzf results)
