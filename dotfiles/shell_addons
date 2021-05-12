@@ -301,7 +301,7 @@ alias tree='command tree --dirsfirst -F'
 # --- yq --- #
 
 # takes JSON from stdin and converts it to YAML
-alias jy='yq eval -prettyPrint -'
+alias jy='yq eval --prettyPrint -'
 # takes YAML from stdin and converts it to JSON
 alias yj='yq eval --tojson -'
 
