@@ -16,7 +16,7 @@ source "${CURRDIR}/utils.sh"
 # --- git --- #
 # ----------- #
 
-backup_and_symlink $ROOTDIR/gitconfig_addons_bravoecho $HOME/.gitconfig_addons_bravoecho
+backup_and_symlink "${ROOTDIR}/gitconfig_addons_bravoecho" "${HOME}/.gitconfig_addons_bravoecho"
 backup_and_symlink "${ROOTDIR}/dot/git-template" "${HOME}/.git-template"
 
 git config --global include.path .gitconfig_addons_bravoecho
@@ -25,21 +25,20 @@ git config --global include.path .gitconfig_addons_bravoecho
 # --- tmux --- #
 # ------------ #
 
-backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
+backup_and_symlink "${ROOTDIR}/tmux.conf" "${HOME}/.tmux.conf"
 
 # -------------- #
 # --- shells --- #
 # -------------- #
 
-backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoecho
-backup_and_symlink $ROOTDIR/zshrc_addons_bravoecho $HOME/.zshrc_addons_bravoecho
-
-backup_and_symlink $ROOTDIR/shell_addons_bravoecho $HOME/.shell_addons_bravoecho
+backup_and_symlink "${ROOTDIR}/bashrc_addons_bravoecho" "${HOME}/.bashrc_addons_bravoecho"
+backup_and_symlink "${ROOTDIR}/zshrc_addons_bravoecho" "${HOME}/.zshrc_addons_bravoecho"
+backup_and_symlink "${ROOTDIR}/shell_addons_bravoecho" "${HOME}/.shell_addons_bravoecho"
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
   # prevent the "last login" message on macOS
   touch ~/.hushlogin
-  backup_and_symlink $ROOTDIR/shell_addons_mac_bravoecho $HOME/.shell_addons_mac_bravoecho
+  backup_and_symlink "${ROOTDIR}/shell_addons_mac_bravoecho" "${HOME}/.shell_addons_mac_bravoecho"
 fi
 
 function enable_shell_addon() {
@@ -65,5 +64,5 @@ function configure_shell_addons() {
   enable_shell_addon "${rcfile}" "shell_addons_local"
 }
 
-configure_shell_addons bashrc
-configure_shell_addons zshrc
+configure_shell_addons "bashrc"
+configure_shell_addons "zshrc"

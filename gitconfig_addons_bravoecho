@@ -1,80 +1,55 @@
 # vim: set ft=gitconfig:
 [core]
   editor = 'vim'
+[pull]
+	ff = only
+[submodule]
+	recurse = true
 [init]
 	templatedir = ~/.git-template
 [color]
   ui = true
-
 [alias]
-  l = log
-  hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(reset)%s - %an%C(bold yellow)%d%C(reset)' --all
-  graph = log --all --decorate --oneline --graph
-  slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
-  # requires GNU version of sort
-  new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
-
   a = add
-
+  amend = commit --amend --no-edit
   br = branch
-
   c = commit
   ci = commit
-  amend = commit --amend --no-edit
-
   co = checkout
-
   d = diff
   ds = diff --staged
-  ds = diff --staged
-
   f = fetch
-  ft = fetch
-
-  p = pull
-
-  pt = push origin HEAD -u
-  ps = push
+  fc = fetch
   # When "forcing with lease", it's essential that the working tree is up to
-  # date with the remote, see:
-  # https://developer.atlassian.com/blog/2015/04/force-with-lease/ cb stands
-  # for "current branch"
+  # date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/
   force = push --force-with-lease
-
-  sd = diff --staged
-
-  s = status
-  st = status
-  sb = status -sb
-
-  stash-all = stash save --include-untracked
-
-  unstage = reset HEAD --
-  undo = reset --soft HEAD^
-
-  cb = rev-parse --abbrev-ref HEAD
+  graph = log --all --decorate --oneline --graph
+  hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(reset)%s - %an%C(bold yellow)%d%C(reset)' --all
+  l = log
+  # requires GNU version of sort
+  new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
+  p = pull
+  ps = push
+  pt = push origin HEAD -u
   root = rev-parse --show-toplevel
+  s = status
+  sb = status -s
+  sd = diff --staged
+  slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
+  st = status
+  stash-all = stash save --include-untracked
+  undo = reset --soft HEAD^
+  unstage = reset HEAD --
 
   # ignored-update = "!git rm --cached -r . ; git add . "
   # remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
-
-[color]
-  ui = true
-
 [commit]
   verbose = true
-
-[core]
-  editor = 'vim'
-
 [diff]
   tool = vimdiff
-
 [push]
   default = simple
-
 [rerere]
   enabled = true
-
 [tag]
   forceSignAnnotated = true
