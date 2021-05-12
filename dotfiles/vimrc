@@ -85,6 +85,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
 " nord-vim only works if the terminal itself is using the 16-color Nord theme
 Plug 'arcticicestudio/nord-vim'
+Plug 'lifepillar/vim-gruvbox8'
 
 call plug#end()
 
