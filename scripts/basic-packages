@@ -23,8 +23,11 @@ sudo apt-get install -y \
   jq \
   less \
   lsof \
+  man \
+  manpages \
   nmap \
   make \
+  openssl \
   ruby \
   silversearcher-ag \
   tmux \
