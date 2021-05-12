@@ -300,8 +300,8 @@ alias rmkube='docker stop $(docker ps -q --filter name=k8s); docker rm $(docker 
 
 # --- kubernetes --- #
 
-alias k='kubectl'
-alias kc='kubectx'
+alias kc='kubectl'
+alias kx='kubectx'
 
 # --- glow --- #
 

@@ -56,7 +56,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # autocompletion
 #
 # the "completealiases" option prevents aliases on the command  line  from
-# being  internally  substituted before completion is attempted, so we need to
+# being internally substituted before completion is attempted, so we need to
 # disable it
 unsetopt COMPLETE_ALIASES
 
@@ -110,12 +110,18 @@ if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget
 fi
 
+# disable "history search" with arrow up/down (https://superuser.com/a/1494820)
+# has no effect because although the "widget" exists and is documented, it
+# doesn't seem to be available in practice
+bindkey '^[[A' up-line-or-history
+bindkey '^[[B' down-line-or-history
+
 if [[ -n "$(command -v kubectl)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectl" ]]; then
-  compdef k='kubectl'
+  compdef kc='kubectl'
 fi
 
 if [[ -n "$(command -v kubectx)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectx" ]]; then
-  compdef kc='kubectx'
+  compdef kx='kubectx'
 fi
 
 # Lightweight prompt that:
