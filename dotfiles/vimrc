@@ -394,7 +394,7 @@ nnoremap < <<
 "
 " For auto-formatting of text (not just comments) to work, textwidth must be
 " explicitly set (it's 0 by default).
-set textwidth=80
+set textwidth=79
 
 " some of these options require that 'autoindent' is set
 set formatoptions+=1 " don't break a line after a one letter word, but before
