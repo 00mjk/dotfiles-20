@@ -6,7 +6,10 @@ set -o pipefail
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 
 echo "[setup] Update natively installed Golang packages"
-~/workspace/dotfiles/scripts/golang-packages
+"${CURRDIR}/golang-packages"
+
+echo "[setup] Update zsh completion script for Golang"
+"${CURRDIR}/golang-zsh-completion"
 
 echo "[setup] Update delta themes"
 "${CURRDIR}/delta-themes"
