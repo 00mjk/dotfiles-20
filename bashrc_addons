@@ -55,6 +55,15 @@ if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
  source $HOME/google-cloud-sdk/completion.bash.inc
 fi
 
+# -------------
+# --- rbenv ---
+# -------------
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+if [[ $(command -v rbenv) ]]; then
+  eval "$(rbenv init -)"
+fi
+
 # -------------------------------------
 # --- Prompt (with git integration) ---
 # -------------------------------------
