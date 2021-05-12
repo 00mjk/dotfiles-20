@@ -24,9 +24,56 @@
 Miscellanea
 -----------
 
+### Other plugins
+
+TODO: move language specific plugins and configuration to separate vimrc
+files to be loaded conditionally via a vimrc.before and vimrc.after mechanism
+
+TypeScript
+
+    " ...syntax
+    Plug 'HerringtonDarkholme/yats.vim'
+    " ...dev tools (TSServer client)
+    Plug 'Quramy/tsuquyomi'
+
+Statusline
+
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+Other
+
+    Plug 'dyng/ctrlsf.vim'
+
+    Plug 'dhruvasagar/vim-table-mode'
+
+    " Reveal syntax highlighting group under the cursor
+    Plug 'gerw/vim-HiLinkTrace'
+
+    Plug 'keith/swift.vim'
+    Plug 'mustache/vim-mustache-handlebars'
+    Plug 'rodjek/vim-puppet'
+    Plug 'udalov/kotlin-vim'
+    Plug 'kchmck/vim-coffee-script'
+    Plug 'posva/vim-vue'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'mxw/vim-jsx'
+    Plug 'mileszs/ack.vim'
+
+Markdown preview
+
+* <https://github.com/greyblake/vim-preview>
+* <https://github.com/previm/previm/blob/master/README-en.mkd>
+* <https://github.com/suan/vim-instant-markdown>
+
+Markdown syntax
+
+* <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
+* <https://github.com/plasticboy/vim-markdown>
+
 ### Alternate JSON formatting, doesn't respect order
 
-" autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
+    autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
 
 ### Airline
 
