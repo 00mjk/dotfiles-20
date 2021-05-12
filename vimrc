@@ -11,7 +11,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
@@ -64,8 +63,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-" Allow to open a different buffer in the same window of a modified buffer
-set hidden
+" position of the new split panes
+set splitbelow
+set splitright
 
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
@@ -156,7 +156,7 @@ endfun
 
 autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-" Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
+" Allow enter to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
