@@ -66,6 +66,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " generate inline TOCs; for tagbar TOC support see TagBar config below
 Plug 'mzlogin/vim-markdown-toc'
 
+" tables
+Plug 'dhruvasagar/vim-table-mode'
+
 " --- Language Server Protocol support
 "
 " for linting and other IDE-like features
@@ -898,6 +901,12 @@ let g:mkdp_refresh_slow = 1
 let g:mkdp_preview_options = {
 \  'uml': {'server': 'http://localhost:8080'},
 \}
+
+" ---------------------- "
+" --- vim-table-mode --- "
+" ---------------------- "
+
+let g:table_mode_insert_column_before_map = '<Leader>tib'
 
 " ----------------------- "
 " --- Auto-formatting --- "
