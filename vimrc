@@ -1212,68 +1212,66 @@ highlight DiffText    cterm=none,bold ctermfg=4   ctermbg=15
 " consistency
 " \ 'c'      : { 'highlight': 'BE_ModeOther',   'name': 'COMMAND'    },
 let g:be_modes = {
-  \ 'n'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'     },
-  \ 'no'     : { 'highlight': 'BE_ModeNormal',  'name': 'N-PENDING)' },
-  \ 'i'      : { 'highlight': 'BE_ModeInsert',  'name': 'INSERT'     },
-  \ 'R'      : { 'highlight': 'BE_ModeInsert',  'name': 'REPLACE'    },
-  \ 'v'      : { 'highlight': 'BE_ModeVisual',  'name': 'VISUAL'     },
-  \ 'V'      : { 'highlight': 'BE_ModeVisual',  'name': 'V-LINE'     },
-  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual',  'name': 'V-BLOCK'    },
-  \ 'Rv'     : { 'highlight': 'BE_ModeInsert',  'name': 'V-REPLACE'  },
-  \ 's'      : { 'highlight': 'BE_ModeOther',   'name': 'SELECT'     },
-  \ 'S'      : { 'highlight': 'BE_ModeOther',   'name': 'S-LINE'     },
-  \ "\<C-s>" : { 'highlight': 'BE_ModeOther',   'name': 'S-BLOCK'    },
-  \ 'c'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'     },
-  \ 'cv'     : { 'highlight': 'BE_ModeOther',   'name': 'VIM-EX'     },
-  \ 'ce'     : { 'highlight': 'BE_ModeOther',   'name': 'EX'         },
-  \ 'r'      : { 'highlight': 'BE_ModeOther',   'name': 'PROMPT'     },
-  \ 'rm'     : { 'highlight': 'BE_ModeOther',   'name': 'MORE'       },
-  \ 'r?'     : { 'highlight': 'BE_ModeOther',   'name': 'CONFIRM'    },
-  \ '!'      : { 'highlight': 'BE_ModeOther',   'name': 'SHELL'      },
-  \ 't'      : { 'highlight': 'BE_ModeOther',   'name': 'TERMINAL'   },
+  \ 'n'      : { 'name': 'NORMAL'    , 'highlight': 'BE_ModeNormal'  },
+  \ 'no'     : { 'name': 'N-PENDING)', 'highlight': 'BE_ModeNormal'  },
+  \ 'i'      : { 'name': 'INSERT'    , 'highlight': 'BE_ModeInsert'  },
+  \ 'R'      : { 'name': 'REPLACE'   , 'highlight': 'BE_ModeInsert'  },
+  \ 'v'      : { 'name': 'VISUAL'    , 'highlight': 'BE_ModeVisual'  },
+  \ 'V'      : { 'name': 'V-LINE'    , 'highlight': 'BE_ModeVisual'  },
+  \ "\<C-v>" : { 'name': 'V-BLOCK'   , 'highlight': 'BE_ModeVisual'  },
+  \ 'Rv'     : { 'name': 'V-REPLACE' , 'highlight': 'BE_ModeInsert'  },
+  \ 's'      : { 'name': 'SELECT'    , 'highlight': 'BE_ModeOther'   },
+  \ 'S'      : { 'name': 'S-LINE'    , 'highlight': 'BE_ModeOther'   },
+  \ "\<C-s>" : { 'name': 'S-BLOCK'   , 'highlight': 'BE_ModeOther'   },
+  \ 'c'      : { 'name': 'NORMAL'    , 'highlight': 'BE_ModeNormal'  },
+  \ 'cv'     : { 'name': 'VIM-EX'    , 'highlight': 'BE_ModeOther'   },
+  \ 'ce'     : { 'name': 'EX'        , 'highlight': 'BE_ModeOther'   },
+  \ 'r'      : { 'name': 'PROMPT'    , 'highlight': 'BE_ModeOther'   },
+  \ 'rm'     : { 'name': 'MORE'      , 'highlight': 'BE_ModeOther'   },
+  \ 'r?'     : { 'name': 'CONFIRM'   , 'highlight': 'BE_ModeOther'   },
+  \ '!'      : { 'name': 'SHELL'     , 'highlight': 'BE_ModeOther'   },
+  \ 't'      : { 'name': 'TERMINAL'  , 'highlight': 'BE_ModeOther'   },
+\}
+
+let g:be_buffer_types = {
+  \ 'quickfix' : { 'name': 'QUICKFIX' , 'highlight': 'BE_ModeQuickfix' },
+  \ 'loclist'  : { 'name': 'LOCLIST'  , 'highlight': 'BE_ModeLoclist'  },
 \}
 
 " highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
 highlight StatusLine    cterm=none ctermfg=15 ctermbg=8
 highlight StatusLineNC  cterm=none ctermfg=15 ctermbg=8
 
-" highlight BE_ModeNormal         cterm=bold          ctermfg=none  ctermbg=10
-highlight BE_ModeNormal         cterm=bold,reverse  ctermfg=10  ctermbg=none
-" highlight BE_ModeNormal_centre  cterm=bold          ctermfg=15    ctermbg=2
-highlight BE_ModeNormal_centre  cterm=bold,reverse  ctermfg=2    ctermbg=none
+" green
+highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10  ctermbg=none
+highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2   ctermbg=none
+" blue
+highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12  ctermbg=none
+highlight BE_ModeVisualCentre     cterm=bold,reverse  ctermfg=4   ctermbg=none
+" magenta
+highlight BE_ModeInsert           cterm=bold,reverse  ctermfg=13  ctermbg=none
+highlight BE_ModeInsertCentre     cterm=bold,reverse  ctermfg=5   ctermbg=none
+" cyan
+highlight BE_ModeOther            cterm=bold,reverse  ctermfg=14  ctermbg=none
+highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6   ctermbg=none
+" red
+highlight BE_ModeQuickfix         cterm=bold,reverse  ctermfg=9   ctermbg=none
+highlight BE_ModeQuickfixCentre   cterm=bold,reverse  ctermfg=1   ctermbg=none
+" yellow
+highlight BE_ModeLoclist         cterm=bold          ctermfg=none  ctermbg=11
+highlight BE_ModeLoclistCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
 
-highlight BE_ModeVisual         cterm=bold,reverse  ctermfg=12    ctermbg=none
-highlight BE_ModeVisual_centre  cterm=bold,reverse  ctermfg=4     ctermbg=none
-
-" yellow insert
-" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=11
-" highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=3     ctermbg=none
-
-" cyan insert
-" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=14
-" highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=6     ctermbg=none
-
-" magenta insert
-" highlight BE_ModeInsert         cterm=bold          ctermfg=none  ctermbg=13
-highlight BE_ModeInsert         cterm=bold,reverse  ctermfg=13     ctermbg=none
-highlight BE_ModeInsert_centre  cterm=bold,reverse  ctermfg=5     ctermbg=none
-
-" red other
-" highlight BE_ModeOther          cterm=bold,reverse  ctermfg=9     ctermbg=none
-" highlight BE_ModeOther_centre   cterm=bold,reverse  ctermfg=1     ctermbg=none
-
-" cyan other
-highlight BE_ModeOther          cterm=bold,reverse  ctermfg=14  ctermbg=none
-highlight BE_ModeOther_centre   cterm=bold,reverse  ctermfg=6     ctermbg=none
-
-let g:BE_statusline_centre = ' %<%f %m%r%h%w%q %='
-let g:BE_statusline_right = ' %10(%l/%L%):%-3c%7.7((%p%%)%)'
+let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
+let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
+let g:BE_statusline_right_only_lines = ' %4l %6([%L]%)'
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
-  if len(&buftype) != 0 | return | endif
+  if len(&buftype) != 0 && &buftype != 'quickfix' | return | endif
   " unless it's the Explore window netrw
   if &filetype ==? 'netrw' | return | endif
+  " quickfix is handled separately
+  if getwininfo(win_getid())[0].quickfix == 1 | return | endif
 
   if a:active == 1
     setlocal statusline=%!BE_ActiveStatusline()
@@ -1282,14 +1280,33 @@ function! BE_Statusline(active)
   endif
 endfunction
 
+function! BE_ListsStatusline()
+  if getwininfo(win_getid())[0].loclist == 1
+    let l:list_type = 'loclist'
+  else
+    let l:list_type = 'quickfix'
+  endif
+
+  let l:mode_name   = g:be_buffer_types[l:list_type]['name']
+  let l:mode_colour = g:be_buffer_types[l:list_type]['highlight']
+
+  let l:stl  = '%#'.l:mode_colour.'#'
+  let l:stl .= ' '.l:mode_name.' '
+  let l:stl .= '%#'.l:mode_colour.'Centre#'
+  let l:stl .= ' [%L]'
+
+  let &statusline=l:stl
+endfunction
+
 function! BE_ActiveStatusline()
   let l:mode_name   = g:be_modes[mode()]['name']
   let l:mode_colour = g:be_modes[mode()]['highlight']
 
   let l:stl  = '%#'.l:mode_colour.'#'
   let l:stl .= ' '.l:mode_name.'%{&paste ? "\ \ (PASTE)" : ""} '
-  let l:stl .= '%#'.l:mode_colour.'_centre#'
-  let l:stl .= g:BE_statusline_centre
+  let l:stl .= '%#'.l:mode_colour.'Centre#'
+  " flags => m: modified, r: readonly, h: help, p: preview, y: filetype
+  let l:stl .=  ' %<%f %m%r %='
   let l:stl .= '%#'.l:mode_colour.'#'
   let l:stl .= g:BE_statusline_right
   return l:stl
@@ -1305,7 +1322,7 @@ augroup BE_StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
-    autocmd FileType              qf        setlocal statusline=%q\ (%l/%L)
+    autocmd FileType              qf        call BE_ListsStatusline()
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
