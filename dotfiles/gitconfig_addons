@@ -53,3 +53,6 @@
   enabled = true
 [tag]
   forceSignAnnotated = true
+[user]
+  name = B.E.
+  email = 698828+bravoecho@users.noreply.github.com
