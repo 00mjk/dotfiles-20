@@ -166,6 +166,7 @@ brew tap homebrew/cask-fonts
 brew install --casks --quiet \
   alacritty \
   calibre \
+  devdocs \
   discord \
   docker \
   drawio \
