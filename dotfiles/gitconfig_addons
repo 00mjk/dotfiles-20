@@ -12,12 +12,19 @@
   # side-by-side = false
 [delta "tweaks"]
   # adjustments to the default style, which puts too much emphasis on the hunks
-  commit-decoration-style = ol bold blue
-  file-decoration-style = box blue
-  file-style = bold blue
+  commit-decoration-style = ol bold brightblack
+  ; commit-decoration-style = box brightwhite brightwhite
+  ; commit-style = black brightwhite
+  file-decoration-style =
+  ; file-style = bold blue
+  file-style = brightblack bold
+  ; file-style = omit
   hunk-header-line-number-style = blue bold
   hunk-header-decoration-style =
-  hunk-header-style = syntax brightwhite line-number
+  hunk-header-file-style = brightblack
+  ; hunk-header-style = syntax brightwhite bold file line-number
+  ; hunk-header-style = syntax bold file line-number
+  hunk-header-style = syntax line-number
 [pull]
 	ff = only
 [submodule]
