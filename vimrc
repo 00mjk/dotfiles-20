@@ -236,6 +236,20 @@ nnoremap > >>
 nnoremap < <<
 
 " ------------------------- "
+" -- Formatting options --- "
+" ------------------------- "
+
+" Ensure some formatting options, some of which may already be enabled by
+" default, depending on the version of Vim.
+" Wrap text automatically (a), both for text (t) and comments (c).
+" Remove the comment characters when joining lines (j).
+set formatoptions+=atcj
+
+" Use only one space after punctuation:
+" http://en.wikipedia.org/wiki/Sentence_spacing#Typography
+set nojoinspaces
+
+" ------------------------- "
 " --- Buffer management --- "
 " ------------------------- "
 
