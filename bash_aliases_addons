@@ -93,7 +93,7 @@ gdel() {
 # --- ls ---
 # ----------
 
-alias ll='ls -l'
+alias ll='ls -lA'
 alias la='ls -la'
 
 # ---------------
