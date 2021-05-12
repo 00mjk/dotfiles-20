@@ -104,21 +104,24 @@ nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
 " --- Search for visual selection --- "
 " ----------------------------------- "
 
-" <http://vim.wikia.com/wiki/Search_for_visually_selected_text>
-" <http://vim.wikia.com/wiki/VimTip171>
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
+" http://vim.wikia.com/wiki/VimTip171
+" http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+" https://github.com/nelstrom/vim-visual-star-search
+" http://vimcasts.org/episodes/search-for-the-selected-text/
 " Search for selected text, forwards or backwards. It is case insensitive, and
 " any whitespace is matched ('hello\nworld' matches 'hello world')
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
+" makes * and # work on visual mode too.
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
 " ------------------------------------------- "
 " --- Search and replace visual selection --- "
@@ -340,11 +343,11 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 set pastetoggle=<F3>
 
 " --- Paste over visual selection preserving the content of the paste buffer
-vnoremap <Leader>p pgvy`>
 " p   -> paste normally
 " gv  -> reselect the pasted text
 " y   -> copy it again
 " `>  -> jump to the last character of the visual selection (built-in mark)
+vnoremap <Leader>p pgvy`>
 
 " ------------------- "
 " --- Real delete --- "
