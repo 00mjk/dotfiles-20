@@ -46,13 +46,43 @@ export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 
 # Use Brew-installed Ruby if available.
 [[ -d "/usr/local/opt/ruby" ]] && PATH="/usr/local/opt/ruby/bin:$PATH"
 
+# ------------- #
+# --- goenv --- #
+# ------------- #
+
+# git clone https://github.com/syndbg/goenv.git ~/.goenv
+
+# export GOENV_ROOT="$HOME/.goenv"
+# export PATH="$GOENV_ROOT/bin:$PATH"
+# eval "$(goenv init -)"
+# export PATH="$GOROOT/bin:$PATH"
+# export PATH="$PATH:$GOPATH/bin"
+
+# -------------- #
+# --- gobrew --- #
+# -------------- #
+
+# https://github.com/kevincobain2000/gobrew
+#
+# this version of gobrew (written in Golang) is an order of magnitude faster
+# than goenv (which is a shell script), so it has next to no overhead on new
+# terminal sessions
+#
+# the only downside is that it doesn't support the system Go installation
+
+[[ -n "$(command -v gobrew)"  ]] && export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+# export GOPATH="$HOME/.gobrew/current/go"
+# export GOROOT="$HOME/.gobrew/current/go"
+
 # --------------
 # --- Golang ---
 # --------------
 
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="/usr/local/go/bin:$PATH"
+if [[ -z "$(command -v gobrew)" ]]; then
+  export GOPATH="$HOME/go"
+  export PATH="$PATH:$GOPATH/bin"
+  export PATH="/usr/local/go/bin:$PATH"
+fi
 
 # ---------------------
 # --- Output stream ---
@@ -164,34 +194,6 @@ alias _init_rbenv='eval "$(rbenv init -)"'
 #   eval "$(pyenv init -)"
 # fi
 alias _init_pyenv='eval "$(pyenv init -)"'
-
-# ------------- #
-# --- goenv --- #
-# ------------- #
-
-# git clone https://github.com/syndbg/goenv.git ~/.goenv
-
-# export GOENV_ROOT="$HOME/.goenv"
-# export PATH="$GOENV_ROOT/bin:$PATH"
-# eval "$(goenv init -)"
-# export PATH="$GOROOT/bin:$PATH"
-# export PATH="$PATH:$GOPATH/bin"
-
-# -------------- #
-# --- gobrew --- #
-# -------------- #
-
-# https://github.com/kevincobain2000/gobrew
-#
-# this version of gobrew (written in Golang) is an order of magnitude faster
-# than goenv (which is a shell script), so it has zero impact on the opening
-# time of a new terminal
-#
-# the only downside is that it doesn't support the system Go installation
-
-export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-# export GOPATH="$HOME/.gobrew/current/go"
-# export GOROOT="$HOME/.gobrew/current/go"
 
 # -------------- #
 # --- Editor --- #
