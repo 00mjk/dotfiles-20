@@ -17,15 +17,23 @@ stty stop '' -ixoff
 # Prevent CTRL-Q from waking up the output stream
 stty start '' -ixon
 
+# -----------
+# --- SSH ---
+# -----------
+
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+fi
+
 # ------------
 # --- Tmux ---
 # ------------
 
-# ensures the correct TERM value inside tmux, requires to also set 
+# ensures the correct TERM value inside tmux, requires to also set
 # the following in tmux.conf
-# 
+#
 #		# ~/.tmux.conf
-# 	set -g default-terminal "screen-256color" 
+# 	set -g default-terminal "screen-256color"
 #
 if [[ -n "$TMUX" ]]; then
   export TERM=screen-256color
