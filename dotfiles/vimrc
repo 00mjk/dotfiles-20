@@ -47,6 +47,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
+Plug 'ollykel/v-vim'
 
 " --- Markdown
 
@@ -1167,6 +1168,12 @@ vmap <C-_> gc
 
 autocmd FileType proto setlocal commentstring=//\ %s
 autocmd FileType sql setlocal commentstring=--\ %s
+
+" ------------- "
+" --- v-vim --- "
+" ------------- "
+
+let g:v_autofmt_bufwritepre = 1
 
 " -------------- "
 " --- vim-go --- "
