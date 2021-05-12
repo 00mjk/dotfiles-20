@@ -1122,11 +1122,15 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " --- vim-go --- "
 " -------------- "
 
-if executable("gofumports")
-  let g:go_fmt_command = "gofumports"
-else
-  let g:go_fmt_command = "goimports"
-endif
+" if executable("gofumpt")
+"   let g:go_fmt_command = "gofumpt"
+" else
+"   let g:go_fmt_command = "goimports"
+" endif
+
+let g:go_fmt_command = "gofumpt"
+let g:go_imports_mode = "goimports"
+let g:go_imports_autosave = 1
 
 let g:go_list_type = "quickfix"
 let g:go_fmt_fail_silently = 1 " we have other means of showing syntax errors
