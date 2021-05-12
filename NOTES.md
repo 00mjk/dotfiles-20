@@ -21,14 +21,35 @@
        " Remap jj to escape insert mode
        inoremap jj <ESC>
 
-Some useful .vimrc.after customisations
----------------------------------------
+Interesting .vimrc files
+------------------------
 
-    " A.L.E. local customisations
-    " ---------------------------
-    let g:ale_linters = {'go': ['golangci-lint', 'govet']}
+* <https://github.com/nickjj/dotfiles/blob/master/.vimrc>
+* <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
+
+.vimrc.after customisations
+---------------------------
+
+    " let g:ale_linters = {'go': ['golangci-lint', 'govet']}
+    " let g:ale_linters = {'go': ['gopls']}
+    " let g:ale_linters = {'go': ['staticcheck', 'govet']}
+    " let g:ale_linters = {'go': ['staticcheck']}
+    let g:ale_linters = {'go': ['govet']}
     let g:ale_go_golangci_lint_options = '' " only use defaults
     let g:ale_go_govet_options = '-composites=false'
+    let g:go_fmt_options = {
+    \  'gofmt': '-s',
+    \  'goimports': '-local bitbucket.glintpay.com -local glint-backend',
+    \}
+
+    " let g:go_gopls_local = 'glint-backend'
+    " let g:go_gopls_local = 'bitbucket.glintpay.com'
+    let g:go_gopls_local = {
+    \  $HOME.'/go/src/some-project-in-gopath': 'some-project-in-gopath',
+    \  $HOME.'/go/src/another-project-in-gopath': 'another-project-in-gopath',
+    \  $HOME.'/myprojects/project-abc': 'bitbucket.foobar.com',
+    \  $HOME.'/myprojects/project-xyz': 'bitbucket.foobar.com',
+    \}
 
 Other plugins
 -------------
@@ -36,24 +57,19 @@ Other plugins
 TODO: move language specific plugins and configuration to separate vimrc
 files to be loaded conditionally via a vimrc.before and vimrc.after mechanism
 
-TypeScript
-----------
+### TypeScript
 
     " ...syntax
     Plug 'HerringtonDarkholme/yats.vim'
     " ...dev tools (TSServer client)
     Plug 'Quramy/tsuquyomi'
 
-Statusline
-----------
+### Statusline
 
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-Other
------
-
-    Plug 'dyng/ctrlsf.vim'
+### Miscellanea
 
     Plug 'dhruvasagar/vim-table-mode'
 
@@ -70,31 +86,28 @@ Other
     Plug 'mxw/vim-jsx'
     Plug 'mileszs/ack.vim'
 
-Markdown preview
-----------------
+Markdown plugins
+-----------------
+
+### Markdown preview
 
 * <https://github.com/greyblake/vim-preview>
 * <https://github.com/previm/previm/blob/master/README-en.mkd>
 * <https://github.com/suan/vim-instant-markdown>
 
-Markdown syntax
----------------
+### Markdown syntax
 
 * <https://github.com/gabrielelana/vim-markdown>, for GitHub-flavoured markdown
 * <https://github.com/plasticboy/vim-markdown>
 * <https://github.com/rhysd/vim-gfm-syntax>
 
-Plasticboy's Markdown config
-----------------------------
+### Plasticboy's Markdown config
 
 This plugin has much better syntax highlighting, but it messes with
-autoformatting in several ways, it's bad enough to be unusable.
+auto-formatting in several ways, to the point of becoming unusable.
 
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
-
-    " plasticboy/vim-markdown
-    " -----------------------
 
     let g:vim_markdown_folding_disabled = 1
     let g:vim_markdown_no_default_key_mappings = 1
@@ -115,78 +128,72 @@ Alice -> Bob : ok
 @enduml
 ```
 
-<https://github.com/aklt/plantuml-syntax> also adds a make target, so the PNG
-can be generated directly with `:Make` from inside a `.puml` file.
+* <https://github.com/aklt/plantuml-syntax> also adds a make target, so the PNG
+  can be generated directly with `:Make` from inside a `.puml` file.
 
-<https://github.com/weirongxu/plantuml-previewer.vim> would be ideal, but it
-does not seem to generate the images
-<https://github.com/weirongxu/plantuml-previewer.vim/issues/40>.
+* <https://github.com/weirongxu/plantuml-previewer.vim> would be ideal, but it
+  does not seem to generate the images
 
-if it worked, this would be the only one to support real time previews of
-standalone `.puml` files.
+  <https://github.com/weirongxu/plantuml-previewer.vim/issues/40>.
 
-    Plug 'tyru/open-browser.vim'
-    Plug 'weirongxu/plantuml-previewer.vim'
+  if it worked, this would be the only one to support real time previews of
+  standalone `.puml` files.
 
-    " -------------------------- "
-    " --- plantuml-previewer --- "
-    " -------------------------- "
+        Plug 'tyru/open-browser.vim'
+        Plug 'weirongxu/plantuml-previewer.vim'
 
-    " point to the correct plantuml.jar (as per readme)
-    " https://github.com/weirongxu/plantuml-previewer.vim#gplantuml_previewerplantuml_jar_path
-    "
-    " in shell:
-    "
-    "     cat `which plantuml` | grep plantuml.jar | sed -r 's/^.+\s{1}(\S+plantuml.jar).*/\1/'
+        " point to the correct plantuml.jar (as per readme)
+        " https://github.com/weirongxu/plantuml-previewer.vim#gplantuml_previewerplantuml_jar_path
+        "
+        " in shell:
+        "
+        "     cat `which plantuml` | grep plantuml.jar | sed -r 's/^.+\s{1}(\S+plantuml.jar).*/\1/'
 
-    au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = get(
-        \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.*\s[''"]?(\S+plantuml\.jar).*'),
-        \  1,
-        \  0
-        \)
+        au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = get(
+            \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.*\s[''"]?(\S+plantuml\.jar).*'),
+            \  1,
+            \  0
+            \)
 
-    " the preview server and the images default to the directory of the plugin
-    " itself, but can be customised
-    " let g:plantuml_previewer#viewer_path = $HOME . "/.plantuml-previews"
+        " the preview server and the images default to the directory of the plugin
+        " itself, but can be customised
+        " let g:plantuml_previewer#viewer_path = $HOME . "/.plantuml-previews"
 
-<https://github.com/iamcco/markdown-preview.nvim> works well, but only for
-PlantUML embedded in markdown files, inside fenced blocks marked as `plantuml`.
+* <https://github.com/iamcco/markdown-preview.nvim> works well, but only for
+  PlantUML embedded in markdown files, inside fenced blocks marked as
+  `plantuml`.
 
-<https://github.com/previm/previm> Previm is an alternative to
-`markdown-preview.nvim`, works similarly, based on Node.js, but it doesn't
-provide instant rendering nor automatic scrolling. It supports PlantUML and
-other graphical formats.
+* <https://github.com/previm/previm> Previm is an alternative to
+  `markdown-preview.nvim`, works similarly, based on Node.js, but it doesn't
+  provide instant rendering nor automatic scrolling. It supports PlantUML and
+  other graphical formats.
 
-<https://github.com/scrooloose/vim-slumlord> is from the same author of
-NERDTree, and it adds an ASCII art render of the current `.puml` file. The
-readme says that it works well for sequence diagrams, less for other types (and
-in fact PlantUML seems to throw exceptions for some state machine diagrams).
+* <https://github.com/scrooloose/vim-slumlord> is from the same author of
+  NERDTree, and it adds an ASCII art render of the current `.puml` file. The
+  readme says that it works well for sequence diagrams, less for other types
+  (and in fact PlantUML seems to throw exceptions for some state machine
+  diagrams).
 
-<https://github.com/skanehira/preview-uml.vim> use the official PlantUML server,
-preferably running in Docker, again to render in ASCII art format. Presumably
-having the same issues as with `vim-slumlord`.
+* <https://github.com/skanehira/preview-uml.vim> uses the official PlantUML
+  server, preferably running in Docker, again to render in ASCII art format.
+  Presumably having the same issues as with `vim-slumlord`.
+
+NERDTree alternatives
+---------------------
+
+* <http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/>
+* <https://github.com/tpope/vim-vinegar>
+* <https://github.com/lambdalisue/fern.vim>
 
 Alternate JSON formatting, doesn't respect order
 ------------------------------------------------
 
     autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
 
-Airline
--------
-
-Sections
-
-    section A => %#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}
-    section B => seems to be empty
-    section C => %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#%#__accent_bold#%#__restore__#
-    section X => %{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#wrap(airline#parts#filetype(),0)}
-    section Y => %{airline#util#wrap(airline#parts#ffenc(),0)}
-    section Z => %p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v
-
 Hide the '[No Name]' buffer
 ---------------------------
 
-    let g:airline#extensions#tabline#excludes = []
+  let g:airline#extensions#tabline#excludes = []
 
 Other colorschemes
 ------------------
@@ -214,35 +221,34 @@ Our main requirements for search are:
 
 Alternative solutions are
 
-* Ack <https://github.com/mileszs/ack.vim> in conjunction with Dispatch
-  <https://github.com/tpope/vim-dispatch>, which however requires tmux.
-  Ack sadly has no plans to support async operation natively.
+* **Ack** <https://github.com/mileszs/ack.vim> in conjunction with Dispatch
+  <https://github.com/tpope/vim-dispatch>, which however requires tmux. Ack
+  sadly has no plans to support async operation natively.
 
-* CtrlSF <https://github.com/dyng/ctrlsf.vim> the most popular.
-  It works very well and it can be configured to work and appear just like
-  Ack, but although it does populate the quickfix list with the results, it
-  shows the results in a custom type of buffer.
-  This could be an advantage because it would leave the quickfix window free
-  for otherpurposes, but for now maintaining full feature parity with the
-  existing Ack setup was a priority.
+* **CtrlSF** <https://github.com/dyng/ctrlsf.vim> the most popular. It works
+  very well and it can be configured to work and appear just like Ack, but
+  although it does populate the quickfix list with the results, it shows the
+  results in a custom type of buffer. This could be an advantage because it
+  would leave the quickfix window free for otherpurposes, but for now
+  maintaining full feature parity with the existing Ack setup was a priority.
 
-* vim-esearch <https://github.com/eugen0329/vim-esearch> is very powerful but
-  overfeatured (the popup overlay in particular)
+* **vim-esearch** <https://github.com/eugen0329/vim-esearch> is very powerful
+  but overfeatured (the popup overlay in particular)
 
-* agrep <https://github.com/ramele/agrep> similar to CtrlSF, doesn't seem to
-  offer any advantage over it.
+* **agrep** <https://github.com/ramele/agrep> similar to CtrlSF, doesn't seem
+  to offer any advantage over it.
 
-* FlyGrep <https://github.com/wsdjeg/FlyGrep.vim> it's a part of the SpaceVim
-  distro also available as a stand-alone plugin.
+* **FlyGrep** <https://github.com/wsdjeg/FlyGrep.vim> it's a part of the
+  SpaceVim distro also available as a stand-alone plugin.
 
-* fzf.vim <https://github.com/junegunn/fzf.vim> although it's capable of
-  populating the quickfix by pressing a sequence of shortcuts, it's a
-  completely different concept, it doesn't load the results in a buffer, it
+* **fzf.vim** <https://github.com/junegunn/fzf.vim> although it's capable of
+  populating the quickfix by pressing a sequence of shortcuts, it's
+  a completely different concept, it doesn't load the results in a buffer, it
   shows them in real time in a terminal window. Text search is a different use
   case than file search, we want to keep the results visible until we close
   them explicitly, and we want to populate the quickfix automatically.
 
-* Ferret <https://github.com/wincent/ferret> looks very nice but again
+* **Ferret** <https://github.com/wincent/ferret> looks very nice but again
   overfeatured
 
 Get info about the window of the current buffer
@@ -250,30 +256,33 @@ Get info about the window of the current buffer
 
 * BAD
 
-        function! GetCurrentWininfo()
-          let l:qf_win_nr = winnr()
-          let l:qf_win_info = {}
+    function! GetCurrentWininfo()
+      let l:qf_win_nr = winnr()
+      let l:qf_win_info = {}
 
-          for win_info in getwininfo()
-            if win_info.winnr == l:qf_win_nr
-              let l:qf_win_info = win_info
-              break
-            endif
-          endfor
+      for win_info in getwininfo()
+        if win_info.winnr == l:qf_win_nr
+          let l:qf_win_info = win_info
+          break
+        endif
+      endfor
 
-          return l:qf_win_info
-        endfunction
+      return l:qf_win_info
+    endfunction
 
 * GOOD
 
-        getwininfo(win_getid())[0].loclist != 1
+    getwininfo(win_getid())[0].loclist != 1
 
 Support for other Vim plugins
 -----------------------------
 
-    " ----------------- "
-    " --- Syntastic --- "
-    " ----------------- "
+### rainbow-pairs
+
+    let g:rainbow#max_level = 16
+    let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
+
+### Syntastic
 
     let g:syntastic_javascript_checkers=['eslint']
     " let g:syntastic_go_checkers=['go']
@@ -283,9 +292,7 @@ Support for other Vim plugins
     let g:syntastic_always_populate_loc_list=1
     let g:syntastic_auto_loc_list = 1
 
-    " -------------- "
-    " --- CtrlSF --- "
-    " -------------- "
+### CtrlSF
 
     " no need to specify the search tool (a.k.a. backend), there are sensible
     " defaults, preferring rg and then ag if available, see ':help g:ctrlsf_backend'
@@ -302,8 +309,8 @@ Support for other Vim plugins
     let g:ctrlsf_winsize = '100'
 
     let g:ctrlsf_extra_backend_args = {
-        \ 'rg': s:rgdefaults,
-        \ }
+    \  'rg': s:rgdefaults,
+    \}
 
     " CtrlSF seems to force the handling of ignores internally, so `--glob='!...'`
     " patterns will be ignored. The only way to set up ignores is to add them to
@@ -311,9 +318,7 @@ Support for other Vim plugins
     let g:ctrlsf_ignore_dir = ['.git']
     let g:ctrlsf_auto_close = {'normal' : 0, 'compact': 0}
 
-    " ----------- "
-    " --- Ack --- "
-    " ----------- "
+### Ack
 
     if executable('rg')
       let g:ackprg = s:rg_base_grepprg
@@ -335,17 +340,58 @@ Support for other Vim plugins
       let g:ack_use_dispatch = 1
     endif
 
-    " -------------------- "
-    " --- vim-dispatch --- "
-    " -------------------- "
+### vim-dispatch
 
     " don't create shortcuts, as this is only installed to support Ack's
     " asynchronous behaviour
     let g:dispatch_no_maps = 1
 
-    " ------------------- "
-    " --- vim-airline --- "
-    " ------------------- "
+### tpope/vim-markdown
+
+    " Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
+    " highligting is basic in terms of styles, and does not support several valid
+    " markdown features
+    "
+    " to activate it:
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+    " treat .txt files as markdown
+    autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
+
+    its options are the following:
+
+    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+    let g:markdown_fenced_languages = [
+    \  'go',
+    \  'ruby',
+    \  'bash=sh',
+    \  'zsh',
+    \  'plantuml',
+    \  'python',
+    \  'json',
+    \  'yaml',
+    \  'vim',
+    \]
+    let g:markdown_syntax_conceal = 0
+    let g:markdown_minlines = 100
+
+### vim-go
+
+    " gofumports is not actually a drop-in replacement for goimports, sometimes it
+    " won't be able to add local packages automatically
+    let g:go_fmt_command = 'gofumports'
+    let g:go_imports_mode = 'goimports'
+    " let g:go_diagnostics_enabled = 1 " we can A.L.E. for this
+    let g:go_gopls_staticcheck = v:true
+    let $GINKGO_EDITOR_INTEGRATION = 'true'
+
+    let g:go_addtags_transform = 'camelcase'
+    let g:go_addtags_transform = 'snake_case'
+
+    " highlight current identifier
+    let g:go_auto_sameids = 1
+
+### Airline
 
     " Airline is included despite of how heavily it clutters the UI, for a few
     " reasons...
@@ -419,6 +465,82 @@ Support for other Vim plugins
       \ [ 'a', 'c' ],
       \ [ 'x', 'z', 'error', 'warning', 'statistics' ]
     \ ]
+
+Default section definitions
+
+    section_A = %#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}
+    section_B = 'seems to be empty'
+    section_C = %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#%#__accent_bold#%#__restore__#
+    section_X = %{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#wrap(airline#parts#filetype(),0)}
+    section_Y = %{airline#util#wrap(airline#parts#ffenc(),0)}
+    section_Z = %p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v
+
+Golang/Neovim setup for LSP
+---------------------------
+
+    if !has('nvim')
+      Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+    endif
+
+    if has('nvim')
+      " requires Neovim 0.5+
+      Plug 'neovim/nvim-lspconfig'
+    endif
+
+    if !has('nvim')
+      Plug 'dense-analysis/ale'
+    endif
+
+    if has('nvim')
+    lua <<EOF
+      nvim_lsp = require "nvim_lsp"
+      nvim_lsp.gopls.setup {
+        cmd = {"gopls", "serve"},
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      }
+
+      function goimports(timeoutms)
+        local context = { source = { organizeImports = true } }
+        vim.validate { context = { context, "t", true } }
+
+        local params = vim.lsp.util.make_range_params()
+        params.context = context
+
+        local method = "textDocument/codeAction"
+        local resp = vim.lsp.buf_request_sync(0, method, params, timeoutms)
+        if resp and resp[1] then
+          local result = resp[1].result
+          if result and result[1] then
+            local edit = result[1].edit
+            vim.lsp.util.apply_workspace_edit(edit)
+          end
+        end
+
+        vim.lsp.buf.formatting()
+      end
+    EOF
+
+    "  local nvim_lsp = require 'nvim_lsp'
+    "  nvim_lsp.gopls.setup{
+    "    cmd = {"gopls"};
+    "    filetypes = {"go"};
+    "    root_dir = nvim_lsp.util.root_pattern('go.mod', '.git');
+    "    log_level = vim.lsp.protocol.MessageType.Log;
+    "    settings = {}
+    "  }
+
+    autocmd BufWritePre *.go lua goimports(1000)
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+
+    autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    endif
 
 Brew packages to be reviewed
 ----------------------------
