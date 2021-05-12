@@ -755,6 +755,10 @@ autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhi
 " appropriate (like vim-go).
 set omnifunc=syntaxcomplete#Complete
 
+" instruct supertab to try and detect the most appropriate autocompletion
+" method, thus minimising the need for pressing the `<C-x><C-o>` combination
+let g:SuperTabDefaultCompletionType = "context"
+
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -1025,13 +1029,6 @@ nmap <silent> <M-k>     :call TmuxWinCmd('k')<CR>
 nmap <silent> <M-j>     :call TmuxWinCmd('j')<CR>
 nmap <silent> <M-h>     :call TmuxWinCmd('h')<CR>
 nmap <silent> <M-l>     :call TmuxWinCmd('l')<CR>
-
-" ---------------- "
-" --- supertab --- "
-" ---------------- "
-
-" try to guess if '<C-x><C-o>' should be used
-let g:SuperTabDefaultCompletionType = "context"
 
 " ------------------- "
 " --- vim-grepper --- "
