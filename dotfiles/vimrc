@@ -146,7 +146,7 @@ set swapfile
 set undofile
 set backup
 
-set timeoutlen=300 " reduce the command timeout (default 1000)
+set timeoutlen=350 " reduce the command timeout (default 1000)
 
 set completeopt-=preview " do not open Preview split with docs for completion entries
 
