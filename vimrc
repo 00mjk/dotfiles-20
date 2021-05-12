@@ -752,6 +752,7 @@ autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
       \ after
       \ before
       \ class_double
+      \ contain_exactly
       \ context
       \ describe
       \ described_class
