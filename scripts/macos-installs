@@ -196,7 +196,6 @@ brew install --casks --quiet \
   stats \
   visual-studio-code \
   vlc \
-  whatsapp \
   zoom
 
 # ------------------------------ #
@@ -250,7 +249,7 @@ echo "
 * Many packages installed depend on the shell configuration provided.
   Run './scripts/dotfiles' to install it.
 
-* Other common GNU utilities are
+* More GNU utilities to consider:
 
   - autoconf
   - binutils
@@ -262,6 +261,9 @@ echo "
   - m4
   - screen
   - util-linux
+
+* More packages:
+  - lolcat (requires Ruby)
 
 * Other casks:
 
@@ -275,13 +277,13 @@ echo "
   - homebrew/cask-drivers/logitech-camera-settings
   - onedrive
   - signal
-  - slack
   - telegram
   - thunderbird
   - tunnelbear
   - vagrant
   - virtualbox
   - virtualbox-extension-pack
+  - whatsapp
 
 * Open Spotlight preferences to disable 'Developer' results (source code files)
 
