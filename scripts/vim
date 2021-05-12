@@ -7,6 +7,11 @@ if [[ -z $(command -v git) ]]; then
   exit 1
 fi
 
+if [[ -z $(command -v curl) ]]; then
+  echo "Please install curl first"
+  exit 1
+fi
+
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
