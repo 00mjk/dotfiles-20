@@ -481,6 +481,17 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g ""' . s:agignore
 endif
 
+let g:ctrlp_abbrev = {
+  \ 'gmode': 'i',
+  \ 'abbrevs': [
+    \ {
+      \ 'pattern': ' ',
+      \ 'expanded': '',
+      \ 'mode': 'pfrz',
+    \ },
+    \ ]
+  \ }
+
 " use ctrlp in a single shortcut to navigate buffers
 noremap <Leader>b :CtrlPBuffer<CR>
 
