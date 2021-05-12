@@ -179,6 +179,16 @@ fi
 # TODO: Link Chrome Dictionary to Dropbox
 # $HOME/Library/Application\ Support/Google/Chrome/Default/Custom\ Dictionary.txt
 
+# ------------------------------- #
+# --- Other non-brew installs --- #
+# ------------------------------- #
+
+pushd ~
+go get -u mvdan.cc/gofumpt
+go get -u mvdan.cc/gofumpt/gofumports
+go get -u honnef.co/go/tools/cmd/staticcheck
+popd
+
 # ------------------ #
 # --- Next steps --- #
 # ------------------ #
