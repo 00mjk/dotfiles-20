@@ -1519,7 +1519,7 @@ function! BE_ActiveStatusline()
   let l:mode_colour = g:be_modes[mode()]['highlight']
 
   let l:stl  = '%#'.l:mode_colour.'#'
-  let l:stl .= ' '.l:mode_name.'%{&paste ? "\ (PASTE)" : ""} '
+  let l:stl .= ' '.l:mode_name.'%{&paste ? "\ [PASTE]" : ""}%{&spell ? "\ [SPELL]" : ""} '
   let l:stl .= '%#'.l:mode_colour.'Centre#'
   " flags => m: modified, r: readonly, h: help, p: preview, y: filetype
   let l:stl .=  ' %<%f %m%r %='
@@ -1538,10 +1538,10 @@ augroup BE_StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
-    " quickfix and help also need to have its own autocmd because WinEnter and
-    " BufWinEnter are not triggered consistently on first opening it
+    " quickfix and help also need to have their own autocmd because WinEnter
+    " and BufWinEnter are not triggered consistently on first opening it
     autocmd FileType              help      setlocal statusline=%!BE_HelpStatusline()
-    autocmd  FileType             qf        call BE_ListsStatuslineInitial()
+    autocmd FileType              qf        call BE_ListsStatuslineInitial()
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END
