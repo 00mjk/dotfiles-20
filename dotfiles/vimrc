@@ -185,7 +185,7 @@ set splitbelow
 set shortmess-=S                  " show match count in searches
 
 if exists('+colorcolumn')
-  set colorcolumn=81,101 " display vertical rulers for line length
+  set colorcolumn=80,100 " display vertical rulers for line length
   autocmd FileType qf set colorcolumn=
 endif
 
