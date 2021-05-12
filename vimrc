@@ -564,15 +564,26 @@ function! InsertPaste() range
   augroup END
 endfunction
 
+function! InsertPasteNewLine() range
+  set paste
+  call append(line("."), "")
+  exec line(".")+1
+	startinsert
+  augroup PasteHelper
+    autocmd InsertLeave * call LeavePaste()
+  augroup END
+endfunction
+
 " Cleanup by turning off paste mode and unbinding itself from InsertLeave
 function! LeavePaste() range
-  set paste!
+  set nopaste
   augroup PasteHelper
     autocmd!
   augroup END
 endfunction
 
 nnoremap <Leader>i :call InsertPaste()<CR>
+nnoremap <Leader>o :call InsertPasteNewLine()<CR>
 
 " ------------------- "
 " --- Real delete --- "
