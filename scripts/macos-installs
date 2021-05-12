@@ -175,7 +175,6 @@ brew install --casks --quiet \
   google-chrome \
   iterm2 \
   libreoffice \
-  logitech-camera-settings \
   menubar-stats \
   microsoft-teams \
   middle \
