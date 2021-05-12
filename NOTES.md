@@ -91,6 +91,59 @@ autoformatting in several ways, it's bad enough to be unusable.
     " we cannot disable auto-bullets because it breaks formatlistpat
     " let g:vim_markdown_auto_insert_bullets = 0
 
+PlantUML
+
+<https://github.com/aklt/plantuml-syntax> also adds a make target, so the PNG
+can be generated directly with `:Make` from inside a `.puml` file.
+
+<https://github.com/weirongxu/plantuml-previewer.vim> would be ideal, but it
+does not seem to generate the images
+<https://github.com/weirongxu/plantuml-previewer.vim/issues/40>.
+
+if it worked, this would be the only one to support real time previews of
+standalone `.puml` files.
+
+    Plug 'tyru/open-browser.vim'
+    Plug 'weirongxu/plantuml-previewer.vim'
+
+    " -------------------------- "
+    " --- plantuml-previewer --- "
+    " -------------------------- "
+
+    " point to the correct plantuml.jar (as per readme)
+    " https://github.com/weirongxu/plantuml-previewer.vim#gplantuml_previewerplantuml_jar_path
+    "
+    " in shell:
+    "
+    "     cat `which plantuml` | grep plantuml.jar | sed -r 's/^.+\s{1}(\S+plantuml.jar).*/\1/'
+
+    au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = get(
+        \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.*\s[''"]?(\S+plantuml\.jar).*'),
+        \  1,
+        \  0
+        \)
+
+    " the preview server and the images default to the directory of the plugin
+    " itself, but can be customised
+    " let g:plantuml_previewer#viewer_path = $HOME . "/.plantuml-previews"
+
+<https://github.com/iamcco/markdown-preview.nvim> works well, but only for
+PlantUML embedded in markdown files, inside fenced blocks marked as `plantuml`.
+
+<https://github.com/previm/previm> Previm is an alternative to
+`markdown-preview.nvim`, works similarly, based on Node.js, but it doesn't
+provide instant rendering nor automatic scrolling. It supports PlantUML and
+other graphical formats.
+
+<https://github.com/scrooloose/vim-slumlord> is from the same author of
+NERDTree, and it adds an ASCII art render of the current `.puml` file. The
+readme says that it works well for sequence diagrams, less for other types (and
+in fact PlantUML seems to throw exceptions for some state machine diagrams).
+
+<https://github.com/skanehira/preview-uml.vim> use the official PlantUML server,
+preferably running in Docker, again to render in ASCII art format. Presumably
+having the same issues as with `vim-slumlord`.
+
 ### Alternate JSON formatting, doesn't respect order
 
     autocmd FileType json command! -nargs=0 Format execute ':%! python -c "import sys, json; print json.dumps(json.load(sys.stdin), indent=2)"'
