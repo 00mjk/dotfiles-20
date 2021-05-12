@@ -1,4 +1,5 @@
 # vim: set ft=gitconfig:
+
 [core]
   editor = 'vim'
 [pull]
