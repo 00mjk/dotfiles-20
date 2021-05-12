@@ -130,3 +130,7 @@ autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 set pastetoggle=<F3>
+
+set wildignore+=*.swp,*/tmp/
+set noswapfile
+set noundofile
