@@ -161,7 +161,7 @@ export FZF_DEFAULT_OPTS="
 --preview-window=:hidden
 --preview='[ -f {} ] && head -n 200 {}'
 "
-[ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always --exclude .git"
+[ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always --exclude .git --no-ignore-vcs"
 [ -n "${FZF_DEFAULT_COMMAND}" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # --------------- #
