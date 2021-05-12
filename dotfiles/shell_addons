@@ -273,8 +273,10 @@ alias tree='command tree --dirsfirst -F'
 
 # --- yq --- #
 
-# takes JSON from stdin and converts it to colorised YAML
-alias yin='yq r -PC -'
+# takes JSON from stdin and converts it to YAML
+alias jy='yq eval -prettyPrint -'
+# takes YAML from stdin and converts it to JSON
+alias yj='yq eval --tojson -'
 
 # --- bundler --- #
 
