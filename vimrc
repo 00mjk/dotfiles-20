@@ -626,6 +626,13 @@ let g:syntastic_javascript_checkers=['eslint']
 
 let g:vim_json_syntax_conceal = 0
 
+" -------------- "
+" --- tagbar --- "
+" -------------- "
+
+" Do not sort the tags alphabetically when opening the tagbar
+let g:tagbar_sort = 0
+
 " ------------------------------------- "
 " --- Load additional configuration --- "
 " ------------------------------------- "
