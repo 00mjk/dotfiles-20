@@ -1241,10 +1241,6 @@ augroup CloseLoclistWindowGroup
 augroup END
 " it will close anyway once all the issue have been addressed
 
-let g:ale_linters = {'go': ['golangci-lint', 'govet']}
-let g:ale_go_golangci_lint_options = '' " only use defaults
-let g:ale_go_govet_options = '-composites=false'
-
 " ---------------- "
 " --- vim-json --- "
 " ---------------- "
