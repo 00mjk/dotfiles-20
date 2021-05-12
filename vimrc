@@ -33,6 +33,7 @@ Plug 'posva/vim-vue'
 Plug 'majutsushi/tagbar'
 Plug 'udalov/kotlin-vim'
 Plug 'godlygeek/tabular'
+Plug 'kchmck/vim-coffee-script'
 
 Plug 'altercation/vim-colors-solarized'
 
