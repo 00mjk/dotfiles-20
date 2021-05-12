@@ -42,6 +42,12 @@
   unstage = reset HEAD --
 	root = rev-parse --show-toplevel
 
+  # Attempt to determine the original author, by ignoring trivial changes
+  # -w  white space
+  # -M  text moved within the file
+  # -C  text moved across files
+  hardblame = blame -wMCCC
+
   # ignored-update = "!git rm --cached -r . ; git add . "
   # remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
 [commit]
