@@ -6,42 +6,56 @@
   ui = true
 
 [alias]
-  a = add
-  br = branch
-  c = commit
-  ci = commit
-  co = checkout
-  d = diff
-  ds = diff --staged
-  f = fetch
-  ft = fetch
   l = log
-  p = pull
-  pt = push origin HEAD -u
-  ps = push
-  s = status -sb
-  sd = diff --staged
-  st = status
-  sb = status -sb
- 
-  unstage = reset HEAD --
-  undo = reset --soft HEAD^
-  ignored-update = "!git rm --cached -r . ; git add . "
-  ds = diff --staged
-  s = status
-  co = checkout
   hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(reset)%s - %an%C(bold yellow)%d%C(reset)' --all
   graph = log --all --decorate --oneline --graph
   slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
-  stash-all = stash save --include-untracked
-  remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
-  # When "forcing with lease", it's essential that the working tree is up to
-  # date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/ 
-  force = push --force-with-lease
-  amend = commit --amend --no-edit
-  cb = rev-parse --abbrev-ref HEAD
-
+  # requires GNU version of sort
   new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
+
+  a = add
+
+  br = branch
+
+  c = commit
+  ci = commit
+  amend = commit --amend --no-edit
+
+  co = checkout
+
+  d = diff
+  ds = diff --staged
+  ds = diff --staged
+
+  f = fetch
+  ft = fetch
+
+  p = pull
+
+  pt = push origin HEAD -u
+  ps = push
+  # When "forcing with lease", it's essential that the working tree is up to
+  # date with the remote, see:
+  # https://developer.atlassian.com/blog/2015/04/force-with-lease/ cb stands
+  # for "current branch"
+  force = push --force-with-lease
+
+  sd = diff --staged
+
+  s = status
+  st = status
+  sb = status -sb
+
+  stash-all = stash save --include-untracked
+
+  unstage = reset HEAD --
+  undo = reset --soft HEAD^
+
+  cb = rev-parse --abbrev-ref HEAD
+  root = rev-parse --show-toplevel
+
+  # ignored-update = "!git rm --cached -r . ; git add . "
+  # remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
 
 [color]
   ui = true
