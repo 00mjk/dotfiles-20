@@ -30,4 +30,4 @@ else
   echo "Golang is not installed, skipping vim-go binaries"
 fi
 
-mkdir -p ~/.vim/{backup,swp,undo}
+mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
