@@ -88,6 +88,10 @@ mkdir -p "${HOME}/.local/bin"
 
 backup_and_symlink "${DOTFILES_DIR}/bat_config" "${HOME}/.config/bat/config"
 
+# --- delta themes --- #
+
+"${CURRDIR}/delta-themes"
+
 # -------------- #
 # --- shells --- #
 # -------------- #

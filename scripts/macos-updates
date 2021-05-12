@@ -8,6 +8,9 @@ CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 echo "[setup] Update natively installed Golang packages"
 ~/workspace/dotfiles/scripts/golang-packages
 
+echo "[setup] Update delta themes"
+"${CURRDIR}/delta-themes"
+
 echo "[setup] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
