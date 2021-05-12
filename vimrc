@@ -138,24 +138,33 @@ set smartcase   " ...unless one upper case letter is present in the word
 set gdefault    " replace all the occurences in the line by default
 set incsearch   " start searching without pressing enter
 set hlsearch    " highlight results
-hi Search term=reverse cterm=reverse ctermbg=8 ctermfg=3
+" normalise the search highlight colours
+" This black text/bright yellow background works really well with Tango Light
+" and most other terminal themes, but might require tweaking in the
+" ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
+" Pastel...)
+" See the README for more options.
+hi Search term=reverse cterm=reverse ctermfg=11 ctermbg=0
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
+
+" highlight current word without jumping to the next occurrence
+map <Leader>h :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<C-M>
 
 " ----------------------------------- "
 " --- Search for visual selection --- "
 " ----------------------------------- "
 
-" http://vim.wikia.com/wiki/Search_for_visually_selected_text
-" http://vim.wikia.com/wiki/VimTip171
-" http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
-" https://github.com/nelstrom/vim-visual-star-search
-" http://vimcasts.org/episodes/search-for-the-selected-text/
 " Search for selected text, forwards or backwards. It is case insensitive, and
 " any whitespace is matched ('hello\nworld' matches 'hello world')
-
 " makes * and # work on visual mode too.
+"
+" - http://vim.wikia.com/wiki/Search_for_visually_selected_text
+" - http://vim.wikia.com/wiki/VimTip171
+" - http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+" - https://github.com/nelstrom/vim-visual-star-search
+" - http://vimcasts.org/episodes/search-for-the-selected-text/
 function! s:VSetSearch(cmdtype)
   let temp = @s
   norm! gv"sy
@@ -166,6 +175,14 @@ endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
+" ------------------------------------------- "
+" --- Search and replace visual selection --- "
+" ------------------------------------------- "
+
+" Start the find and replace command across the entire file
+" vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
+vnoremap <C-r> <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
+
 " ------------------------------ "
 " --- Visual selection utils --- "
 " ------------------------------ "
@@ -174,6 +191,10 @@ xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 " * https://github.com/bryankennedy/vimrc/blob/master/vimrc
 " * http://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
 " * http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
+
+function! GetVimEscapedVisual() range
+  return VimEscape(GetVisual())
+endfunction
 
 " Escape special characters in a string for exact matching.
 " This is useful to copying strings from the file to the search tool
@@ -205,10 +226,6 @@ function! GetVisual() range
   return selection
 endfunction
 
-function! GetVimEscapedVisual() range
-  return VimEscape(GetVisual())
-endfunction
-
 function! ShellEscape(str)
   let str=a:str
   return shellescape(fnameescape(str))
@@ -218,16 +235,21 @@ function! GetShellEscapedVisual() range
   return ShellEscape(GetVisual())
 endfunction
 
-" ------------------------------------------- "
-" --- Search and replace visual selection --- "
-" ------------------------------------------- "
+" --------------------------------- "
+" --- Reselect last edited text --- "
+" --------------------------------- "
 
-" Start the find and replace command across the entire file
-vnoremap <Leader>r <Esc>:%s/<c-r>=GetVimEscapedVisual()<cr>//c<Left><Left>
+" gp selects the just changed or pasted text
+" <http://vim.wikia.com/wiki/Selecting_your_pasted_text>
+" (it uses `gp` in the wiki, but conflicts with standard gp, which is paste
+" going to the end of the pasted text)
+nnoremap <expr> <Leader>v '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " --------------------- "
 " --- Mouse support --- "
 " --------------------- "
+
+" see also <http://usevim.com/2012/05/16/mouse/>
 
 if !has('nvim')
   set mouse=a " enable mouse mode
@@ -684,9 +706,9 @@ let s:rgignore =
       \' --glob="!*.so"'.
       \' --glob="!tags"'
 
-" ----------- "
-" --- Ack --- "
-" ----------- "
+" ----------------------- "
+" --- Search with Ack --- "
+" ----------------------- "
 
 if executable('rg')
   let g:ackprg = 'rg --hidden --no-heading --line-number --follow --smart-case --no-ignore-vcs' . s:rgignore
@@ -699,7 +721,7 @@ nnoremap <Leader>a :Ack!<Space>
 " highlight the searched term
 let g:ackhighlight = 1
 
-" Search for visual selection
+" Search for visual selection (rudimental, only works in basic scenarios)
 vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
 
 " ---------------- "
