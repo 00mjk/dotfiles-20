@@ -1261,7 +1261,28 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{', '}']]
 " -------------- "
 
 nnoremap <Leader>tt :TagbarToggle<CR>
+
 let g:tagbar_sort = 0 " list tags in order of appearance in the file
+
+" Add support for markdown files in tagbar with
+" <https://github.com/jszakmeister/markdown2ctags>
+let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
+if filereadable(glob(g:markdown2ctags_path))
+  let g:tagbar_type_markdown = {
+      \ 'ctagstype': 'markdown',
+      \ 'ctagsbin' : g:markdown2ctags_path,
+      \ 'ctagsargs' : '-f - --sort=yes --sro=»',
+      \ 'kinds' : [
+          \ 's:sections',
+          \ 'i:images'
+      \ ],
+      \ 'sro' : '»',
+      \ 'kind2scope' : {
+          \ 's' : 'section',
+      \ },
+      \ 'sort': 0,
+  \ }
+endif
 
 " ------------------------- "
 " --- Diff highlighting --- "

@@ -33,3 +33,9 @@ fi
 mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
 
 backup_and_symlink $ROOTDIR/dotfiles/init.vim $HOME/.config/nvim/init.vim
+
+# Add markdown support to TagBar
+mkd2ctags_path="${HOME}/.vim/tools/markdown2ctags"
+curl -fLo "${mkd2ctags_path}" --create-dirs \
+  https://raw.githubusercontent.com/jszakmeister/markdown2ctags/master/markdown2ctags.py
+chmod -v u+x "${mkd2ctags_path}"
