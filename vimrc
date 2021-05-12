@@ -930,12 +930,14 @@ let s:rgignore =
       \' --glob="!*.so"'.
       \' --glob="!tags"'
 
+let s:rg_base_grepprg = 'rg --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
+
 " ----------------------- "
 " --- Search with Ack --- "
 " ----------------------- "
 
 if executable('rg')
-  let g:ackprg = 'rg --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
+  let g:ackprg = s:rg_base_grepprg
 elseif executable('ag')
   let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
 endif
@@ -994,27 +996,22 @@ if exists(":Grepper")
   let g:grepper.open = 0
   autocmd User Grepper copen
 
-  " let g:grepper.prompt = 0 " execute the query directly without prompting
-  " let g:grepper.switch = 0 " experimental: do not focus the result list
   let g:grepper.prompt_text = '$t > ' " don't show the underlying search command, only the tool
   let g:grepper.highlight = 1 " highlight matches
-  let g:grepper.stop = 1000 " limit the number of results to 1000 instead of the default 5000
+  let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
 
-  let s:rg_base_grepprg = 'rg --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs' . s:rgignore
-
-  " also add `--` at the end, so that search patters starting with `-` can be
-  " used without escaping
-  let g:grepper.rg.grepprg = s:rg_base_grepprg . ' -- '
+  let g:grepper.rg.grepprg = s:rg_base_grepprg
 
   " this will open the Grepper prompt, where the search pattern can be entered
   " (or by pressing Enter using the current word if no pattern is given)
   nnoremap <Leader>s :Grepper<CR>
-  " the operator for some tools such as rg and ag adds the double dash `--` to
-  " separate arguments, so it needs to be redefined
-  " <https://github.com/mhinz/vim-grepper/issues/139>
-  " $* will be replaced by `-- <the-search-pattern>`
-  let g:grepper.operator.rg.grepprgbuf = s:rg_base_grepprg . ' $*'
-  " enable the operator in normal mode or will take a range or motion; see
+
+  " search the word under the cursor directly
+  nnoremap <Leader>8 :Grepper -open -cword -noprompt -switch<CR>
+  nnoremap <Leader>* :Grepper -open -cword -noprompt -switch<CR>
+
+  " --- operator --- "
+  " enable the operator in normal mode, it will take a range or motion; see
   " :help grepper-operator
   nmap gs <plug>(GrepperOperator)
   " search the visual selection by mapping the operator (which can take ranges
