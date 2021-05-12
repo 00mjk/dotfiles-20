@@ -1288,6 +1288,7 @@ let g:ale_linters['javascript'] = ['eslint']
 " let g:ale_fix_on_save = 1
 let g:ale_fixers = {}
 let g:ale_fixers['python'] = ['yapf']
+let g:ale_fixers['rust'] = ['rustfmt']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
 let g:ale_go_govet_options = '-composites=false'
