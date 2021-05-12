@@ -1,16 +1,10 @@
 # vim: set ft=sh:
 
-# ------------
-# --- bash ---
-# ------------
+# -------------
+# --- shell ---
+# -------------
 
 alias cls="clear && printf '\e[3J'"
-
-# -----------
-# --- ssh ---
-# -----------
-
-# alias sshagentfw='declare -x SSH_AUTH_SOCK="$(find /tmp -type s -path '*ssh*' 2>/dev/null | head -n1)"'
 
 # -----------
 # --- git ---
@@ -38,56 +32,6 @@ alias gs='git status -sb'
 alias gst='git status -sb'
 alias gsm='git submodule update --init --recursive'
 alias gsd='git diff --staged'
-
-# Clean up all the branches that have been merged into master,
-# both locally and remotely.
-#
-# Note: if a branch has been rebased either locally or remotely, it won't be
-#       removed, and it will have to be delete manually and forcibly.
-gdel() {
-  # Make sure that master is clean.
-  git checkout master
-  git pull origin master
-
-  # --prune: After fetching, remove any remote-tracking references that no longer exist on the remote.
-  git fetch --prune
-
-  # remove local branches that have gone remotes (http://stackoverflow.com/a/33548037)
-  # - show the local branches, including more information about the corresponding remote
-  # - keep only the relevant columns (local branch name and remote info)
-  # - filter the ones that are "gone" in the remote
-  # - keep only the local branch name
-  # - loop and force-delete the resulting branches
-  for branch in `git branch -vv | awk '{print $1,$4}'  | grep ': gone]' | awk '{print $1}'`; do
-    git branch -D $branch
-  done
-
-  # Delete all the remote branches that have already been merged into master,
-  # excluding master itself.
-  git branch --no-color --remote --merged origin/master \
-    | cut -c3-  \
-    | grep -vE '^(origin/master|origin/HEAD|origin/staging|origin/development|origin/production)\b' \
-    | while read x; do
-        git push --delete origin "${x#origin/}" # strip the origin/ prefix
-      done
-
-  # Same but with the local branches.
-  git branch --list --no-color \
-		| cut -c3-  \
-    | grep -vE '^(master|staging|development|production)$' \
-    | while read x; do
-        git branch -D "${x}"
-      done
-
-  # Remove "origin" branches that are not in the remote origin
-  git remote prune origin
-
-  # Garbage-collect all the objects that are no longer referenced
-  git prune
-
-  # Go back to the original branch
-  git checkout -
-}
 
 # ----------
 # --- ls ---
