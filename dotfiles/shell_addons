@@ -245,6 +245,11 @@ FZF_COMPLETION_TRIGGER='~~'
 # FZF_ALT_C_OPTS
 # FZF_COMPLETION_OPTS='+c -x'
 
+# https://medium.com/@mrWinston/smarter-git-checkout-using-fzf-to-supercharge-your-commandline-7507db600996
+function gch() {
+ git checkout "$(git branch --all | fzf| tr -d '[:space:]')"
+}
+
 # -------------------- #
 # --- RG (RIPGREP) --- #
 # -------------------- #
