@@ -442,6 +442,8 @@ let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in stat
 nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
 " Keep the tabline hidden by default
 au VimEnter * :set showtabline=0
+" Disable the branch display
+let g:airline#extensions#branch#enabled = 0
 
 " ---------------- "
 " --- agignore --- "
