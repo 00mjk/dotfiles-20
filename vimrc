@@ -455,17 +455,24 @@ autocmd FileType gitcommit setlocal spell
 " --- Markdown --- "
 " ---------------- "
 
+" Highlight syntax by default when entering an md file
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" In modern Vim the markdown plugin is included by default in the Vim
+" distribution itself.
 let g:markdown_fenced_languages = [
-      \ 'html',
-      \ 'python',
-      \ 'sh',
-      \ 'bash=sh',
-      \ 'ruby',
       \ 'go',
       \ 'golang=go',
+      \ 'html',
+      \ 'javascript',
+      \ 'json',
+      \ 'kotlin',
+      \ 'python',
+      \ 'ruby',
+      \ 'bash=sh',
+      \ 'sh',
 \]
-let g:markdown_syntax_conceal = 0
-let g:markdown_minlines = 100
+let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
+let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
 
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
