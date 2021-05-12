@@ -960,6 +960,8 @@ let s:rg_grepprg = 'rg' . s:rgdefaults . s:rg_ignore
 " --- vim-grepper --- "
 " ------------------- "
 
+" --- general options --- "
+
 " the grepper variable will be merged with the defaults once the plugin loads
 let g:grepper = {}
 
@@ -989,18 +991,24 @@ autocmd User Grepper copen
 " focus the results automatically
 let g:grepper.switch = 1
 
-" this will open the Grepper prompt, where the search pattern can be entered
-" (or by pressing Enter using the current word if no pattern is given)
-
+" --- prompt --- "
+"
 " the prompt is a nice to have, and provides different functionality than the
 " command above, in particular shortcuts for changing search tool (with <Tab>)
 " and target directory of the search (with <C-d>)
 "
-" however, it does not support path completion
-"
+" however, it does not support path completion, and it causes a redraw when Esc
+" is pressed
+
+" this will open the Grepper prompt, where the search pattern can be entered
+" (or by pressing Enter using the current word if no pattern is given)
+nnoremap <Leader>g :Grepper<CR>
+
 " only show a visual prompt, not the underlying search command;
 let g:grepper.prompt_text = ' ❯❯ '
 
+" --- Ack-like custom command --- "
+"
 " build a command that that supports both current word (when no args are given),
 " and path completion (like :Ack), because the Grepper prompt does not support
 " completion
@@ -1024,14 +1032,13 @@ command! -nargs=* -complete=file Ackg call AckgFunc(<q-args>)
 
 nnoremap <Leader>a :Ackg<Space>
 
-" open the prompt with a shortcut
-nnoremap <Leader>s :Grepper<CR>
-
-" search the word under the cursor directly
+" -- search current word --- "
+"
 nnoremap <Leader>8 :Grepper -open -cword -noprompt -switch<CR>
 nnoremap <Leader>* :Grepper -open -cword -noprompt -switch<CR>
 
 " --- operator --- "
+"
 " enable the operator in normal and visual mode, it will take a range or
 " motion; see :help grepper-operator
 nmap gs <plug>(GrepperOperator)
@@ -1052,7 +1059,7 @@ let NERDTreeNaturalSort=1
 let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184844/hide-certain-files-in-nerdtree
 let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
 let NERDTreeCascadeSingleChildDir=0 " do not collapse on the same line directories that have only one child directory
-let NERDTreeStatusline=""
+let NERDTreeStatusline="" " this seems to be ignored anyawy
 
 " ----------------------------------- "
 " --- fzf and fzf.vim integration --- "
@@ -1205,7 +1212,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 " --- Diff highlighting --- "
 " ------------------------- "
 
-" use simple ansi-colours for readability in any terminal
+" use simple ansi-colours for readability in any terminal with a sensible
+" palette
 highlight DiffAdd cterm=none,bold ctermfg=2 ctermbg=15
 highlight DiffDelete cterm=none ctermfg=13 ctermbg=15
 highlight DiffChange cterm=none ctermfg=8 ctermbg=15
