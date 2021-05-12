@@ -1324,10 +1324,10 @@ let g:ale_sign_info = '▶︎▶︎'
 highlight ALEErrorSign cterm=reverse,bold ctermfg=1 ctermbg=none
 
 " white on dark yellow
-highlight ALEWarningSign cterm=reverse,bold ctermfg=3 ctermbg=none
+" highlight ALEWarningSign cterm=reverse,bold ctermfg=3 ctermbg=none
 
 " black on bright yellow
-" highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
+highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
 
 " white on light blue
 highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
