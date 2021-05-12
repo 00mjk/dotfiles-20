@@ -104,6 +104,7 @@ brew install --formulae --quiet \
   ruby-install \
   slurm \
   the_silver_searcher \
+  tig \
   tmux \
   trash \
   tree \
