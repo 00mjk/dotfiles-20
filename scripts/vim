@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-set -e
+set -eu
+set -o pipefail
 
 if [[ -z $(command -v git) ]]; then
   echo "Please install git first"
