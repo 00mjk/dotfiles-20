@@ -33,7 +33,12 @@ backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoec
 backup_and_symlink $ROOTDIR/zshrc_addons_bravoecho $HOME/.zshrc_addons_bravoecho
 
 backup_and_symlink $ROOTDIR/shell_addons_bravoecho $HOME/.shell_addons_bravoecho
-backup_and_symlink $ROOTDIR/shell_addons_mac_bravoecho $HOME/.shell_addons_mac_bravoecho
+
+if [[ "$(uname -s)" =~ Darwin ]]; then
+  # prevent the "last login" message on macOS
+  touch ~/.hushlogin
+  backup_and_symlink $ROOTDIR/shell_addons_mac_bravoecho $HOME/.shell_addons_mac_bravoecho
+fi
 
 function enable_shell_addon() {
   local rcfile=$1
