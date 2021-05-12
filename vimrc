@@ -843,6 +843,7 @@ map <Leader>f :NERDTreeFind<CR>
 
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1 " show hidden files at startup
+let NERDTreeNaturalSort=1
 let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184844/hide-certain-files-in-nerdtree
 let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
 let NERDTreeCascadeSingleChildDir=0 " do not collapse on the same line directories that have only one child directory
