@@ -14,9 +14,12 @@ key_name="$(whoami)@${computer_name%.local}_$(date -u +'%F')"
 
 echo "--- Generating key with name: $key_name ---"
 
-ssh-keygen \
-  -t ed25519 \
-  -a 200 \
-  -C $key_name
+ssh-keygen -t ed25519 -a 200 -C "${key_name}_ed25519"
 
+echo "--- $HOME/.ssh/id_ed25519.pub ---"
 cat "$HOME/.ssh/id_ed25519.pub"
+
+ssh-keygen -t rsa -b 4096 -a 200 -C "${key_name}_rsa"
+
+echo "--- $HOME/.ssh/id_rsa.pub ---"
+cat "$HOME/.ssh/id_rsa.pub"
