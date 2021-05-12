@@ -547,9 +547,9 @@ noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^
 " 3. also support insert mode
 imap <silent> <Home> <C-O><Home>
 
-" ---------------- "
-" --- Quickfix --- "
-" ---------------- "
+" ---------------------------- "
+" --- Quickfix and Loclist --- "
+" ---------------------------- "
 
 " force quickfix to always use the full width of the terminal at the bottom
 " (and only the quickfix, not the location list, which instead belongs to each
@@ -559,9 +559,12 @@ autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | en
 
 " Navigation
 " ----------
-" Useful for any type of search and command that populates the quickfix list.
+" Useful for any type of search and command that populates the lists.
 nmap [q :cprevious<CR>
 nmap ]q :cnext<CR>
+
+nmap [l :lprevious<CR>
+nmap ]l :lnext<CR>
 
 " Close quickfix list with Q like some plugins do
 " -----------------------------------------------
