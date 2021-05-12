@@ -290,8 +290,9 @@ f() {
 # -o: open files only on Enter key
 # -R: disable roll-over at edges
 # -x: show notice on selection cp, mv, rm completion, copy path to system clipboard on select
+# -u: use selection if available, don't prompt to choose between selection and hovered entry
 
-export NNN_OPTS="CoRea"
+export NNN_OPTS="CoReau"
 export NNN_PLUG='p:preview-tui-ext'
 
 # https://github.com/jarun/nnn/wiki/Basic-use-cases#configure-cd-on-quit
