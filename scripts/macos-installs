@@ -71,7 +71,6 @@ brew install --formulae --quiet \
   fzf \
   glow \
   gnupg \
-  go \
   golangci/tap/golangci-lint \
   graphviz \
   htop \
