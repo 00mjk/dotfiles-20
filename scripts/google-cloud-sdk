@@ -10,11 +10,13 @@ if [[ "$(which gcloud)" == "${HOME}/google-cloud-sdk/bin/gcloud" ]]; then
   exit 0
 fi
 
-# Remove the system wide gcloud, because it doesn't support some modules.
-sudo apt-get remove --purge -y google-cloud-sdk
+if [[ $(uname -s) == 'Linux' ]]; then
+  # Remove the system-wide gcloud, because it doesn't support some modules.
+  sudo apt-get remove --purge -y google-cloud-sdk
 
-sudo apt-get update
-sudo apt-get install -y wget unzip
+  sudo apt-get update
+  sudo apt-get install -y wget unzip
+fi
 
 DOWNLOAD_DIR="${HOME}/downloads"
 mkdir -p "${DOWNLOAD_DIR}"
