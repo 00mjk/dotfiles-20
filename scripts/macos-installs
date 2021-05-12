@@ -173,6 +173,7 @@ brew install --casks --quiet \
   google-chrome \
   iterm2 \
   middle \
+  microsoft-teams \
   rectangle \
   sdformatter \
   slack \
