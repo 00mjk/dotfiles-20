@@ -86,6 +86,7 @@ brew install --formulae --quiet \
   jump \
   just \
   kubectx \
+  lazygit \
   lf \
   libpq \
   lsof \
