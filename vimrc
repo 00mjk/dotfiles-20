@@ -94,9 +94,9 @@ else
 	set ttymouse=xterm2
 end
 
-" ------------ "
-" --- Tabs --- "
-" ------------ "
+" -------------------------- "
+" --- Tabs (indentation) --- "
+" -------------------------- "
 
 " Use 2-space soft tabs by defaults
 " (it's overriden for some some languages with different conventions).
@@ -244,6 +244,21 @@ vnoremap <Leader>p pgvy`>
 " gv  -> reselect the pasted text
 " y   -> copy it again
 " `>  -> jump to the last character of the visual selection (built-in mark)
+
+" ---------------------- "
+" --- Spell checking --- "
+" ---------------------- "
+
+" toggle spell checking with <F6>
+nnoremap <F6> :setlocal spell!<CR>
+vnoremap <F6> :setlocal spell!<CR>
+inoremap <F6> <Esc>:setlocal spell!<CR>
+
+" Automatically enable spell checking for some filetypes.
+" <http://robots.thoughtbot.com/vim-spell-checking>
+" autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
 
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
