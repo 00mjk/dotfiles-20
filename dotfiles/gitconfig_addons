@@ -1,38 +1,47 @@
 # vim: set ft=gitconfig:
 
 [include]
-  path = .config/delta/themes.gitconfig
+  path = /Users/luca/.config/delta/themes.gitconfig
+
 [core]
   editor = 'vim'
   pager = 'delta'
+
 [delta]
+  light = true
   line-numbers = true
   paging = always
   features = tweaks
   # side-by-side = false
+
 [delta "tweaks"]
   # adjustments to the default style, which puts too much emphasis on the hunks
   commit-decoration-style = ol bold brightblack
-  ; commit-decoration-style = box brightwhite brightwhite
-  ; commit-style = black brightwhite
+  # commit-decoration-style = box brightwhite brightwhite
+  # commit-style = black brightwhite
   file-decoration-style =
-  ; file-style = bold blue
   file-style = brightblack bold
-  ; file-style = omit
+  # file-style = bold blue
+  # file-style = omit
   hunk-header-line-number-style = blue bold
   hunk-header-decoration-style =
   hunk-header-file-style = brightblack
-  ; hunk-header-style = syntax brightwhite bold file line-number
-  ; hunk-header-style = syntax bold file line-number
-  hunk-header-style = syntax line-number
+  hunk-header-style = syntax brightwhite bold line-number
+  # hunk-header-style = syntax brightwhite bold file line-number
+  # hunk-header-style = syntax bold file line-number
+
 [pull]
 	ff = only
+
 [submodule]
 	recurse = true
+
 [init]
 	defaultBranch = main
+
 [color]
   ui = true
+
 [alias]
   a = add
   amend = commit --amend --no-edit
@@ -75,16 +84,22 @@
 
   # ignored-update = "!git rm --cached -r . ; git add . "
   # remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
+
 [commit]
   verbose = true
+
 [diff]
   tool = vimdiff
+
 [push]
   default = simple
+
 [rerere]
   enabled = true
+
 [tag]
   forceSignAnnotated = true
+
 [user]
   name = B.E.
   email = 698828+bravoecho@users.noreply.github.com
