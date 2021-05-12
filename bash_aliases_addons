@@ -1,6 +1,6 @@
 # vim: set ft=sh:
 
-# Git shortcuts
+# git
 
 alias g='git'
 alias ga='git add'
@@ -23,3 +23,18 @@ alias gs='git status -sb'
 alias gst='git status -sb'
 alias gsm='git submodule update --init --recursive'
 alias gsd='git diff --staged'
+
+# ls
+
+alias ls='ls -Ga'
+
+# bundler
+
+alias be='bundle exec'
+
+# docker 
+
+alias d='docker'
+alias dc='docker-compose'
+alias rmimages='docker rmi $(docker images -a -q)'
+alias rmcontainers='docker rm $(docker ps -a -f status=exited -q)'
