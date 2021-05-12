@@ -13,7 +13,7 @@ GO_VERSION=$(
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 GO_WORKSPACE="${HOME}/go"
 
-DOWNLOAD_DIR="${HOME}/downloads"
+DOWNLOAD_DIR="${HOME}/Downloads"
 mkdir -p "${DOWNLOAD_DIR}"
 
 FILENAME="go${GO_VERSION}.linux-amd64.tar.gz"
