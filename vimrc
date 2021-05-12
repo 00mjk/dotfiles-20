@@ -947,3 +947,10 @@ nnoremap <Leader>t :TagbarToggle<CR>
 if filereadable(glob("~/.vimrc.after"))
   source ~/.vimrc.after
 endif
+
+" ---------------------------------- "
+" --- Reload vimrc automatically --- "
+" ---------------------------------- "
+
+" <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
