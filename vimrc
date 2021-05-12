@@ -552,6 +552,11 @@ let g:go_highlight_format_strings = 1
 " specify it even if it's currently the default
 let g:go_highlight_string_spellcheck = 1
 
+" When on with the cursor, show information about the identifier (funcions, vars..)...
+let g:go_auto_type_info = 1
+" ...after only 100 ms instead of the default 800
+set updatetime=100
+
 " ----------------- "
 " --- vim-RSpec --- "
 " ----------------- "
