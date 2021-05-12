@@ -57,6 +57,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/tsuquyomi'
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'rakr/vim-one'
 
 " ------------------------------------------- "
 " --- Experimental or rarely used plugins --- "
