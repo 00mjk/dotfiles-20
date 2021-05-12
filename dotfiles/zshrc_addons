@@ -45,6 +45,9 @@ setopt GLOB_COMPLETE
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+# highlight current completion option
+zstyle ':completion:*' menu select
+
 # enable autocompletion for aliases defined in shell_addons;
 # each alias will use the give command as the underlying target for the
 # autocompletion
