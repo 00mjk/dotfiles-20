@@ -1,0 +1,40 @@
+#!/usr/bin/env zsh
+
+set -eu
+set -o pipefail
+
+echo "[setup][rust] Install rustup"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+  | sh -s -- --no-modify-path -y
+
+echo "[setup][rust] Install rust components"
+$HOME/.cargo/bin/rustup component add \
+  rust-src \
+  rustfmt
+
+echo "[setup][rust] Install rust-analyzer"
+mkdir -p ~/.local/bin
+rust_analyzer_bin=$HOME/.local/bin/rust-analyzer
+platform=
+if [[ "$(uname -s)" =~ Darwin ]]; then
+  platform='mac'
+elif [[ "$(uname -s)" =~ Linux ]]; then
+  platform='linux'
+fi
+rust_analyzer_url="https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-${platform}"
+curl -L $rust_analyzer_url -o $rust_analyzer_bin
+chmod u+x $rust_analyzer_bin
+
+echo "[setup][rust] Install zsh autocompletions"
+zsh_site_functions=/usr/local/share/zsh/site-functions
+mkdir -p $zsh_site_functions
+
+$HOME/.cargo/bin/rustup completions zsh >| $zsh_site_functions/_rustup
+$HOME/.cargo/bin/rustup completions zsh cargo >| $zsh_site_functions/_cargo
+
+echo "[setup][rust] Install bash autocompletions"
+bash_autocomplete_dir=/usr/local/etc/bash_completion.d
+mkdir -p $bash_autocomplete_dir
+
+$HOME/.cargo/bin/rustup completions bash > $bash_autocomplete_dir/rustup.bash-completion
+$HOME/.cargo/bin/rustup completions bash cargo >> $bash_autocomplete_dir/cargo.bash-completion
