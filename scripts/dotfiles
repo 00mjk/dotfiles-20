@@ -44,14 +44,7 @@ backup_and_symlink "${DOTFILES_DIR}/fdignore" "${global_config_path}/fd/ignore"
 
 # --- global ripgrep config --- #
 
-# arguments in the RIPGREP_CONFIG_PATH file are not expanded when rg loads them,
-# so we need to template it
-sed \
-  -e "s|{{home}}|$HOME|" \
-  -e "s|{{script}}|$(readlink --canonicalize $0)|" \
-  "${DOTFILES_DIR}/ripgreprc.tmpl" \
-> "${HOME}/.ripgreprc"
-
+backup_and_symlink "${DOTFILES_DIR}/ripgreprc" "${HOME}/.ripgreprc"
 backup_and_symlink "${DOTFILES_DIR}/rgignore" "${HOME}/.rgignore"
 
 # --- htop --- #

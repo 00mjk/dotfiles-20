@@ -934,49 +934,6 @@ nmap <silent> <M-h>     :call TmuxWinCmd('h')<CR>
 nmap <silent> <M-l>     :call TmuxWinCmd('l')<CR>
 
 " ------------------- "
-" --- ag defaults --- "
-" ------------------- "
-
-let s:ag_ignore =
-      \' --ignore=".bin"'.
-      \' --ignore=".bundle"'.
-      \' --ignore=".git"'.
-      \' --ignore=".hg"'.
-      \' --ignore=".svn"'.
-      \' --ignore="_quarantine"'.
-      \' --ignore="bitbucket.org"'.
-      \' --ignore="bundle"'.
-      \' --ignore="cloud.google.com"'.
-      \' --ignore="code.google.com"'.
-      \' --ignore="cuelang.org"'.
-      \' --ignore="github.com"'.
-      \' --ignore="golang.org"'.
-      \' --ignore="gopkg.in"'.
-      \' --ignore="launchpad.net"'.
-      \' --ignore="log"'.
-      \' --ignore="node_modules"'.
-      \' --ignore="speter.net"'.
-      \' --ignore="vendor"'.
-      \' --ignore="*.class"'.
-      \' --ignore="*.dll"'.
-      \' --ignore="*.exe"'.
-      \' --ignore="*.pyc"'.
-      \' --ignore="*.so"'.
-      \' --ignore="tags"'
-
-let s:ag_defaults = ' --hidden --follow --smart-case --skip-vcs-ignores'
-
-let s:ag_grepprg = 'ag' . s:ag_defaults . s:ag_ignore
-
-" ------------------- "
-" --- rg defaults --- "
-" ------------------- "
-
-" the config path needs to be specified because Vim doesn't load the shell
-" interactively
-let s:rg_grepprg = 'RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc" rg --vimgrep'
-
-" ------------------- "
 " --- vim-grepper --- "
 " ------------------- "
 
@@ -998,10 +955,6 @@ let g:grepper.tools = [
 
 let g:grepper.highlight = 1 " highlight matches
 " let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
-
-" set up customised search commands
-let g:grepper.rg = {'grepprg': s:rg_grepprg}
-let g:grepper.ag = {'grepprg': s:ag_grepprg}
 
 " the following two settings will use the standard 10-line quickfix window
 " no matter how many matches found; see ':h grepper-faq-4'
@@ -1053,7 +1006,7 @@ command! -nargs=* -complete=file Ackg call AckgFunc(<q-args>)
 nnoremap <Leader>a :Ackg<Space>
 
 " -- search current word --- "
-"
+
 nnoremap <Leader>8 :Grepper -open -cword -noprompt -switch<CR>
 nnoremap <Leader>* :Grepper -open -cword -noprompt -switch<CR>
 
