@@ -152,9 +152,10 @@ brew install --casks --quiet \
   firefox \
   font-inconsolata \
   iterm2 \
+  middle \
   rectangle \
-  visual-studio-code \
-  sdformatter
+  sdformatter \
+  visual-studio-code
 
 brew tap homebrew/cask-fonts
 brew install --casks --quiet font-juliamono
