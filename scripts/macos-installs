@@ -175,7 +175,6 @@ brew install --casks --quiet \
   google-chrome \
   iterm2 \
   libreoffice \
-  menubar-stats \
   microsoft-teams \
   middle \
   pastebot \
@@ -191,19 +190,6 @@ brew install --casks --quiet \
 # ------------------------------ #
 # --- Post install for casks --- #
 # ------------------------------ #
-
-echo "[setup] Download MenuBar Plugin Manager"
-
-download_dir="${HOME}/Downloads"
-mkdir -p "${download_dir}"
-mbspm_dir="MenuBar Stats Plugins Manager.app"
-pushd "${download_dir}"
-  curl -Lf "https://www.seense.com/menubarstats/plugins3/updateapp/mbspm.zip"
-  rm -rf "${mbspm_dir}"
-  rm -rf "/Applications/${mbspm_dir}"
-  unzip mbspm.zip
-  mv "${mbspm_dir}" /Applications/
-popd "${download_dir}"
 
 echo "[setup] Configure extra autocompletions"
 ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
@@ -256,12 +242,14 @@ echo "
   - screen
   - util-linux
 
-* Other common casks:
+* Other casks:
 
   - dash
   - devdocs
   - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - menubar-stats
   - mdrp
+  - istat-menus
   - signal
   - slack
   - telegram
