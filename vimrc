@@ -1078,6 +1078,11 @@ let g:go_fmt_fail_silently = 1 " we have other means of showing syntax errors
 " gopls, in addition to finding all the expected types, also appears faster
 let g:go_implements_mode = 'gopls'
 
+" let g:go_fillstruct_mode = 'gopls'
+" let g:go_diagnostics_enabled = 1
+" let g:go_gopls_complete_unimported = v:true
+" let $GINKGO_EDITOR_INTEGRATION = "true"
+
 " let g:go_addtags_transform = "camelcase"
 " let g:go_addtags_transform = "snake_case"
 
