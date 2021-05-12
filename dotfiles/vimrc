@@ -840,6 +840,13 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " treat .txt files as markdown
 autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
 
+" ----------------------------- "
+" --- markdown-preview.nvim --- "
+" ----------------------------- "
+
+let g:mkdp_auto_close = 0
+let g:mkdp_refresh_slow = 1
+
 " ----------------------- "
 " --- Auto-formatting --- "
 " ----------------------- "
