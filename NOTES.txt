@@ -21,6 +21,16 @@
        " Remap jj to escape insert mode
        inoremap jj <ESC>
 
+`gobrew` setup
+--------------
+
+    # while versions < 1.16 are still in use, GOPATH needs to be set explicitly
+    # because gobrew by default sets it as a "$HOME/.gobrew/current/go", which
+    # instead is actually the GOROOT, and will prevent installation of binaries
+    # with "go get -u"
+    # export GOPATH="$HOME/.gobrew/current/gopath"
+    # export PATH="$GOPATH/bin:$PATH"
+
 Interesting .vimrc files
 ------------------------
 

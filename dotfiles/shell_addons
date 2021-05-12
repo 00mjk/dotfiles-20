@@ -84,17 +84,22 @@ export DELTA_PAGER='less --clear-screen'
 # order of magnitude faster than goenv (which is a shell script), so it has
 # next to no overhead on opening new terminal sessions
 
-# if [[ -n "$(command -v gobrew)" && -d "$HOME/.gobrew" ]]; then
 if [[ -x "$HOME/.gobrew/bin/gobrew" ]]; then
   export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-
-  # while versions < 1.16 are still in use, GOPATH needs to be set explicitly
-  # because gobrew by default sets it as a "$HOME/.gobrew/current/go", which
-  # instead is actually the GOROOT, and will prevent installation of binaries
-  # with "go get -u"
-  export GOPATH="$HOME/go"
-  export PATH="$GOPATH/bin:$PATH"
 fi
+
+# -------------- #
+# --- Golang --- #
+# -------------- #
+
+# Activate manually installed go if it wasn't installed with a package manager
+# and there is no gobrew
+if [[ ! -x "$HOME/.gobrew/bin/gobrew" && -z "$(command -v go)" && -d "/usr/local/go/bin" ]]; then
+  PATH="/usr/local/go/bin:$PATH"
+fi
+
+GOPATH="$HOME/go"
+PATH="$GOPATH/bin:$PATH"
 
 # --------------------- #
 # --- Output stream --- #
