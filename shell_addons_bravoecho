@@ -48,10 +48,16 @@ export PATH="/usr/local/go/bin:$PATH"
 # --- Output stream ---
 # ---------------------
 
-# Prevent CTRL-S from suspending the output stream
-stty stop '' -ixoff
-# Prevent CTRL-Q from waking up the output stream
-stty start '' -ixon
+# only for interactive shells
+if [[ -t 0 && $- = *i* ]]; then
+  # Prevent CTRL-S from suspending the output stream
+  # stty stop '' -ixoff
+  # Prevent CTRL-Q from waking up the output stream
+  # stty start '' -ixon
+  # stty stop undef
+  # stty start undef
+  stty -ixon
+fi
 
 # ------------
 # --- Tmux ---
