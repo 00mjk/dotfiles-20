@@ -45,8 +45,7 @@ append_if_missing () {
   if [ "$(grep -F "${CONTENT_LINE}" $TARGET_FILE)" ]; then
     echo "-- line \"$CONTENT_LINE\" already in $TARGET_FILE"
   else
-    sudo sed -i --follow-symlinks "$ a\
-$CONTENT_LINE" "$TARGET_FILE"
+    echo "${CONTENT_LINE}" >> "${TARGET_FILE}"
     echo "-- added \"$CONTENT_LINE\" to $TARGET_FILE"
   fi
 }
