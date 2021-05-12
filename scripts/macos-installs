@@ -124,11 +124,6 @@ brew install --formulae --quiet \
   --HEAD \
   universal-ctags/universal-ctags/universal-ctags
 
-# until Neovim 0.5 is released as stable, the HEAD version is required for LSP support
-brew install --formulae --quiet \
-  --HEAD \
-  neovim
-
 # --------------------------------- #
 # --- Post install for formulae --- #
 # --------------------------------- #
@@ -137,7 +132,6 @@ echo "[setup] Python post-install setup"
 brew link --overwrite --force python@3.9
 
 python3 -m pip install ydiff
-python3 -m pip install --user --upgrade pynvim
 
 echo "[setup] FZF post-install setup"
 /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
