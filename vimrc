@@ -1228,32 +1228,36 @@ highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
 highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
 highlight! StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
-highlight BE_ModeNormal cterm=bold ctermfg=10 ctermbg=8
-highlight BE_ModeVisual cterm=bold ctermfg=15 ctermbg=6
-highlight BE_ModeInsert cterm=bold ctermfg=15 ctermbg=3
+highlight BE_ModeNormal cterm=bold ctermfg=none ctermbg=10
+highlight BE_ModeVisual cterm=reverse,bold ctermfg=12 ctermbg=none
+highlight BE_ModeInsert cterm=bold ctermfg=none ctermbg=11
 highlight BE_ModeOther cterm=bold ctermfg=7 ctermbg=1
+highlight BE_StatuslineCursorPosition cterm=bold ctermfg=0 ctermbg=11
+highlight BE_StatuslineCursorPercent cterm=bold ctermfg=15 ctermbg=3
 
 let g:be_modes = {
-  \ 'n'      : { 'highlight': 'BE_ModeNormal', 'name': 'NORMAL' },
-  \ 'no'     : { 'highlight': 'BE_ModeNormal', 'name': 'NORMAL (OP PENDING)' },
-  \ 'i'      : { 'highlight': 'BE_ModeInsert', 'name': 'INSERT' },
-  \ 'R'      : { 'highlight': 'BE_ModeInsert', 'name': 'REPLACE' },
-  \ 'v'      : { 'highlight': 'BE_ModeVisual', 'name': 'VISUAL' },
-  \ 'V'      : { 'highlight': 'BE_ModeVisual', 'name': 'V-LINE' },
-  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual', 'name': 'V-BLOCK' },
-  \ 'Rv'     : { 'highlight': 'BE_ModeInsert', 'name': 'V-REPLACE' },
-  \ 's'      : { 'highlight': 'BE_ModeOther', 'name': 'SELECT' },
-  \ 'S'      : { 'highlight': 'BE_ModeOther', 'name': 'S-LINE' },
-  \ "\<C-s>" : { 'highlight': 'BE_ModeOther', 'name': 'S-BLOCK' },
-  \ 'c'      : { 'highlight': 'BE_ModeOther', 'name': 'COMMAND' },
-  \ 'cv'     : { 'highlight': 'BE_ModeOther', 'name': 'VIM-EX' },
-  \ 'ce'     : { 'highlight': 'BE_ModeOther', 'name': 'EX' },
-  \ 'r'      : { 'highlight': 'BE_ModeOther', 'name': 'PROMPT' },
-  \ 'rm'     : { 'highlight': 'BE_ModeOther', 'name': 'MORE' },
-  \ 'r?'     : { 'highlight': 'BE_ModeOther', 'name': 'CONFIRM' },
-  \ '!'      : { 'highlight': 'BE_ModeOther', 'name': 'SHELL' },
-  \ 't'      : { 'highlight': 'BE_ModeOther', 'name': 'TERMINAL' },
+  \ 'n'      : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL'              },
+  \ 'no'     : { 'highlight': 'BE_ModeNormal',  'name': 'NORMAL (OP PENDING)' },
+  \ 'i'      : { 'highlight': 'BE_ModeInsert',  'name': 'INSERT'              },
+  \ 'R'      : { 'highlight': 'BE_ModeInsert',  'name': 'REPLACE'             },
+  \ 'v'      : { 'highlight': 'BE_ModeVisual',  'name': 'VISUAL'              },
+  \ 'V'      : { 'highlight': 'BE_ModeVisual',  'name': 'V-LINE'              },
+  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual',  'name': 'V-BLOCK'             },
+  \ 'Rv'     : { 'highlight': 'BE_ModeInsert',  'name': 'V-REPLACE'           },
+  \ 's'      : { 'highlight': 'BE_ModeOther',   'name': 'SELECT'              },
+  \ 'S'      : { 'highlight': 'BE_ModeOther',   'name': 'S-LINE'              },
+  \ "\<C-s>" : { 'highlight': 'BE_ModeOther',   'name': 'S-BLOCK'             },
+  \ 'c'      : { 'highlight': 'BE_ModeOther',   'name': 'COMMAND'             },
+  \ 'cv'     : { 'highlight': 'BE_ModeOther',   'name': 'VIM-EX'              },
+  \ 'ce'     : { 'highlight': 'BE_ModeOther',   'name': 'EX'                  },
+  \ 'r'      : { 'highlight': 'BE_ModeOther',   'name': 'PROMPT'              },
+  \ 'rm'     : { 'highlight': 'BE_ModeOther',   'name': 'MORE'                },
+  \ 'r?'     : { 'highlight': 'BE_ModeOther',   'name': 'CONFIRM'             },
+  \ '!'      : { 'highlight': 'BE_ModeOther',   'name': 'SHELL'               },
+  \ 't'      : { 'highlight': 'BE_ModeOther',   'name': 'TERMINAL'            },
 \}
+
+let g:BE_statusline_right_end = '%10(%l/%L%):%-3c%7.7((%p%%)%)'
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
@@ -1264,15 +1268,26 @@ function! BE_Statusline(active)
   if a:active == 1
     setlocal statusline=%!BE_ActiveStatusline()
   else
-    let &l:statusline=' %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
+    setlocal statusline=%!BE_InactiveStatusline()
   endif
 endfunction
 
 function! BE_ActiveStatusline()
-  return "%#" . g:be_modes[mode()].highlight . "# %{g:be_modes[mode()].name}%{&paste ? '\ \ (PASTE)' : ''} %* %<%f %m%r%h%w %= %l:%c/%L (%P)"
+  let l:stl  = "%#".g:be_modes[mode()].highlight."# "
+  let l:stl .= "%{g:be_modes[mode()].name}%{&paste ? '\ \ (PASTE)' : ''} %* "
+  let l:stl .= "%<%f %m%r%h%w "
+  let l:stl .= "%=%#".g:be_modes[mode()].highlight."# "
+  let l:stl .= g:BE_statusline_right_end
+  return l:stl
 endfunction
 
-augroup StatuslineEvents
+function! BE_InactiveStatusline()
+  let l:stl  = ' %<%f %m%r%h%w%q %='
+  let l:stl .= g:BE_statusline_right_end
+  return l:stl
+endfunction
+
+augroup BE_StatuslineEvents
     autocmd!
     autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType              netrw     setlocal statusline=\ %<%f
