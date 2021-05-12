@@ -1162,40 +1162,37 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " --- vim-go --- "
 " -------------- "
 
+" --- vim-go: gofmt ---
+
 let g:go_fmt_command = 'gopls'
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 let g:go_gopls_gofumpt = v:true
 
+" --- vim-go: goimports ---
+
 let g:go_imports_mode = 'gopls'
 let g:go_imports_autosave = 1
-" let g:go_gopls_local = 'mymod'
+
+" --- vim-go: general options ---
 
 let g:go_code_completion_icase = 1
 let g:go_fillstruct_mode = 'gopls'
 let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
 
-" let g:go_gopls_settings = {
-" \   'formatting': {
-" \     'local': 'mymod',
-" \     'gofumpt': v:true,
-" \   },
-" \}
-
-" let g:go_gopls_use_placeholders = v:true
-" let g:go_gopls_staticcheck = v:true
-
-" When on with the cursor, show information about the identifier (funcions, vars..)...
+" show information about the identifier under the cursor (funcions, vars..)...
 let g:go_auto_type_info = 1
-" ...after only 100 ms instead of the default 800
+" ...after 400 ms instead of the default 800
 let g:go_updatetime=400
+
+" --- vim-go: mappings ---
 
 autocmd FileType go nnoremap <Leader>z :GoDiagnostics<CR>
 autocmd FileType go nnoremap <Leader>t :GoTest<CR>
 autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
 
-" --- additional syntax highlighting
+" --- vim-go: syntax highlighting ---
 
 highlight link goBuiltins Keyword
 
@@ -1214,48 +1211,73 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_variable_declarations = 1
 
+" ------------ "
+" --- Rust --- "
+" ------------ "
+
+let g:rustfmt_autosave = 1
+let g:rustfmt_autosave_if_config_present = 1
+
 " ---------------------------------------------- "
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
+" --- ALE: Language settings ---
+
+" set to 1 to disable all linters unless explicitly enabled, default 0
+let g:ale_linters_explicit = 0
+
+let g:ale_lint_on_save = 1
+let g:ale_linters = {
+\  'go': ['govet'],
+\  'python': ['flake8', 'pylint'],
+\  'rust': ['analyzer'],
+\  'javascript': ['eslint'],
+\}
+
+" let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\  'python': ['yapf'],
+\}
+
+let g:ale_go_golangci_lint_options = '' " only use defaults
+let g:ale_go_govet_options = '-composites=false'
+
+" --- ALE: Error list customisation ---
+
+" * open the loclist automatically on errors
+" * and close it when the buffer is closed
+" * it will close anyway once all the issue have been addressed
+let g:ale_open_list = 1
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
+
+" --- ALE: Visual customisations ---
+
 " merge the sign column and the number column, to avoid shifting the content
-" when signs are shown; instead, signs will replace the number on a given line
 set signcolumn=number
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-" let g:ale_lint_on_save = 0 " temporarily disable
 
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
-let g:ale_sign_info = 'I'
-" other symbols to try ▶︎ ▷ • ‣ ■ □ ▢ ▪︎ ▲ ▴ ● ◯ ◼️ ☐
+let g:ale_sign_error = '▶︎▶︎'
+let g:ale_sign_warning = '▶︎▶︎'
+let g:ale_sign_info = '▶︎▶︎'
 
 " white on dark red
-highlight ALEErrorSign    cterm=reverse,bold ctermfg=1  ctermbg=none
+highlight ALEErrorSign cterm=reverse,bold ctermfg=1 ctermbg=none
+
 " white on dark yellow
-highlight ALEWarningSign  cterm=reverse,bold ctermfg=3  ctermbg=none
-" white on light blue
-highlight ALEInfoSign     cterm=reverse,bold ctermfg=12 ctermbg=none
+highlight ALEWarningSign cterm=reverse,bold ctermfg=3 ctermbg=none
+
 " black on bright yellow
-" highlight ALEWarningSign  cterm=bold         ctermfg=none ctermbg=11
+" highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
 
-" disable all linters unless explicitly enabled
-" let g:ale_linters_explicit = 1
-"
-" let g:ale_linters = {
-" \   'javascript': ['eslint'],
-" \}
-
-" open the loclist automatically on errors...
-let g:ale_open_list = 1
-" ...and close it when the buffer is closed
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-" it will close anyway once all the issue have been addressed
+" white on light blue
+highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
 
 " ---------------- "
 " --- vim-json --- "

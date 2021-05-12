@@ -27,65 +27,6 @@ Interesting .vimrc files
 * <https://github.com/nickjj/dotfiles/blob/master/.vimrc>
 * <https://github.com/bryankennedy/vimrc/blob/master/vimrc>
 
-.vimrc.after customisations
----------------------------
-
-    " A.L.E. local customisations
-    " ---------------------------
-    let g:ale_linters = {
-    \   'go': ['govet'],
-    \   'python': ['flake8', 'pylint'],
-    \}
-    let g:ale_lint_on_save = 1
-
-    let g:ale_fixers = {
-    \    'python': ['yapf'],
-    \}
-    " let g:ale_fix_on_save = 1
-
-    let g:ale_go_golangci_lint_options = '' " only use defaults
-    let g:ale_go_govet_options = '-composites=false'
-
-    " vim-go local customisations
-    " ---------------------------
-
-    let g:go_gopls_local = 'bitbucket.example.com'
-
-    " let g:go_fmt_options = {
-    " \  'gofumpt': '-s',
-    " \  'gofmt': '-s',
-    " \  'goimports': '-local bitbucket.example.com -local some-backend',
-    " \}
-
-    " let g:go_gopls_local = 'bitbucket.example.com'
-
-    " let g:go_gopls_local = {
-    " \  $HOME.'/go/src/some-backend': 'some-backend',
-    " \  $HOME.'/go/src/some-backend/clients-service': 'some-backend',
-    " \  $HOME.'/projects/svc/adjust-events': 'bitbucket.example.com',
-    " \}
-
-    " let g:ale_linters = {'go': ['golangci-lint', 'govet']}
-    " let g:ale_linters = {'go': ['gopls']}
-    " let g:ale_linters = {'go': ['staticcheck', 'govet']}
-    " let g:ale_linters = {'go': ['staticcheck']}
-    let g:ale_linters = {'go': ['govet']}
-    let g:ale_go_golangci_lint_options = '' " only use defaults
-    let g:ale_go_govet_options = '-composites=false'
-    let g:go_fmt_options = {
-    \  'gofmt': '-s',
-    \  'goimports': '-local bitbucket.example.com -local some-backend',
-    \}
-
-    " let g:go_gopls_local = 'some-backend'
-    " let g:go_gopls_local = 'bitbucket.example.com'
-    let g:go_gopls_local = {
-    \  $HOME.'/go/src/some-project-in-gopath': 'some-project-in-gopath',
-    \  $HOME.'/go/src/another-project-in-gopath': 'another-project-in-gopath',
-    \  $HOME.'/myprojects/project-abc': 'bitbucket.foobar.com',
-    \  $HOME.'/myprojects/project-xyz': 'bitbucket.foobar.com',
-    \}
-
 Other plugins
 -------------
 
@@ -414,6 +355,7 @@ Support for other Vim plugins
 
     " gofumports is not actually a drop-in replacement for goimports, sometimes it
     " won't be able to add local packages automatically
+    " gofumports no longer exists
     let g:go_fmt_command = 'gofumports'
     let g:go_imports_mode = 'goimports'
     " let g:go_diagnostics_enabled = 1 " we can A.L.E. for this
@@ -425,6 +367,50 @@ Support for other Vim plugins
 
     " highlight current identifier
     let g:go_auto_sameids = 1
+
+    " --- gofmt ---
+
+    let g:go_fmt_options = {
+    \  'gofumpt': '-s',
+    \  'gofmt': '-s',
+    \  'goimports': '-local bitbucket.example.com -local my-project',
+    \}
+
+    let g:go_gopls_settings = {
+    \   'formatting': {
+    \     'local': 'mymod',
+    \     'gofumpt': v:true,
+    \   },
+    \}
+
+    " --- goimports ---
+
+    let g:go_gopls_local = 'mymod,bitbucket.example.com,github.com/acme-corp'
+
+    " ...or for different workspaces:
+
+    let g:go_gopls_local = {
+    \  $HOME.'/go/src/my-project': 'my-project',
+    \  $HOME.'/go/src/my-project/sub-package': 'my-project',
+    \  $HOME.'/projects/svc/other-project': 'github.com/acme-corp',
+    \}
+
+    " --- linting: see ALE settings ---
+
+    " whether it should run staticcheck automatically
+    let g:go_gopls_staticcheck = v:true
+
+    " --- general options ---
+
+    " generate dynamic snippets (doesn't work really well)
+    let g:go_gopls_use_placeholders = v:true
+
+### ALE
+
+    let g:ale_sign_error = 'E'
+    let g:ale_sign_warning = 'W'
+    let g:ale_sign_info = 'I'
+    " other symbols to try ▶︎ ▷ • ‣ ■ □ ▢ ▪︎ ▲ ▴ ● ◯ ◼️ ☐
 
 ### Airline
 
