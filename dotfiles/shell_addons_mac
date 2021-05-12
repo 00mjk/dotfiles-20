@@ -14,12 +14,25 @@ PATH="/usr/local/sbin:$PATH"
 MANPATH="/usr/local/share/man/:$MANPATH"
 
 function brut() {
-  local TS=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
-  local LOG="$HOME/log/brew-upgrade-${TS}.log"
-  mkdir -p ~/log
+  local ts=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
+  local logdir="$HOME/log"
+  local logfile="$logdir/brew-upgrade-${ts}.log"
 
-  brew update -v | tee $LOG
-  brew outdated
-  brew upgrade 2>&1 | tee -a $LOG
-  brew cleanup | tee -a $LOG
+  mkdir -p $logdir
+  touch $logfile
+
+  echo "Logging to $logfile"
+  _do_brew_upgrade | tee -a $logfile
+  echo "Logged to $logfile"
+}
+
+function _do_brew_upgrade() {
+  echo "-------------- brew update ----------------"
+  brew update 2>&1
+  # echo "-------------- brew outdated ---------------"
+  # brew outdated 2>&1
+  echo "-------------- brew upgrade ---------------"
+  brew upgrade 2>&1
+  echo "-------------- brew cleanup ---------------"
+  brew cleanup 2>&1
 }
