@@ -57,6 +57,10 @@ backup_and_symlink "${DOTFILES_DIR}/htoprc" "${global_config_path}/htop/htoprc"
 
 backup_and_symlink "${DOTFILES_DIR}/sqliterc" "${HOME}/.sqliterc"
 
+# --- lf (console file manager, ranger clone) --- #
+
+backup_and_symlink "${DOTFILES_DIR}/lfrc" "${global_config_path}/lf/lfrc"
+
 # -------------- #
 # --- shells --- #
 # -------------- #
