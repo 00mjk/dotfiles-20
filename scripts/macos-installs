@@ -170,6 +170,7 @@ brew install --casks --quiet \
   font-go \
   font-inconsolata \
   font-juliamono \
+  font-jetbrains-mono \
   google-backup-and-sync \
   google-chrome \
   iterm2 \
