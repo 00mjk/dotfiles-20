@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+sudo apt-get udpate -qq
+sudo apt-get install -y software-properties-common
+
+sudo add-apt-repository -yu ppa:neovim-ppa/stable
+
+# Prerequisites for Python modules
+sudo apt-get install -y \
+  python-dev \
+  python-pip \
+  python3-dev \
+  python3-pip
+
+sudo apt-get install -y neovim
+
+backup_and_symlink $ROOTDIR/vimrc $HOME/.config/nvim/init.vim
+
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+nvim +PlugInstall +qall
+
+if [[ -x /usr/local/go/bin/go || -n "$(command -v go)" ]]; then
+  nvim +GoInstallBinaries +qall
+else
+  echo "Golang is not installed, skipping vim-go binaries"
+fi
