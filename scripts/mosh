@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  software-properties-common
 
 # -y: non interactive, -u: update package cache after adding
 sudo add-apt-repository -yu ppa:keithw/mosh-dev
@@ -12,3 +12,15 @@ sudo add-apt-repository -yu ppa:keithw/mosh-dev
 sudo apt-get install -y mosh
 
 mosh --version
+
+echo "
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+mosh server installed.
+Please open the port range 60001-60999 if you are behind a firewall
+because it will be needed to connect via mosh.
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+"

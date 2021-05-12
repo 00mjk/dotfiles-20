@@ -12,16 +12,27 @@ CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
 source "${CURRDIR}/utils.sh"
 
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# --------------------------------------------
+# --- File permissions required for Bionic ---
+# --------------------------------------------
+touch ~/.gitconfig
+mkdir -p ~/.config
+sudo chown -R developer.developer ~/.gitconfig ~/.config
 
+# ----------------------
+# --- Basic packages ---
+# ----------------------
 sudo apt-get update -q
 
 sudo apt-get install -y \
+  build-essential \
   coreutils \
   curl \
   exuberant-ctags \
   jq \
   less \
+  lsof \
+  nmap \
   make \
   ruby \
   silversearcher-ag \
@@ -29,32 +40,44 @@ sudo apt-get install -y \
   unzip \
   vim-nox \
   wget \
-  nodejs \
-  build-essential \
 
-sudo npm install eslint --global
+# ----------------
+# --- Dotfiles ---
+# ----------------
 
-# Dotfiles
 backup_and_symlink $ROOTDIR/gitconfig_addons $HOME/.gitconfig_addons
 backup_and_symlink $ROOTDIR/bash_aliases_addons $HOME/.bash_aliases_addons
 backup_and_symlink $ROOTDIR/bashrc_addons $HOME/.bashrc_addons
 backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
 
-# Bash
+# ------------
+# --- Bash ---
+# ------------
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons" ]] && source ~/.bashrc_addons'
 append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons" ]] && source ~/.bash_aliases_addons'
 
-# Git
+# -----------
+# --- Git ---
+# -----------
 git config --global include.path .gitconfig_addons
 
+source $ROOTDIR/scripts/docker
+source $ROOTDIR/scripts/docker-compose
+source $ROOTDIR/scripts/golang
+source $ROOTDIR/scripts/google-cloud-sdk
+source $ROOTDIR/scripts/mosh
+source $ROOTDIR/scripts/nodejs
 source $ROOTDIR/scripts/vim
 
-touch ~/.gitconfig
-mkdir -p ~/.config
-sudo chown -R developer.developer ~/.gitconfig ~/.config
-
+# -----------------------
+# --- Success message ---
+# -----------------------
 echo "
+---------------------------------------------------
+---------------------------------------------------
 
 Installation complete, please restart your session.
 
+---------------------------------------------------
+---------------------------------------------------
 "
