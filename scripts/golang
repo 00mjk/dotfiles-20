@@ -2,12 +2,12 @@
 
 set -e
 
-# The Golang project does not use github releases properly (2017-09-15).
-# This might change in the future, but for now we need to derive the
-# latest version from the branch names.
+# The Golang project does not use github releases properly (2017-10-28).
+# The most reliable way is currently to parse the official Golang downloads page.
 GO_VERSION=$(
-  curl -s https://api.github.com/repos/golang/go/branches |
-    python -c 'import sys, json; releases = map(lambda x: x[17:].encode("ascii"), filter(lambda x: x.startswith("release-branch.go"), [r["name"] for r in json.load(sys.stdin)])); print releases[-1]'
+  curl -gsL golang.org/dl \
+    | grep -m1 'linux-amd64.tar.gz' \
+    | sed -E 's/.*https:\/\/.+\/go(.+)\.linux-amd64\.tar\.gz.*/\1/'
 )
 
 CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
