@@ -31,8 +31,8 @@
 .ssh/
 .svn/
 .terminfo/
-.terraform/
-.terraform.d/
+# .terraform/
+# .terraform.d/
 .vim/
 .vscode-insiders/
 .vscode/
