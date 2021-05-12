@@ -374,12 +374,13 @@ alias gta='git stash --include-untracked'
 
 # --- ls --- #
 
-alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --group-directories-first'
+# alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --group-directories-first'
 
 #--- exa ---#
 
-alias e='exa --long --header --git --group-directories-first --classify --group --time-style=long-iso'
-alias ee='e --all'
+alias l='exa --long --header --git --group-directories-first --classify --group --time-style=long-iso --octal-permissions'
+# alias ee='e --all'
+alias ll='e --all'
 
 # --- tree --- #
 
