@@ -2,8 +2,6 @@
 
 setopt HISTIGNOREDUPS
 setopt HIST_IGNORE_ALL_DUPS
-setopt CORRECT
-setopt CORRECT_ALL
 setopt GLOBDOTS
 # prevents you from accidentally overwriting an existing file.
 setopt NOCLOBBER
