@@ -184,6 +184,11 @@ to derive the technique from, in order to create a Tango-like 16-color scheme.
 * `tomorrow` => this is interesting because it takes the color from the syntax
   highlighting groups
 * `monochrome`
+* <https://github.com/pineapplegiant/spaceduck>
+* <https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme>
+* <https://cocopon.github.io/iceberg.vim/>
+* <https://gist.github.com/gkeep/3434864a3321fcce7d69e75d6d63888e>
+* <https://github.com/cocopon/iceberg.vim/>
 
 Async search
 -------------
