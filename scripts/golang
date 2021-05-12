@@ -48,3 +48,4 @@ sudo tar -C /usr/local -xzf "${DOWNLOAD_DIR}/${FILENAME}"
 echo "Checking installation: $(go version) installed at $(command -v go)"
 
 "${CURRDIR}/golang-zsh-completion"
+"${CURRDIR}/golang-packages"
