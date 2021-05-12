@@ -17,7 +17,6 @@ source "${CURRDIR}/utils.sh"
 # ----------- #
 
 backup_and_symlink "${ROOTDIR}/gitconfig_addons_bravoecho" "${HOME}/.gitconfig_addons_bravoecho"
-backup_and_symlink "${ROOTDIR}/dot/git-template" "${HOME}/.git-template"
 
 git config --global include.path .gitconfig_addons_bravoecho
 
