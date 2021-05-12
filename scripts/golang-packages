@@ -2,7 +2,27 @@
 
 function go_install() {
   echo "--- ${1} ---"
-  go install "${1}@latest"
+
+  if go_gte_1_16; then
+    go install "${1}@latest"
+  else
+    (
+      cd ~
+      go get -u "${1}"
+    )
+  fi
+}
+
+function go_gte_1_16() {
+  # extract the numeric portion of the go version by discarding head and tail,
+  # and remove "go" before the numbers
+  # alternatively:
+  #
+  #   go version | grep --colour=never --extended-regexp --only-matching '([[:digit:]]|\.)+[[:space:]]'
+  #
+  local go_version=$(go version | { read _ _ v _; echo ${v#go}; })
+
+  [ "${go_version}" = $(echo -e "${go_version}\n1.16" | sort -Vr | head -n1) ]
 }
 
 pushd ~
@@ -12,7 +32,6 @@ go_install 'github.com/kyoh86/richgo'
 go_install 'github.com/asciimoo/wuzz'
 go_install 'golang.org/x/exp/cmd/modgraphviz'
 go_install 'github.com/mgechev/revive'
-go_install 'github.com/kevincobain2000/gobrew/cmd/gobrew'
 go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
-go_install 'github.com/KyleBanks/depth'
+go_install 'github.com/KyleBanks/depth/cmd/depth'
 popd

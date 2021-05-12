@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# https://github.com/kevincobain2000/gobrew
+
+curl -sLk https://git.io/gobrew | sh -

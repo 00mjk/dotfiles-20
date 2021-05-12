@@ -27,10 +27,10 @@ export LS_COLORS
 
 export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 --LONG-PROMPT --shift=3"
 
-# # -----------
-# # --- GPG ---
-# # -----------
-#
+# ----------- #
+# --- GPG --- #
+# ----------- #
+
 # export GPG_TTY=$(tty)
 # # This create-socketdir command is only required if a non default home
 # # directory is used and the /run based sockets shall be used. For the default
@@ -58,36 +58,30 @@ export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 
 # export PATH="$GOROOT/bin:$PATH"
 # export PATH="$PATH:$GOPATH/bin"
 
-# --------------
-# --- Golang ---
-# --------------
-
-if [[ -z "$(command -v gobrew)" ]]; then
-  export GOPATH="$HOME/go"
-  export PATH="$PATH:$GOPATH/bin"
-  export PATH="/usr/local/go/bin:$PATH"
-fi
-
 # -------------- #
 # --- gobrew --- #
 # -------------- #
 
 # https://github.com/kevincobain2000/gobrew
 #
-# this version of gobrew (written in Golang) is an order of magnitude faster
-# than goenv (which is a shell script), so it has next to no overhead on new
-# terminal sessions
-#
-# the only downside is that it doesn't support the system Go installation
+# this version of gobrew (written in Golang) although less feature-rich, is an
+# order of magnitude faster than goenv (which is a shell script), so it has
+# next to no overhead on opening new terminal sessions
 
-if [[ -n "$(command -v gobrew)" ]]; then
+# if [[ -n "$(command -v gobrew)" && -d "$HOME/.gobrew" ]]; then
+if [[ -x "$HOME/.gobrew/bin/gobrew" ]]; then
   export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-  export GOPATH="$HOME/.gobrew/current/go"
+
+  # while versions < 1.16 are still in use, GOPATH needs to be set explicitly
+  # because gobrew by default sets it as a "$HOME/.gobrew/current/go", which
+  # instead is actually the GOROOT, and will prevent installation of binaries
+  # with "go get -u"
+  export GOPATH="$HOME/go"
 fi
 
-# ---------------------
-# --- Output stream ---
-# ---------------------
+# --------------------- #
+# --- Output stream --- #
+# --------------------- #
 
 # only for interactive shells
 if [[ -t 0 && $- = *i* ]]; then
@@ -100,9 +94,9 @@ if [[ -t 0 && $- = *i* ]]; then
   stty -ixon
 fi
 
-# ------------
-# --- Tmux ---
-# ------------
+# ------------ #
+# --- Tmux --- #
+# ------------ #
 
 # attach to current session if there is only one, or start a new one
 alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux attach; else tmux; fi'
@@ -148,9 +142,9 @@ fi
 #   source <(kubectl completion bash)
 # fi
 
-# ----------------
-# --- Minikube ---
-# ----------------
+# ---------------- #
+# --- Minikube --- #
+# ---------------- #
 
 # export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
 # export MINIKUBE_WANTUPDATENOTIFICATION=false
@@ -163,9 +157,9 @@ fi
 #
 # export KUBECONFIG=$HOME/.kube/config
 
-# -------------
-# --- rbenv ---
-# -------------
+# ------------- #
+# --- rbenv --- #
+# ------------- #
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 # SLOW: rbenv init takes more than 150 ms. Use alias when needed.
