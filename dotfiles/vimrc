@@ -46,6 +46,7 @@ Plug 'fourjay/vim-yamsong'
 Plug 'pangloss/vim-javascript'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-ruby/vim-ruby'
+Plug 'rust-lang/rust.vim'
 
 " --- Markdown
 

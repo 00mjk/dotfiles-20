@@ -218,6 +218,12 @@ export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 
 export BAT_THEME=GitHub
 
+# ------------ #
+# --- Rust --- #
+# ------------ #
+
+PATH="$PATH:$HOME/.cargo/bin"
+
 # --------------- #
 # --- Aliases --- #
 # --------------- #
