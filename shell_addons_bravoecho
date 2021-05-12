@@ -157,14 +157,15 @@ export VISUAL=$(command -v vim)
 [[ $SHELL =~ zsh ]] && [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ $SHELL =~ bash ]] && [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# use this for enabling preview in fzf (using a Ctrl-/ keybinding when in the
-# fzf results); it's not enabled because preview options in Vim are not
-# respected; also, remember to comment out the lines about the stty settings,
-# because they will cause an error in the preview output
-# export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline --bind 'ctrl-/:toggle-preview' --preview-window hidden --preview '[ -f {} ] && head -n 200 {}'"
+# This also enables the preview in fzf (using a Ctrl-/ keybinding when in the
+# fzf results)
+#
+# NOTE: the preview will be hidden, but enabled, however some FZF helpers in
+# Vim don't respect it, so you may want to remove the parts related to the
+# preview.
+export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline --bind 'ctrl-/:toggle-preview' --preview-window hidden --preview '[ -f {} ] && head -n 200 {}'"
 
-export FZF_DEFAULT_OPTS="--extended --history=$HOME/.fzf_history --color=light --ansi --reverse --info inline"
-
+# if available, use fd to feed fzf
 [ -n "$(command -v fd)" ] && export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=always --exclude .git --no-ignore-vcs"
 
 [ -n "${FZF_DEFAULT_COMMAND}" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
