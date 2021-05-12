@@ -34,6 +34,8 @@
 	slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(blue)%an %C(cyan)<%ae> %C(reset)%s%C(green)%d' --date=iso-local
   stash-all = stash save --include-untracked
   remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
+  # When "forcing with lease", it's essential that the working tree is up to date with the remote, so we pull first
+  force = "!f() { git pull origin HEAD; git push --force-with-lease origin HEAD; }; f"
   amend = commit --amend --no-edit
 
 [color]
