@@ -36,6 +36,10 @@ nmap <C-J> :bprev<CR>
 nnoremap = $
 nnoremap - 0
 
+" Map l key to right pane and h key to left pane
+map <C-L> <C-w>w
+map <C-H> <C-w>p
+
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
