@@ -876,9 +876,13 @@ noremap <Leader>b :Buffers<CR>
 " --- vim-commentary --- "
 " ---------------------- "
 
-" Remap gc comments to leader-c
+" Shortcuts
 nmap <Leader>c gcc
 vmap <Leader>c gc
+" The underscore represents the forward slash. See :help :map-special-keys.
+" Note: this will not work with nnoremap and vnoremap
+nmap <C-_> gcc
+vmap <C-_> gc
 
 autocmd FileType proto setlocal commentstring=//\ %s
 autocmd FileType sql setlocal commentstring=--\ %s
