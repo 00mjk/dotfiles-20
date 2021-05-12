@@ -549,6 +549,12 @@ let g:markdown_fenced_languages = [
 let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
 let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
 
+" ------------------------------------------------------- "
+" --- File types for non-standard filename extensions --- "
+" ------------------------------------------------------- "
+
+autocmd BufNewFile,BufReadPost {*zsh,*.zsh-theme} set filetype=zsh
+
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
 " ---------------------------------------- "
