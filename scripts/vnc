@@ -26,4 +26,8 @@ You can now start the VNC server with
 ...and stop it with
 
     vncserver -kill
+
+When connecting you will find Chromium and a terminal already running.
+
+See also ~/.vnc/xstartup on how to run the browser.
 "
