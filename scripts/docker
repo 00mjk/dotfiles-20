@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ as of 2018-03-05.
 
 set -e
-CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 
 # ------------------------
 # --- CPU architecture ---

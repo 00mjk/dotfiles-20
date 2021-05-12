@@ -1,4 +1,4 @@
-# vim: set ft=bash:
+# vim: set ft=zsh:
 
 # Sourced by other install scripts.
 
