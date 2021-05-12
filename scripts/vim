@@ -31,3 +31,5 @@ else
 fi
 
 mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
+
+backup_and_symlink $ROOTDIR/dotfiles/init.vim $HOME/.config/nvim/init.vim
