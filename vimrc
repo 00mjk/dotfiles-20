@@ -538,8 +538,11 @@ imap <silent> <Home> <C-O><Home>
 " --- Quickfix --- "
 " ---------------- "
 
-" force quickfix to always use the full width of the terminal
-au FileType qf wincmd J
+" force quickfix to always use the full width of the terminal at the bottom
+" (and only the quickfix, not the location list, which instead belongs to each
+" specific buffer)
+" https://stackoverflow.com/a/59823132/417375
+autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif
 
 " Navigation
 " ----------
