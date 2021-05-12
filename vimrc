@@ -219,6 +219,11 @@ highlight EndOfBuffer cterm=none ctermfg=15
 highlight ColorColumn ctermbg=15
 highlight WildMenu cterm=bold ctermfg=0 ctermbg=11
 
+" other higlights
+highlight CursorLineNr cterm=underline,bold ctermfg=none ctermbg=none
+highlight LineNr cterm=none ctermfg=8 ctermbg=none
+highlight SignColumn cterm=none ctermbg=none
+
 " ---------------------- "
 " --- Search options --- "
 " ---------------------- "
@@ -802,6 +807,11 @@ autocmd FileType json command! -nargs=0 Format execute ':%! jq -Mr .'
 " Autoformat XML and HTML with xmllint
 autocmd FileType xml command! -nargs=0 Format execute ':%! xmllint --format --nowarning -'
 
+" --- Special syntax highlight --- "
+" TODO:
+" autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|CHANGED\|BUG\|HACK\)')
+" autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+
 " ---------------- "
 " --- vim-ruby --- "
 " ---------------- "
@@ -1340,23 +1350,29 @@ highlight StatusLine    cterm=none ctermfg=15 ctermbg=8
 highlight StatusLineNC  cterm=none ctermfg=15 ctermbg=8
 
 " green
-highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10  ctermbg=none
-highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2   ctermbg=none
+" highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
+highlight BE_ModeNormal           cterm=bold  ctermfg=none    ctermbg=10
+highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2     ctermbg=none
 " blue
-highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12  ctermbg=none
-highlight BE_ModeVisualCentre     cterm=bold,reverse  ctermfg=4   ctermbg=none
+highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12    ctermbg=none
+highlight BE_ModeVisualCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
 " magenta
-highlight BE_ModeInsert           cterm=bold,reverse  ctermfg=13  ctermbg=none
-highlight BE_ModeInsertCentre     cterm=bold,reverse  ctermfg=5   ctermbg=none
+highlight BE_ModeInsert           cterm=bold,reverse  ctermfg=13    ctermbg=none
+highlight BE_ModeInsertCentre     cterm=bold,reverse  ctermfg=5     ctermbg=none
 " cyan
-highlight BE_ModeOther            cterm=bold,reverse  ctermfg=14  ctermbg=none
-highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6   ctermbg=none
+" highlight BE_ModeOther            cterm=bold,reverse  ctermfg=14    ctermbg=none
+highlight BE_ModeOther            cterm=bold  ctermfg=none ctermbg=14
+highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6     ctermbg=none
 " red
-highlight BE_ModeQuickfix         cterm=bold,reverse  ctermfg=9   ctermbg=none
-highlight BE_ModeQuickfixCentre   cterm=bold,reverse  ctermfg=1   ctermbg=none
-" yellow
-highlight BE_ModeLoclist          cterm=bold          ctermfg=none  ctermbg=11
-highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=3     ctermbg=none
+highlight BE_ModeLoclist          cterm=bold,reverse  ctermfg=9     ctermbg=none
+highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=1     ctermbg=none
+" grey
+highlight BE_ModeQuickfix         cterm=bold,reverse  ctermfg=7     ctermbg=8
+highlight BE_ModeQuickfixCentre   cterm=bold,reverse  ctermfg=8     ctermbg=none
+
+" " yellow
+" highlight BE_ModeLoclist          cterm=bold          ctermfg=none  ctermbg=11
+" highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=3     ctermbg=none
 
 let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
 let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
