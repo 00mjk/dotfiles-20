@@ -12,6 +12,10 @@ setopt HIST_FIND_NO_DUPS
 # remove whitespace from any command before adding it to the history
 setopt HIST_REDUCE_BLANKS
 
+# always expire history items in the original order (regardless of duplicates)
+setopt NO_HIST_EXPIRE_DUPS_FIRST
+setopt NO_HIST_IGNORE_ALL_DUPS
+
 # prevents accidentally overwriting an existing file
 setopt NO_CLOBBER
 
