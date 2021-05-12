@@ -41,6 +41,7 @@ Plug 'aklt/plantuml-syntax'
 " Tim Pope's Markdown plugin is included in Vim, but we want the latest
 " version.
 Plug 'tpope/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
@@ -51,9 +52,7 @@ if !has('nvim')
   Plug 'dense-analysis/ale'
 endif
 
-" -------------------- "
-" --- Colorschemes --- "
-" -------------------- "
+" --- Colorschemes
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'rakr/vim-one'
@@ -824,34 +823,56 @@ autocmd FileType gitcommit setlocal spell
 " --- Markdown --- "
 " ---------------- "
 
-" treat .txt files as markdown
-autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
-
-" Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
-" highligting is basic in terms of styles, and does not support several valid
-" markdown features
+" " Vim has a built-in markdown plugin (tpope/vim-markdown), but its syntax
+" " highligting is basic in terms of styles, and does not support several valid
+" " markdown features
+" "
+" " to activate it:
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "
-" to activate it:
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" " treat .txt files as markdown
+" autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
 
 " its options are the following:
 
 " let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-let g:markdown_fenced_languages = [
-  \ 'go',
-  \ 'ruby',
-  \ 'bash=sh',
-  \ 'zsh',
-  \ 'plantuml',
-  \ 'python',
-  \ 'json',
-  \ 'yaml',
-\]
+" let g:markdown_fenced_languages = [
+" \  'go',
+" \  'ruby',
+" \  'bash=sh',
+" \  'zsh',
+" \  'plantuml',
+" \  'python',
+" \  'json',
+" \  'yaml',
+" \]
 " let g:markdown_syntax_conceal = 0
 " let g:markdown_minlines = 100
 
-" treat .txt files as markdown
-autocmd BufNewFile,BufReadPost *.txt set filetype=markdown
+" --------------------- "
+" --- Pandoc Syntax --- "
+" --------------------- "
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+    au! BufNewFile,BufFilePre,BufRead *.txt set filetype=markdown.pandoc
+augroup END
+
+let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#style#emphases = 0
+let g:pandoc#syntax#style#underline_special = 0
+let g:pandoc#syntax#style#use_definition_lists = 0
+
+let g:pandoc#syntax#codeblocks#embeds#langs = [
+\  'go',
+\  'ruby',
+\  'bash=sh',
+\  'zsh',
+\  'plantuml',
+\  'python',
+\  'json',
+\  'yaml',
+\]
 
 " ----------------------------- "
 " --- markdown-preview.nvim --- "
@@ -1251,6 +1272,10 @@ highlight ALEInfoSign     cterm=reverse,bold ctermfg=12 ctermbg=none
 
 " disable all linters unless explicitly enabled
 " let g:ale_linters_explicit = 1
+"
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \}
 
 " open the loclist automatically on errors...
 let g:ale_open_list = 1
