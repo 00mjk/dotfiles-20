@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+# with help from
+#
+#   * https://github.com/fabiomaia/linuxify
+#   * https://github.com/ickc/GNU-ize
+
+set -e
+
+if [[ ! "$(uname -s)" =~ Darwin ]]; then
+  echo "Only needed on macOS, all done"
+  exit 0
+fi
+
+if [[ -z $(command -v brew) ]]; then
+  echo "Please install Homebrew first"
+  exit 1
+fi
+
+ROOTDIR=$(git rev-parse --show-toplevel)
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+brew install \
+  autoconf \
+  bash \
+  binutils \
+  bmon \
+  coreutils \
+  diffutils \
+  ed \
+  emacs \
+  fd \
+  ffmpeg \
+  findutils \
+  fzf \
+  gawk \
+  gdb \
+  git \
+  gnu-getopt \
+  gnu-indent \
+  gnu-sed \
+  gnu-tar \
+  gnu-time \
+  gnu-units \
+  gnu-which \
+  gnupg \
+  go \
+  gpatch \
+  grep \
+  gzip \
+  htop \
+  imagemagick \
+  inetutils \
+  less \
+  make \
+  mosh \
+  nano \
+  nethogs \
+  nload \
+  openssh \
+  perl \
+  python \
+  rbenv \
+  ripgrep \
+  rsync \
+  ruby-install \
+  screen \
+  slurm \
+  sqlite \
+  the_silver_searcher \
+  tmux \
+  unrar \
+  unzip \
+  vim \
+  watch \
+  wdiff \
+  wget \
+  zsh
+
+echo "\n===> Configuring fzf\n"
+/usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+
+printf "\n===> Enabling brew-installed shells\n\n"
+append_if_missing /etc/shells "/usr/local/bin/bash"
+append_if_missing /etc/shells "/usr/local/bin/zsh"
+
+echo "
+
+NOTE: Many packages installed depend on the shell configuration provided.
+      Run './scripts/dotfiles' to install it.
+"
