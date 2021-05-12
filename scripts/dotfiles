@@ -30,19 +30,24 @@ backup_and_symlink "${ROOTDIR}/tmux.conf" "${HOME}/.tmux.conf"
 # --- miscellanea --- #
 # ------------------- #
 
+global_config_path=
+if [[ -n "${XDG_CONFIG_HOME}" ]]; then
+  global_config_path="${XDG_CONFIG_HOME}"
+else
+  global_config_path="${HOME}/.config"
+fi
+
 # --- global fd ignore --- #
 
-fd_global_ignore_path=
-if [[ -n "${XDG_CONFIG_HOME}" ]]; then
-  fd_global_ignore_path="${XDG_CONFIG_HOME}"
-else
-  fd_global_ignore_path="${HOME}/.config"
-fi
-backup_and_symlink "${ROOTDIR}/dotfiles/fdignore" "${fd_global_ignore_path}/fd/ignore"
+backup_and_symlink "${ROOTDIR}/dotfiles/fdignore" "${global_config_path}/fd/ignore"
 
 # --- global ripgrep config --- #
 
 backup_and_symlink "${ROOTDIR}/dotfiles/ripgreprc" "${HOME}/.ripgreprc"
+
+# --- htop --- #
+
+backup_and_symlink "${ROOTDIR}/dotfiles/htoprc" "${global_config_path}/htop/htoprc"
 
 # -------------- #
 # --- shells --- #
