@@ -168,7 +168,10 @@ set showmatch " highlight matching parentheses
 set matchtime=0 " ...but stay out of the way (do not jump around)
 
 filetype plugin indent on " automatically detect file types.
-syntax on " syntax highlighting
+syntax on
+
+" show name of syntax element below cursor (https://vi.stackexchange.com/a/19043)
+command! SynName  echo synIDattr(synID(line("."), col("."), 1), "name")
 
 set noshowcmd                     " showcmd (on by default) is very noisy when running long commands, such as Ack
 set noerrorbells visualbell t_vb= " disable all bells
