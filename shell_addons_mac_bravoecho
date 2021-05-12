@@ -6,5 +6,6 @@ export PATH="$(echo /usr/local/opt/*/libexec/gnubin | tr ' ' :):$PATH"
 
 PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 PATH="/usr/local/opt/sqlite/bin:$PATH"
+PATH="/usr/local/opt/lsof/bin:$PATH"
 
 MANPATH="/usr/local/share/man/:$MANPATH"
