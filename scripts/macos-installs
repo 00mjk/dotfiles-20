@@ -162,18 +162,24 @@ brew tap homebrew/cask-fonts
 
 brew install --casks --quiet \
   alacritty \
+  discord \
   docker \
   drawio \
+  dropbox \
   firefox \
   font-go \
   font-inconsolata \
   font-juliamono \
+  google-backup-and-sync \
   google-chrome \
   iterm2 \
   middle \
   rectangle \
   sdformatter \
-  visual-studio-code
+  slack \
+  visual-studio-code \
+  vlc \
+  zoom
 
 # ------------------------------ #
 # --- Post install for casks --- #
@@ -247,16 +253,9 @@ echo "
 * Other casks that could be useful:
 
   - copyq (clipboard manager that supports images)
-  - discord
-  - dropbox
-  - google-backup-and-sync (for personal accounts, works with G Suite, but does not support Shared Drives)
-  - google-chrome
   - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
-  - slack
   - vagrant
   - virtualbox
   - virtualbox-extension-pack
-  - vlc
-  - zoomus
 
 "
