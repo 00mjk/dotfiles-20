@@ -7,7 +7,7 @@ set -e
 GO_VERSION=$(
   curl -gsL golang.org/dl \
     | grep -m1 'linux-amd64.tar.gz' \
-    | sed -E 's/.*https:\/\/.+\/go(.+)\.linux-amd64\.tar\.gz.*/\1/'
+    | sed -E 's/.*dl\/go(.+)\.linux-amd64\.tar\.gz.*/\1/'
 )
 
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
