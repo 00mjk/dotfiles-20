@@ -1226,39 +1226,48 @@ highlight DiffText cterm=none,bold ctermfg=4 ctermbg=15
 highlight! StatusLine cterm=bold ctermfg=15 ctermbg=2
 highlight! StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
+highlight BE_ModeNormal cterm=bold ctermfg=10 ctermbg=8
+highlight BE_ModeVisual cterm=bold ctermfg=15 ctermbg=6
+highlight BE_ModeInsert cterm=bold ctermfg=15 ctermbg=3
+highlight BE_ModeOther cterm=bold ctermfg=7 ctermbg=1
+
 let g:be_modes = {
-  \ 'n'      : 'NORMAL',
-  \ 'no'     : 'NORMAL (OP PENDING)',
-  \ 'v'      : 'VISUAL',
-  \ 'V'      : 'V-LINE',
-  \ "\<C-v>" : 'V-BLOCK',
-  \ 's'      : 'SELECT',
-  \ 'S'      : 'S-LINE',
-  \ "\<C-s>" : 'S-BLOCK',
-  \ 'i'      : 'INSERT',
-  \ 'R'      : 'REPLACE',
-  \ 'Rv'     : 'V-REPLACE',
-  \ 'c'      : 'COMMAND',
-  \ 'cv'     : 'VIM-EX',
-  \ 'ce'     : 'EX',
-  \ 'r'      : 'PROMPT',
-  \ 'rm'     : 'MORE',
-  \ 'r?'     : 'CONFIRM',
-  \ '!'      : 'SHELL',
-  \ 't'      : 'TERMINAL',
+  \ 'n'      : { 'highlight': 'BE_ModeNormal', 'name': 'NORMAL' },
+  \ 'no'     : { 'highlight': 'BE_ModeNormal', 'name': 'NORMAL (OP PENDING)' },
+  \ 'i'      : { 'highlight': 'BE_ModeInsert', 'name': 'INSERT' },
+  \ 'R'      : { 'highlight': 'BE_ModeInsert', 'name': 'REPLACE' },
+  \ 'v'      : { 'highlight': 'BE_ModeVisual', 'name': 'VISUAL' },
+  \ 'V'      : { 'highlight': 'BE_ModeVisual', 'name': 'V-LINE' },
+  \ "\<C-v>" : { 'highlight': 'BE_ModeVisual', 'name': 'V-BLOCK' },
+  \ 'Rv'     : { 'highlight': 'BE_ModeInsert', 'name': 'V-REPLACE' },
+  \ 's'      : { 'highlight': 'BE_ModeOther', 'name': 'SELECT' },
+  \ 'S'      : { 'highlight': 'BE_ModeOther', 'name': 'S-LINE' },
+  \ "\<C-s>" : { 'highlight': 'BE_ModeOther', 'name': 'S-BLOCK' },
+  \ 'c'      : { 'highlight': 'BE_ModeOther', 'name': 'COMMAND' },
+  \ 'cv'     : { 'highlight': 'BE_ModeOther', 'name': 'VIM-EX' },
+  \ 'ce'     : { 'highlight': 'BE_ModeOther', 'name': 'EX' },
+  \ 'r'      : { 'highlight': 'BE_ModeOther', 'name': 'PROMPT' },
+  \ 'rm'     : { 'highlight': 'BE_ModeOther', 'name': 'MORE' },
+  \ 'r?'     : { 'highlight': 'BE_ModeOther', 'name': 'CONFIRM' },
+  \ '!'      : { 'highlight': 'BE_ModeOther', 'name': 'SHELL' },
+  \ 't'      : { 'highlight': 'BE_ModeOther', 'name': 'TERMINAL' },
 \}
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
-  if len(&buftype) != 0     | return | endif
+  if len(&buftype) != 0 | return | endif
   " unless it's the Explore window netrw
-  if &filetype ==? 'netrw'  | return | endif
+  if &filetype ==? 'netrw' | return | endif
 
   if a:active == 1
-    let &l:statusline=' %{g:be_modes[mode()]}%{&paste ? "(PASTE)" : ""} | %<%f %m%r%h%w %=%l:%c/%L (%P)'
+    setlocal statusline=%!BE_ActiveStatusline()
   else
     let &l:statusline=' %<%f %m%r%h%w%q %=%l:%c/%L (%P)'
   endif
+endfunction
+
+function! BE_ActiveStatusline()
+  return "%#" . g:be_modes[mode()].highlight . "# %{g:be_modes[mode()].name}%{&paste ? '\ \ (PASTE)' : ''} %* %<%f %m%r%h%w %= %l:%c/%L (%P)"
 endfunction
 
 augroup StatuslineEvents
