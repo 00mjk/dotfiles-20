@@ -25,7 +25,23 @@ export LS_COLORS
 # --- LESS --- #
 # ------------ #
 
-export LESS="--ignore-case --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3"
+# --ignore-case         (-i) case-insensitive search
+# --chop-long-lines     (-S) truncate long lines, and allow horizontal scrolling instead of wrapping
+# --RAW-CONTROL-CHARS   (-R) forward only colour escape sequences, so that they are displayed
+# --tabs=2              (-x) use two spaces to render tab characters
+# --LONG-PROMPT         (-M) show all the available info about the buffer, at the bottom
+# --shift=3             (-#) how many columns to move when scrolling horizontally
+# --use-color           enable coloured text in various places (like prompt, search results...)
+export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3"
+
+# ------------- #
+# --- DELTA --- #
+# ------------- #
+
+# although delta's default pager is "less", and it does use the LESS variable,
+# it will not clear the screen after exiting the git command; this will ensure
+# the screen is cleared (and it will still use all the other LESS options)
+export DELTA_PAGER='less --clear-screen'
 
 # ----------- #
 # --- GPG --- #
