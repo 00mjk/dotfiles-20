@@ -1026,6 +1026,13 @@ nmap <silent> <M-j>     :call TmuxWinCmd('j')<CR>
 nmap <silent> <M-h>     :call TmuxWinCmd('h')<CR>
 nmap <silent> <M-l>     :call TmuxWinCmd('l')<CR>
 
+" ---------------- "
+" --- supertab --- "
+" ---------------- "
+
+" try to guess if '<C-x><C-o>' should be used
+let g:SuperTabDefaultCompletionType = "context"
+
 " ------------------- "
 " --- vim-grepper --- "
 " ------------------- "
