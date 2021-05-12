@@ -188,6 +188,7 @@ brew install --casks --quiet \
   rectangle \
   sdformatter \
   slack \
+  stats \
   visual-studio-code \
   vlc \
   whatsapp \
