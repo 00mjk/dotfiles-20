@@ -89,6 +89,7 @@ brew install --formulae --quiet \
   lsof \
   mosh \
   mtr \
+  ncdu \
   nethogs \
   nload \
   nmap \
