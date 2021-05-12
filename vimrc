@@ -109,8 +109,22 @@ endtry
 set wildmode=list:longest,full " open a list of all the matches (list) *and* cycle through them (full)
 set wildignorecase
 set wildignore+=*.swp,*/tmp/
-set noswapfile
-set noundofile
+
+let s:swap_dir = $HOME . "/.vim/swp//"
+let s:bkp_dir = $HOME . "/.vim/backup//"
+let s:undo_dir = $HOME . "/.vim/undo//"
+
+if !isdirectory(s:swap_dir) | call mkdir(s:swap_dir, "p", 0755) | endif
+if !isdirectory(s:bkp_dir) | call mkdir(s:bkp_dir, "p", 0755) | endif
+if !isdirectory(s:undo_dir) | call mkdir(s:undo_dir, "p", 0755) | endif
+
+let &directory=s:swap_dir
+let &undodir=s:undo_dir
+let &backupdir=s:bkp_dir
+
+set swapfile
+set undofile
+set backup
 
 " --- reduce the command timeout --- "
 " (default 1000)

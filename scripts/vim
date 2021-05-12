@@ -29,3 +29,5 @@ if [[ -x /usr/local/go/bin/go || -n "$(command -v go)" ]]; then
 else
   echo "Golang is not installed, skipping vim-go binaries"
 fi
+
+mkdir -p ~/.vim/{backup,swp,undo}
