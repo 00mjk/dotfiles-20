@@ -38,7 +38,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'altercation/vim-colors-solarized'
 
 " Experimental
-Plug 'dhruvasagar/vim-table-mode'
+" Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
@@ -496,12 +496,23 @@ let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creati
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
+
+" TODO: Hide the '[No Name]' buffer
+" let g:airline#extensions#tabline#excludes = [
+"   \]
+
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
 nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
 " Keep the tabline hidden by default
 au VimEnter * :set showtabline=0
-" Disable the branch display
+
+" --- Streamline the status bar
+" Disable branch display
 let g:airline#extensions#branch#enabled = 0
+" TODO:
+" disable mode display
+" disable word count
+" show default line count + line number
 
 " ---------------- "
 " --- agignore --- "
