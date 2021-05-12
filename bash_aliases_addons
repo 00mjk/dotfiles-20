@@ -64,7 +64,7 @@ gdel() {
 		| cut -c3-  \
     | grep -vE '^(master|staging|development|production)$' \
     | while read x; do
-        git branch -d "${x}"
+        git branch -D "${x}"
       done
 
   # Remove "origin" branches that are not in the remote origin
