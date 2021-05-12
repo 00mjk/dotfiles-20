@@ -1,4 +1,4 @@
-# vim: set ft=sh:
+# vim: set ft=zsh:
 
 setopt HIST_IGNORE_ALL_DUPS
 ZSH_CUSTOM=~/.zsh_custom
