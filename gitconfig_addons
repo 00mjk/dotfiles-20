@@ -1,9 +1,5 @@
 # vim: set ft=gitconfig:
 
-[core]
-  editor = 'vim'
-[color]
-  ui = true
 [alias]
   a = add
   br = branch
@@ -35,9 +31,20 @@
   remove-merged = "!f() { git branch --merged master | grep -v \"\\* master\" | xargs -n 1 git branch -d; }; f"
   amend = commit --amend --no-edit
 
+[color]
+  ui = true
+
+[commit]
+  verbose = true
+
+[core]
+  editor = 'vim'
+
 [diff]
   tool = vimdiff
+
 [push]
   default = simple
+
 [rerere]
   enabled = true
