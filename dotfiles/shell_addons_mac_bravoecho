@@ -9,5 +9,6 @@ PATH="/usr/local/opt/sqlite/bin:$PATH"
 PATH="/usr/local/opt/lsof/bin:$PATH"
 PATH="/usr/local/opt/libxml2/bin:$PATH"
 PATH="/usr/local/opt/libpq/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
 
 MANPATH="/usr/local/share/man/:$MANPATH"
