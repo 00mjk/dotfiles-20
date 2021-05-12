@@ -10823,7 +10823,7 @@
 				<real>0.0</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>Custom Shell</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -11333,6 +11333,8 @@
 	<integer>5</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
+	<key>TimeBetweenBlinks</key>
+	<real>0.375</real>
 	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>ViewManPageCommand</key>
