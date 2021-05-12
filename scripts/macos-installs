@@ -136,11 +136,6 @@ echo "\n===> Enabling brew-installed shells\n\n"
 append_if_missing /etc/shells "/usr/local/bin/bash"
 append_if_missing /etc/shells "/usr/local/bin/zsh"
 
-echo -e "\n===> Configuring yq completion\n\n"
-if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
-  yq shell-completion > $ZSH_SITE_FUNCTIONS/_yq
-fi
-
 # ------------- #
 # --- Casks --- #
 # ------------- #
