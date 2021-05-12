@@ -2,22 +2,31 @@
 
 set -e
 
+PLATFORM=
+if [[ "$(uname -s)" =~ Darwin ]]; then
+  PLATFORM='darwin'
+elif [[ "$(uname -s)" =~ Linux ]]; then
+  PLATFORM='linux'
+fi
+
 # The Golang project does not use github releases properly (2017-10-28).
 # The most reliable way is currently to parse the official Golang downloads page.
 GO_VERSION=$(
   curl -gsL golang.org/dl \
-    | grep -m1 'linux-amd64.tar.gz' \
-    | sed -E 's/.*dl\/go(.+)\.linux-amd64\.tar\.gz.*/\1/'
+    | grep -m1 "${PLATFORM}-amd64.tar.gz" \
+    | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-amd64.tar.gz\".+|\1|"
 )
 
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 GO_WORKSPACE="${HOME}/go"
-
 DOWNLOAD_DIR="${HOME}/Downloads"
-mkdir -p "${DOWNLOAD_DIR}"
-
-FILENAME="go${GO_VERSION}.linux-amd64.tar.gz"
+FILENAME="go${GO_VERSION}.${PLATFORM}-amd64.tar.gz"
 URL="https://storage.googleapis.com/golang/${FILENAME}"
+
+echo "PLATFORM    ${PLATFORM}"
+echo "GO_VERSION  ${GO_VERSION}"
+echo "FILENAME    ${FILENAME}"
+echo "URL         ${URL}"
 
 source "${CURRDIR}/utils.sh"
 
