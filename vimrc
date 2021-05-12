@@ -21,6 +21,10 @@ Plug 'mileszs/ack.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json'
+Plug 'vim-syntastic/syntastic'
 
 Plug 'majutsushi/tagbar'
 
@@ -334,3 +338,15 @@ autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
       \ xit
 
 highlight def link rubyRspec Function
+
+" -----------------
+" --- Syntastic ---
+" -----------------
+
+let g:syntastic_javascript_checkers=['eslint']
+
+" ----------------
+" --- vim-json ---
+" ----------------
+
+let g:vim_json_syntax_conceal = 0
