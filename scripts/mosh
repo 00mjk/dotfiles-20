@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# -y: non interactive, -u: update package cache after adding
+sudo add-apt-repository -yu ppa:keithw/mosh-dev
+
+sudo apt-get install -y mosh
+
+mosh --version
