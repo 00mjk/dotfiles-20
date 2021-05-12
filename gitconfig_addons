@@ -48,3 +48,6 @@
 
 [rerere]
   enabled = true
+  
+[tag]
+  forceSignAnnotated = true
