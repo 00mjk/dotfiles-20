@@ -58,6 +58,16 @@ export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 
 # export PATH="$GOROOT/bin:$PATH"
 # export PATH="$PATH:$GOPATH/bin"
 
+# --------------
+# --- Golang ---
+# --------------
+
+if [[ -z "$(command -v gobrew)" ]]; then
+  export GOPATH="$HOME/go"
+  export PATH="$PATH:$GOPATH/bin"
+  export PATH="/usr/local/go/bin:$PATH"
+fi
+
 # -------------- #
 # --- gobrew --- #
 # -------------- #
@@ -70,19 +80,10 @@ export LESS="--ignore-case --RAW-CONTROL-CHARS --tabs=2 --mouse --wheel-lines=3 
 #
 # the only downside is that it doesn't support the system Go installation
 
-[[ -n "$(command -v gobrew)"  ]] && export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-# # export GOPATH="$HOME/.gobrew/current/go"
-# export GOROOT="$HOME/.gobrew/current/go"
-
-# --------------
-# --- Golang ---
-# --------------
-
-# if [[ -z "$(command -v gobrew)" ]]; then
-#   export GOPATH="$HOME/go"
-#   export PATH="$PATH:$GOPATH/bin"
-#   export PATH="/usr/local/go/bin:$PATH"
-# fi
+if [[ -n "$(command -v gobrew)" ]]; then
+  export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+  export GOPATH="$HOME/.gobrew/current/go"
+fi
 
 # ---------------------
 # --- Output stream ---
