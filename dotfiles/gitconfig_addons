@@ -5,8 +5,8 @@
 	ff = only
 [submodule]
 	recurse = true
-# [init]
-# 	defaultBranch = main
+[init]
+	defaultBranch = main
 [color]
   ui = true
 [alias]
