@@ -391,12 +391,6 @@ vnoremap < <gv
 nnoremap > >>
 nnoremap < <<
 
-" --------------- "
-" --- Folding --- "
-" --------------- "
-
-" autocmd FileType python setlocal foldmethod=indent
-
 " -------------------------- "
 " --- Formatting options --- "
 " -------------------------- "
@@ -404,30 +398,40 @@ nnoremap < <<
 " Ensure some formatting options, some of which may already be enabled by
 " default, depending on the version of Vim.
 "
-" * Wrap text automatically both for text (t) and comments (c).
-" * Auto-add current comment leader on new lines both in insert mode (r) and
-" * normal mode (o).
-" * Remove the comment characters when joining lines (j).
-" * Allow formatting of comments with 'gq' (q).
-set formatoptions+=jtcroq
 " For auto-formatting of text (not just comments) to work, textwidth must be
 " explicitly set (it's 0 by default).
-set textwidth=79
-" Also wrap existing long lines when adding text to it (-l).
-" Respect new lines with a paragraph (-a).
-set formatoptions-=la
+set textwidth=80
+
+" some of these options require that 'autoindent' is set
+set formatoptions+=1 " don't break a line after a one letter word, but before
+set formatoptions+=c " auto-wrap comments
+set formatoptions+=j " remove the comment characters when joining lines
+set formatoptions+=l " keep long lines when editing, if they were already long
+set formatoptions+=n " recognise numbered lists (using 'formatlistpat')
+set formatoptions+=q " allow formatting of comments with 'gq'
+set formatoptions+=r " auto-add current comment leader on new lines both in insert mode
+set formatoptions+=t " wrap text automatically using 'textwidth'
+
+set formatoptions-=o " do not add comment leader to new lines created with 'o' or 'O'
+set formatoptions-=a " do not reformat the entire paragraph on every change because it messes with commented code
 
 " Disabling auto formatting for the following file types because the wrapping
 " also seems to be applied to code.
-autocmd FileType swift,erb,sh set formatoptions-=t
+autocmd FileType swift,erb,sh,python set formatoptions-=t
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
 set nojoinspaces
 
-" I - When moving the cursor up or down just after inserting indent for i
-" 'autoindent', do not delete the indent. (cpo-I)
+" I - When moving the cursor up or down just after inserting indent for
+" 'autoindent', do not delete the indent. (cpo+=I)
 set cpoptions+=I
+
+" --------------- "
+" --- Folding --- "
+" --------------- "
+
+" autocmd FileType python setlocal foldmethod=indent
 
 " ------------------------- "
 " --- Buffer management --- "
