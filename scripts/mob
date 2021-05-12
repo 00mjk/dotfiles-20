@@ -1,0 +1,153 @@
+#!/bin/bash
+
+# ASCII constants
+readonly CLEAR_LINE='\033[K'
+readonly RED='\033[0;31m'
+readonly NO_COLOR='\033[0m'
+
+# command line arguments
+readonly ARGS=("$@")
+
+function countdown {
+  local i
+  for i in {5..1}
+  do
+    printf "MOB STARTING IN $i\r"
+    sleep 1
+  done
+}
+
+# one parameter: message (string)
+function alarm {
+  local msg=$1
+  printf $RED
+  local i
+  for i in {1..10}
+  do
+    printf "$msg\r"
+    sleep .5
+    printf "$CLEAR_LINE"
+    sleep .5
+  done
+  printf $NO_COLOR
+}
+
+# parameters: one+ team members, no of rounds (int), length of a round in min (int)
+function work {
+  local params=("$@")
+  local param_n=${#params[@]}
+
+  local time=${params[$((param_n - 1))]}
+  local rounds=${params[$((param_n - 2))]}
+  local team_size=$((param_n - 2))
+  local team=("${params[@]:0:$team_size}")
+
+  local i=0
+  local previous=""
+  local r
+  local next
+
+  while [ $i -lt $rounds ]
+  do
+    r=$(( RANDOM % team_size ))
+    next=${team[r]}
+
+    if [ "$next" !=  "$previous" ]
+    then
+      if [ $i -eq 0 ]
+      then
+        alarm "GET READY! FIRST: $next"
+      else
+        alarm "TIME'S UP! NEXT: $next"
+      fi
+
+      printf "NOW DRIVING: $next\r"
+      sleep $(( time * 60 ))
+      printf "$CLEAR_LINE"
+      previous=$next
+      ((i++))
+    fi
+  done
+}
+
+# one parameter: length in minutes (integer)
+function rest {
+  local time=$1
+  alarm "STOP! $time MIN BREAK"
+  progress_bar $time
+}
+
+# one parameter: length in minutes (integer)
+function progress_bar {
+  local i
+  local j
+  local time=$1
+  for (( i=0; i<$time; i++ ))
+  do
+    printf "["
+
+    for (( j=0; j<$i; j++ ))
+    do
+      printf "#"
+    done
+    for (( j=$i; j<$time; j++ ))
+    do
+      printf "."
+    done
+
+    printf "]"
+    printf " $(( time - i )) MIN LEFT"
+
+    sleep 60
+    printf "\r$CLEAR_LINE"
+  done
+}
+
+function help {
+  printf "mob 1.0\n"
+  printf "usage:   mob team_member... work_rounds work_time rest_time\n"
+  printf "example: mob ADRIAN EVA LUCA TOM 4 10 10\n"
+}
+
+function ctrl_c {
+  # reset font color in case ctrl-c was used while showing the "alarm"
+  printf "$NO_COLOR\n"
+
+  # make cursor visible
+  tput cnorm
+
+  exit 130
+}
+
+# note: doesn't check type or value of command-line parameters
+function main {
+  local arg_n=${#ARGS[@]}
+
+  # check number of command line arguments
+  if [ $arg_n -lt 4 ]
+  then
+    help
+    exit 1
+  fi
+
+  # make cursor invisible
+  tput civis
+
+  # command line arguments
+  local rest_time=${ARGS[$((arg_n - 1))]}
+  local work_params=("${ARGS[@]:0:$((arg_n - 1))}")
+
+  # main loop
+  while true
+  do
+    countdown
+    work ${work_params[@]}
+    rest $rest_time
+  done
+
+  # make cursor visible again
+  tput cnorm
+}
+trap ctrl_c SIGINT
+
+main
