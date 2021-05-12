@@ -179,6 +179,7 @@ brew install --casks --quiet \
   font-go \
   font-inconsolata \
   font-jetbrains-mono \
+  font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-backup-and-sync \
   google-chrome \
