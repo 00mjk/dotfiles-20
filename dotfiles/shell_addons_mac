@@ -12,3 +12,14 @@ PATH="/usr/local/opt/libpq/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 
 MANPATH="/usr/local/share/man/:$MANPATH"
+
+function brut() {
+  local TS=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
+  local LOG="$HOME/log/brew-upgrade-${TS}.log"
+  mkdir -p ~/log
+
+  brew update -v | tee $LOG
+  brew outdated
+  brew upgrade 2>&1 | tee -a $LOG
+  brew cleanup | tee -a $LOG
+}
