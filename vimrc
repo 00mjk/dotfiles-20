@@ -195,3 +195,9 @@ nmap <M-Down>   :call TmuxWinCmd('j')<CR>
 nmap <M-Up>     :call TmuxWinCmd('k')<CR>
 nmap <M-Left>   :call TmuxWinCmd('h')<CR>
 nmap <M-Right>  :call TmuxWinCmd('l')<CR>
+
+" ----------------------------
+" --- vim-go configuration ---
+" ----------------------------
+
+let g:go_fmt_command = "goimports"
