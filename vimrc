@@ -547,19 +547,20 @@ let g:airline#extensions#branch#enabled = 0
 " ---------------- "
 
 let s:agignore =
+      \' --ignore-dir=.bin'.
+      \' --ignore-dir=.bundle'.
+      \' --ignore-dir=bundle'.
       \' --ignore-dir=.git'.
       \' --ignore-dir=.hg'.
       \' --ignore-dir=.svn'.
-      \' --ignore-dir=.bundle'.
-      \' --ignore-dir=.bin'.
-      \' --ignore-dir=vendor'.
       \' --ignore-dir=log'.
       \' --ignore-dir=node_modules'.
-      \' --ignore=*.exe'.
-      \' --ignore=*.so'.
+      \' --ignore-dir=vendor'.
       \' --ignore=*.class'.
       \' --ignore=*.dll'.
+      \' --ignore=*.exe'.
       \' --ignore=*.pyc'.
+      \' --ignore=*.so'.
       \' --ignore=tags'
 
 " ----------- "
@@ -623,7 +624,7 @@ let g:ctrlp_custom_ignore = {
 " overrides that. We need therefore to explicitly specify the paths to be
 " ignored.
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g ""' . s:agignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g "" ' . s:agignore
 endif
 
 " Ignore space chars in file finder by designating spaces as an abbreviation
