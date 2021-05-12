@@ -191,6 +191,10 @@ alias utcnow='date -u +"%Y-%m-%dT%H-%M-%SZ"'
 
 # --- git --- #
 
+# width refers to each column if side-by-side; we set it to half the current
+# number of columns in the terminal
+alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
+
 alias gti='git'
 alias g='git'
 alias ga='git add'

@@ -27,6 +27,7 @@ brew install \
   bat \
   bmon \
   cmark \
+  colordiff \
   coreutils \
   diffutils \
   direnv \
@@ -70,7 +71,8 @@ brew install \
   openssh \
   perl \
   pre-commit \
-  python \
+  python@3.8 \
+  python@3.9 \
   ranger \
   rbenv \
   ripgrep \
@@ -94,6 +96,10 @@ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 # --------------------------------- #
 # --- Post install for formulae --- #
 # --------------------------------- #
+
+brew link --overwrite --force python@3.9
+
+python3 -m pip install ydiff
 
 printf "\n===> Configuring fzf\n"
 set -x
@@ -128,8 +134,9 @@ ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
-  ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion _docker
-  ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion _docker-compose
+  docker_completions_dir=/Applications/Docker.app/Contents/Resources/etc/
+  ln -sfv "$docker_completions_dir/docker.zsh-completion" _docker
+  ln -sfv "$docker_completions_dir/docker-compose.zsh-completion" _docker-compose
   kubectl completion zsh > _kubectl
   popd
 fi
@@ -140,7 +147,9 @@ fi
 
 echo "
 
-NOTES
+-------------
+--- NOTES ---
+-------------
 
 * Many packages installed depend on the shell configuration provided.
   Run './scripts/dotfiles' to install it.
