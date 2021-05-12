@@ -84,42 +84,38 @@ alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux
 #
 # update_auth_sock()
 
-# # ------------------------
-# # --- Google Cloud SDK ---
-# # ------------------------
-#
-# # The next line updates PATH for the Google Cloud SDK.
-# if [[ -f $HOME/.google-cloud-sdk/path.bash.inc ]]; then
-#   source $HOME/.google-cloud-sdk/path.bash.inc
-# fi
-#
-# if [[ -f $HOME/google-cloud-sdk/path.bash.inc ]]; then
-#   source $HOME/google-cloud-sdk/path.bash.inc
-# fi
-#
-# # The next line enables bash completion for gcloud.
-# if [[ -f $HOME/.google-cloud-sdk/completion.bash.inc ]]; then
-#   source $HOME/.google-cloud-sdk/completion.bash.inc
-# fi
-#
-# if [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]]; then
-#   source $HOME/google-cloud-sdk/completion.bash.inc
-# fi
-#
-# # ----------------------------------- #
-# # --- Kubernetes CLI autocomplete --- #
-# # ----------------------------------- #
-#
-# # TODO: this is very slow, because `kubectl completion bash` is slow,
-# #       replace with a file containing the output of the kubectl command
+# ------------------------
+# --- Google Cloud SDK ---
+# ------------------------
+
+if [[ $SHELL =~ bash ]]; then
+  [[ -f $HOME/.google-cloud-sdk/path.bash.inc ]] && source $HOME/.google-cloud-sdk/path.bash.inc
+  [[ -f $HOME/google-cloud-sdk/path.bash.inc ]] && source $HOME/google-cloud-sdk/path.bash.inc
+  [[ -f $HOME/.google-cloud-sdk/completion.bash.inc ]] && source $HOME/.google-cloud-sdk/completion.bash.inc
+  [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]] && source $HOME/google-cloud-sdk/completion.bash.inc
+fi
+
+if [[ $SHELL =~ zsh ]]; then
+  [[ -f $HOME/.google-cloud-sdk/path.zsh.inc ]] && source $HOME/.google-cloud-sdk/path.zsh.inc
+  [[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc
+  [[ -f $HOME/.google-cloud-sdk/completion.zsh.inc ]] && source $HOME/.google-cloud-sdk/completion.zsh.inc
+  [[ -f $HOME/google-cloud-sdk/completion.zsh.inc ]] && source $HOME/google-cloud-sdk/completion.zsh.inc
+fi
+
+# ----------------------------------- #
+# --- Kubernetes CLI autocomplete --- #
+# ----------------------------------- #
+
+# TODO: this is very slow, because `kubectl completion bash` is slow,
+#       replace with a file containing the output of the kubectl command
 # if [[ -n "$(command -v kubectl)" ]]; then
 #   source <(kubectl completion bash)
 # fi
-#
-# # ----------------
-# # --- Minikube ---
-# # ----------------
-#
+
+# ----------------
+# --- Minikube ---
+# ----------------
+
 # export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
 # export MINIKUBE_WANTUPDATENOTIFICATION=false
 # export MINIKUBE_WANTREPORTERRORPROMPT=false
