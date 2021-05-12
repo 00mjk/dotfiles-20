@@ -497,8 +497,10 @@ vnoremap <Leader>p pgvy`>
 " Delete without yanking, send the deleted content to the 'black hole' register.
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
-if !has('nvim')
+if !has('nvim') && has('linux')
   set <M-d>=d
+elseif has('osxdarwin')
+  set <M-d>=∂
 end
 
 " ...then, the actual mapping:
