@@ -49,6 +49,7 @@ echo "[setup] Install recent versions of macOS built-in utilities"
 brew install --formulae --quiet \
   bash \
   git \
+  tidy-html5 \
   less \
   libxml2 \
   make \
