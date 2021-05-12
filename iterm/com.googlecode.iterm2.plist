@@ -13,7 +13,7 @@
 	<key>BootstrapDaemon</key>
 	<false/>
 	<key>Command</key>
-	<string></string>
+	<string>/usr/local/bin/zsh</string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>3024 Day</key>
@@ -10823,7 +10823,7 @@
 				<real>0.0</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Custom Shell</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -11333,8 +11333,6 @@
 	<integer>5</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
-	<key>TimeBetweenBlinks</key>
-	<real>0.375</real>
 	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>ViewManPageCommand</key>

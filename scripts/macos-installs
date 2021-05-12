@@ -140,15 +140,6 @@ append_if_missing /etc/shells "/usr/local/bin/zsh"
 echo "\n===> Changing default shell to brew-installed zsh (requires sudo pass)"
 chsh -s /usr/local/bin/zsh
 
-echo "\n===> Install Oh My ZSH"
-
-if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-  touch "${HOME}/.zshrc"
-  ohmyzsh_install="/tmp/install-ohmyzsh.sh"
-  curl -o "${ohmyzsh_install}" -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-  KEEP_ZSHRC=yes sh /tmp/install-ohmyzsh.sh
-fi
-
 echo "\n===> Install dotfiles"
 
 "${CURRDIR}/dotfiles"
