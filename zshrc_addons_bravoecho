@@ -22,8 +22,7 @@ setopt NO_CLOBBER
 export COMPLETION_WAITING_DOTS="true"
 export HIST_STAMPS="yyyy-mm-dd"
 
-export HISTFILESIZE=3000000 # ~ 3 MB
-export HISTSIZE=200000 # 200K lines
+export HISTSIZE=250000 # 250K lines
 
 # autocomplete hidden files...
 setopt GLOB_DOTS
