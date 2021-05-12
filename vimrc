@@ -16,9 +16,7 @@ Plug 'mileszs/ack.vim'
 
 call plug#end()
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" Additional leader keys
 
 nmap , \
 vmap , \
@@ -32,7 +30,7 @@ nmap <S-Tab> :bprev<CR>
 nmap <C-K> :bnext<CR>
 nmap <C-J> :bprev<CR>
 
-"map = and -  to end and beginning of line. More intuitive and easy on the fingers
+" map `=` and `-`  to end and beginning of line
 nnoremap = $
 nnoremap - 0
 
@@ -92,14 +90,43 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Ack
-nnoremap <Leader>a :Ack!<space>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" do no jump to the first result
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 " NERDTree
-let NERDTreeMinimalUI=1
 " Shortcut to open/close
 map <Leader>n :NERDTreeToggle<CR>
 " Highlight the current buffer (think of 'find')
 map <Leader>f :NERDTreeFind<CR>
+
+let NERDTreeMinimalUI=1
+let NERDTreeShowHidden=1 " show hidden files at startup
+let NERDTreeIgnore = ['\.pyc$', '\.class$'] " http://superuser.com/questions/184844/hide-certain-files-in-nerdtree
+let NERDTreeAutoDeleteBuffer=1 " automatically replace/close the corresponding buffer when a file is moved/deleted
+
+" CtrlP
+let g:ctrlp_show_hidden = 1
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](\.git|\.hg|\.svn|\.bundle|bin|bbin|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll|class|pyc)$',
+  \ }
+  " \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+
+" use ctrlp in a single shortcut to navigate buffers
+noremap <Leader>b :CtrlPBuffer<CR>
+
+" use ag (https://robots.thoughtbot.com/faster-grepping-in-vim)
+" * faster and respects .gitignore
+" * ag is fast enough that CtrlP doesn't need to cache
+if executable('ag')
+	" let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
