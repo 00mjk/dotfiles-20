@@ -76,7 +76,10 @@ set splitright
 " --- Wrapping
 set autoindent  " Remember indent level after going to the next line.
 set nowrap " Do not visually wrap lines by default.
-set breakindent " Align visually wrapped lines with the original indentation.
+
+if version > 704
+  set breakindent " Align visually wrapped lines with the original indentation.
+endif
 set linebreak " Break between words when wrapping (don't break within words).
 " toggle wrapping with leader-w
 nmap <silent> <leader>w :set wrap!<CR>
