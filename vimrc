@@ -956,40 +956,9 @@ let s:ag_grepprg = 'ag' . s:ag_defaults . s:ag_ignore
 " --- rg defaults --- "
 " ------------------- "
 
-" TODO: move ignores to an rg config file, so they are the same everywhere
-let s:rg_ignore =
-      \ " --glob='!**/.bin/'".
-      \ " --glob='!**/.bundle/'".
-      \ " --glob='!**/.git/'".
-      \ " --glob='!**/.hg/'".
-      \ " --glob='!**/.svn/'".
-      \ " --glob='!**/_quarantine/'".
-      \ " --glob='!**/bitbucket.org/'".
-      \ " --glob='!**/bundle/'".
-      \ " --glob='!**/cloud.google.com/'".
-      \ " --glob='!**/code.google.com/'".
-      \ " --glob='!**/cuelang.org/'".
-      \ " --glob='!**/git/'".
-      \ " --glob='!**/github.com/'".
-      \ " --glob='!**/golang.org/'".
-      \ " --glob='!**/google.golang.org/'".
-      \ " --glob='!**/gopkg.in/'".
-      \ " --glob='!**/launchpad.net/'".
-      \ " --glob='!**/log/'".
-      \ " --glob='!**/node_modules/'".
-      \ " --glob='!**/speter.net/'".
-      \ " --glob='!**/vendor/'".
-      \ " --glob='!**/venv*/'".
-      \ " --glob='!*.class'".
-      \ " --glob='!*.dll'".
-      \ " --glob='!*.exe'".
-      \ " --glob='!*.pyc'".
-      \ " --glob='!*.so'".
-      \ " --glob='!tags'"
-
-let s:rgdefaults = " --vimgrep --hidden --no-heading --line-number --follow --smart-case --trim --no-ignore-vcs"
-
-let s:rg_grepprg = 'rg' . s:rgdefaults . s:rg_ignore
+" the config path needs to be specified because Vim doesn't load the shell
+" interactively
+let s:rg_grepprg = 'RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc" rg --vimgrep'
 
 " ------------------- "
 " --- vim-grepper --- "
