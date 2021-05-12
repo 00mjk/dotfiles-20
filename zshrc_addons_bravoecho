@@ -3,6 +3,7 @@
 setopt HISTIGNOREDUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt GLOBDOTS
+setopt GLOB_COMPLETE
 # prevents you from accidentally overwriting an existing file.
 setopt NOCLOBBER
 
@@ -13,3 +14,6 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+if [[ -n "$(command -v fzf)" && "$(uname -s)" == "Darwin" ]]; then
+  bindkey "ç" fzf-cd-widget
+fi
