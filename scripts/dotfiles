@@ -17,11 +17,22 @@ backup_and_symlink $ROOTDIR/bash_aliases_addons_bravoecho $HOME/.bash_aliases_ad
 backup_and_symlink $ROOTDIR/bashrc_addons_bravoecho $HOME/.bashrc_addons_bravoecho
 backup_and_symlink $ROOTDIR/tmux.conf $HOME/.tmux.conf
 
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
+if [[ -f "$HOME/.bashrc" ]]; then
+  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
+  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
 
-# Allow to further customise aliases without the need to make changes to the provided setup.
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
-append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
+  # Allow to further customise aliases without the need to make changes to the provided setup.
+  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
+  append_if_missing "$HOME/.bashrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
+fi
+
+if [[ -f "$HOME/.zshrc" ]]; then
+  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bashrc_addons_bravoecho" ]] && source ~/.bashrc_addons_bravoecho'
+  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bash_aliases_addons_bravoecho" ]] && source ~/.bash_aliases_addons_bravoecho'
+
+  # Allow to further customise aliases without the need to make changes to the provided setup.
+  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bashrc_addons_local" ]] && source ~/.bashrc_addons_local'
+  append_if_missing "$HOME/.zshrc" '[[ -e "${HOME}/.bash_aliases_addons_local" ]] && source ~/.bash_aliases_addons_local'
+fi
 
 git config --global include.path .gitconfig_addons_bravoecho
