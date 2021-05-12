@@ -21,4 +21,4 @@ vim +GoUpdateBinaries +qall
 "${CURRDIR}/vim-markdown-tagbar"
 
 echo "[setup] Update Rust"
-rustup update
+"${CURRDIR}/rust"

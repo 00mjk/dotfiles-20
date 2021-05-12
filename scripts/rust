@@ -3,14 +3,19 @@
 set -eu
 set -o pipefail
 
-echo "[setup][rust] Install rustup"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
-  | sh -s -- --no-modify-path -y
+if [[ -n "$(command -v rustup)" ]]; then
+  echo "[setup][rust] Run 'rustup update'"
+  rustup update
+else
+  echo "[setup][rust] Install rustup"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+    | sh -s -- --no-modify-path -y
 
-echo "[setup][rust] Install rust components"
-$HOME/.cargo/bin/rustup component add \
-  rust-src \
-  rustfmt
+  echo "[setup][rust] Install rust components"
+  $HOME/.cargo/bin/rustup component add \
+    rust-src \
+    rustfmt
+fi
 
 echo "[setup][rust] Install rust-analyzer"
 mkdir -p ~/.local/bin
@@ -36,5 +41,5 @@ echo "[setup][rust] Install bash autocompletions"
 bash_autocomplete_dir=/usr/local/etc/bash_completion.d
 mkdir -p $bash_autocomplete_dir
 
-$HOME/.cargo/bin/rustup completions bash > $bash_autocomplete_dir/rustup.bash-completion
-$HOME/.cargo/bin/rustup completions bash cargo >> $bash_autocomplete_dir/cargo.bash-completion
+$HOME/.cargo/bin/rustup completions bash >| $bash_autocomplete_dir/rustup.bash-completion
+$HOME/.cargo/bin/rustup completions bash cargo >| $bash_autocomplete_dir/cargo.bash-completion
