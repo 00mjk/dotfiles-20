@@ -47,6 +47,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # highlight current completion option
 zstyle ':completion:*' menu select
 
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
 # enable autocompletion for aliases defined in shell_addons;
 # each alias will use the give command as the underlying target for the
 # autocompletion
