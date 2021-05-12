@@ -245,12 +245,6 @@ function gch() {
 
 export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 
-# ----------- #
-# --- BAT --- #
-# ----------- #
-
-export BAT_THEME=GitHub
-
 # ------------ #
 # --- Rust --- #
 # ------------ #
