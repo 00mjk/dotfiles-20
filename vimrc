@@ -474,10 +474,15 @@ function! TmuxWinCmd(direction)
   end
 endfunction
 
-nmap <M-Down>   :call TmuxWinCmd('j')<CR>
 nmap <M-Up>     :call TmuxWinCmd('k')<CR>
+nmap <M-Down>   :call TmuxWinCmd('j')<CR>
 nmap <M-Left>   :call TmuxWinCmd('h')<CR>
 nmap <M-Right>  :call TmuxWinCmd('l')<CR>
+
+nmap <M-k> :call TmuxWinCmd('k')<CR>
+nmap <M-j> :call TmuxWinCmd('j')<CR>
+nmap <M-h> :call TmuxWinCmd('h')<CR>
+nmap <M-l> :call TmuxWinCmd('l')<CR>
 
 " ------------------- "
 " --- vim-airline --- "
