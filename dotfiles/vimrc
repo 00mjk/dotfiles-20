@@ -1165,10 +1165,10 @@ autocmd FileType sql setlocal commentstring=--\ %s
 let g:go_fmt_command = 'gopls'
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
+let g:go_gopls_gofumpt = v:true
 
 let g:go_imports_mode = 'gopls'
 let g:go_imports_autosave = 1
-" let g:go_gopls_gofumpt = v:true
 " let g:go_gopls_local = 'mymod'
 
 let g:go_code_completion_icase = 1
