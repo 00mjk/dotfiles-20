@@ -1230,11 +1230,14 @@ let g:go_code_completion_icase = 1
 " let g:go_fillstruct_mode = 'gopls' " disabled as currently broken (2021-03)
 let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
+" let g:go_gopls_use_placeholders = v:null
 
 " show information about the identifier under the cursor (funcions, vars..)...
 let g:go_auto_type_info = 1
 " ...after 1000 ms instead of the default 800
 let g:go_updatetime=1000
+
+ let g:go_addtags_skip_unexported = 1
 
 " --- vim-go: mappings ---
 
