@@ -256,6 +256,7 @@ alias gcl='git checkout -' # "git checkout 'last'"
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gf='git fetch'
+alias gnp='git --no-pager'
 alias gp='git pull'
 alias gpl='git pull'
 alias gpp='git push origin HEAD -u'

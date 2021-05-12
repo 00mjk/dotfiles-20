@@ -86,6 +86,7 @@ if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
   compdef gd='git'
   compdef gds='git'
   compdef gf='git'
+  compdef gnp='git'
   compdef gp='git'
   compdef gpl='git'
   compdef gpp='git'
