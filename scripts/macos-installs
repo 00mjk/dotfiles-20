@@ -216,6 +216,15 @@ echo "[setup] Install Golang"
 echo "[setup] Install Rust"
 "${CURRDIR}/rust"
 
+# ---------------------------------------------------- #
+# --- Fix source code files appearing in Spotlight --- #
+# ---------------------------------------------------- #
+
+# See https://www.howtogeek.com/231829/how-to-disable-developer-search-results-in-spotlight-on-a-mac/
+
+echo "[setup] Fix Spotlight bug not showing the 'Developer' option"
+touch /Applications/Xcode.app
+
 # ------------------ #
 # --- Next steps --- #
 # ------------------ #
@@ -259,5 +268,7 @@ echo "
   - vagrant
   - virtualbox
   - virtualbox-extension-pack
+
+* Open Spotlight preferences to disable 'Developer' results (source code files)
 
 "
