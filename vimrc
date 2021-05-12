@@ -46,8 +46,22 @@ set cursorline
 set ignorecase
 set showmatch
 
-" enable mouse mode
-set mouse=a
+filetype plugin indent on " Automatically detect file types.
+syntax on  " syntax highlighting
+set mouse=a " enable mouse mode
+
+set noerrorbells visualbell t_vb=    " Disable all bells
+set autoindent                       " remember indent after going to the next line
+set showcmd                          " show command that is being entered in the lower right
+set backspace=indent,eol,start       " Allow extended backspace behaviour
+set virtualedit=block                " allow placing the cursor after the last char
+
+" Use 2-space soft tabs by defaults
+" (it's overriden for some some languages with different conventions).
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
@@ -111,18 +125,6 @@ endfun
 
 autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-set noerrorbells visualbell t_vb=    " Disable all bells
-set autoindent                       " remember indent after going to the next line
-set showcmd                          " show command that is being entered in the lower right
-set backspace=indent,eol,start       " Allow extended backspace behaviour
-set virtualedit=block                " allow placing the cursor after the last char
-
-" Use 2-space soft tabs by defaults
-" (it's overriden for some some languages with different conventions).
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
 " Allow enter to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
