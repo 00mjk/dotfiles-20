@@ -1,3 +1,5 @@
+# vim: set ft=sh:
+
 # Git shortcuts
 
 alias g='git'

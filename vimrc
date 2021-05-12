@@ -7,7 +7,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdtree'
@@ -84,11 +83,13 @@ nmap <Leader>s :w<CR>
 nmap <Leader>q :qa!<CR>
 
 " vim-airline
-
-let g:airline_theme = 'base16_default' " Milder colorschemes (pending the creation of a 16-color colorscheme)
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
-let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in status bar
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+" Show buffer number in status bar
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Ack
 nnoremap <Leader>a :Ack!<space>
