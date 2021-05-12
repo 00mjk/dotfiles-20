@@ -2,6 +2,10 @@
 
 [core]
   editor = 'vim'
+  pager = 'delta'
+[delta]
+  line-numbers = true
+  side-by-side = true
 [pull]
 	ff = only
 [submodule]
@@ -42,7 +46,7 @@
   shall = stash save --include-untracked
   undo = reset --soft HEAD^
   unstage = reset HEAD --
-	root = rev-parse --show-toplevel
+  root = rev-parse --show-toplevel
 
   # Attempt to determine the original author, by ignoring trivial changes
   # -w  white space
