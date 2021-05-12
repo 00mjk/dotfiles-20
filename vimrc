@@ -495,6 +495,8 @@ set listchars=tab:»·,trail:·,extends:>,precedes:<
 " toggle hidden characters highlighting:
 nmap <silent> <Leader>w :set nolist!<CR>
 
+" --- Strip whitespace ---
+
 function! <SID>StripTrailingWhitespaces()
   " store the original position
   let l = line(".")
@@ -505,7 +507,7 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c) " back to the original position
 endfun
 
-autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType Dockerfile,make,c,coffee,cpp,css,eruby,eelixir,elixir,html,java,javascript,json,markdown,php,puppet,python,ruby,scss,sh,sql,text,tmux,typescript,vim,yaml,zsh autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " -------------------- "
 " --- Omnicomplete --- "
