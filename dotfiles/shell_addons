@@ -77,6 +77,7 @@ if [[ -x "$HOME/.gobrew/bin/gobrew" ]]; then
   # instead is actually the GOROOT, and will prevent installation of binaries
   # with "go get -u"
   export GOPATH="$HOME/go"
+  export PATH="$GOPATH/bin:$PATH"
 fi
 
 # --------------------- #
