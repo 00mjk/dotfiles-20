@@ -88,6 +88,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'jsit/disco.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'romainl/apprentice'
 
 call plug#end()
 
