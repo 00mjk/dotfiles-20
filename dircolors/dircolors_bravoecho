@@ -1,14 +1,14 @@
 # vim: set ft=dircolors:
 
 # Based on GNU's dircolors default database (below is the original copyright
-# notice), and on 
-# 
+# notice), and on
+#
 #   Configuration file for dircolors, a utility to help you set the LS_COLORS
 #   environment variable used by GNU ls with the --color option. Copyright (C)
 #   1996-2020 Free Software Foundation, Inc. Copying and distribution of this
 #   file, with or without modification, are permitted provided the copyright
 #   notice and this notice are preserved.
-# 
+#
 # The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
 # slackware version of dircolors) are recognized but ignored.
 
@@ -38,15 +38,15 @@ TERM terminator
 TERM tmux*
 TERM vt100
 TERM xterm*
- 
+
 # -------------- #
 # --- Legend --- #
 # -------------- #
 
 # Attribute codes:
-# 
+#
 #   00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
-# 
+#
 # Text color codes, respectively normal and bright:
 #
 #   Foreground
@@ -77,10 +77,10 @@ CHR 105;97 # character device driver
 # --- Executables --- #
 # ------------------- #
 
-EXEC 31 
+EXEC 31
 
 .sh 31
-.cmd 31 
+.cmd 31
 .exe 31
 .com 31
 .btm 31
@@ -99,7 +99,6 @@ CAPABILITY 31;103 # file with capability
 STICKY_OTHER_WRITABLE 35;103 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 35;103 # dir that is other-writable (o+w) and not sticky
 STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
-
 
 # ---------------- #
 # --- Archives --- #
@@ -277,4 +276,3 @@ STICKY 36;103 # dir with the sticky bit set (+t) and not other-writable
 .ANSI-01;36-bdcyan 01;36
 .ANSI-37-white 37
 .ANSI-01;37-bdwhite 01;37
-
