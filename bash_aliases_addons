@@ -80,7 +80,8 @@ gdel() {
 # --- ls ---
 # ----------
 
-alias ls='ls -Ga'
+alias ll='ls -l'
+alias la='ls -la'
 
 # ---------------
 # --- bundler ---
