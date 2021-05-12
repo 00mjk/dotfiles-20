@@ -245,6 +245,25 @@ vnoremap <Leader>p pgvy`>
 " y   -> copy it again
 " `>  -> jump to the last character of the visual selection (built-in mark)
 
+" ------------------- "
+" --- Real delete --- "
+" ------------------- "
+"
+" Delete without yanking, send the deleted content to the 'black hole' register.
+
+" First, fix ALT-d key combo...
+" https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+" http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
+set <M-d>=d
+
+" ...then, the actual mapping:
+" current line in normal and insert mode
+nnoremap <M-d> "_dd
+nnoremap <Leader>d "_dd
+" selection in visual mode
+vnoremap <M-d> "_d
+vnoremap <Leader>d "_d
+
 " ---------------------- "
 " --- Spell checking --- "
 " ---------------------- "
