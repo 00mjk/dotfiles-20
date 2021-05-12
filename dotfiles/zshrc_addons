@@ -5,7 +5,6 @@
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
 export LANG=en_GB.UTF-8
 
 # don't add history entry if it's a duplicate of the previous command (and only
@@ -22,10 +21,10 @@ setopt HIST_REDUCE_BLANKS
 setopt NO_HIST_EXPIRE_DUPS_FIRST
 setopt NO_HIST_IGNORE_ALL_DUPS
 
-# prevents accidentally overwriting an existing file
+# prevents accidentally overwriting an existing file, override with >|
 setopt NO_CLOBBER
 
-# disable messing with redirection (treat redirection like bash)
+# disable messing with redirection (treat redirection and pipes like bash)
 setopt NO_MULTIOS
 
 export COMPLETION_WAITING_DOTS="true"
@@ -39,7 +38,7 @@ setopt GLOB_DOTS
 zstyle ':completion:*' special-dirs false
 
 # allow to choose matching options when a command has a wildcard, instead of
-# completing the command with all the maches
+# completing the command with all the matches
 setopt GLOB_COMPLETE
 
 # use the same colors for completion as ls
