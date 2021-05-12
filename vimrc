@@ -34,10 +34,6 @@ nmap <S-Tab> :bprev<CR>
 nmap <C-K> :bnext<CR>
 nmap <C-J> :bprev<CR>
 
-" Map l key to right pane and h key to left pane
-map <C-L> <C-w>w
-map <C-H> <C-w>p
-
 set number
 
 set cursorline
