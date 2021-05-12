@@ -405,26 +405,32 @@ let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number in stat
 " Toggle the buffer/tab line with 'leader-t' (think of 'Toggle Tabs')
 nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
 
+" ---------------- "
+" --- agignore --- "
+" ---------------- "
+
+let s:agignore =
+      \' --ignore-dir=.git'.
+      \' --ignore-dir=.hg'.
+      \' --ignore-dir=.svn'.
+      \' --ignore-dir=.bundle'.
+      \' --ignore-dir=.bin'.
+      \' --ignore-dir=vendor'.
+      \' --ignore-dir=log'.
+      \' --ignore-dir=node_modules'.
+      \' --ignore=*.exe'.
+      \' --ignore=*.so'.
+      \' --ignore=*.class'.
+      \' --ignore=*.dll'.
+      \' --ignore=*.pyc'.
+      \' --ignore=tags'
+
 " ----------- "
 " --- Ack --- "
 " ----------- "
 
 if executable('ag')
-  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores'.
-        \' --ignore-dir=.git'.
-        \' --ignore-dir=.hg'.
-        \' --ignore-dir=.svn'.
-        \' --ignore-dir=.bundle'.
-        \' --ignore-dir=.bin'.
-        \' --ignore-dir=vendor'.
-        \' --ignore-dir=log'.
-        \' --ignore-dir=node_modules'.
-        \' --ignore=*.exe'.
-        \' --ignore=*.so'.
-        \' --ignore=*.class'.
-        \' --ignore=*.dll'.
-        \' --ignore=*.pyc'.
-        \' --ignore=tags'
+  let g:ackprg = 'ag --hidden --follow --smart-case --skip-vcs-ignores' . s:agignore
 endif
 " do no jump to the first result
 cnoreabbrev Ack Ack!
@@ -474,21 +480,7 @@ let g:ctrlp_custom_ignore = {
 " overrides that. We need therefore to explicitly specify the paths to be
 " ignored.
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g ""'.
-        \' --ignore-dir=.git'.
-        \' --ignore-dir=.hg'.
-        \' --ignore-dir=.svn'.
-        \' --ignore-dir=.bundle'.
-        \' --ignore-dir=.bin'.
-        \' --ignore-dir=vendor'.
-        \' --ignore-dir=log'.
-        \' --ignore-dir=node_modules'.
-        \' --ignore=*.exe'.
-        \' --ignore=*.so'.
-        \' --ignore=*.class'.
-        \' --ignore=*.dll'.
-        \' --ignore=*.pyc'.
-        \' --ignore=tags'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g ""' . s:agignore
 endif
 
 " use ctrlp in a single shortcut to navigate buffers
