@@ -104,6 +104,7 @@ brew install --formulae --quiet \
   ruby-install \
   slurm \
   the_silver_searcher \
+  terraform \
   tig \
   tmux \
   trash \
@@ -160,7 +161,9 @@ brew tap homebrew/cask-fonts
 
 brew install --casks --quiet \
   alacritty \
+  authy \
   calibre \
+  dash \
   discord \
   docker \
   drawio \
@@ -172,12 +175,13 @@ brew install --casks --quiet \
   font-juliamono \
   google-backup-and-sync \
   google-chrome \
+  istat-menus \
   iterm2 \
   libreoffice \
   microsoft-teams \
-  microsoft-edge \
   middle \
   pastebot \
+  postman \
   rectangle \
   sdformatter \
   slack \
