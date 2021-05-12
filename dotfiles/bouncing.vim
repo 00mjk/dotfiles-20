@@ -43,23 +43,6 @@ nnoremap <M-q> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <C-q> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
-" ====================
-" === fatih/vim-go ===
-" ====================
-let g:go_snippet_engine = "ultisnips"
-
-" https://google.github.io/styleguide/jsoncstyleguide.xml?showone=Property_Name_Format#Property_Name_Format
-let g:go_snippet_case_type = "camelcase"
-
-" Sometimes when using both vim-go and syntastic Vim will start lagging while
-" saving and opening files. The following fixes this.
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-" Another issue with vim-go and syntastic is that the location list window
-" that contains the output of commands such as :GoBuild and :GoTest might
-" not appear. To resolve this:
-let g:go_list_type = "quickfix"
-
 " ===============================
 " === Filetype customizations ===
 " ===============================
@@ -366,15 +349,3 @@ autocmd! bufwritepost $HOME/.vimrc.after source $HOME/.vimrc.after
 " <http://damien.lespiau.name/blog/2009/03/18/per-project-vimrc/>
 set exrc " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
-
-" ===========================
-" === Trailing whitespace ===
-" ===========================
-" <http://stackoverflow.com/questions/9121550/vim-highlight-trailing-whitespace-and-spaces-before-and-after-tabs>
-" <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
-set listchars=tab:»·,trail:·,extends:>,precedes:<
-" set listchars=tab:>-,trail:·,eol:$
-" set list
-" Whitespace will be hidden by default, but it's possible to toggle it
-" http://items.sjbach.com/319
-nmap <silent> <leader>w :set nolist!<CR>
