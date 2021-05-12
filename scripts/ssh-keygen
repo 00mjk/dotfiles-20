@@ -1,8 +1,22 @@
 #!/usr/bin/env zsh
 
+# taken from oh-my-zsh: macOS's $HOST changes with dhcp, etc. Use ComputerName
+# if possible.
+computer_name=$(
+  if [[ "$OSTYPE" = darwin* && -n $(scutil --get ComputerName 2>/dev/null) ]]; then
+    scutil --get ComputerName 2>/dev/null
+  else
+    hostname | sed "s|\..*||"
+  fi
+)
+
+key_name="$(whoami)@${computer_name%.local}_$(date -u +'%F')"
+
+echo "--- Generating key with name: $key_name ---"
+
 ssh-keygen \
   -t ed25519 \
   -a 200 \
-  -C "$(whoami)@${$(hostname)%.local}_$(date -u +'%Y-%m-%dT%H-%M-%SZ')"
+  -C $key_name
 
 cat "$HOME/.ssh/id_ed25519.pub"
