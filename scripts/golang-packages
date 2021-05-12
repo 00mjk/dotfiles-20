@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 pushd ~
-GO111MODULE=on go get -u mvdan.cc/gofumpt
-GO111MODULE=on go get -u mvdan.cc/gofumpt/gofumports
-GO111MODULE=on go get -u honnef.co/go/tools/cmd/staticcheck
-GO111MODULE=on go get -u github.com/kyoh86/richgo
+GO111MODULE=on go get -v -u mvdan.cc/gofumpt
+GO111MODULE=on go get -v -u mvdan.cc/gofumpt/gofumports
+GO111MODULE=on go get -v -u honnef.co/go/tools/cmd/staticcheck
+GO111MODULE=on go get -v -u github.com/kyoh86/richgo
 popd
