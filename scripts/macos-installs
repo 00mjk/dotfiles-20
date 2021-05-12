@@ -71,6 +71,7 @@ brew install --formulae --quiet \
   ffmpeg \
   fzf \
   gnupg \
+  glow \
   go \
   golangci/tap/golangci-lint \
   graphviz \
