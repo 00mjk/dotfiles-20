@@ -941,6 +941,9 @@ let NERDTreeCascadeSingleChildDir=0 " do not collapse on the same line directori
 
 " See also https://github.com/junegunn/fzf/blob/master/README-VIM.md
 
+" NOTE: Most of the options set with envars in the shell will also apply when
+" fzf is invoked in Vim. Check those options in case of unwanted behaviour.
+
 " run in a less intrusive terminal buffer at the bottom
 let g:fzf_layout = { 'down': '~30%' }
 " command to generate tags file
@@ -961,8 +964,9 @@ noremap <Leader>b :Buffers<CR>
 " Shortcuts
 nmap <Leader>c gcc
 vmap <Leader>c gc
-" The underscore represents the forward slash. See :help :map-special-keys.
-" Note: this will not work with nnoremap and vnoremap
+" The underscore (_) represents the forward slash (/).
+" See :help :map-special-keys.
+" NOTE: this will not work with nnoremap and vnoremap
 nmap <C-_> gcc
 vmap <C-_> gc
 
