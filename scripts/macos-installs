@@ -175,6 +175,7 @@ brew install --casks --quiet \
   iterm2 \
   libreoffice \
   microsoft-teams \
+  microsoft-edge \
   middle \
   pastebot \
   rectangle \
