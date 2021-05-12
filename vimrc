@@ -53,7 +53,6 @@ syntax on  " syntax highlighting
 set mouse=a " enable mouse mode
 
 set noerrorbells visualbell t_vb=    " Disable all bells
-set autoindent                       " remember indent after going to the next line
 set showcmd                          " show command that is being entered in the lower right
 set backspace=indent,eol,start       " Allow extended backspace behaviour
 set virtualedit=block                " allow placing the cursor after the last char
@@ -68,6 +67,14 @@ set expandtab
 " position of the new split panes
 set splitbelow
 set splitright
+
+" --- Wrapping
+set autoindent  " Remember indent level after going to the next line.
+set nowrap " Do not visually wrap lines by default.
+set breakindent " Align visually wrapped lines with the original indentation.
+set linebreak " Break between words when wrapping (don't break within words).
+" toggle wrapping with leader-w
+nmap <silent> <leader>w :set wrap!<CR>
 
 " Remember cursor position when re-opening a file
 autocmd BufReadPost *
@@ -143,9 +150,10 @@ nmap <Leader>d :bd
 nmap <Leader>c gcc
 vmap <Leader>c gc
 
-" Remove excess whitespace
+" --- Whitespace
 set listchars=tab:»·,trail:·,extends:>,precedes:<
-nmap <silent> <leader>w :set nolist!<CR>
+" toggle hidden characters highlighting:
+nmap <silent> <Leader>h :set nolist!<CR>
 
 function! <SID>StripTrailingWhitespaces()
   let l = line(".")
