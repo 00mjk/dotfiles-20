@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ as of 2018-03-05.
 
 set -e
+CURRDIR=$(cd "$(dirname $BASH_SOURCE)" && pwd -P)
 
 # ------------------------
 # --- CPU architecture ---
@@ -77,6 +78,12 @@ sudo apt-get install -y docker-ce
 
 sudo groupadd -f docker
 sudo usermod -aG docker $USER
+
+# ----------------------
+# --- docker-compose ---
+# ----------------------
+
+"${CURRDIR}/docker-compose"
 
 # ----------------
 # --- Test out ---
