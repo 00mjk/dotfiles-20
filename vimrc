@@ -338,7 +338,7 @@ nnoremap <expr><silent> <Leader>t &showtabline ? ":set showtabline=0\<cr>" : ":s
 " ----------- "
 
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case'.
+  let g:ackprg = 'ag --vimgrep --hidden --follow --smart-case --skip-vcs-ignores'.
         \' --ignore-dir=.git'.
         \' --ignore-dir=.hg'.
         \' --ignore-dir=.svn'.
@@ -402,7 +402,7 @@ let g:ctrlp_custom_ignore = {
 " overrides that. We need therefore to explicitly specify the paths to be
 " ignored.
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --skip-vcs-ignores -g ""'.
         \' --ignore-dir=.git'.
         \' --ignore-dir=.hg'.
         \' --ignore-dir=.svn'.
