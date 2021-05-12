@@ -257,12 +257,22 @@ nnoremap < <<
 " Ensure some formatting options, some of which may already be enabled by
 " default, depending on the version of Vim.
 " Wrap text automatically (a), both for text (t) and comments (c).
+" Auto-add current comment leader on new lines both in insert mode (r) and
+" normal mode (o).
 " Remove the comment characters when joining lines (j).
-" set formatoptions+=atcj
+" Allow formatting of comments with 'gq' (q)
+set formatoptions+=jtcroq
+" Also wrap existing long lines when adding text to it (-l).
+" Respect new lines with a paragraph (-a).
+set formatoptions-=la
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
 set nojoinspaces
+
+" I - When moving the cursor up or down just after inserting indent for i
+" 'autoindent', do not delete the indent. (cpo-I)
+set cpoptions+=I
 
 " ------------------------- "
 " --- Buffer management --- "
