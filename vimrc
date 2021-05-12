@@ -388,8 +388,9 @@ nmap <Leader>l :set foldmethod=syntax<CR>
 " Remap jj to escape insert mode
 inoremap jj <ESC>
 
-" Map leader-S to save file
-nmap <Leader>s :w<CR>
+" write all changed buffers with Ctrl-S
+inoremap <C-S> <esc>:wall<cr>
+nnoremap <C-S> :wall<CR>
 
 " Map F1 key (main vim help) to ESC to avoid bringing it up by mistake.
 nnoremap <F1> <ESC>
