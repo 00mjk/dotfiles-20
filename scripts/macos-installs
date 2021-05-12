@@ -161,7 +161,6 @@ brew tap homebrew/cask-fonts
 brew install --casks --quiet \
   alacritty \
   calibre \
-  devdocs \
   discord \
   docker \
   drawio \
@@ -249,6 +248,7 @@ echo "
   - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
   - menubar-stats
   - mdrp
+  - devdocs
   - istat-menus
   - signal
   - slack
