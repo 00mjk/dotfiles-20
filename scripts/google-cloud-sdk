@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+If gcloud is installed globally, ignore it and install it afresh,
+otherwise just update the existing one.
+if [[ "$(which gcloud)" == "${HOME}/google-cloud-sdk/bin/gcloud" ]]; then
+  echo "Google Cloud SDK already installed for the current user, updating and installing additional components."
+  gcloud components update --quiet
+  gcloud components install --quiet kubectl app-engine-python beta alpha
+  exit 0
+fi
+
+sudo apt-get update
+sudo apt-get install -y wget unzip
+
+DOWNLOAD_DIR="${HOME}/downloads"
+mkdir -p "${DOWNLOAD_DIR}"
+
+FILENAME="google-cloud-sdk.zip"
+URL="https://dl.google.com/dl/cloudsdk/release/${FILENAME}"
+
+echo "Downloading ${URL}"
+wget -N -P "${DOWNLOAD_DIR}" "${URL}"
+
+unzip "${DOWNLOAD_DIR}/${FILENAME}" -d "${HOME}"
+
+"${HOME}"/google-cloud-sdk/install.sh \
+  --quiet \
+  --usage-reporting false \
+  --command-completion false \
+  --path-update false \
+  --additional-components kubectl app-engine-python beta alpha
