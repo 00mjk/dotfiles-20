@@ -690,6 +690,14 @@ let g:markdown_fenced_languages = [
 let g:markdown_minlines = 100 " allow for more lines to be syntax highlighted
 let g:markdown_syntax_conceal = 0 " don't mess with how the actual content is displayed
 
+" -------------------- "
+" --- vim-dispatch --- "
+" -------------------- "
+
+" don't create shortcuts, as this is only installed to support Ack's
+" asynchronous behaviour
+let g:dispatch_no_maps = 1
+
 " ---------------- "
 " --- vim-ruby --- "
 " ---------------- "
@@ -940,7 +948,10 @@ let g:ackhighlight = 1
 vnoremap <Leader>a y:Ack <C-r>=GetShellEscapedVisual()<CR>
 
 " Run in the background with the help of tpope/vim-dispatch
-let g:ack_use_dispatch = 1
+" only appears to work in tmux
+if $TMUX != ""
+  let g:ack_use_dispatch = 1
+endif
 
 " ---------------- "
 " --- NERDTree --- "
