@@ -48,7 +48,7 @@ call plug#end()
 " --- General options --- "
 " ----------------------- "
 
-set wildmode=list:full " open a list of all the matches (list) *and* cycle through them (full)
+set wildmode=list:longest,full " open a list of all the matches (list) *and* cycle through them (full)
 set wildignorecase
 set wildignore+=*.swp,*/tmp/
 set noswapfile
