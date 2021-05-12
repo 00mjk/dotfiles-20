@@ -490,11 +490,10 @@ inoremap <C-k> <ESC>:m .-2<CR>gi
 " --- Whitespace --- "
 " ------------------ "
 
-" --- Strip whitespace ---
-
+" --- Visualise whitespace ---
 set listchars=tab:»·,trail:·,extends:>,precedes:<
 " toggle hidden characters highlighting:
-nmap <silent> <Leader>h :set nolist!<CR>
+nmap <silent> <Leader>w :set nolist!<CR>
 
 function! <SID>StripTrailingWhitespaces()
   " store the original position
