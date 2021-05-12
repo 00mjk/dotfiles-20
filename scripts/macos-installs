@@ -16,8 +16,6 @@ fi
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
-ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
-
 # ---------------- #
 # --- Formulae --- #
 # ---------------- #
@@ -183,6 +181,8 @@ brew install --casks --quiet \
 # ------------------------------ #
 
 # --- autocompletions
+
+ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
