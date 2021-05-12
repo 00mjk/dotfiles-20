@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+set -e
+
+# ------------------------
+# --- CPU architecture ---
+# ------------------------
+
+ARCH=$(dpkg --print-architecture)
+if [[ "${ARCH}" == "i386" ]]; then
+  echo "32 bit not supported, aborting"
+  exit 1
+fi
+# Let's assume it's an ARM processor if it's not 32 or 64 bit.
+# Always use armhf, should work on armv6, armel...
+if [[ "${ARCH}" != "amd64" ]]; then
+  ARCH="armhf"
+fi
+
+# -------------------------------
+# --- Clean up older versions ---
+# -------------------------------
+
+sudo apt-get remove docker docker-engine docker.io
+
+# ----------------------------
+# --- Install dependencies ---
+# ----------------------------
+
+UBUNTU_VERSION=$(lsb_release -rs) # Ubuntu version number in short format, e.g. "18.04"
+
+sudo apt-get update -q
+
+# If Ubuntu < 16.04...
+if [[ "${UBUNTU_VERSION}" != $(echo -e "${UBUNTU_VERSION}\n16.04" | sort -rV | head -n1) ]]; then
+  echo "This Ubuntu version (${UBUNTU_VERSION}) requires aufs drivers: installing extra kernel modules."
+
+  sudo apt-get install -y \
+    linux-image-extra-$(uname -r) \
+    linux-image-extra-virtual
+fi
+
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# -------------------
+# --- Add apt key ---
+# -------------------
+
+FINGERPRINT="9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+if [[ -z $(sudo apt-key fingerprint 0EBFCD88 | grep "${FINGERPRINT}") ]]; then
+  echo "apt repository key not installed correctly, aborting"
+  exit 1
+fi
+
+sudo add-apt-repository \
+   "deb [arch=${ARCH}] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+# print the output since we have a new repo
+sudo apt-get update
+
+sudo apt-get install -y docker-ce
+
+# -----------------------
+# --- Non-root access ---
+# -----------------------
+
+sudo groupadd -f docker
+sudo usermod -aG docker $USER
+
+# ----------------
+# --- Test out ---
+# ----------------
+
+sudo service docker restart
+
+cat <<-EOF
+Please log out and log in again, and try to run, as your normal user:
+
+  docker run hello-world
+
+EOF
