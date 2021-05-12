@@ -1347,44 +1347,44 @@ highlight DiffText    cterm=none,bold ctermfg=4   ctermbg=15
 " vim switches into command mode when searching or replacing, but not other
 " commands, we disable the specific visualisation until we manage to achieve
 " consistency
-" \ 'c'      : { 'highlight': 'BE_ModeOther',   'name': 'COMMAND'    },
+" \ 'c'      : { 'name': 'NORMAL',      'highlight': 'BE_ModeNormal' },
 let g:be_modes = {
-  \ 'n'      : { 'name': 'NORMAL'    , 'highlight': 'BE_ModeNormal'  },
-  \ 'no'     : { 'name': 'N-PENDING)', 'highlight': 'BE_ModeNormal'  },
-  \ 'i'      : { 'name': 'INSERT'    , 'highlight': 'BE_ModeInsert'  },
-  \ 'R'      : { 'name': 'REPLACE'   , 'highlight': 'BE_ModeInsert'  },
-  \ 'v'      : { 'name': 'VISUAL'    , 'highlight': 'BE_ModeVisual'  },
-  \ 'V'      : { 'name': 'V-LINE'    , 'highlight': 'BE_ModeVisual'  },
-  \ "\<C-v>" : { 'name': 'V-BLOCK'   , 'highlight': 'BE_ModeVisual'  },
-  \ 'Rv'     : { 'name': 'V-REPLACE' , 'highlight': 'BE_ModeInsert'  },
-  \ 's'      : { 'name': 'SELECT'    , 'highlight': 'BE_ModeOther'   },
-  \ 'S'      : { 'name': 'S-LINE'    , 'highlight': 'BE_ModeOther'   },
-  \ "\<C-s>" : { 'name': 'S-BLOCK'   , 'highlight': 'BE_ModeOther'   },
-  \ 'c'      : { 'name': 'NORMAL'    , 'highlight': 'BE_ModeNormal'  },
-  \ 'cv'     : { 'name': 'VIM-EX'    , 'highlight': 'BE_ModeOther'   },
-  \ 'ce'     : { 'name': 'EX'        , 'highlight': 'BE_ModeOther'   },
-  \ 'r'      : { 'name': 'PROMPT'    , 'highlight': 'BE_ModeOther'   },
-  \ 'rm'     : { 'name': 'MORE'      , 'highlight': 'BE_ModeOther'   },
-  \ 'r?'     : { 'name': 'CONFIRM'   , 'highlight': 'BE_ModeOther'   },
-  \ '!'      : { 'name': 'SHELL'     , 'highlight': 'BE_ModeOther'   },
-  \ 't'      : { 'name': 'TERMINAL'  , 'highlight': 'BE_ModeOther'   },
+  \ 'c'      : { 'name': 'COMMAND',     'highlight': 'BE_ModeOther'  },
+  \ 'n'      : { 'name': 'NORMAL',      'highlight': 'BE_ModeNormal' },
+  \ 'no'     : { 'name': 'N-PENDING)',  'highlight': 'BE_ModeNormal' },
+  \ 'i'      : { 'name': 'INSERT',      'highlight': 'BE_ModeInsert' },
+  \ 'R'      : { 'name': 'REPLACE',     'highlight': 'BE_ModeInsert' },
+  \ 'v'      : { 'name': 'VISUAL',      'highlight': 'BE_ModeVisual' },
+  \ 'V'      : { 'name': 'V-LINE',      'highlight': 'BE_ModeVisual' },
+  \ "\<C-v>" : { 'name': 'V-BLOCK',     'highlight': 'BE_ModeVisual' },
+  \ 'Rv'     : { 'name': 'V-REPLACE',   'highlight': 'BE_ModeInsert' },
+  \ 's'      : { 'name': 'SELECT',      'highlight': 'BE_ModeOther'  },
+  \ 'S'      : { 'name': 'S-LINE',      'highlight': 'BE_ModeOther'  },
+  \ "\<C-s>" : { 'name': 'S-BLOCK',     'highlight': 'BE_ModeOther'  },
+  \ 'cv'     : { 'name': 'VIM-EX',      'highlight': 'BE_ModeOther'  },
+  \ 'ce'     : { 'name': 'EX',          'highlight': 'BE_ModeOther'  },
+  \ 'r'      : { 'name': 'PROMPT',      'highlight': 'BE_ModeOther'  },
+  \ 'rm'     : { 'name': 'MORE',        'highlight': 'BE_ModeOther'  },
+  \ 'r?'     : { 'name': 'CONFIRM',     'highlight': 'BE_ModeOther'  },
+  \ '!'      : { 'name': 'SHELL',       'highlight': 'BE_ModeOther'  },
+  \ 't'      : { 'name': 'TERMINAL',    'highlight': 'BE_ModeOther'  },
 \}
 
 let g:be_buffer_types = {
-  \ 'quickfix' : { 'name': 'QUICKFIX' , 'highlight': 'BE_ModeQuickfix' },
-  \ 'loclist'  : { 'name': 'LOCLIST'  , 'highlight': 'BE_ModeLoclist'  },
-  \ 'preview'  : { 'name': 'PREVIEW'  , 'highlight': 'BE_ModeOther'    },
-  \ 'scratch'  : { 'name': 'SCRATCH'  , 'highlight': 'BE_ModeOther'    },
-  \ 'help'     : { 'name': 'HELP'     , 'highlight': 'BE_ModeOther'    },
+  \ 'quickfix' : { 'name': 'QUICKFIX',  'highlight': 'BE_ModeQuickfix' },
+  \ 'loclist'  : { 'name': 'LOCLIST',   'highlight': 'BE_ModeLoclist'  },
+  \ 'preview'  : { 'name': 'PREVIEW',   'highlight': 'BE_ModeOther'    },
+  \ 'scratch'  : { 'name': 'SCRATCH',   'highlight': 'BE_ModeOther'    },
+  \ 'help'     : { 'name': 'HELP',      'highlight': 'BE_ModeOther'    },
 \}
 
 " highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
-highlight StatusLine    cterm=none ctermfg=15 ctermbg=8
-highlight StatusLineNC  cterm=none ctermfg=15 ctermbg=8
+highlight StatusLine              cterm=none          ctermfg=15    ctermbg=8
+highlight StatusLineNC            cterm=none          ctermfg=15    ctermbg=8
 
 " green
 " highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
-highlight BE_ModeNormal           cterm=bold  ctermfg=none    ctermbg=10
+highlight BE_ModeNormal           cterm=bold          ctermfg=none  ctermbg=10
 highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2     ctermbg=none
 " blue
 highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12    ctermbg=none
@@ -1394,7 +1394,7 @@ highlight BE_ModeInsert           cterm=bold,reverse  ctermfg=13    ctermbg=none
 highlight BE_ModeInsertCentre     cterm=bold,reverse  ctermfg=5     ctermbg=none
 " cyan
 " highlight BE_ModeOther            cterm=bold,reverse  ctermfg=14    ctermbg=none
-highlight BE_ModeOther            cterm=bold  ctermfg=none ctermbg=14
+highlight BE_ModeOther            cterm=bold          ctermfg=none  ctermbg=14
 highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6     ctermbg=none
 " red
 highlight BE_ModeLoclist          cterm=bold,reverse  ctermfg=9     ctermbg=none
