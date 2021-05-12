@@ -13,4 +13,5 @@ go_install 'github.com/asciimoo/wuzz'
 go_install 'golang.org/x/exp/cmd/modgraphviz'
 go_install 'github.com/mgechev/revive'
 go_install 'github.com/kevincobain2000/gobrew/cmd/gobrew'
+go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
 popd
