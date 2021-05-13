@@ -26,6 +26,7 @@
 .config/
 .ocean9/
 .oh-my-zsh/
+.rubies/
 .rbenv/
 .rustup/
 .ssh/
@@ -38,7 +39,11 @@
 .vscode/
 .zsh_sessions/
 Library/
+Movies/TV/Media.localized/
+Movies/TV/TV Library.tvlibrary/
+Movies/TV/Previous Libraries.localized/
 Pictures/Photos Library.photoslibrary
+Pictures/Screenshots/
 _old/
 _quarantine/
 bundle/
