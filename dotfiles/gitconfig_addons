@@ -7,6 +7,9 @@
   editor = 'vim'
   pager = 'delta'
 
+[interactive]
+  diffFilter = delta --color-only
+
 [delta]
   light = true
   line-numbers = true
