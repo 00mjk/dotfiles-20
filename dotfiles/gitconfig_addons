@@ -13,6 +13,7 @@
 [delta]
   light = true
   line-numbers = true
+  navigate = true
   paging = always
   features = tweaks
 
