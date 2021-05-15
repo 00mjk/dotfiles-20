@@ -20,9 +20,6 @@ vim +PlugUpdate +qall
 vim +GoUpdateBinaries +qall
 "${CURRDIR}/vim-markdown-tagbar"
 
-echo "[setup] Update Gobrew"
-"${CURRDIR}/golang-gobrew"
-
 echo "[setup] Update Rust"
 "${CURRDIR}/rust"
 

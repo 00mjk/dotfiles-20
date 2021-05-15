@@ -1,35 +1,63 @@
-[ ] `[vim]` suggest different style for Search dark yellow for some terminal
-   colorschemes, in the rare cases where the default is not readable
-   `hi Search term=reverse cterm=reverse ctermfg=3 ctermbg=15`
-   dark cyan background with bright white text is also generally well readable
-   `hi Search term=reverse cterm=reverse ctermfg=6 ctermbg=15`
+* [ ] `[vim]` suggest different style for Search dark yellow for some terminal
+  colorschemes, in the rare cases where the default is not readable
 
-[ ] See if this can fixed, it's become very unpredictable depending on the
-   terminal
+  `hi Search term=reverse cterm=reverse ctermfg=3 ctermbg=15`
 
-       " Close quickfix list with escape
-       if has('localmap')
-         autocmd FileType qf nnoremap <buffer> <silent> <Esc> :<c-u> cclose<CR>
-       endif
+  dark cyan background with bright white text is also generally well readable
 
-[ ] Reconsider these shortcuts
+  `hi Search term=reverse cterm=reverse ctermfg=6 ctermbg=15`
 
-       " Set folding to leader-L
-       " zr to unfold and zm to fold. zR to unfold all and zM to fold all
-       nmap <Leader>l :set foldmethod=syntax<CR>
+* [ ] See if this can fixed, it's become very unpredictable depending on the
+  terminal
 
-       " Remap jj to escape insert mode
-       inoremap jj <ESC>
+        " Close quickfix list with escape
+        if has('localmap')
+          autocmd FileType qf nnoremap <buffer> <silent> <Esc> :<c-u> cclose<CR>
+        endif
 
-`gobrew` setup
---------------
+* [ ] Reconsider these shortcuts
 
-    # while versions < 1.16 are still in use, GOPATH needs to be set explicitly
-    # because gobrew by default sets it as a "$HOME/.gobrew/current/go", which
-    # instead is actually the GOROOT, and will prevent installation of binaries
-    # with "go get -u"
-    # export GOPATH="$HOME/.gobrew/current/gopath"
-    # export PATH="$GOPATH/bin:$PATH"
+        " Set folding to leader-L
+        " zr to unfold and zm to fold. zR to unfold all and zM to fold all
+        nmap <Leader>l :set foldmethod=syntax<CR>
+
+        " Remap jj to escape insert mode
+        inoremap jj <ESC>
+
+Go envs
+-------
+
+    # ------------- #
+    # --- goenv --- #
+    # ------------- #
+
+    # git clone https://github.com/syndbg/goenv.git ~/.goenv
+
+    # export GOENV_ROOT="$HOME/.goenv"
+    # export PATH="$GOENV_ROOT/bin:$PATH"
+    # eval "$(goenv init -)"
+    # export PATH="$GOROOT/bin:$PATH"
+    # export PATH="$PATH:$GOPATH/bin"
+
+    # -------------- #
+    # --- gobrew --- #
+    # -------------- #
+
+    # https://github.com/kevincobain2000/gobrew
+    #
+    # this version of gobrew (written in Golang) although less feature-rich, is an
+    # order of magnitude faster than goenv (which is a shell script), so it has
+    # next to no overhead on opening new terminal sessions
+
+    # if [[ -x "$HOME/.gobrew/bin/gobrew" ]]; then
+    #   export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+    # fi
+
+    # Activate manually installed go if it wasn't installed with a package manager
+    # and there is no gobrew
+    # if [[ ! -x "$HOME/.gobrew/bin/gobrew" && -z "$(command -v go)" && -d "/usr/local/go/bin" ]]; then
+      PATH="/usr/local/go/bin:$PATH"
+    # fi
 
 Interesting .vimrc files
 ------------------------
