@@ -267,6 +267,10 @@ echo "
   - m4
   - screen
   - util-linux
+  - awscli
+  - amazon-ecs-cli
+  - git-remote-codecommit
+  - terraform
 
 * More packages:
   - lolcat (requires Ruby)
@@ -275,7 +279,7 @@ echo "
 
   - dash
   - devdocs
-  - google-drive-file-stream (for G Suite accounts, supports Shared Drives)
+  - google-drive-file-stream (for Google Workspace accounts, supports Shared Drives)
   - menubar-stats
   - mdrp
   - devdocs
