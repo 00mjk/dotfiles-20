@@ -1,13 +1,15 @@
 # vim: set ft=bash:
 
 use_ruby() {
+  # ~/.rubies is managed by ruby-install, not rbenv
   local ruby_dir=$HOME/.rubies/$1
   load_prefix $ruby_dir
   layout ruby
 }
 
+# TODO: allow to customise the base path for global Go runtimes
 use_go() {
-  local go_dir=$HOME/.gos/$1
+  local go_dir=$HOME/.go/$1
   load_prefix $go_dir
   layout go
 }

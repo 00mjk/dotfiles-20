@@ -62,44 +62,11 @@ export DELTA_PAGER='less --clear-screen'
 # Use Brew-installed Ruby if available.
 [[ -d "/usr/local/opt/ruby" ]] && PATH="/usr/local/opt/ruby/bin:$PATH"
 
-# ------------- #
-# --- goenv --- #
-# ------------- #
-
-# git clone https://github.com/syndbg/goenv.git ~/.goenv
-
-# export GOENV_ROOT="$HOME/.goenv"
-# export PATH="$GOENV_ROOT/bin:$PATH"
-# eval "$(goenv init -)"
-# export PATH="$GOROOT/bin:$PATH"
-# export PATH="$PATH:$GOPATH/bin"
-
-# -------------- #
-# --- gobrew --- #
-# -------------- #
-
-# https://github.com/kevincobain2000/gobrew
-#
-# this version of gobrew (written in Golang) although less feature-rich, is an
-# order of magnitude faster than goenv (which is a shell script), so it has
-# next to no overhead on opening new terminal sessions
-
-if [[ -x "$HOME/.gobrew/bin/gobrew" ]]; then
-  export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-fi
-
 # -------------- #
 # --- Golang --- #
 # -------------- #
 
-# Activate manually installed go if it wasn't installed with a package manager
-# and there is no gobrew
-if [[ ! -x "$HOME/.gobrew/bin/gobrew" && -z "$(command -v go)" && -d "/usr/local/go/bin" ]]; then
-  PATH="/usr/local/go/bin:$PATH"
-fi
-
-GOPATH="$HOME/go"
-PATH="$GOPATH/bin:$PATH"
+PATH="/usr/local/go/bin:$PATH"
 
 # --------------------- #
 # --- Output stream --- #

@@ -18,6 +18,7 @@
 .dropbox.cache/
 .fingerprint/
 .git/
+.go/
 .gobrew/
 .goenv/
 .hg/
