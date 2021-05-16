@@ -30,14 +30,17 @@ function brut() {
 }
 
 function _do_brew_upgrade() {
-  echo "-------------- brew update ----------------"
+  echo "--- brew update ------------------------------------------------------"
   brew update 2>&1
-  echo "-------------- brew outdated ---------------"
+  echo "--- brew outdated ----------------------------------------------------"
   brew outdated 2>&1
-  echo "-------------- brew upgrade ---------------"
+  echo "---- brew upgrade ----------------------------------------------------"
   brew upgrade 2>&1
-  echo "-------------- brew cleanup ---------------"
-  brew cleanup --prune=all 2>&1
+  echo "--- brew autoremove --------------------------------------------------"
+  brew autoremove 2>&1
+  echo "--- brew cleanup -----------------------------------------------------"
+  brew cleanup --dry-run --prune=all -s 2>&1
+  brew cleanup 2>&1
 }
 
 #---------------#
