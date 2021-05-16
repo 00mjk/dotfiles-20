@@ -29,10 +29,6 @@ export LANG=en_GB.UTF-8
 # setopt sharehistory
 # setopt zle
 
-# --------------- #
-# --- History --- #
-# --------------- #
-
 # don't add history entry if it's a duplicate of the previous command (and only
 # if it's exactly the previous one, older duplicates don't count)
 setopt HIST_IGNORE_DUPS
@@ -43,6 +39,8 @@ setopt HIST_REDUCE_BLANKS
 # always expire history items in the original order (regardless of duplicates)
 setopt NO_HIST_EXPIRE_DUPS_FIRST
 setopt NO_HIST_IGNORE_ALL_DUPS
+export HIST_STAMPS="yyyy-mm-dd"
+export HISTSIZE=250000 # 250K lines
 
 # prevents accidentally overwriting an existing file, override with >|
 setopt NO_CLOBBER
@@ -51,10 +49,6 @@ setopt NO_CLOBBER
 setopt NO_MULTIOS
 
 export COMPLETION_WAITING_DOTS="true"
-export HIST_STAMPS="yyyy-mm-dd"
-
-export HISTSIZE=250000 # 250K lines
-
 # autocomplete hidden files...
 setopt GLOB_DOTS
 # ...but exclude "." and ".."
@@ -77,7 +71,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 # each alias will use the give command as the underlying target for the
 # autocompletion
 #
-# the "completealiases" option prevents aliases on the command  line  from
+# the "completealiases" option prevents aliases on the command line from
 # being internally substituted before completion is attempted, so we need to
 # disable it
 unsetopt COMPLETE_ALIASES
@@ -163,7 +157,7 @@ function _bravoecho_hostname() {
 
 [[ -n "${COMPUTER_NAME}" ]] || export COMPUTER_NAME="$(_bravoecho_hostname)"
 
-# Lightweight prompt in pure zsh syntax that:
+# Lightweight prompt, depends on oh-my-zsh:
 #
 #   * colorises the info about user and host
 #   * displays the current path
