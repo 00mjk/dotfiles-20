@@ -12,7 +12,7 @@ PATH="/usr/local/opt/lsof/bin:$PATH"
 PATH="/usr/local/opt/sqlite/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 
-MANPATH="/usr/local/share/man/:$MANPATH"
+MANPATH="/usr/local/share/man/:/usr/local/opt/curl/share/man:$MANPATH"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"
 
