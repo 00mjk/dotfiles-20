@@ -91,6 +91,7 @@ brew install --formulae --quiet \
   lf \
   libpq \
   lsof \
+  mdcat \
   mosh \
   mtr \
   ncdu \
