@@ -31,8 +31,12 @@ export LS_COLORS
 # --tabs=2              (-x) use two spaces to render tab characters
 # --LONG-PROMPT         (-M) show all the available info about the buffer, at the bottom
 # --shift=3             (-#) how many columns to move when scrolling horizontally
-# --use-color           enable coloured text in various places (like prompt, search results...)
-export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3"
+# --use-color                enable coloured text in various places (like prompt, search results...)
+# --no-histdups              only keep the last occurrence of a search string in the history
+# --save-marks               save marks across invocations of less
+# --mouse                    enable mouse-wheel scrolling and save clicks to the "#" mark
+# --wheel-lines              number of lines to scroll on each step of the wheel
+export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --mouse --wheel-lines=3"
 
 # ------------- #
 # --- DELTA --- #
