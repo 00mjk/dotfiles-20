@@ -23,5 +23,15 @@ vim +GoUpdateBinaries +qall
 echo "[setup] Update Rust"
 "${CURRDIR}/rust"
 
+echo "[setup] Update curl autocomplete for zsh"
+# curl has a different location for each version, we need to relink for the
+# updates to be effective
+ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
+if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
+  pushd "${ZSH_SITE_FUNCTIONS}"
+  ln -sfv "$(echo /usr/local/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
+  popd
+fi
+
 echo "[setup] Upgrade pipx packages"
 pipx upgrade-all

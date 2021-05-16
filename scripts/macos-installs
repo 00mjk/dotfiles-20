@@ -48,6 +48,7 @@ brew install --formulae --quiet \
 echo "[setup] Install recent versions of macOS built-in utilities"
 brew install --formulae --quiet \
   bash \
+  curl \
   git \
   tidy-html5 \
   less \
@@ -211,6 +212,7 @@ if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   ln -sfv "$docker_completions_dir/docker.zsh-completion" _docker
   ln -sfv "$docker_completions_dir/docker-compose.zsh-completion" _docker-compose
   kubectl completion zsh > _kubectl
+  ln -sfv "$(echo /usr/local/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
   popd
 fi
 
