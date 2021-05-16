@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+set -eu
+set -o pipefail
+
+echo "Installing iTerm2 utilities"
+
+function iterm2_util () {
+  local util=$1
+  local dest="${HOME}/.local/bin/${util}"
+  local url="https://raw.githubusercontent.com/gnachman/iterm2-website/master/source/utilities/${util}"
+
+  curl \
+    "${url}" \
+    --location \
+    --create-dirs \
+    --time-cond "${dest}" \
+    --output "${dest}"
+
+  chmod u+x "$dest"
+}
+
+iterm2_util 'imgcat'
+iterm2_util 'imgls'
