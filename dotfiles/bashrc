@@ -143,9 +143,5 @@ eval "$(jump shell)"
 [[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
 [[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
 
-# Remove duplicates from $PATH
-# https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
-typeset -aU path
-
 # the direnv hook must be at the end of the rc file
-[[ -n "$(command -v direnv)" ]] && eval "$(direnv hook zsh)"
+[[ -n "$(command -v direnv)" ]] && eval "$(direnv hook bash)"
