@@ -12,6 +12,7 @@ ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
 
 curl \
   'https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang' \
-  -L \
+  --location \
   --create-dirs \
-  -o "${ZSH_SITE_FUNCTIONS}/_golang"
+  --time-cond "${ZSH_SITE_FUNCTIONS}/_golang" \
+  --output "${ZSH_SITE_FUNCTIONS}/_golang"
