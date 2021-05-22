@@ -1090,6 +1090,7 @@ highlight def link rubyRspec Function
 " ------------------------------------------------------- "
 
 autocmd BufNewFile,BufReadPost {*zsh,*.zsh-theme} set filetype=zsh
+autocmd BufNewFile,BufReadPost {.envrc,direnvrc,.direnvrc} set filetype=bash
 
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
