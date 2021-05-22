@@ -196,6 +196,7 @@ brew install --casks --quiet \
   sdformatter \
   slack \
   stats \
+  the-unarchiver \
   visual-studio-code \
   vlc \
   zoom
