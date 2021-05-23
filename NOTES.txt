@@ -555,6 +555,29 @@ This will break `gP`, by pasting the new content inside the original one.
 Golang/Neovim setup for LSP
 ---------------------------
 
+    backup_and_symlink "${DOTFILES_DIR}/init.vim" "${HOME}/.config/nvim/init.vim"
+
+    if !has('nvim')
+      if has('linux')
+        set <M-d>=d
+      elseif has('osxdarwin')
+        set <M-d>=∂
+      endif
+    endif
+
+    if !has('nvim')
+      if has("mouse_sgr")
+        set ttymouse=sgr
+      else
+        set ttymouse=xterm2
+      end
+    end
+
+    if has('nvim')
+      " reset to default, so it will show as normally does in Vim
+      set guicursor=
+    endif
+
     if !has('nvim')
       Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
     endif
