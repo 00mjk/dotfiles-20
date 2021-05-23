@@ -201,11 +201,6 @@ vmap <space> \
 " --- Visual options --- "
 " ---------------------- "
 
-if has('nvim')
-  " reset to default, so it will show as normally does in Vim
-  set guicursor=
-endif
-
 set number " show line numbers
 
 set cursorline
@@ -391,12 +386,10 @@ nnoremap <expr> <Leader>gv '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 set mouse=a " enable mouse mode
 
-if !has('nvim')
-  if has("mouse_sgr")
-    set ttymouse=sgr
-  else
-    set ttymouse=xterm2
-  end
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
 end
 
 set ttyfast          " Send more characters for redraws (faster scrolling)
@@ -895,12 +888,10 @@ nnoremap <Leader>o :call InsertPasteNewLine()<CR>
 " Delete without yanking, send the deleted content to the 'black hole' register.
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
-if !has('nvim')
-  if has('linux')
-    set <M-d>=d
-  elseif has('osxdarwin')
-    set <M-d>=∂
-  endif
+if has('linux')
+  set <M-d>=d
+elseif has('osxdarwin')
+  set <M-d>=∂
 endif
 
 " ...then, the actual mapping:
