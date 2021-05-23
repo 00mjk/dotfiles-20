@@ -57,7 +57,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 Plug 'ollykel/v-vim'
 Plug 'tpope/vim-git'
-Plug 'gisphm/vim-gitignore'
+" Plug 'gisphm/vim-gitignore'
+Plug 'benknoble/gitignore-vim'
 Plug 'cespare/vim-toml'
 
 " --- Markdown
@@ -1311,6 +1312,8 @@ let g:go_updatetime=1000
 autocmd FileType go nnoremap <Leader>z :GoDiagnostics<CR>
 autocmd FileType go nnoremap <Leader>t :GoTest<CR>
 autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
+autocmd FileType go nnoremap <Leader>l :GoDecls<CR>
+autocmd FileType go nnoremap <Leader>ll :GoDeclsDir<CR>
 
 " --- vim-go: syntax highlighting ---
 
