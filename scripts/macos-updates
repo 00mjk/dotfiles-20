@@ -17,7 +17,6 @@ echo "[setup] Update delta themes"
 echo "[setup] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
-vim +GoUpdateBinaries +qall
 "${CURRDIR}/vim-markdown-tagbar"
 
 echo "[setup] Update Rust"

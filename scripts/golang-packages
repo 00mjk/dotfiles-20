@@ -6,10 +6,7 @@ function go_install() {
   if go_gte_1_16; then
     go install "${1}@latest"
   else
-    (
-      cd ~
-      go get -u "${1}"
-    )
+    go get -u "${1}"
   fi
 }
 
@@ -36,3 +33,6 @@ go_install 'github.com/cespare/reflex'
 # go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
 # go_install 'github.com/KyleBanks/depth/cmd/depth'
 popd
+
+echo "[setup] Update Go binaries for Vim"
+vim +GoUpdateBinaries +qall
