@@ -805,8 +805,8 @@ endfun
 autocmd FileType python autocmd BufWritePre <buffer> :call BE_StripTrailingWhitespace()
 
 " it is occasionally useful to be able to run whitespace removal manually
-command! WhitespaceAll      call BE_StripExtraWhitespace
-command! WhitespaceTrailing call BE_StripTrailingWhitespace
+command! WhitespaceAll      call BE_StripExtraWhitespace()
+command! WhitespaceTrailing call BE_StripTrailingWhitespace()
 
 " -------------------- "
 " --- Omnicomplete --- "
