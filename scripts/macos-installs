@@ -72,6 +72,7 @@ brew install --formulae --quiet \
   direnv \
   exa \
   fd \
+  figlet \
   fff \
   ffmpeg \
   fzf \
