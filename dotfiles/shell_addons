@@ -410,4 +410,4 @@ alias umldown='docker stop plantuml'
 # --- ImageMagick --- #
 
 # create a compressed JPG copy of each PNG in the current directory
-alias screenshot-minify='mogrify -strip -unsharp 0.25x0.25+8+0.065 -resize 80% -quality 85 -format jpg *.png'
+alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -resize 80% -quality 85 -format jpg *.png'
