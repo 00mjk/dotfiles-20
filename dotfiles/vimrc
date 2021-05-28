@@ -1255,7 +1255,10 @@ let g:fzf_history_dir = s:fzf_history_dir
 
 " same keybindings used for CtrlP
 nmap <C-p> :Files<CR>
-noremap <Leader>b :Buffers<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>s :BLines<CR>
+" :History is similar to MRU buffers
+nnoremap <Leader>m :History<CR>
 
 " ---------------------- "
 " --- vim-commentary --- "
@@ -1315,8 +1318,8 @@ let g:go_updatetime=1000
 autocmd FileType go nnoremap <Leader>z :GoDiagnostics<CR>
 autocmd FileType go nnoremap <Leader>t :GoTest<CR>
 autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
-autocmd FileType go nnoremap <Leader>l :GoDecls<CR>
-autocmd FileType go nnoremap <Leader>ll :GoDeclsDir<CR>
+autocmd FileType go nnoremap <Leader>e :GoDecls<CR>
+autocmd FileType go nnoremap <Leader>ee :GoDeclsDir<CR>
 
 " --- vim-go: syntax highlighting ---
 
