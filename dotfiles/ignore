@@ -13,6 +13,7 @@
 .cache/
 .cargo/
 .cups/
+.direnv/
 .docker/
 .dropbox/
 .dropbox.cache/
@@ -33,8 +34,8 @@
 .ssh/
 .svn/
 .terminfo/
-# .terraform/
-# .terraform.d/
+.terraform/
+.terraform.d/
 .vim/
 .vscode-insiders/
 .vscode/
@@ -44,7 +45,6 @@ Movies/TV/Media.localized/
 Movies/TV/TV Library.tvlibrary/
 Movies/TV/Previous Libraries.localized/
 Pictures/Photos Library.photoslibrary
-Pictures/Screenshots/
 _old/
 _quarantine/
 bundle/
@@ -55,22 +55,6 @@ log/
 node_modules/
 vendor/
 venv*/
-
-# Obsolete:
-#
-# bitbucket.org
-# cloud.google.com
-# code.google.com
-# cuelang.org
-# github.com
-# go.mongodb.org
-# golang.org
-# google.golang.org
-# gopkg.in
-# honnef.co
-# launchpad.net
-# speter.net
-# stathat.com
 
 # Files
 
