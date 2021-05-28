@@ -956,6 +956,9 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 \  'vim',
 \]
 
+highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
+highlight pandocAtxHeader ctermfg=6 ctermbg=none
+
 " ----------------------------- "
 " --- markdown-preview.nvim --- "
 " ----------------------------- "
