@@ -70,7 +70,7 @@ export DELTA_PAGER='less --clear-screen'
 # --- Golang --- #
 # -------------- #
 
-PATH="/usr/local/go/bin:$PATH"
+PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
 
 # --------------------- #
 # --- Output stream --- #
