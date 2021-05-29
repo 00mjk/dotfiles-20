@@ -76,6 +76,7 @@ brew install --formulae --quiet \
   fff \
   ffmpeg \
   fzf \
+  gdu \
   git-delta \
   glow \
   gnupg \
@@ -95,7 +96,6 @@ brew install --formulae --quiet \
   mdcat \
   mosh \
   mtr \
-  ncdu \
   nethogs \
   nload \
   nmap \
