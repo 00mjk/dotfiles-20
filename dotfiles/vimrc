@@ -1321,6 +1321,21 @@ autocmd FileType go nnoremap <Leader>e :GoDecls<CR>
 autocmd FileType go nnoremap <Leader>ee :GoDeclsDir<CR>
 autocmd FileType go nnoremap <Leader>s :GoSameIdsToggle<CR>
 
+" defaults:
+"
+" let g:go_debug_mappings = {
+"    \ '(go-debug-continue)':   {'key': '<F5>'},
+"    \ '(go-debug-print)':      {'key': '<F6>'},
+"    \ '(go-debug-breakpoint)': {'key': '<F9>'},
+"    \ '(go-debug-next)':       {'key': '<F10>'},
+"    \ '(go-debug-step)':       {'key': '<F11>'},
+"    \ '(go-debug-halt)':       {'key': '<F8>'},
+" \ }
+"
+let g:go_debug_mappings = {
+   \ '(go-debug-stepout)':    {'key': '<F12>'},
+\ }
+
 " --- vim-go: syntax highlighting ---
 
 highlight link goBuiltins Keyword
