@@ -800,7 +800,6 @@ function! BE_StripTrailingWhitespace()
   call cursor(l, c) " back to the original position
 endfun
 
-" autocmd FileType python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 autocmd FileType python autocmd BufWritePre <buffer> :call BE_StripTrailingWhitespace()
 
 " it is occasionally useful to be able to run whitespace removal manually
@@ -1255,7 +1254,7 @@ let g:fzf_history_dir = s:fzf_history_dir
 " same keybindings used for CtrlP
 nmap <C-p> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>s :BLines<CR>
+nnoremap <Leader>/ :BLines<CR>
 " :History is similar to MRU buffers
 nnoremap <Leader>m :History<CR>
 
@@ -1320,6 +1319,7 @@ autocmd FileType go nnoremap <Leader>t :GoTest<CR>
 autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
 autocmd FileType go nnoremap <Leader>e :GoDecls<CR>
 autocmd FileType go nnoremap <Leader>ee :GoDeclsDir<CR>
+autocmd FileType go nnoremap <Leader>s :GoSameIdsToggle<CR>
 
 " --- vim-go: syntax highlighting ---
 
