@@ -7,12 +7,12 @@ set -e
 # --------------------------------------------------------------------------- #
 
 PLATFORM=
-if [[ "$(uname --kernel-name)" =~ Darwin ]]; then
+if [[ "$(uname -s)" =~ Darwin ]]; then
   PLATFORM='darwin'
-elif [[ "$(uname --kernel-name)" =~ Linux ]]; then
+elif [[ "$(uname -s)" =~ Linux ]]; then
   PLATFORM='linux'
 else
-  echo "Unsupported platform: $(uname --kernel-name)"
+  echo "Unsupported platform: $(uname -s)"
   exit 1
 fi
 
@@ -21,12 +21,12 @@ fi
 # --------------------------------------------------------------------------- #
 
 ARCH=
-if [[ "$(uname --machine)" == "x86_64" ]]; then
+if [[ "$(uname -m)" == "x86_64" ]]; then
   ARCH='amd64'
-elif [[ "$(uname --machine)" == "arm64" ]]; then
+elif [[ "$(uname -m)" == "arm64" ]]; then
   ARCH='arm64'
 else
-  echo "Unsupported architecture: $(uname --machine)"
+  echo "Unsupported architecture: $(uname -m)"
   exit 1
 fi
 
@@ -125,10 +125,6 @@ if [[ -z "${LOCAL_INSTALL}" ]]; then
   echo "Running command with sudo to perform global installation"
   sudo mkdir -p "${GO_ROOT}"
   sudo tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"
-  # if [[ "${PLATFORM}" == "darwin" ]]; then
-  #   # On macOS, change ownership of the root, in the same way as Homebrew does.
-  #   sudo chown -R "$(id -un):$(id -gn)" "${GO_ROOT}"
-  # fi
 else
   mkdir -p "${GO_ROOT}"
   tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"

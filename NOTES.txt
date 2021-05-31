@@ -170,6 +170,10 @@ auto-formatting in several ways, to the point of becoming unusable.
 
 apparently custom defintions no longer needed
 
+    # scripts/vim
+    "${CURRDIR}/vim-markdown-tagbar"
+
+    " vimrc
     " Add support for markdown files in tagbar with
     " " <https://github.com/jszakmeister/markdown2ctags>
     let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
