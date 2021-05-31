@@ -1660,6 +1660,8 @@ augroup BE_StatuslineEvents
     autocmd FileType  nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType  netrw     setlocal statusline=\ %<%f
 
+    autocmd FileType  fugitive          setlocal statusline=\[git]
+    autocmd FileType  fugitiveblame     setlocal statusline=\[git]
     autocmd FileType  godebugstacktrace setlocal statusline=\[debug]
     autocmd FileType  godebugvariables  setlocal statusline=\[debug]
     autocmd FileType  godebugoutput     setlocal statusline=\[debug]
