@@ -1450,8 +1450,7 @@ let g:vim_json_syntax_conceal = 0
 " --- TagBar --- "
 " -------------- "
 
-nnoremap <Leader>tt :TagbarToggle<CR>
-nnoremap <F8> :TagbarToggle<CR>
+nnoremap <C-t> :TagbarToggle<CR>
 
 let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
