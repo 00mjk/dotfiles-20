@@ -21,6 +21,19 @@ fi
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
+# native uname only supports -m, not the long format --machine
+BREW_PREFIX=
+if [[ "$(uname -m)" == "x86_64" ]]; then
+  BREW_PREFIX='/usr/local'
+elif [[ "$(uname -m)" == "arm64" ]]; then
+  BREW_PREFIX='/opt/homebrew'
+else
+  echo "Unsupported architecture: $(uname -m)"
+  exit 1
+fi
+
+export PATH="$BREW_PREFIX/bin:$PATH"
+
 # ---------------- #
 # --- Formulae --- #
 # ---------------- #
@@ -29,7 +42,7 @@ source "${CURRDIR}/utils.sh"
 # formulae exists, that requires VirtualBox.
 
 echo "[setup] Install GNU utilities"
-brew install --formulae --quiet \
+brew install --formulae \
   coreutils \
   diffutils \
   findutils \
@@ -46,7 +59,7 @@ brew install --formulae --quiet \
   inetutils
 
 echo "[setup] Install recent versions of macOS built-in utilities"
-brew install --formulae --quiet \
+brew install --formulae \
   bash \
   curl \
   git \
@@ -63,20 +76,17 @@ brew install --formulae --quiet \
   zsh
 
 echo "[setup] Install extra utilities"
-brew install --formulae --quiet \
+brew install --formulae \
   bat \
   bmon \
   cloc \
   cmark \
-  colordiff \
   direnv \
   exa \
   fd \
   figlet \
-  fff \
   ffmpeg \
   fzf \
-  gdu \
   git-delta \
   glow \
   gnupg \
@@ -88,7 +98,6 @@ brew install --formulae --quiet \
   jq \
   jump \
   just \
-  kubectx \
   lazygit \
   lf \
   libpq \
@@ -105,7 +114,6 @@ brew install --formulae --quiet \
   plantuml \
   pre-commit \
   pyenv \
-  ranger \
   rbenv \
   ripgrep \
   ruby \
@@ -113,7 +121,6 @@ brew install --formulae --quiet \
   ruby-install \
   slurm \
   the_silver_searcher \
-  terraform \
   tig \
   tmux \
   trash \
@@ -125,12 +132,12 @@ brew install --formulae --quiet \
   yq
 
 echo "[setup] Install Node.js"
-brew install --formulae --quiet \
+brew install --formulae \
   node \
   yarn
 
 # universal-ctags is a head-only formula until considered stable
-brew install --formulae --quiet \
+brew install --formulae \
   --HEAD \
   universal-ctags/universal-ctags/universal-ctags
 
@@ -141,23 +148,21 @@ brew install --formulae --quiet \
 # echo "[setup] Python post-install setup"
 # brew link --overwrite --force python@3.9
 
-python3 -m pip install ydiff
-
 echo "[setup] FZF post-install setup"
-/usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+$BREW_PREFIX/opt/fzf/install --key-bindings --completion --no-update-rc
 
 echo "[setup] Brew-installed shells post-install setup"
-append_if_missing /etc/shells "/usr/local/bin/bash"
-append_if_missing /etc/shells "/usr/local/bin/zsh"
+append_if_missing /etc/shells "$BREW_PREFIX/bin/bash"
+append_if_missing /etc/shells "$BREW_PREFIX/bin/zsh"
 
-chsh -s /usr/local/bin/zsh
+chsh -s $BREW_PREFIX/bin/zsh
 
-echo "[setup] Install dotfiles"
-"${CURRDIR}/dotfiles"
-
-echo "[setup] Install Vim configuration"
-"${CURRDIR}/vim"
-
+# echo "[setup] Install dotfiles"
+# "${CURRDIR}/dotfiles"
+#
+# echo "[setup] Install Vim configuration"
+# "${CURRDIR}/vim"
+#
 echo "[setup] Install Oh My Zsh"
 "$CURRDIR/ohmyzsh"
 
@@ -168,12 +173,8 @@ echo "[setup] Install Oh My Zsh"
 echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
-brew install --casks --quiet \
-  adoptopenjdk \
-  alacritty \
+brew install --casks \
   authy \
-  calibre \
-  dash \
   discord \
   docker \
   drawio \
@@ -181,22 +182,17 @@ brew install --casks --quiet \
   firefox \
   font-go \
   font-inconsolata \
+  font-inconsolata-nerd-font \
   font-jetbrains-mono \
   font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-backup-and-sync \
   google-chrome \
-  istat-menus \
   iterm2 \
-  libreoffice \
-  microsoft-teams \
   middle \
   pastebot \
-  postman \
   rectangle \
-  sdformatter \
   slack \
-  stats \
   the-unarchiver \
   visual-studio-code \
   vlc \
@@ -207,7 +203,7 @@ brew install --casks --quiet \
 # ------------------------------ #
 
 echo "[setup] Configure extra autocompletions"
-ZSH_SITE_FUNCTIONS=/usr/local/share/zsh/site-functions
+ZSH_SITE_FUNCTIONS=$BREW_PREFIX/share/zsh/site-functions
 
 if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   pushd "${ZSH_SITE_FUNCTIONS}"
@@ -215,7 +211,7 @@ if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
   ln -sfv "$docker_completions_dir/docker.zsh-completion" _docker
   ln -sfv "$docker_completions_dir/docker-compose.zsh-completion" _docker-compose
   kubectl completion zsh > _kubectl
-  ln -sfv "$(echo /usr/local/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
+  ln -sfv "$(echo $BREW_PREFIX/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
   popd
 fi
 
@@ -236,10 +232,25 @@ echo "[setup] Install Rust"
 "${CURRDIR}/rust"
 
 echo "[setup] Install pipx packages"
-pipx install \
-  litecli \
-  pgcli \
-  glances
+
+pipx ensurepath
+pipx install --force litecli
+pipx install --force glances
+pipx install --force ydiff
+
+# pipx install --force pgcli
+# Fatal error from pip prevented installation. Full pip output in file:
+#     ~/.local/pipx/logs/cmd_2021-05-31_11.58.22_pip_errors.log
+#
+# pip seemed to fail to build package:
+#     pgcli
+#
+# Some possibly relevant errors from pip install:
+#     Error: pg_config executable not found.
+#     ERROR: Cannot install pgcli==0.15.4, pgcli==0.16.0, pgcli==0.16.1, pgcli==0.16.2, pgcli==0.16.3, pgcli==0.17.0, pgcli==0.18.0, pgcli==0.19.0, pgcli==0.19.1, pgcli==0.19.2, pgcli==0.20.0, pgcli==0.20.1, pgcli==1.0.0, pgcli==1.1.0, pgcli==1.10.0, pgcli==1.10.1, pgcli==1.10.2, pgcli==1.10.3, pgcli==1.11.0, pgcli==1.2.0, pgcli==1.3.0, pgcli==1.3.1, pgcli==1.4.0, pgcli==1.5.0, pgcli==1.5.1, pgcli==1.6.0, pgcli==1.7.0, pgcli==1.8.0, pgcli==1.8.1, pgcli==1.8.2, pgcli==1.9.0, pgcli==1.9.1, pgcli==2.0.0, pgcli==2.0.1, pgcli==2.0.2, pgcli==2.1.0, pgcli==2.1.1, pgcli==2.2.0, pgcli==3.0.0 and pgcli==3.1.0 because these package versions have conflicting dependencies.
+#     ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/user_guide/#fixing-conflicting-dependencies
+#
+# Error installing pgcli.
 
 # ---------------------------------------------------- #
 # --- Fix source code files appearing in Spotlight --- #
@@ -282,6 +293,11 @@ echo "
 
 * More packages:
   - lolcat (requires Ruby)
+  - kubectx
+  - colordiff
+  - terraform
+  - fff
+  - ranger
 
 * Other casks:
 
@@ -302,6 +318,25 @@ echo "
   - virtualbox
   - virtualbox-extension-pack
   - whatsapp
+  - postman
+  - libreoffice
+  - alacritty
+  - calibre
+  - dash
+  - istat-menus
+  - stats
+  - homebrew/cask/menubar-stats
+  - homebrew/cask/stats
+  - font-dejavu
+  - font-dejavu-sans-mono-nerd-font
+
+* Casks requiring Rosetta 2 on arm64
+  - adoptopenjdk
+  - microsoft-teams
+  - sdformatter
+  - bitwarden
+  - authy
+  - dropbox
 
 * Open Spotlight preferences to disable 'Developer' results (source code files)
 
