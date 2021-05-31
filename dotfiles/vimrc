@@ -954,6 +954,7 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 \  'vim',
 \]
 
+" Highlight headers formatted with underlying '-' and '=' in bold cyan
 highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
 highlight pandocAtxHeader ctermfg=6 ctermbg=none
 
@@ -1440,26 +1441,6 @@ nnoremap <F8> :TagbarToggle<CR>
 
 let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
-" Add support for markdown files in tagbar with
-" " <https://github.com/jszakmeister/markdown2ctags>
-" let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
-" if filereadable(glob(g:markdown2ctags_path))
-"   let g:tagbar_type_markdown = {
-"       \ 'ctagstype': 'markdown',
-"       \ 'ctagsbin' : g:markdown2ctags_path,
-"       \ 'ctagsargs' : '-f - --sort=yes --sro=»',
-"       \ 'kinds' : [
-"           \ 's:sections',
-"           \ 'i:images'
-"       \ ],
-"       \ 'sro' : '»',
-"       \ 'kind2scope' : {
-"           \ 's' : 'section',
-"       \ },
-"       \ 'sort': 0,
-"   \ }
-" endif
-
 let g:tagbar_iconchars = ['▶', '◢']
 
 " https://github.com/preservim/tagbar/wiki#markdown
@@ -1501,19 +1482,15 @@ let g:vista#renderer#enable_icon = 0
 " ------------------------- "
 
 " use simple ansi-colours for readability in any terminal with an ANSI palette
-highlight DiffAdd     cterm=none,bold ctermfg=2   ctermbg=15
-highlight DiffDelete  cterm=none      ctermfg=13  ctermbg=15
-highlight DiffChange  cterm=none      ctermfg=8   ctermbg=15
-highlight DiffText    cterm=none,bold ctermfg=4   ctermbg=15
+highlight DiffAdd     cterm=none,bold   ctermfg=2   ctermbg=15
+highlight DiffDelete  cterm=none        ctermfg=13  ctermbg=15
+highlight DiffChange  cterm=none        ctermfg=8   ctermbg=15
+highlight DiffText    cterm=none,bold   ctermfg=4   ctermbg=15
 
 " ------------------ "
 " --- Statusline --- "
 " ------------------ "
 
-" vim switches into command mode when searching or replacing, but not other
-" commands, we disable the specific visualisation until we manage to achieve
-" consistency
-" \ 'c'      : { 'name': 'NORMAL',      'highlight': 'BE_ModeNormal' },
 let g:be_modes = {
   \ 'c'      : { 'name': 'COMMAND',     'highlight': 'BE_ModeOther'  },
   \ 'n'      : { 'name': 'NORMAL',      'highlight': 'BE_ModeNormal' },
@@ -1597,7 +1574,8 @@ function! BE_Statusline(active)
   elseif &l:previewwindow == 1
     setlocal statusline=%!BE_ModeOnlyStatusline('preview')
   elseif (&l:buftype ==? 'nofile' && &l:filetype ==? '') || &l:buftype ==? 'acwrite'
-    " it's a 'scratch' file (we neeed to check filetype is empty because nerdtree is a 'nofile' too)
+    " it's a 'scratch' file (we neeed to check filetype is empty because
+    " NERDTree is a 'nofile' too)
     setlocal statusline=%!BE_ModeOnlyStatusline('scratch')
   elseif a:active == 1
     setlocal statusline=%!BE_ActiveStatusline()
@@ -1672,12 +1650,14 @@ endfunction
 
 augroup BE_StatuslineEvents
     autocmd!
-    autocmd FileType              nerdtree  setlocal statusline=\ NERDTree
-    autocmd FileType              netrw     setlocal statusline=\ %<%f
+
     " quickfix and help also need to have their own autocmd because WinEnter
     " and BufWinEnter are not triggered consistently on first opening it
-    autocmd FileType              help      setlocal statusline=%!BE_HelpStatusline()
-    autocmd FileType              qf        call BE_ListsStatuslineInitial()
+    autocmd FileType  help      setlocal statusline=%!BE_HelpStatusline()
+    autocmd FileType  qf        call BE_ListsStatuslineInitial()
+    autocmd FileType  nerdtree  setlocal statusline=\ NERDTree
+    autocmd FileType  netrw     setlocal statusline=\ %<%f
+
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
 augroup END

@@ -168,6 +168,28 @@ auto-formatting in several ways, to the point of becoming unusable.
     " we cannot disable auto-bullets because it breaks formatlistpat
     " let g:vim_markdown_auto_insert_bullets = 0
 
+apparently custom defintions no longer needed
+
+    " Add support for markdown files in tagbar with
+    " " <https://github.com/jszakmeister/markdown2ctags>
+    let g:markdown2ctags_path='~/.vim/tools/markdown2ctags'
+    if filereadable(glob(g:markdown2ctags_path))
+      let g:tagbar_type_markdown = {
+          \ 'ctagstype': 'markdown',
+          \ 'ctagsbin' : g:markdown2ctags_path,
+          \ 'ctagsargs' : '-f - --sort=yes --sro=»',
+          \ 'kinds' : [
+              \ 's:sections',
+              \ 'i:images'
+          \ ],
+          \ 'sro' : '»',
+          \ 'kind2scope' : {
+              \ 's' : 'section',
+          \ },
+          \ 'sort': 0,
+      \ }
+    endif
+
 PlantUML
 --------
 
@@ -574,6 +596,51 @@ Default section definitions
     section_X = %{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#wrap(airline#parts#filetype(),0)}
     section_Y = %{airline#util#wrap(airline#parts#ffenc(),0)}
     section_Z = %p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v
+
+Other status line stuff
+-----------------------
+
+    let g:be_plugin_filetypes = {
+      \ 'fugitive' :          { 'name': '[GIT]',    'highlight': 'BE_StatuslineGreyCentre' },
+      \ 'fugitiveblame' :     { 'name': '[GIT]',    'highlight': 'BE_StatuslineGreyCentre' },
+      \ 'godebugstacktrace' : { 'name': '[DEBUG]',  'highlight': 'BE_StatuslineGreyCentre' },
+      \ 'godebugvariables' :  { 'name': '[DEBUG]',  'highlight': 'BE_StatuslineGreyCentre' },
+      \ 'godebugoutput' :     { 'name': '[DEBUG]',  'highlight': 'BE_StatuslineGreyCentre' },
+    \}
+
+    " ignore if the statusline is configured for a type set by a plugin
+    if has_key(g:be_plugin_filetypes, &l:filetype) | return | endif
+
+    autocmd FileType  fugitive          setlocal statusline=%!BE_PluginStatusline('fugitive')
+    autocmd FileType  fugitiveblame     setlocal statusline=%!BE_PluginStatusline('fugitiveblame')
+    autocmd FileType  godebugstacktrace setlocal statusline=%!BE_PluginStatusline('godebugstacktrace')
+    autocmd FileType  godebugvariables  setlocal statusline=%!BE_PluginStatusline('godebugvariables')
+    autocmd FileType  godebugoutput     setlocal statusline=%!BE_PluginStatusline('godebugoutput')
+
+    highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
+    highlight BE_StatuslineGreen          cterm=bold,reverse  ctermfg=10    ctermbg=none
+    highlight BE_StatuslineGreen          cterm=bold          ctermfg=none  ctermbg=10
+    highlight BE_StatuslineCyan           cterm=bold,reverse  ctermfg=14    ctermbg=none
+
+    function! BE_PluginStatusline(given_filetype)
+      if !has_key(g:be_plugin_filetypes, a:given_filetype)
+        echom "[error] No config for ".a:given_filetype
+        return ""
+      endif
+
+      let l:mode_name   = g:be_plugin_filetypes[a:given_filetype]['name']
+      let l:mode_colour = g:be_plugin_filetypes[a:given_filetype]['highlight']
+
+      let l:stl  = '%#'.l:mode_colour.'#'
+      let l:stl .= ' '.l:mode_name
+
+      return l:stl
+    endfunction
+
+    " vim switches into command mode when searching or replacing, but not other
+    " commands, we disable the specific visualisation until we manage to achieve
+    " consistency
+    " \ 'c'      : { 'name': 'NORMAL',      'highlight': 'BE_StatuslineGreen' },
 
 Other Vim settings
 ------------------
