@@ -1492,64 +1492,52 @@ highlight DiffText    cterm=none,bold   ctermfg=4   ctermbg=15
 " ------------------ "
 
 let g:be_modes = {
-  \ 'c'      : { 'name': 'COMMAND',     'highlight': 'BE_ModeOther'  },
-  \ 'n'      : { 'name': 'NORMAL',      'highlight': 'BE_ModeNormal' },
-  \ 'no'     : { 'name': 'N-PENDING)',  'highlight': 'BE_ModeNormal' },
-  \ 'i'      : { 'name': 'INSERT',      'highlight': 'BE_ModeInsert' },
-  \ 'R'      : { 'name': 'REPLACE',     'highlight': 'BE_ModeInsert' },
-  \ 'v'      : { 'name': 'VISUAL',      'highlight': 'BE_ModeVisual' },
-  \ 'V'      : { 'name': 'V-LINE',      'highlight': 'BE_ModeVisual' },
-  \ "\<C-v>" : { 'name': 'V-BLOCK',     'highlight': 'BE_ModeVisual' },
-  \ 'Rv'     : { 'name': 'V-REPLACE',   'highlight': 'BE_ModeInsert' },
-  \ 's'      : { 'name': 'SELECT',      'highlight': 'BE_ModeOther'  },
-  \ 'S'      : { 'name': 'S-LINE',      'highlight': 'BE_ModeOther'  },
-  \ "\<C-s>" : { 'name': 'S-BLOCK',     'highlight': 'BE_ModeOther'  },
-  \ 'cv'     : { 'name': 'VIM-EX',      'highlight': 'BE_ModeOther'  },
-  \ 'ce'     : { 'name': 'EX',          'highlight': 'BE_ModeOther'  },
-  \ 'r'      : { 'name': 'PROMPT',      'highlight': 'BE_ModeOther'  },
-  \ 'rm'     : { 'name': 'MORE',        'highlight': 'BE_ModeOther'  },
-  \ 'r?'     : { 'name': 'CONFIRM',     'highlight': 'BE_ModeOther'  },
-  \ '!'      : { 'name': 'SHELL',       'highlight': 'BE_ModeOther'  },
-  \ 't'      : { 'name': 'TERMINAL',    'highlight': 'BE_ModeOther'  },
+  \ 'c'      : { 'name': 'COMMAND',     'highlight': 'BE_StatuslineCyan'    },
+  \ 'n'      : { 'name': 'NORMAL',      'highlight': 'BE_StatuslineGreen'   },
+  \ 'no'     : { 'name': 'N-PENDING)',  'highlight': 'BE_StatuslineGreen'   },
+  \ 'i'      : { 'name': 'INSERT',      'highlight': 'BE_StatuslineMagenta' },
+  \ 'R'      : { 'name': 'REPLACE',     'highlight': 'BE_StatuslineMagenta' },
+  \ 'v'      : { 'name': 'VISUAL',      'highlight': 'BE_StatuslineBlue'    },
+  \ 'V'      : { 'name': 'V-LINE',      'highlight': 'BE_StatuslineBlue'    },
+  \ "\<C-v>" : { 'name': 'V-BLOCK',     'highlight': 'BE_StatuslineBlue'    },
+  \ 'Rv'     : { 'name': 'V-REPLACE',   'highlight': 'BE_StatuslineMagenta' },
+  \ 's'      : { 'name': 'SELECT',      'highlight': 'BE_StatuslineCyan'    },
+  \ 'S'      : { 'name': 'S-LINE',      'highlight': 'BE_StatuslineCyan'    },
+  \ "\<C-s>" : { 'name': 'S-BLOCK',     'highlight': 'BE_StatuslineCyan'    },
+  \ 'cv'     : { 'name': 'VIM-EX',      'highlight': 'BE_StatuslineCyan'    },
+  \ 'ce'     : { 'name': 'EX',          'highlight': 'BE_StatuslineCyan'    },
+  \ 'r'      : { 'name': 'PROMPT',      'highlight': 'BE_StatuslineCyan'    },
+  \ 'rm'     : { 'name': 'MORE',        'highlight': 'BE_StatuslineCyan'    },
+  \ 'r?'     : { 'name': 'CONFIRM',     'highlight': 'BE_StatuslineCyan'    },
+  \ '!'      : { 'name': 'SHELL',       'highlight': 'BE_StatuslineCyan'    },
+  \ 't'      : { 'name': 'TERMINAL',    'highlight': 'BE_StatuslineCyan'    },
 \}
 
 let g:be_buffer_types = {
-  \ 'quickfix' : { 'name': 'QUICKFIX',  'highlight': 'BE_ModeQuickfix' },
-  \ 'loclist'  : { 'name': 'LOCLIST',   'highlight': 'BE_ModeLoclist'  },
-  \ 'preview'  : { 'name': 'PREVIEW',   'highlight': 'BE_ModeOther'    },
-  \ 'scratch'  : { 'name': 'SCRATCH',   'highlight': 'BE_ModeOther'    },
-  \ 'help'     : { 'name': 'HELP',      'highlight': 'BE_ModeOther'    },
+  \ 'quickfix' : { 'name': 'QUICKFIX',  'highlight': 'BE_StatuslineGrey' },
+  \ 'loclist'  : { 'name': 'LOCLIST',   'highlight': 'BE_StatuslineRed'  },
+  \ 'preview'  : { 'name': 'PREVIEW',   'highlight': 'BE_StatuslineCyan' },
+  \ 'scratch'  : { 'name': 'SCRATCH',   'highlight': 'BE_StatuslineCyan' },
+  \ 'help'     : { 'name': 'HELP',      'highlight': 'BE_StatuslineCyan' },
 \}
 
-" highlight StatusLine cterm=bold ctermfg=15 ctermbg=2
-highlight StatusLine              cterm=none          ctermfg=15    ctermbg=8
-highlight StatusLineNC            cterm=none          ctermfg=15    ctermbg=8
+highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
+highlight StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
-" green
-" highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
-" highlight BE_ModeNormal           cterm=bold          ctermfg=none  ctermbg=10
-highlight BE_ModeNormal           cterm=bold,reverse  ctermfg=10    ctermbg=none
-highlight BE_ModeNormalCentre     cterm=bold,reverse  ctermfg=2     ctermbg=none
-" blue
-highlight BE_ModeVisual           cterm=bold,reverse  ctermfg=12    ctermbg=none
-highlight BE_ModeVisualCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
-" magenta
-highlight BE_ModeInsert           cterm=bold,reverse  ctermfg=13    ctermbg=none
-highlight BE_ModeInsertCentre     cterm=bold,reverse  ctermfg=5     ctermbg=none
-" cyan
-" highlight BE_ModeOther            cterm=bold,reverse  ctermfg=14    ctermbg=none
-highlight BE_ModeOther            cterm=bold          ctermfg=none  ctermbg=14
-highlight BE_ModeOtherCentre      cterm=bold,reverse  ctermfg=6     ctermbg=none
-" red
-highlight BE_ModeLoclist          cterm=bold,reverse  ctermfg=9     ctermbg=none
-highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=1     ctermbg=none
-" grey
-highlight BE_ModeQuickfix         cterm=bold,reverse  ctermfg=7     ctermbg=8
-highlight BE_ModeQuickfixCentre   cterm=bold,reverse  ctermfg=8     ctermbg=none
-
-" " yellow
-" highlight BE_ModeLoclist          cterm=bold          ctermfg=none  ctermbg=11
-" highlight BE_ModeLoclistCentre    cterm=bold,reverse  ctermfg=3     ctermbg=none
+highlight BE_StatuslineGreen          cterm=bold,reverse  ctermfg=10    ctermbg=none
+highlight BE_StatuslineGreenCentre    cterm=bold,reverse  ctermfg=2     ctermbg=none
+highlight BE_StatuslineBlue           cterm=bold,reverse  ctermfg=12    ctermbg=none
+highlight BE_StatuslineBlueCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
+highlight BE_StatuslineMagenta        cterm=bold,reverse  ctermfg=13    ctermbg=none
+highlight BE_StatuslineMagentaCentre  cterm=bold,reverse  ctermfg=5     ctermbg=none
+highlight BE_StatuslineCyan           cterm=bold          ctermfg=none  ctermbg=14
+highlight BE_StatuslineCyanCentre     cterm=bold,reverse  ctermfg=6     ctermbg=none
+highlight BE_StatuslineRed            cterm=bold,reverse  ctermfg=9     ctermbg=none
+highlight BE_StatuslineRedCentre      cterm=bold,reverse  ctermfg=1     ctermbg=none
+highlight BE_StatuslineGrey           cterm=bold,reverse  ctermfg=7     ctermbg=8
+highlight BE_StatuslineGreyCentre     cterm=bold,reverse  ctermfg=8     ctermbg=none
+highlight BE_StatuslineYellow         cterm=bold          ctermfg=none  ctermbg=11
+highlight BE_StatuslineYellowCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
 
 let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
 let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
