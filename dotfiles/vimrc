@@ -1322,20 +1322,31 @@ autocmd FileType go nnoremap <Leader>e :GoDecls<CR>
 autocmd FileType go nnoremap <Leader>ee :GoDeclsDir<CR>
 autocmd FileType go nnoremap <Leader>s :GoSameIdsToggle<CR>
 
-" defaults:
-"
-" let g:go_debug_mappings = {
-"    \ '(go-debug-continue)':   {'key': '<F5>'},
-"    \ '(go-debug-print)':      {'key': '<F6>'},
-"    \ '(go-debug-breakpoint)': {'key': '<F9>'},
-"    \ '(go-debug-next)':       {'key': '<F10>'},
-"    \ '(go-debug-step)':       {'key': '<F11>'},
-"    \ '(go-debug-halt)':       {'key': '<F8>'},
-" \ }
-"
-let g:go_debug_mappings = {
-   \ '(go-debug-stepout)':    {'key': '<F12>'},
+" --- vim-go: debugging ---
+
+" \ 'out':        'botright 5new', " remove the output window
+let g:go_debug_windows = {
+    \ 'vars':       'leftabove 30vnew',
+    \ 'stack':      'leftabove 20new',
+    \ 'goroutines': 'botright 10new',
 \ }
+
+" default mappings when debugger is active:
+"
+"   go-debug-continue   <F5>
+"   go-debug-print      <F6>
+"   go-debug-breakpoint <F9>
+"   go-debug-next       <F10>
+"   go-debug-step       <F11>
+"   go-debug-halt       <F8>
+"
+" additional ones will be merged into the defaults
+let g:go_debug_mappings = {
+   \ '(go-debug-stop)':     {'key': '<F7>'},
+   \ '(go-debug-stepout)':  {'key': '<F12>'},
+\ }
+
+autocmd FileType go nnoremap <F4> :GoDebugStart<CR>
 
 " --- vim-go: syntax highlighting ---
 
@@ -1355,6 +1366,9 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_variable_declarations = 1
+
+let g:go_highlight_debug = 0
+let g:go_debug_breakpoint_sign_text = '▶︎'
 
 " ------------ "
 " --- Rust --- "
@@ -1645,6 +1659,10 @@ augroup BE_StatuslineEvents
     autocmd FileType  qf        call BE_ListsStatuslineInitial()
     autocmd FileType  nerdtree  setlocal statusline=\ NERDTree
     autocmd FileType  netrw     setlocal statusline=\ %<%f
+
+    autocmd FileType  godebugstacktrace setlocal statusline=\[debug]
+    autocmd FileType  godebugvariables  setlocal statusline=\[debug]
+    autocmd FileType  godebugoutput     setlocal statusline=\[debug]
 
     autocmd WinEnter,BufWinEnter  *         call BE_Statusline(1)
     autocmd WinLeave              *         call BE_Statusline(0)
