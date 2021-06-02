@@ -3,4 +3,6 @@
 set -eux
 set -o pipefail
 
+rm -rfv "${HOME}/.config/nnn/plugins"
+
 curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
