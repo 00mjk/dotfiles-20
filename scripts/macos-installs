@@ -151,11 +151,13 @@ brew install --formulae \
 echo "[setup] FZF post-install setup"
 $BREW_PREFIX/opt/fzf/install --key-bindings --completion --no-update-rc
 
-echo "[setup] Brew-installed shells post-install setup"
-append_if_missing /etc/shells "$BREW_PREFIX/bin/bash"
-append_if_missing /etc/shells "$BREW_PREFIX/bin/zsh"
+if [[ ! $SHELL == "$BREW_PREFIX/bin/zsh" ]]; then
+  echo "[setup] Brew-installed shells post-install setup"
+  append_if_missing /etc/shells "$BREW_PREFIX/bin/bash"
+  append_if_missing /etc/shells "$BREW_PREFIX/bin/zsh"
 
-chsh -s $BREW_PREFIX/bin/zsh
+  chsh -s $BREW_PREFIX/bin/zsh
+fi
 
 # echo "[setup] Install dotfiles"
 # "${CURRDIR}/dotfiles"
