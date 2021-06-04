@@ -1346,7 +1346,9 @@ let g:go_debug_mappings = {
    \ '(go-debug-stepout)':  {'key': '<F12>'},
 \ }
 
+autocmd FileType go nnoremap <F2> :GoDebugTestFunc<CR>
 autocmd FileType go nnoremap <F4> :GoDebugStart<CR>
+autocmd FileType go nnoremap <F9> :GoDebugBreakpoint<CR>
 
 " --- vim-go: syntax highlighting ---
 
