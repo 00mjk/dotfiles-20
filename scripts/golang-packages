@@ -22,6 +22,15 @@ function go_gte_1_16() {
   [ "${go_version}" = $(echo -e "${go_version}\n1.16" | sort -Vr | head -n1) ]
 }
 
+cat << EOF
+-------------------------------------------------------------------------------
+Go version: $(go version)
+GOROOT:     $(go env GOROOT)
+GOPATH:     $(go env GOPATH)
+-------------------------------------------------------------------------------
+
+EOF
+
 pushd ~
 go_install 'mvdan.cc/gofumpt'
 go_install 'honnef.co/go/tools/cmd/staticcheck'
