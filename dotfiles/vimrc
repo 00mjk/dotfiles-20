@@ -109,8 +109,8 @@ call plug#end()
 " however, since the command history is indeed useful sometimes, it's still
 " possible to summon it with the Vim-native :<C-f>
 map q: <Nop>
-" disable interactive ex-mode
-nnoremap Q <Nop>
+" remap Ex mode to 'formatting'
+map Q gq
 " disable compatibility with old vi
 set nocompatible
 
