@@ -189,13 +189,8 @@ set matchpairs+=<:>
 " --- Leader key alternatives --- "
 " ------------------------------- "
 
-" They preserve the native leader key.
+" Preserves the native leader key.
 
-" this is popular
-nmap , \
-vmap , \
-
-" this is less so, but works great in practice
 nmap <space> \
 vmap <space> \
 
@@ -804,7 +799,7 @@ endfun
 
 autocmd FileType python autocmd BufWritePre <buffer> :call BE_StripTrailingWhitespace()
 
-" it is occasionally useful to be able to run whitespace removal manually
+" also available for manual execution, for files where it's not enabled by default
 command! WhitespaceAll      call BE_StripExtraWhitespace()
 command! WhitespaceTrailing call BE_StripTrailingWhitespace()
 
