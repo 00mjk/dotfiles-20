@@ -175,30 +175,56 @@ echo "[setup] Install Oh My Zsh"
 echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
-brew install --casks \
-  authy \
-  discord \
-  docker \
-  drawio \
-  dropbox \
-  firefox \
-  font-go \
-  font-inconsolata \
-  font-inconsolata-nerd-font \
-  font-jetbrains-mono \
-  font-jetbrains-mono-nerd-font \
-  font-juliamono \
-  google-backup-and-sync \
-  google-chrome \
-  iterm2 \
-  middle \
-  pastebot \
-  rectangle \
-  slack \
-  the-unarchiver \
-  visual-studio-code \
-  vlc \
+# These casks can be installed locally, but they are free and of general
+# utility.
+global_apps_by_choice=(
+  rectangle
+  sync
+  the-unarchiver
+  font-inconsolata
+  font-inconsolata-nerd-font
+  font-jetbrains-mono
+  font-jetbrains-mono-nerd-font
+  font-juliamono
+)
+
+for app in "${global_apps_by_choice[@]}"; do
+  echo "[setup] Installing cask ${app} globally"
+  brew install --cask "${app}"
+done
+
+# These casks can only be installed globally, and will ignore the --appdir
+# option.
+global_apps=(
+  docker
   zoom
+)
+
+for app in "${global_apps[@]}"; do
+  echo "[setup] Installing cask ${app} globally"
+  brew install --cask "${app}"
+done
+
+# These casks are better installed on a per-user basis.
+local_apps=(
+  authy
+  discord
+  drawio
+  firefox
+  google-chrome
+  istat-menus
+  iterm2
+  middle
+  pastebot
+  slack
+  visual-studio-code
+  vlc
+)
+
+for app in "${local_apps[@]}"; do
+  echo "[setup] Installing cask ${app} locally"
+  brew install --cask --appdir ~/Applications "${app}"
+done
 
 # ------------------------------ #
 # --- Post install for casks --- #
@@ -309,6 +335,7 @@ echo "
   - menubar-stats
   - mdrp
   - devdocs
+  - google-backup-and-sync
   - istat-menus
   - homebrew/cask-drivers/logitech-camera-settings
   - onedrive
@@ -331,12 +358,13 @@ echo "
   - homebrew/cask/stats
   - font-dejavu
   - font-dejavu-sans-mono-nerd-font
+  - font-go
 
 * Casks requiring Rosetta 2 on arm64
   - adoptopenjdk
   - microsoft-teams
   - sdformatter
-  - bitwarden
+  - bitwarden (including the Safari extension)
   - authy
   - dropbox
 
