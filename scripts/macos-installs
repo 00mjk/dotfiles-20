@@ -226,6 +226,9 @@ for app in "${local_apps[@]}"; do
   brew install --cask --appdir ~/Applications "${app}"
 done
 
+echo "[setup] Ensure local ~/Applications is available only to this user"
+chmod 0700 ~/Applications
+
 # ------------------------------ #
 # --- Post install for casks --- #
 # ------------------------------ #
