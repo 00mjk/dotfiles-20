@@ -168,7 +168,7 @@ auto-formatting in several ways, to the point of becoming unusable.
     " we cannot disable auto-bullets because it breaks formatlistpat
     " let g:vim_markdown_auto_insert_bullets = 0
 
-apparently custom defintions no longer needed
+apparently custom defintions are no longer needed
 
     # scripts/vim
     "${CURRDIR}/vim-markdown-tagbar"
