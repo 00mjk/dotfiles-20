@@ -1,16 +1,5 @@
 # vim: set ft=bash:
 
-USR_LOCAL=
-if [[ "$(uname -s)" == "Linux" || "$(uname -m)" == "x86_64" ]]; then
-  USR_LOCAL='/usr/local'
-elif [[ "$(uname -m)" == "arm64" ]]; then
-  USR_LOCAL='/opt/homebrew'
-  export PATH="$USR_LOCAL/bin:$PATH"
-else
-  echo "Unsupported architecture: $(uname -m)"
-  exit 1
-fi
-
 # ----------------- #
 # --- LOCAL BIN --- #
 # ----------------- #
@@ -75,7 +64,7 @@ export DELTA_PAGER='less --clear-screen'
 # ------------ #
 
 # Use Brew-installed Ruby if available.
-[[ -d "$USR_LOCAL/opt/ruby" ]] && PATH="$USR_LOCAL/opt/ruby/bin:$PATH"
+[[ -d "$HOMEBREW_PREFIX/opt/ruby" ]] && PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
 
 # -------------- #
 # --- Golang --- #

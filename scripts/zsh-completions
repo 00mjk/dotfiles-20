@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+set -eu
+set -o pipefail
+
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+HOMEBREW_PREFIX=$(usr_local)
+
+echo "[setup] Update version-dependent zsh completion scripts"
+
+ZSH_SITE_FUNCTIONS=$HOMEBREW_PREFIX/share/zsh/site-functions
+
+if [[ -n "$(command -v kubectl)" ]]; then
+  echo "[setup] Kubernetes autocompletions"
+  kubectl completion zsh > "${ZSH_SITE_FUNCTIONS}/_kubectl"
+fi
+
+if [[ -d "$HOMEBREW_PREFIX/Cellar/curl" ]]; then
+  echo "[setup] curl autocompletions"
+  ln -sfv "$(echo $HOMEBREW_PREFIX/Cellar/curl/*/share/zsh/site-functions/_curl)" "${ZSH_SITE_FUNCTIONS}/_curl"
+fi
+
+DOCKER_COMPLETIONS_DIR=/Applications/Docker.app/Contents/Resources/etc/
+if [[ -d $DOCKER_COMPLETIONS_DIR ]]; then
+  echo "[setup] Docker autocompletions"
+  ln -sfv "$DOCKER_COMPLETIONS_DIR/docker.zsh-completion" "${ZSH_SITE_FUNCTIONS}/_docker"
+  ln -sfv "$DOCKER_COMPLETIONS_DIR/docker-compose.zsh-completion" "${ZSH_SITE_FUNCTIONS}/_docker-compose"
+fi
+
+"${CURRDIR}/golang-zsh-completion"

@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-echo "Installing iTerm2 utilities"
+echo "[setup] Installing iTerm2 utilities"
 
 function iterm2_util () {
   local util=$1

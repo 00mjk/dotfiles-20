@@ -13,6 +13,14 @@ DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
 
+CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+HOMEBREW_PREFIX=$(usr_local)
+
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+
 # ----------- #
 # --- git --- #
 # ----------- #
@@ -112,3 +120,9 @@ if [[ "$(uname -s)" =~ Darwin ]]; then
   touch ~/.hushlogin
   backup_and_symlink "${DOTFILES_DIR}/shell_addons_mac" "${HOME}/.shell_addons_mac"
 fi
+
+# ----------------------- #
+# --- zsh completions --- #
+# ----------------------- #
+
+"${CURRDIR}/zsh-completions"

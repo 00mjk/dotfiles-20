@@ -4,30 +4,21 @@ set -eu
 set -o pipefail
 
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+
 source "${CURRDIR}/utils.sh"
 
-echo "Installing zsh autocompletion"
+HOMEBREW_PREFIX=$(usr_local)
 
-# native uname only supports -m, not the long format --machine
-BREW_PREFIX=
-if [[ "$(uname -s)" == "Linux" || "$(uname -m)" == "x86_64" ]]; then
-  BREW_PREFIX='/usr/local'
-elif [[ "$(uname -m)" == "arm64" ]]; then
-  BREW_PREFIX='/opt/homebrew'
-else
-  echo "Unsupported architecture: $(uname -m)"
-  exit 1
-fi
+ZSH_SITE_FUNCTIONS=$HOMEBREW_PREFIX/share/zsh/site-functions
 
-ZSH_SITE_FUNCTIONS=$BREW_PREFIX/share/zsh/site-functions
-
+echo "[setup] Golang autocompletions"
 curl \
   'https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_golang' \
   --location \
   --time-cond "${ZSH_SITE_FUNCTIONS}/_golang" \
   --output "/tmp/_golang"
 
-if [[ -w $BREW_PREFIX ]]; then
+if [[ -w $HOMEBREW_PREFIX ]]; then
   mv -v /tmp/_golang $ZSH_SITE_FUNCTIONS/
 else
   sudo mv -v /tmp/_golang $ZSH_SITE_FUNCTIONS/
