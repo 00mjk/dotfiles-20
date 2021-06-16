@@ -1,8 +1,8 @@
-# vim: set ft=zsh:
+# vim: set ft=bash:
 
 # Sourced by other install scripts.
 
-backup_and_symlink () {
+function backup_and_symlink () {
   # remove trailing slashes
   local target_path="$(echo "${1}" | sed -E 's|/+$||')"
   local symlink_path="$(echo "${2}" | sed -E 's|/+$||')"
@@ -35,7 +35,7 @@ backup_and_symlink () {
   ln -sfnv "${target_path}" "${symlink_path}"
 }
 
-append_if_missing () {
+function append_if_missing () {
   local dest=$1
   local content=$2
 
@@ -49,5 +49,15 @@ append_if_missing () {
       echo "${content}" | sudo tee -a "${dest}" > /dev/null
     fi
     echo "==> added \"$content\" to $dest"
+  fi
+}
+
+# usr_local returns either /usr/local or /opt/homebrew depending on the system,
+# and is used to link to various support files
+function usr_local () {
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo '/opt/homebrew'
+  elif [[ "$(uname -m)" == "x86_64" ]]; then
+    echo '/usr/local'
   fi
 }

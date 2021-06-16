@@ -13,11 +13,6 @@ echo "[setup] Install Command Line Tools for Xcode if not already present"
 xcode-select --install 2>&1
 set -e
 
-echo "[setup] Install Homebrew if not already present"
-if [[ -z $(command -v brew) ]]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 source "${CURRDIR}/utils.sh"
 
@@ -30,6 +25,11 @@ elif [[ "$(uname -m)" == "arm64" ]]; then
 else
   echo "Unsupported architecture: $(uname -m)"
   exit 1
+fi
+
+echo "[setup] Install Homebrew if not already present"
+if [[ ! -x "${BREW_PREFIX}/bin/brew" ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 export PATH="$BREW_PREFIX/bin:$PATH"
@@ -78,52 +78,32 @@ brew install --formulae \
 echo "[setup] Install extra utilities"
 brew install --formulae \
   bat \
-  bmon \
   cloc \
-  cmark \
   direnv \
   exa \
   fd \
-  figlet \
   ffmpeg \
   fzf \
   git-delta \
-  glow \
-  gnupg \
   golangci/tap/golangci-lint \
-  graphviz \
   htop \
   httpie \
   imagemagick \
   jq \
   jump \
-  just \
-  lazygit \
   lf \
-  libpq \
   lsof \
-  mdcat \
   mosh \
   mtr \
-  nethogs \
-  nload \
   nmap \
   nnn \
   parallel \
-  pipx \
   plantuml \
   pre-commit \
-  pyenv \
-  rbenv \
   ripgrep \
   ruby \
-  ruby-build \
   ruby-install \
-  slurm \
-  the_silver_searcher \
-  tig \
   tmux \
-  trash \
   tree \
   vim \
   watch \
@@ -159,12 +139,12 @@ if [[ ! $SHELL == "$BREW_PREFIX/bin/zsh" ]]; then
   chsh -s $BREW_PREFIX/bin/zsh
 fi
 
-# echo "[setup] Install dotfiles"
-# "${CURRDIR}/dotfiles"
-#
-# echo "[setup] Install Vim configuration"
-# "${CURRDIR}/vim"
-#
+echo "[setup] Install dotfiles"
+"${CURRDIR}/dotfiles"
+
+echo "[setup] Install Vim configuration"
+"${CURRDIR}/vim"
+
 echo "[setup] Install Oh My Zsh"
 "$CURRDIR/ohmyzsh"
 
@@ -233,19 +213,6 @@ chmod 0700 ~/Applications
 # --- Post install for casks --- #
 # ------------------------------ #
 
-echo "[setup] Configure extra autocompletions"
-ZSH_SITE_FUNCTIONS=$BREW_PREFIX/share/zsh/site-functions
-
-if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
-  pushd "${ZSH_SITE_FUNCTIONS}"
-  docker_completions_dir=/Applications/Docker.app/Contents/Resources/etc/
-  ln -sfv "$docker_completions_dir/docker.zsh-completion" _docker
-  ln -sfv "$docker_completions_dir/docker-compose.zsh-completion" _docker-compose
-  kubectl completion zsh > _kubectl
-  ln -sfv "$(echo $BREW_PREFIX/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
-  popd
-fi
-
 # TODO: Link Chrome Dictionary to Dropbox
 # $HOME/Library/Application\ Support/Google/Chrome/Default/Custom\ Dictionary.txt
 
@@ -262,12 +229,12 @@ echo "[setup] Install Golang"
 echo "[setup] Install Rust"
 "${CURRDIR}/rust"
 
-echo "[setup] Install pipx packages"
-
-pipx ensurepath
-pipx install --force litecli
-pipx install --force glances
-pipx install --force ydiff
+# echo "[setup] Install pipx packages"
+#
+# pipx ensurepath
+# pipx install --force litecli
+# pipx install --force glances
+# pipx install --force ydiff
 
 # pipx install --force pgcli
 # Fatal error from pip prevented installation. Full pip output in file:
@@ -323,12 +290,32 @@ echo "
   - terraform
 
 * More packages:
-  - lolcat (requires Ruby)
-  - kubectx
+  - bmon
+  - cmark
   - colordiff
-  - terraform
   - fff
+  - figlet
+  - glow
+  - gnupg
+  - graphviz
+  - just
+  - kubectx
+  - lazygit
+  - libpq
+  - lolcat (requires Ruby)
+  - mdcat
+  - nethogs
+  - nload
+  - pipx
+  - pyenv
   - ranger
+  - rbenv
+  - ruby-build
+  - slurm
+  - terraform
+  - the_silver_searcher
+  - tig
+  - trash
 
 * Other casks:
 

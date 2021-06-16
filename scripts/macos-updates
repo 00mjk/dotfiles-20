@@ -3,46 +3,28 @@
 set -eu
 set -o pipefail
 
-USR_LOCAL=
-if [[ "$(uname -s)" == "Linux" || "$(uname -m)" == "x86_64" ]]; then
-  USR_LOCAL='/usr/local'
-elif [[ "$(uname -m)" == "arm64" ]]; then
-  USR_LOCAL='/opt/homebrew'
-else
-  echo "Unsupported architecture: $(uname -m)"
-  exit 1
-fi
-
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+
+source "${CURRDIR}/utils.sh"
+
+HOMEBREW_PREFIX=$(usr_local)
 
 echo "[setup] Update natively installed Golang packages"
 "${CURRDIR}/golang-packages"
 
-echo "[setup] Update zsh completion script for Golang"
-"${CURRDIR}/golang-zsh-completion"
-
-echo "[setup] Update delta themes"
 "${CURRDIR}/delta-themes"
 
 echo "[setup] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
 
-echo "[setup] Update Rust"
+"${CURRDIR}/zsh-completions"
+
 "${CURRDIR}/rust"
 
-echo "[setup] Update curl autocomplete for zsh"
-# curl has a different location for each version, we need to relink for the
-# updates to be effective
-ZSH_SITE_FUNCTIONS=$USR_LOCAL/share/zsh/site-functions
-if [[ -d "${ZSH_SITE_FUNCTIONS}" ]]; then
-  pushd "${ZSH_SITE_FUNCTIONS}"
-  ln -sfv "$(echo $USR_LOCAL/Cellar/curl/*/share/zsh/site-functions/_curl)" _curl
-  popd
-fi
-
-echo "[setup] Update some of the iTerm2 utilities"
 "${CURRDIR}/iterm2-utils"
 
-echo "[setup] Upgrade pipx packages"
-pipx upgrade-all
+if [[ -n "$(command -v pipx)" ]]; then
+  echo "[setup] Upgrade pipx packages"
+  pipx upgrade-all
+fi
