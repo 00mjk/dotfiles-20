@@ -10,7 +10,6 @@ PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/libxml2/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/lsof/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/sqlite/bin:$PATH"
-PATH="$HOMEBREW_PREFIX/sbin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 
 MANPATH="$HOMEBREW_PREFIX/share/man/:$HOMEBREW_PREFIX/opt/curl/share/man:$MANPATH"
