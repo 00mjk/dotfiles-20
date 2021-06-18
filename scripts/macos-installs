@@ -42,7 +42,7 @@ export PATH="$BREW_PREFIX/bin:$PATH"
 # formulae exists, that requires VirtualBox.
 
 echo "[setup] Install GNU utilities"
-brew install --formulae \
+brew install --quiet --formulae \
   coreutils \
   diffutils \
   findutils \
@@ -59,7 +59,7 @@ brew install --formulae \
   inetutils
 
 echo "[setup] Install recent versions of macOS built-in utilities"
-brew install --formulae \
+brew install --quiet --formulae \
   bash \
   curl \
   git \
@@ -76,7 +76,7 @@ brew install --formulae \
   zsh
 
 echo "[setup] Install extra utilities"
-brew install --formulae \
+brew install --quiet --formulae \
   bat \
   cloc \
   direnv \
@@ -112,12 +112,12 @@ brew install --formulae \
   yq
 
 echo "[setup] Install Node.js"
-brew install --formulae \
+brew install --quiet --formulae \
   node \
   yarn
 
 # universal-ctags is a head-only formula until considered stable
-brew install --formulae \
+brew install --quiet --formulae \
   --HEAD \
   universal-ctags/universal-ctags/universal-ctags
 
@@ -158,53 +158,31 @@ brew tap homebrew/cask-fonts
 # These casks can be installed locally, but they are free and of general
 # utility.
 global_apps_by_choice=(
-  rectangle
-  sync
-  the-unarchiver
-  font-inconsolata
-  font-inconsolata-nerd-font
-  font-jetbrains-mono
-  font-jetbrains-mono-nerd-font
-  font-juliamono
 )
 
-for app in "${global_apps_by_choice[@]}"; do
-  echo "[setup] Installing cask ${app} globally"
-  brew install --cask "${app}"
-done
-
-# These casks can only be installed globally, and will ignore the --appdir
-# option.
-global_apps=(
-  docker
+brew install --quiet --casks \
+  authy \
+  discord \
+  docker \
+  drawio \
+  firefox \
+  font-inconsolata \
+  font-inconsolata-nerd-font \
+  font-jetbrains-mono \
+  font-jetbrains-mono-nerd-font \
+  font-juliamono \
+  google-chrome \
+  istat-menus \
+  iterm2 \
+  middle \
+  pastebot \
+  rectangle \
+  slack \
+  sync \
+  the-unarchiver \
+  visual-studio-code \
+  vlc \
   zoom
-)
-
-for app in "${global_apps[@]}"; do
-  echo "[setup] Installing cask ${app} globally"
-  brew install --cask "${app}"
-done
-
-# These casks are better installed on a per-user basis.
-local_apps=(
-  authy
-  discord
-  drawio
-  firefox
-  google-chrome
-  istat-menus
-  iterm2
-  middle
-  pastebot
-  slack
-  visual-studio-code
-  vlc
-)
-
-for app in "${local_apps[@]}"; do
-  echo "[setup] Installing cask ${app} locally"
-  brew install --cask --appdir ~/Applications "${app}"
-done
 
 echo "[setup] Ensure local ~/Applications is available only to this user"
 chmod 0700 ~/Applications
