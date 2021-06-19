@@ -297,17 +297,30 @@ echo "
 
 * Other casks:
 
+  - alacritty
+  - calibre
+  - dash
   - dash
   - devdocs
-  - google-drive-file-stream (for Google Workspace accounts, supports Shared Drives)
-  - menubar-stats
-  - mdrp
   - devdocs
+  - font-dejavu
+  - font-dejavu-sans-mono-nerd-font
+  - font-go
   - google-backup-and-sync
-  - istat-menus
+  - google-drive-file-stream (for Google Workspace accounts, supports Shared Drives)
   - homebrew/cask-drivers/logitech-camera-settings
+  - homebrew/cask/menubar-stats
+  - homebrew/cask/stats
+  - istat-menus
+  - istat-menus
+  - libreoffice
+  - mdrp
+  - menubar-stats
+  - menumeters
   - onedrive
+  - postman
   - signal
+  - stats
   - telegram
   - thunderbird
   - tunnelbear
@@ -315,18 +328,6 @@ echo "
   - virtualbox
   - virtualbox-extension-pack
   - whatsapp
-  - postman
-  - libreoffice
-  - alacritty
-  - calibre
-  - dash
-  - istat-menus
-  - stats
-  - homebrew/cask/menubar-stats
-  - homebrew/cask/stats
-  - font-dejavu
-  - font-dejavu-sans-mono-nerd-font
-  - font-go
 
 * Casks requiring Rosetta 2 on arm64
   - adoptopenjdk
