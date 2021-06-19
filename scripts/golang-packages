@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+# go_install is needed until versions prior 1.16 are in use, because only in
+# 1.16 was the "go install" subcommand updated to be dedicated to installing
+# packages to the GOPATH, without modifying the current module if any.
+#
+# Prior to that "go get" needed to be run outside of a module location.
 function go_install() {
   echo "--- ${1} ---"
 
@@ -10,13 +15,17 @@ function go_install() {
   fi
 }
 
+# go_gte_1_16 determines whether the version of the current "go" command is at
+#
+# extracts the numeric portion of the go version by discarding head and tail,
+# and removing "go" before the numbers
+#
+# alternatively:
+#
+#   go version | grep --colour=never --extended-regexp --only-matching '([[:digit:]]|\.)+[[:space:]]'
+#
+# least 1.16
 function go_gte_1_16() {
-  # extract the numeric portion of the go version by discarding head and tail,
-  # and remove "go" before the numbers
-  # alternatively:
-  #
-  #   go version | grep --colour=never --extended-regexp --only-matching '([[:digit:]]|\.)+[[:space:]]'
-  #
   local go_version=$(go version | { read _ _ v _; echo ${v#go}; })
 
   [ "${go_version}" = $(echo -e "${go_version}\n1.16" | sort -Vr | head -n1) ]
