@@ -9,14 +9,16 @@ source "${CURRDIR}/utils.sh"
 
 HOMEBREW_PREFIX=$(usr_local)
 
-echo "[setup] Update natively installed Golang packages"
-"${CURRDIR}/golang-packages"
-
 "${CURRDIR}/delta-themes"
 
 echo "[setup] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
+
+echo "[setup] Update natively installed Golang packages"
+# ensure it's run after updating Vim plugins, so that the latest version of
+# vim-go will be used when updating its support binaries
+"${CURRDIR}/golang-packages"
 
 "${CURRDIR}/zsh-completions"
 
