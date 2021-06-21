@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -e
+set -euo pipefail
 
 # --------------------------------------------------------------------------- #
 # --- Detect the operating system ------------------------------------------- #
@@ -87,7 +87,8 @@ fi
 DOWNLOAD_DIR="${HOME}/Downloads"
 FILENAME="go${GO_VERSION}.${PLATFORM}-${ARCH}.tar.gz"
 ARCHIVE_FILE="${DOWNLOAD_DIR}/${FILENAME}"
-URL="https://storage.googleapis.com/golang/${FILENAME}"
+# URL="https://storage.googleapis.com/golang/${FILENAME}"
+URL="https://golang.org/dl/${FILENAME}"
 
 echo "PLATFORM      ${PLATFORM}"
 echo "GO_VERSION    ${GO_VERSION}"
@@ -110,6 +111,7 @@ curl \
   --location \
   --create-dirs \
   --time-cond "${ARCHIVE_FILE}" \
+  --fail-with-body \
   --output "${ARCHIVE_FILE}"
 
 echo "Remove old installation (dir ${GO_ROOT})"
