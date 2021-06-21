@@ -98,6 +98,7 @@ brew install --quiet --formulae \
   nmap \
   nnn \
   parallel \
+  pipx \
   plantuml \
   pre-commit \
   ripgrep \
@@ -284,7 +285,6 @@ echo "
   - mdcat
   - nethogs
   - nload
-  - pipx
   - pyenv
   - ranger
   - rbenv
