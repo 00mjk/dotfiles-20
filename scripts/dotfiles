@@ -107,6 +107,14 @@ backup_and_symlink "${DOTFILES_DIR}/direnvrc" "${HOME}/.direnvrc"
 
 "${CURRDIR}/delta-themes"
 
+# --- gotop --- #
+
+# this requires the gotop command to be aliases, because it will not
+# automatically load the configuration from this custom location
+
+backup_and_symlink "${DOTFILES_DIR}/gotop.conf" "${HOME}/.config/gotop/gotop.conf"
+backup_and_symlink "${DOTFILES_DIR}/gotop.procs.layout" "${HOME}/.config/gotop/layouts/procs"
+
 # -------------- #
 # --- shells --- #
 # -------------- #
