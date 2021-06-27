@@ -17,10 +17,10 @@
   paging = always
   features = tweaks
 
+# adjustments to the default style, which puts too much emphasis on the hunks
 [delta "tweaks"]
-  # adjustments to the default style, which puts too much emphasis on the hunks
-  commit-decoration-style = ol bold brightblack
-  file-decoration-style =
+  commit-decoration-style = box ul bold brightblack
+  file-decoration-style = box black
   file-style = brightblack bold
   hunk-header-line-number-style = blue bold
   hunk-header-decoration-style =
