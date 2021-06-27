@@ -411,3 +411,7 @@ alias umldown='docker stop plantuml'
 
 # create a compressed JPG copy of each PNG in the current directory
 alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -resize 80% -quality 85 -format jpg *.png'
+
+# --- gotop --- #
+
+alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
