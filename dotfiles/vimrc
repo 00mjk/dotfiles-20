@@ -1283,26 +1283,26 @@ let g:v_autofmt_bufwritepre = 1
 
 " --- vim-go: gofmt ---
 
-let g:go_fmt_command = 'gopls'
+" vim-go uses gopls by default for fmt
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 let g:go_gopls_gofumpt = v:true
 
 " --- vim-go: goimports ---
 
-let g:go_imports_mode = 'gopls'
+" vim-go uses gopls by default for imports
 let g:go_imports_autosave = 1
 
 " --- vim-go: general options ---
 
-let g:go_code_completion_icase = 1
 " let g:go_fillstruct_mode = 'gopls' " not working, reverting to default (2021-06-02)
+let g:go_code_completion_icase = 1
 let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
 let g:go_gopls_use_placeholders = v:true " (v:null) treat autocompletion items as anonymous snippets
 let g:go_addtags_skip_unexported = 1 " do not add JSON tags to unexported fields when using :GoAddTags
 
-" show information about the identifier under the cursor (funcions, vars..)...
+" show information about the identifier under the cursor (functions, vars..)...
 let g:go_auto_type_info = 1
 " ...after 1000 ms instead of the default 800
 let g:go_updatetime=1000
