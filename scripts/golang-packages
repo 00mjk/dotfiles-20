@@ -16,6 +16,7 @@ function go_install() {
 }
 
 # go_gte_1_16 determines whether the version of the current "go" command is at
+# least 1.16
 #
 # extracts the numeric portion of the go version by discarding head and tail,
 # and removing "go" before the numbers
@@ -24,7 +25,6 @@ function go_install() {
 #
 #   go version | grep --colour=never --extended-regexp --only-matching '([[:digit:]]|\.)+[[:space:]]'
 #
-# least 1.16
 function go_gte_1_16() {
   local go_version=$(go version | { read _ _ v _; echo ${v#go}; })
 
@@ -47,7 +47,7 @@ go_install 'github.com/kyoh86/richgo'
 go_install 'github.com/mgechev/revive'
 go_install 'github.com/cespare/reflex'
 go_install 'github.com/dundee/gdu/v5/cmd/gdu'
-go_install 'golang.org/x/tools/present'
+go_install 'golang.org/x/tools/cmd/present'
 # go_install 'github.com/asciimoo/wuzz'
 # go_install 'golang.org/x/exp/cmd/modgraphviz'
 # go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
