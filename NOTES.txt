@@ -749,6 +749,72 @@ Golang/Neovim setup for LSP
     autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
     endif
 
+Memory and other stats
+----------------------
+
+    # The free command does not exist on Darwin, this helper will provide similar
+    # information to the free command.
+    #
+    # https://apple.stackexchange.com/a/48195
+    # https://apple.stackexchange.com/a/19107
+    #
+    # It's based on the output of the vm_stat command.
+    #
+    # Mach Virtual Memory Statistics: (page size of 16384 bytes)
+    # Pages free:                              186261.
+    # Pages active:                            367677.
+    # Pages inactive:                          249557.
+    # Pages speculative:                       117861.
+    # Pages throttled:                              0.
+    # Pages wired down:                         85618.
+    # Pages purgeable:                           2942.
+    # "Translation faults":                  37722303.
+    # Pages copy-on-write:                    7607940.
+    # Pages zero filled:                     11878955.
+    # Pages reactivated:                         9746.
+    # Pages purged:                             17268.
+    # File-backed pages:                       367280.
+    # Anonymous pages:                         367815.
+    # Pages stored in compressor:                   0.
+    # Pages occupied by compressor:                 0.
+    # Decompressions:                               0.
+    # Compressions:                                 0.
+    # Pageins:                                 279753.
+    # Pageouts:                                     0.
+    # Swapins:                                      0.
+    # Swapouts:                                     0.
+    #
+    # local free_pages=$(echo "${memstats}" | grep -w 'free' | grep -E '[[:digit:]]+' -o)
+    # local throttled_pages=$(echo "${memstats}" | grep -w 'throttled' | grep -E '[[:digit:]]+' -o)
+    # local reactivated_pages=$(echo "${memstats}" | grep -w 'reactivated' | grep -E '[[:digit:]]+' -o)
+    # local purged_pages=$(echo "${memstats}" | grep -w 'purged' | grep -E '[[:digit:]]+' -o)
+    # local compressor_stored_pages=$(echo "${memstats}" | grep -w 'stored in compressor' | grep -E '[[:digit:]]+' -o)
+    # local file_backed_pages=$(echo "${memstats}" | grep -w 'File-backed' | grep -E '[[:digit:]]+' -o)
+    # local anonymous_pages=$(echo "${memstats}" | grep -w 'Anonymous' | grep -E '[[:digit:]]+' -o)
+
+    # local MB=1048576
+
+    # local free=$(( $free_pages * $page_size ))
+    # local active=$(( $active_pages * $page_size ))
+    # local speculative=$(( $speculative_pages * $page_size ))
+    # local throttled=$(( $throttled_pages * $page_size ))
+    # local wired=$(( $wired_pages * $page_size ))
+    # local purgeable=$(( $purgeable_pages * $page_size ))
+    # local reactivated=$(( $reactivated_pages * $page_size ))
+    # local purged=$(( $purged_pages * $page_size ))
+    # local file_backed=$(( $file_backed_pages * $page_size ))
+    # local anonymous=$(( $anonymous_pages * $page_size ))
+    # local compressor_stored=$(( $compressor_stored_pages * $page_size ))
+    # local compressor_occupied=$(( $compressor_occupied_pages * $page_size ))
+    # used (active + wired + inactive)
+    # used [htop] (active + wired)
+    # local used_htop_style=$(( ($active_pages + $wired_pages) * $page_size ))
+    # used [gotop] (active + wired + speculative + purgeable)
+    # local available=$(( ($free_pages + $purgeable_pages + $inactive_pages + $speculative_pages) * $page_size ))
+    # local total_computed=$(( ($free_pages + $active_pages + $inactive_pages + $speculative_pages + $wired_pages + $compressor_occupied) * $page_size ))
+    # local app_memory=$(( ($active_pages + $speculative_pages) * $page_size ))
+    # local used_by_exclusion=$(( ($active_pages + $speculative_pages) * $page_size ))
+
 Brew packages to be reviewed
 ----------------------------
 
