@@ -10,6 +10,7 @@ fi
 ROOTDIR=$(git rev-parse --show-toplevel)
 CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
+SCRIPTS_DIR="${ROOTDIR}/scripts"
 
 source "${CURRDIR}/utils.sh"
 
@@ -114,6 +115,10 @@ backup_and_symlink "${DOTFILES_DIR}/direnvrc" "${HOME}/.direnvrc"
 
 backup_and_symlink "${DOTFILES_DIR}/gotop.conf" "${HOME}/.config/gotop/gotop.conf"
 backup_and_symlink "${DOTFILES_DIR}/gotop.procs.layout" "${HOME}/.config/gotop/layouts/procs"
+
+# --- custom free script --- #
+
+backup_and_symlink "${SCRIPTS_DIR}/free" "${HOME}/.local/bin/free"
 
 # -------------- #
 # --- shells --- #
