@@ -239,6 +239,10 @@ fi
 # bindkey '[1;5C' forward-word
 # bindkey '[1;5D' backward-word
 
+# emulate bash, cut to beginning of line with Ctrl+U instead of cutting the
+# whole line.
+bindkey \^U backward-kill-line
+
 # -------------------------------------- #
 # --- Additional shell configuration --- #
 # -------------------------------------- #
