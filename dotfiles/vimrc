@@ -57,6 +57,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'ollykel/v-vim'
 Plug 'tpope/vim-git'
 Plug 'cespare/vim-toml'
+Plug 'hashivim/vim-terraform'
 
 " --- Markdown
 
@@ -1450,7 +1451,7 @@ let g:vim_json_syntax_conceal = 0
 
 nnoremap gt :TagbarToggle<CR>
 
-let g:tagbar_sort = 0 " list tags in order of appearance in the file
+" let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
 let g:tagbar_iconchars = ['▶', '◢']
 
