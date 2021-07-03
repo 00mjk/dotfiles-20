@@ -117,10 +117,16 @@ backup_and_symlink "${DOTFILES_DIR}/gotop.procs.layout" "${HOME}/.config/gotop/l
 
 backup_and_symlink "${SCRIPTS_DIR}/free" "${HOME}/.local/bin/free"
 
-# --- brew upgrade --- #
+# --- macos upgrade everything --- #
 
 backup_and_symlink "${SCRIPTS_DIR}/brut" "${HOME}/.local/bin/brut"
 backup_and_symlink "${SCRIPTS_DIR}/macos-updates" "${HOME}/.local/bin/macos-updates"
+
+# --- other custom scripts --- #
+
+backup_and_symlink "${SCRIPTS_DIR}/epochms" "${HOME}/.local/bin/epochms"
+backup_and_symlink "${SCRIPTS_DIR}/utcnow" "${HOME}/.local/bin/utcnow"
+backup_and_symlink "${SCRIPTS_DIR}/nauniq" "${HOME}/.local/bin/nauniq"
 
 # -------------- #
 # --- shells --- #

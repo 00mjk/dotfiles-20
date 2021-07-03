@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+awk "BEGIN { printf \"%.f\n\", ( $(date -u +%s%N)/1000000 ) }"

@@ -315,13 +315,6 @@ n () {
 # the prompt to the top
 alias cls="clear && printf '\e[3J'"
 
-# remove duplicates from a list, without sorting
-alias nauniq="awk '!seen[\$0]++'"
-
-# time shortcuts
-alias utcnow='date -u +"%Y-%m-%dT%H-%M-%SZ"'
-alias epoch_ms="perl -MTime::HiRes=time -e 'printf \"%.3f\n\", time'"
-
 # --- git --- #
 
 # width refers to each column if side-by-side; we set it to half the current
