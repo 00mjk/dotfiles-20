@@ -9,24 +9,24 @@ function free() {
 
   local top_summary=$(top -l 1 | head -n 10)
 
-  local active_pages=$(echo "${memstats}" | grep -w 'active' | grep -oE '[[:digit:]]+')
-  local inactive_pages=$(echo "${memstats}" | grep -w 'inactive' | grep -oE '[[:digit:]]+')
-  local speculative_pages=$(echo "${memstats}" | grep -w 'speculative' | grep -oE '[[:digit:]]+')
-  local wired_pages=$(echo "${memstats}" | grep -w 'wired' | grep -oE '[[:digit:]]+')
-  local purgeable_pages=$(echo "${memstats}" | grep -w 'purgeable' | grep -oE '[[:digit:]]+')
-  local compressor_occupied_pages=$(echo "${memstats}" | grep -w 'occupied by compressor' | grep -oE '[[:digit:]]+')
+  local active=$(echo "${memstats}" | grep -w 'active' | grep -oE '[[:digit:]]+')
+  local inactive=$(echo "${memstats}" | grep -w 'inactive' | grep -oE '[[:digit:]]+')
+  local speculative=$(echo "${memstats}" | grep -w 'speculative' | grep -oE '[[:digit:]]+')
+  local wired=$(echo "${memstats}" | grep -w 'wired' | grep -oE '[[:digit:]]+')
+  local purgeable=$(echo "${memstats}" | grep -w 'purgeable' | grep -oE '[[:digit:]]+')
+  local compressed=$(echo "${memstats}" | grep -w 'occupied by compressor' | grep -oE '[[:digit:]]+')
 
-  local inactive=$(( $inactive_pages * $page_size ))
-  local used_gotop_style=$(( ($active_pages + $wired_pages + $speculative_pages + $purgeable_pages + $compressor_occupied_pages) * $page_size ))
-  local available_gotop_style=$(( $total - $used_gotop_style ))
+  local inactive_bytes=$(( $inactive * $page_size ))
+  local used_bytes=$(( ($active + $wired + $speculative + $purgeable + $compressed) * $page_size ))
+  local available_bytes=$(( $total - $used_bytes ))
 
   local GB=1073741824
 
-  awk "BEGIN {printf \"%-19s %s\n\", \"Load (1/5/15 min)\", \"$(echo "${top_summary}" | grep 'Load' | sed -E 's/^[^0-9]*([0-9]+.*$)/\1/')\"}"
-  awk "BEGIN {printf \"%-19s %.2f GB used (%.2f GB available, including %.2f inactive)\n\", \"RAM\", ($used_gotop_style / $GB), ($available_gotop_style / $GB), ($inactive / $GB)}"
-  awk "BEGIN {printf \"%-19s %s\n\", \"Swap\", \"$(sysctl -n vm.swapusage)\"}"
-  awk "BEGIN {printf \"%-19s %s\n\", \"Uptime\", \"$(uptime | sed -E 's/^.*up ([^,]+).+$/\1/')\"}"
-  awk "BEGIN {printf \"%-19s %s\n\", \"Disks\", \"$(echo "${top_summary}" | grep 'Disks' | sed -E 's/.+\/(.+ read),.+\/(.+ written)/\1, \2/')\"}"
+  awk "BEGIN {printf \"%-6s %s\n\", \"UPTIME\", \"$(uptime | sed -E 's/^.*up ([^,]+).+$/\1/')\"}"
+  awk "BEGIN {printf \"%-6s %s\n\", \"LOAD\", \"$(echo "${top_summary}" | grep 'Load' | sed -E 's/^[^0-9]*([0-9]+.*$)/\1/')(1/5/15 min)\"}"
+  awk "BEGIN {printf \"%-6s %.2f GB used (+%.2f inactive) of %.f GB total\n\", \"RAM\", ($used_bytes / $GB), ($inactive_bytes / $GB), ($total / $GB)}"
+  awk "BEGIN {printf \"%-6s %s\n\", \"SWAP\", \"$(sysctl -n vm.swapusage | sed -E 's/^(.+)\(.*$/\1/')\"}"
+  awk "BEGIN {printf \"%-6s %s\n\", \"DISKS\", \"$(echo "${top_summary}" | grep 'Disks' | sed -E 's/.+\/(.+ read),.+\/(.+ written).*$/\1, \2/')\"}"
 }
 
 free
