@@ -13,7 +13,7 @@ echo "[setup] Install Command Line Tools for Xcode if not already present"
 xcode-select --install 2>&1
 set -e
 
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 source "${CURRDIR}/utils.sh"
 
 # native uname only supports -m, not the long format --machine

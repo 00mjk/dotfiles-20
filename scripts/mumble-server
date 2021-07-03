@@ -8,7 +8,7 @@ if [[ -z $(command -v git) ]]; then
 fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 
 source "${CURRDIR}/utils.sh"
 
