@@ -3,7 +3,7 @@
 # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ as of 2018-03-05.
 
 set -e
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 
 # ------------------------
 # --- CPU architecture ---

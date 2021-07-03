@@ -3,30 +3,33 @@
 set -eu
 set -o pipefail
 
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 
-source "${CURRDIR}/utils.sh"
+echo "[update] Brew packages"
+"${CURRDIR}/brut"
 
-HOMEBREW_PREFIX=$(usr_local)
-
+echo "[update] Update delta themes"
 "${CURRDIR}/delta-themes"
 
-echo "[setup] Update Vim setup"
+echo "[update] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
 
-echo "[setup] Update natively installed Golang packages"
+echo "[update] Update natively installed Golang packages"
 # ensure it's run after updating Vim plugins, so that the latest version of
 # vim-go will be used when updating its support binaries
 "${CURRDIR}/golang-packages"
 
+echo "[update] Update zsh completions"
 "${CURRDIR}/zsh-completions"
 
+echo "[update] Update Rust"
 "${CURRDIR}/rust"
 
+echo "[update] Update iTerm utilities"
 "${CURRDIR}/iterm2-utils"
 
 if [[ -n "$(command -v pipx)" ]]; then
-  echo "[setup] Upgrade pipx packages"
+  echo "[update] Upgrade pipx packages"
   pipx upgrade-all
 fi

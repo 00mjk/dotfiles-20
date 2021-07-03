@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+function brut() {
+  local ts=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
+  local logdir="$HOME/log"
+  local logfile="$logdir/brew-upgrade-${ts}.log"
+
+  mkdir -p $logdir
+  touch $logfile
+
+  echo "Logging to $logfile"
+  _do_brew_upgrade | tee -a $logfile
+  echo "Logged to $logfile"
+}
+
+function _do_brew_upgrade() {
+  echo "--- brew update ------------------------------------------------------"
+  brew update -v 2>&1
+
+  echo "--- brew outdated ----------------------------------------------------"
+  brew outdated 2>&1
+
+  echo "---- brew upgrade ----------------------------------------------------"
+  brew upgrade 2>&1
+
+  echo "--- brew autoremove --------------------------------------------------"
+  brew autoremove -v 2>&1
+
+  echo "--- brew full cleanup (dry run)---------------------------------------"
+  brew cleanup --dry-run --prune=all -s 2>&1
+
+  echo "--- brew cleanup -----------------------------------------------------"
+  brew cleanup -v 2>&1
+}
+
+brut

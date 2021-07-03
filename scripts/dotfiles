@@ -8,13 +8,9 @@ if [[ -z $(command -v git) ]]; then
 fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
 SCRIPTS_DIR="${ROOTDIR}/scripts"
-
-source "${CURRDIR}/utils.sh"
-
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
 
 source "${CURRDIR}/utils.sh"
 
@@ -110,8 +106,9 @@ backup_and_symlink "${DOTFILES_DIR}/direnvrc" "${HOME}/.direnvrc"
 
 # --- gotop --- #
 
-# this requires the gotop command to be aliases, because it will not
-# automatically load the configuration from this custom location
+# this requires the gotop command to be aliases, because it does not respect
+# the XDG_CONFIG_HOME convention, and it will not automatically load the
+# configuration from this custom location
 
 backup_and_symlink "${DOTFILES_DIR}/gotop.conf" "${HOME}/.config/gotop/gotop.conf"
 backup_and_symlink "${DOTFILES_DIR}/gotop.procs.layout" "${HOME}/.config/gotop/layouts/procs"
@@ -119,6 +116,11 @@ backup_and_symlink "${DOTFILES_DIR}/gotop.procs.layout" "${HOME}/.config/gotop/l
 # --- custom free script --- #
 
 backup_and_symlink "${SCRIPTS_DIR}/free" "${HOME}/.local/bin/free"
+
+# --- brew upgrade --- #
+
+backup_and_symlink "${SCRIPTS_DIR}/brut" "${HOME}/.local/bin/brut"
+backup_and_symlink "${SCRIPTS_DIR}/macos-updates" "${HOME}/.local/bin/macos-updates"
 
 # -------------- #
 # --- shells --- #

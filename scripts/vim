@@ -14,7 +14,7 @@ if [[ -z $(command -v curl) ]]; then
 fi
 
 ROOTDIR=$(git rev-parse --show-toplevel)
-CURRDIR=$(cd "$(dirname $0)" && pwd -P)
+CURRDIR=$(dirname "$(readlink $0)")
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
