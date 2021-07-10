@@ -26,8 +26,8 @@ function _do_brew_upgrade() {
   echo "--- brew autoremove --------------------------------------------------"
   brew autoremove -v 2>&1
 
-  echo "--- brew full cleanup (dry run)---------------------------------------"
-  brew cleanup --dry-run --prune=all -s 2>&1
+  # echo "--- brew full cleanup (dry run)---------------------------------------"
+  # brew cleanup --dry-run --prune=all -s 2>&1
 
   echo "--- brew cleanup -----------------------------------------------------"
   brew cleanup -v 2>&1
