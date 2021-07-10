@@ -157,11 +157,6 @@ echo "[setup] Install Oh My Zsh"
 echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
-# These casks can be installed locally, but they are free and of general
-# utility.
-global_apps_by_choice=(
-)
-
 brew install --quiet --casks \
   authy \
   discord \
@@ -181,7 +176,6 @@ brew install --quiet --casks \
   rectangle \
   slack \
   sync \
-  the-unarchiver \
   visual-studio-code \
   vlc \
   zoom
@@ -219,7 +213,7 @@ echo "[setup] Install Rust"
 
 # echo "[setup] Install pipx packages"
 #
-# pipx ensurepath
+pipx ensurepath
 # pipx install --force litecli
 # pipx install --force glances
 # pipx install --force ydiff
@@ -303,6 +297,8 @@ echo "
   - the_silver_searcher
   - tig
   - trash
+  - timewarrior (time tracking)
+  - timetrap (to be installed as a Ruby gem, no brew package)
 
 * Other casks:
 
@@ -331,6 +327,7 @@ echo "
   - signal
   - stats
   - telegram
+  - the-unarchiver
   - thunderbird
   - tunnelbear
   - vagrant

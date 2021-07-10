@@ -15,9 +15,9 @@ echo "[update] Update Vim setup"
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
 
-echo "[update] Update natively installed Golang packages"
 # ensure it's run after updating Vim plugins, so that the latest version of
 # vim-go will be used when updating its support binaries
+echo "[update] Update natively installed Golang packages"
 "${CURRDIR}/golang-packages"
 
 echo "[update] Update zsh completions"
