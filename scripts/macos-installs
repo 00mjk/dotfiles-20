@@ -199,6 +199,14 @@ chmod 0700 ~/Applications
 echo "[setup] Install some of the iTerm2 utilities"
 "${CURRDIR}/iterm2-utils"
 
+# Middle.app <https://middleclick.app/> only allows to choose one option (click
+# or tap) for each device.
+#
+# By writing the options directly it's possible to have both click and tap
+# working for the same device (trick shared by author of the app.)
+defaults write com.knollsoft.Middle trackpadThreeClick -bool true
+defaults write com.knollsoft.Middle trackpadThreeTap -bool true
+
 # ------------------------------- #
 # --- Other non-brew installs --- #
 # ------------------------------- #
