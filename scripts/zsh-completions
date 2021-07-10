@@ -30,4 +30,9 @@ if [[ -d $DOCKER_COMPLETIONS_DIR ]]; then
   ln -sfv "$DOCKER_COMPLETIONS_DIR/docker-compose.zsh-completion" "${ZSH_SITE_FUNCTIONS}/_docker-compose"
 fi
 
+WATSON_AUTOCOMPLETE="$HOMEBREW_PREFIX/opt/watson/share/zsh/site-functions/_watson"
+if [[ -f $WATSON_AUTOCOMPLETE ]]; then
+  ln -sfv $WATSON_AUTOCOMPLETE "$ZSH_SITE_FUNCTIONS/_watson"
+fi
+
 "${CURRDIR}/golang-zsh-completion"

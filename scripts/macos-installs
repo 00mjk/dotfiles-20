@@ -108,6 +108,7 @@ brew install --quiet --formulae \
   tree \
   vim \
   watch \
+  watson \
   wdiff \
   wget \
   yq
