@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-CURRDIR=$(dirname "$(readlink $0)")
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
 
 source "${CURRDIR}/utils.sh"
 
