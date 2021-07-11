@@ -1,0 +1,4 @@
+# vim: set ft=bash:
+
+use ruby ruby-3.0.2
+use go 1.16.5

@@ -307,6 +307,13 @@ n () {
   fi
 }
 
+# -------------- #
+# --- DIRENV --- #
+# -------------- #
+
+# do not print anything when changing env vars
+export DIRENV_LOG_FORMAT=
+
 # --------------- #
 # --- ALIASES --- #
 # --------------- #
