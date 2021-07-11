@@ -1,8 +1,5 @@
 # vim: set ft=gitconfig:
 
-[include]
-  path = /Users/luca/.config/delta/themes.gitconfig
-
 [core]
   editor = 'vim'
   pager = 'delta'
