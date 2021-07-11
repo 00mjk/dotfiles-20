@@ -88,7 +88,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 unsetopt COMPLETE_ALIASES
 
 # set up local completions
-fpath+=~/.local/zsh/site-functions
+fpath+=~/.config/zsh/site-functions
 
 # this would normally be done by oh-my-zsh but even if was installed, some apps
 # still need it again

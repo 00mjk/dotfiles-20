@@ -17,9 +17,6 @@ vim +PlugUpdate +qall
 echo "[update] Update natively installed Golang packages"
 "${CURRDIR}/golang-packages"
 
-echo "[update] Update zsh completions"
-"${CURRDIR}/zsh-completions"
-
 echo "[update] Update Rust"
 "${CURRDIR}/rust"
 
@@ -30,3 +27,6 @@ if [[ -n "$(command -v pipx)" ]]; then
   echo "[update] Upgrade pipx packages"
   pipx upgrade-all
 fi
+
+echo "[update] Update zsh completions"
+"${CURRDIR}/zsh-completions"
