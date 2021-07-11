@@ -52,9 +52,7 @@ tic "${ROOTDIR}/dotfiles/tmux-256color.terminfo"
 # --- miscellanea --- #
 # ------------------- #
 
-mkdir -p "${HOME}/.local/bin"
 "${CURRDIR}/nnn-plugins"
-"${CURRDIR}/delta-themes"
 
 LOCAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 

@@ -60,6 +60,28 @@ Leader keybindings
         " Remap jj to escape insert mode
         inoremap jj <ESC>
 
+Delta themes
+------------
+
+in `./scripts/delta-themes`
+
+    #!/usr/bin/env zsh
+
+    curl \
+      'https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig' \
+      -L \
+      --create-dirs \
+      -o "${HOME}/.config/delta/themes.gitconfig"
+
+in `./scripts/macos-updates`:
+
+    echo "[update] Update delta themes"
+    "${CURRDIR}/delta-themes"
+
+in `./scripts/dotfiles`
+
+    "${CURRDIR}/delta-themes"
+
 Go envs
 -------
 
