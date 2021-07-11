@@ -18,6 +18,9 @@ HOMEBREW_PREFIX=$(usr_local)
 
 export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.config"
+
 # ----------- #
 # --- git --- #
 # ----------- #
