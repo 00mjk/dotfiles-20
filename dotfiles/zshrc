@@ -287,12 +287,12 @@ bindkey \^U backward-kill-line
 # --- Additional shell configuration --- #
 # -------------------------------------- #
 
+[[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
+[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
+
 if [[ "$(uname -s)" =~ Darwin ]]; then
   [[ -e "${HOME}/.shell_addons_mac" ]] && source ~/.shell_addons_mac
 fi
-
-[[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
-[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
 
 # Remove duplicates from various PATHs
 # https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
