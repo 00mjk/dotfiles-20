@@ -240,13 +240,13 @@ function gch() {
 export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 
 # ------------ #
-# --- Rust --- #
+# --- RUST --- #
 # ------------ #
 
 PATH="$PATH:$HOME/.cargo/bin"
 
 # ------------------------ #
-# --- fff file manager --- #
+# --- FFF FILE MANAGER --- #
 # ------------------------ #
 
 export FFF_HIDDEN=1 # show hidden files by default
@@ -261,7 +261,7 @@ f() {
 }
 
 # ------------------------ #
-# --- nnn file manager --- #
+# --- NNN FILE MANAGER --- #
 # ------------------------ #
 
 # -a: auto-setup temporary NNN_FIFO
@@ -308,7 +308,7 @@ n () {
 }
 
 # --------------- #
-# --- Aliases --- #
+# --- ALIASES --- #
 # --------------- #
 
 # --- shell --- #
