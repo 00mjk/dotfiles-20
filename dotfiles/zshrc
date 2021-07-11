@@ -15,11 +15,12 @@ fi
 
 # from brew shellenv
 export HOMEBREW_PREFIX
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
-export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+# export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+export MANPATH="$HOMEBREW_PREFIX/share/man:$HOMEBREW_PREFIX/opt/curl/share/man${MANPATH+:$MANPATH}"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export LANG=en_GB.UTF-8
 
@@ -293,9 +294,11 @@ fi
 [[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
 [[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
 
-# Remove duplicates from $PATH
+# Remove duplicates from various PATHs
 # https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
 typeset -aU path
+typeset -aU manpath
+typeset -aU infopath
 
 # the direnv hook must be at the end of the rc file
 [[ -n "$(command -v direnv)" ]] && eval "$(direnv hook zsh)"

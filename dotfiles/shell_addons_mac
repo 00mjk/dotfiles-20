@@ -12,8 +12,6 @@ PATH="$HOMEBREW_PREFIX/opt/lsof/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/sqlite/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 
-MANPATH="$HOMEBREW_PREFIX/share/man/:$HOMEBREW_PREFIX/opt/curl/share/man:$MANPATH"
-
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$HOMEBREW_PREFIX/opt/openssl@1.1"
 
 #---------------#
