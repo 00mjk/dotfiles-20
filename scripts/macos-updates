@@ -23,6 +23,9 @@ echo "[update] Update Rust"
 echo "[update] Update iTerm utilities"
 "${CURRDIR}/iterm2-utils"
 
+echo "[update] Update Ruby gems"
+gem update
+
 if [[ -n "$(command -v pipx)" ]]; then
   echo "[update] Upgrade pipx packages"
   pipx upgrade-all

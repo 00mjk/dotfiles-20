@@ -13,6 +13,8 @@ elif [[ "$(uname -m)" == "x86_64" ]]; then
   HOMEBREW_PREFIX='/usr/local'
 fi
 
+export SHEET_FILE="$HOME/.config/tt/time-entries.json"
+
 # from brew shellenv
 export HOMEBREW_PREFIX
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"

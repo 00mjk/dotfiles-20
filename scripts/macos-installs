@@ -211,6 +211,9 @@ echo "[setup] Install Golang"
 echo "[setup] Install Rust"
 "${CURRDIR}/rust"
 
+echo "[setup] Install Ruby locally"
+$BREW_PREFIX/bin/ruby-install --no-reinstall --cleanup ruby 3.0.2
+
 # echo "[setup] Install pipx packages"
 #
 pipx ensurepath
