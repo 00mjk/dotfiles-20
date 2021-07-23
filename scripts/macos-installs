@@ -159,7 +159,6 @@ brew tap homebrew/cask-fonts
 
 brew install --quiet --casks \
   authy \
-  discord \
   docker \
   drawio \
   firefox \
@@ -169,13 +168,12 @@ brew install --quiet --casks \
   font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-chrome \
+  google-drive \
   istat-menus \
   iterm2 \
   middle \
   pastebot \
   rectangle \
-  slack \
-  sync \
   visual-studio-code \
   vlc \
   zoom
