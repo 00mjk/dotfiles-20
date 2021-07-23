@@ -447,8 +447,9 @@ set formatoptions-=o " do not add comment leader to new lines created with 'o' o
 set formatoptions-=a " do not reformat the entire paragraph on every change because it messes with commented code
 
 " Disabling auto formatting for the following file types because the wrapping
-" also seems to be applied to code.
-autocmd FileType swift,erb,sh,python set formatoptions-=t
+" also seems to be applied to code, at least in some case such as
+" autocompletion.
+autocmd FileType swift,erb,sh,python,go set formatoptions-=t
 
 " Use only one space after punctuation:
 " http://en.wikipedia.org/wiki/Sentence_spacing#Typography
