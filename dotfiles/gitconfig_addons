@@ -7,6 +7,10 @@
 [interactive]
   diffFilter = delta --color-only
 
+[diff]
+  # enable color-moved so that it can be displayed by delta
+  colorMoved = default
+
 [delta]
   light = true
   line-numbers = true
@@ -68,6 +72,11 @@
   shall = stash save --include-untracked
   undo = reset --soft HEAD^
   unstage = reset HEAD --
+
+  # delta shortcuts for side-to-side comparison
+  sidediff = -c delta.side-by-side=true diff
+  sideshow = -c delta.side-by-side=true show
+  sidelog = -c delta.side-by-side=true log -p
 
   # Attempt to determine the original author, by ignoring trivial changes
   # -w  white space
