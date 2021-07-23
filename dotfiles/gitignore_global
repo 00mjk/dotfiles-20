@@ -1,5 +1,7 @@
 # vim: set ft=gitignore:
 
+/analysis/
+
 .token
 secret
 secrets
