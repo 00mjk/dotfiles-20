@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+set -ex
+
+mkdir -p ~/Downloads
+pushd ~/Downloads
+curl -OJL https://ankerwork.s3-us-west-2.amazonaws.com/prod/AnkerWork.dmg
+
+hdiutil attach AnkerWork.dmg
+
+pushd /Volumes/AnkerWork
+cp -R AnkerWork.app Applications
+
+popd; popd
+
+hdiutil unmount /Volumes/AnkerWork
