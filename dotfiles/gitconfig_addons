@@ -74,9 +74,9 @@
   unstage = reset HEAD --
 
   # delta shortcuts for side-to-side comparison
-  sidediff = -c delta.side-by-side=true diff
-  sideshow = -c delta.side-by-side=true show
-  sidelog = -c delta.side-by-side=true log -p
+  sidediff = -c delta.side-by-side=true diff --ignore-blank-lines --ignore-all-space
+  sideshow = -c delta.side-by-side=true show --ignore-blank-lines --ignore-all-space
+  sidelog = -c delta.side-by-side=true log -p --ignore-blank-lines --ignore-all-space
 
   # Attempt to determine the original author, by ignoring trivial changes
   # -w  white space
