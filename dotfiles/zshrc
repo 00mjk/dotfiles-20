@@ -176,8 +176,10 @@ be-fzf-dir-widget() {
   zle reset-prompt
   return $ret
 }
-zle     -N  be-fzf-dir-widget # register the widget
-# Mapping Alt+F
+
+zle -N be-fzf-dir-widget # register the widget
+
+# Map Alt+F
 if [[ "$(uname -s)" == "Darwin" ]]; then
   bindkey 'ƒ' be-fzf-dir-widget
 else

@@ -98,6 +98,7 @@ brew install --quiet --formulae \
   nmap \
   nnn \
   parallel \
+  pigz \
   pipx \
   plantuml \
   pre-commit \
