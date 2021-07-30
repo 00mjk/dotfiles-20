@@ -199,6 +199,9 @@ vmap <space> \
 
 set number " show line numbers
 
+" merge the sign column and the number column, to avoid shifting the content
+set signcolumn=number
+
 set cursorline
 set showmatch " highlight matching parentheses
 set matchtime=0 " ...but stay out of the way (do not jump around)
@@ -1393,7 +1396,7 @@ let g:rustfmt_options = '--edition 2018'
 " set to 1 to disable all linters unless explicitly enabled, default 0
 " let g:ale_linters_explicit = 1
 
-let g:ale_lint_on_save = 1
+" let g:ale_lint_on_save = 1
 
 let g:ale_linters = {}
 let g:ale_linters['go'] = ['govet']
@@ -1415,16 +1418,13 @@ let g:ale_go_govet_options = '-composites=false'
 " * open the loclist automatically on errors
 " * and close it when the buffer is closed
 " * it will close anyway once all the issue have been addressed
-let g:ale_open_list = 1
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
+" let g:ale_open_list = 1
+" augroup CloseLoclistWindowGroup
+"   autocmd!
+"   autocmd QuitPre * if empty(&buftype) | lclose | endif
+" augroup END
 
 " --- ALE: Visual customisations ---
-
-" merge the sign column and the number column, to avoid shifting the content
-set signcolumn=number
 
 " let g:ale_lint_on_text_changed = 'never'
 " let g:ale_lint_on_insert_leave = 0
@@ -1445,6 +1445,12 @@ highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
 
 " white on light blue
 highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
+
+" --- ALE: shortcuts ---
+
+" mnemomic: 'd' is for 'diagnostic'
+nmap <silent> ]d <Plug>(ale_previous_wrap)
+nmap <silent> [d <Plug>(ale_next_wrap)
 
 " ---------------- "
 " --- vim-json --- "
@@ -1635,6 +1641,20 @@ function! BE_ListsStatuslineInitial()
   endif
 endfunction
 
+" Integrate ALE results into the statusline, crude solution.
+function! BE_LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '%#BE_StatuslineGreenCentre# OK ' : printf(
+    \   '%%#BE_StatuslineYellow# %dW %%#BE_StatuslineRedCentre# %dE ',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
 function! BE_ActiveStatusline()
   let l:mode_name   = g:be_modes[mode()]['name']
   let l:mode_colour = g:be_modes[mode()]['highlight']
@@ -1643,7 +1663,8 @@ function! BE_ActiveStatusline()
   let l:stl .= ' '.l:mode_name.'%{&paste ? "\ [PASTE]" : ""}%{&spell ? "\ [SPELL]" : ""} '
   let l:stl .= '%#'.l:mode_colour.'Centre#'
   " flags => m: modified, r: readonly, h: help, p: preview, y: filetype
-  let l:stl .=  ' %<%f %m%r %='
+  let l:stl .= ' %<%f %m%r %='
+  let l:stl .= BE_LinterStatus()
   let l:stl .= '%#'.l:mode_colour.'#'
   let l:stl .= g:BE_statusline_right
   return l:stl
