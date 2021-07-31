@@ -1313,10 +1313,13 @@ let g:go_list_type = 'quickfix'
 let g:go_gopls_use_placeholders = v:true " (v:null) treat autocompletion items as anonymous snippets
 let g:go_addtags_skip_unexported = 1 " do not add JSON tags to unexported fields when using :GoAddTags
 
-" show information about the identifier under the cursor (functions, vars..)...
-let g:go_auto_type_info = 1
+" Show information about the identifier under the cursor (functions, vars..)...
+"
+" Needs to be disabled so tha ALE/linting/compile errors can be shown on hover
+" without the need for opening the loclist.
+" let g:go_auto_type_info = 1
 " ...after 1000 ms instead of the default 800
-let g:go_updatetime=1000
+" let g:go_updatetime=1000
 
  let g:go_addtags_skip_unexported = 1
 
@@ -1328,6 +1331,9 @@ autocmd FileType go nnoremap <Leader>tf :GoTestFunc<CR>
 autocmd FileType go nnoremap <Leader>e :GoDecls<CR>
 autocmd FileType go nnoremap <Leader>ee :GoDeclsDir<CR>
 autocmd FileType go nnoremap <Leader>s :GoSameIdsToggle<CR>
+" Since Shift+K in vim-go opens the docs for the current element, we use
+" a similar mapping to display the info in the output of the commandline.
+autocmd FileType go nmap     <silent> <Leader>k <Plug>(go-info)
 
 " --- vim-go: debugging ---
 
@@ -1419,10 +1425,24 @@ let g:ale_go_govet_options = '-composites=false'
 " * and close it when the buffer is closed
 " * it will close anyway once all the issue have been addressed
 " let g:ale_open_list = 1
-" augroup CloseLoclistWindowGroup
-"   autocmd!
-"   autocmd QuitPre * if empty(&buftype) | lclose | endif
-" augroup END
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
+
+" --- Toggle location list ---
+
+" very neat solution from https://vi.stackexchange.com/a/18090
+function! BE_ToggleLocationList() abort
+  " check if location list of current window is open
+  if get(getloclist(0, {'winid':0}), 'winid', 0)
+    lclose
+  else
+    lopen
+  endif
+endfunction
+
+nmap <silent> <leader>l :call BE_ToggleLocationList()<CR>
 
 " --- ALE: Visual customisations ---
 
@@ -1648,7 +1668,8 @@ function! BE_LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? '%#BE_StatuslineGreenCentre# OK ' : printf(
+    " '%#BE_StatuslineGreenCentre# OK '
+    return l:counts.total == 0 ? '' : printf(
     \   '%%#BE_StatuslineYellow# %dW %%#BE_StatuslineRedCentre# %dE ',
     \   all_non_errors,
     \   all_errors

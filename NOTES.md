@@ -1,36 +1,36 @@
 Leader keybindings
 ------------------
 
-`A`: Ack(g)!
-`B`: select open buffers
-`C`: toggle comment
-`D`: alias for `Alt+D` (deleting – line or selection – without yanking)
-`E`: in Go: Go function and type declarations (`:GoDecls`)
+`A` : Ack(g)!
+`B` : select open buffers
+`C` : toggle comment
+`D` : alias for `Alt+D` (deleting – line or selection – without yanking)
+`E` : in Go: Go function and type declarations (`:GoDecls`)
 `EE`: in Go: Go function and type declarations (`:GoDeclsDir`)
-`F`: locate file of current buffer in NERDTree
-`G`: open the Grepper prompt
-`H`: search current word without jumping to the _next_ occurrence
-`I`: insert in paste mode
-`J`: [FREE]
-`K`: [FREE]
-`LL`: `:GoDeclsDir`
-`L`: `:GoDecls`
-`M`: `:History`
-`N`: toggle NERDTree
-`O`: new line in paste mode
-`P`: paste over visual selection without yanking
-`Q`: close buffer without closing window
-`R`: __alias__ for `Ctrl+R` (replace current visual selection)
-`S`: `:GoSameIdsToggle`
+`F` : locate file of current buffer in NERDTree
+`G` : open the Grepper prompt
+`H` : search current word without jumping to the _next_ occurrence
+`I` : insert in paste mode
+`J` : [FREE]
+`K` : `:GoInfo`
+`L` : toggle location list for the current buffer
+`LL`: [FREE]
+`M` : `:History`
+`N` : toggle NERDTree
+`O` : new line in paste mode
+`P` : paste over visual selection without yanking
+`Q` : close buffer without closing window
+`R` : __alias__ for `Ctrl+R` (replace current visual selection)
+`S` : `:GoSameIdsToggle`
 `TT`: toggle TagBar (overridden by vim-table-mode plugin)
-`T`: [FREE]
-`U`: [FREE]
-`V`: [FREE]
+`T` : [FREE]
+`U` : [FREE]
+`V` : [FREE]
 `WW`: toggle whitespace highlighting
-`W`: toggle text wrapping
-`X`: [FREE]
-`Y`: copy current path and line number to system clipboard
-`Z`: `:GoDiagnostics`
+`W` : toggle text wrapping
+`X` : [FREE]
+`Y` : copy current path and line number to system clipboard
+`Z` : `:GoDiagnostics`
 
 -------------------------------------------------------------------------------
 
