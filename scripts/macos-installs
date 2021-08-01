@@ -85,7 +85,7 @@ brew install --quiet --formulae \
   ffmpeg \
   fzf \
   git-delta \
-  golangci/tap/golangci-lint \
+  golangci-lint \
   htop \
   httpie \
   imagemagick \
@@ -107,6 +107,7 @@ brew install --quiet --formulae \
   ruby-install \
   tmux \
   tree \
+  universal-ctags \
   vim \
   watch \
   watson \
@@ -118,11 +119,6 @@ echo "[setup] Install Node.js"
 brew install --quiet --formulae \
   node \
   yarn
-
-# universal-ctags is a head-only formula until considered stable
-brew install --quiet --formulae \
-  --HEAD \
-  universal-ctags/universal-ctags/universal-ctags
 
 # --------------------------------- #
 # --- Post install for formulae --- #
