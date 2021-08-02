@@ -117,8 +117,10 @@ set nocompatible
 " ------------------- "
 
 " Try to use 'peachpuff' if available, because it's a 16-color scheme that
-" adapts acceptably well to dark and light background terminals, at the same
-" time, which is useful for pairing in shared sessions.
+" adapts acceptably well to dark and light background terminals as long as they
+" use a standard 16-color palette (4-bit ANSI colours).
+"
+" This is is useful for pairing in shared sessions.
 try
   colorscheme peachpuff
   catch
@@ -1037,6 +1039,8 @@ endif
 
 " Highlight ruby operators (`/`, `&&`, `*`...)
 let g:ruby_operators = 1
+let g:ruby_indent_assignment_style = 'variable'
+let g:ruby_indent_block_style = 'do'
 
 " ----------------- "
 " --- vim-RSpec --- "
