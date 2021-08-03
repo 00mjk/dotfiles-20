@@ -158,12 +158,17 @@ set backup
 
 set lazyredraw
 
-set timeoutlen=350 " reduce the command timeout (default 1000)
+set autoread
+
+" set timeoutlen=350 " (default 1000)
+" time out on mapping after 1/2 second, time out on key codes after 1/10 of
+" a second
+set timeout timeoutlen=500 ttimeoutlen=100
 
 set completeopt-=preview " do not open Preview split with docs for completion entries
 
 " --- history --- "
-set history=1000
+set history=10000
 
 " there is another setting that might override the history size, so we ensure to
 " set that too; see "h 'viminfo'" (with quotes)
@@ -184,6 +189,10 @@ set viminfo=!,'100,<50,s10,h,:1000
 " --- jumping between pairs ---
 
 set matchpairs+=<:>
+
+" Write swap files to disk and trigger CursorHold event faster (default is
+" after 4000 ms of inactivity)
+set updatetime=200
 
 " ------------------------------- "
 " --- Leader key alternatives --- "
@@ -228,6 +237,11 @@ if exists('+colorcolumn')
   set colorcolumn=80,100 " display vertical rulers for line length
   autocmd FileType qf set colorcolumn=
 endif
+
+" Compute syntax highlighting from beginning of file. (By default, vim only
+" looks 200 lines back, which can make it highlight code incorrectly in some
+" long files.)
+autocmd BufEnter * :syntax sync fromstart
 
 " --- custom highlighting ---
 
@@ -581,6 +595,7 @@ endfunction
 " ------------------------------------------------------------------- "
 
 set modeline
+set modelines=3
 
 " --------------------------------------------------------- "
 " --- Remember cursor position (when re-opening a file) --- "
