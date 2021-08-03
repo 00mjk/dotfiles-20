@@ -60,6 +60,37 @@ Leader keybindings
         " Remap jj to escape insert mode
         inoremap jj <ESC>
 
+All ALE global Go options
+-------------------------
+
+    g:ale_go_bingo_executable
+    g:ale_go_bingo_options
+    g:ale_go_go111module
+    g:ale_go_go_executable
+    g:ale_go_gobuild_options
+    g:ale_go_gofmt_options
+    g:ale_go_golangci_lint_executable
+    g:ale_go_golangci_lint_options
+    g:ale_go_golangci_lint_package
+    g:ale_go_golint_executable
+    g:ale_go_golint_options
+    g:ale_go_gometalinter_executable
+    g:ale_go_gometalinter_lint_package
+    g:ale_go_gometalinter_options
+    g:ale_go_gopls_executable
+    g:ale_go_gopls_init_options
+    g:ale_go_gopls_options
+    g:ale_go_gopls_use_global
+    g:ale_go_govet_options
+    g:ale_go_langserver_executable
+    g:ale_go_langserver_options
+    g:ale_go_revive_executable
+    g:ale_go_revive_options
+    g:ale_go_staticcheck_executable
+    g:ale_go_staticcheck_lint_package
+    g:ale_go_staticcheck_options
+    g:ale_go_staticcheck_use_global
+
 Delta themes
 ------------
 
