@@ -616,7 +616,7 @@ autocmd BufReadPost *
 " --------------------- "
 
 " write all changed buffers with Ctrl-S
-inoremap <C-S> <esc>:wall<cr>
+inoremap <C-S> <ESC>:wall<CR>
 nnoremap <C-S> :wall<CR>
 
 " Map F1 key (main vim help) to ESC to avoid bringing it up by mistake.
@@ -1440,6 +1440,7 @@ let g:ale_go_govet_options = '-composites=false'
 
 let g:ale_go_langserver_executable = ''
 
+let g:ale_go_gopls_options = '-remote=auto'
 let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
 \ 'composites': v:false,
 \ 'nilness': v:true,
