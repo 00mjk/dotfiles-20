@@ -84,6 +84,7 @@ backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$HOME/.local/bin/macos-updates"
 backup_and_symlink "$SCRIPTS_DIR/epochms" "$HOME/.local/bin/epochms"
 backup_and_symlink "$SCRIPTS_DIR/utcnow" "$HOME/.local/bin/utcnow"
 backup_and_symlink "$SCRIPTS_DIR/nauniq" "$HOME/.local/bin/nauniq"
+backup_and_symlink "$SCRIPTS_DIR/gddirs" "$HOME/.local/bin/gddirs"
 
 # -------------- #
 # --- shells --- #

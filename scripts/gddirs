@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# report all the directories that have any changes against a given branch
+# (default is branch 'main')
+
+OTHER_BRANCH=main
+if [[ $# -gt 0 ]]; then
+  OTHER_BRANCH=$1
+fi
+
+git diff \
+  --ignore-all-space \
+  --ignore-blank-lines \
+  --stat \
+  --name-only \
+  $OTHER_BRANCH \
+| sed -E -s 's/^(.+)\/[^\/]*$/\1/' \
+| sort -u
