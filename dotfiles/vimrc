@@ -1618,9 +1618,9 @@ highlight BE_StatuslineGreyCentre     cterm=bold,reverse  ctermfg=8     ctermbg=
 highlight BE_StatuslineYellow         cterm=bold          ctermfg=none  ctermbg=11
 highlight BE_StatuslineYellowCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
 
-let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
+" let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
 let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
-let g:BE_statusline_right_only_lines = ' %4l %6([%L]%)'
+" let g:BE_statusline_right_only_lines = ' %4l %6([%L]%)'
 
 function! BE_Statusline(active)
   " an empty buftype name means a normal buffer...
@@ -1699,15 +1699,20 @@ endfunction
 function! BE_LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+    if l:counts.total == 0
+      return ' OK '
+    endif
 
-    " '%#BE_StatuslineGreenCentre# OK '
-    return l:counts.total == 0 ? ' OK ' : printf(
-    \   '%%#BE_StatuslineYellow# %dW %%#BE_StatuslineRedCentre# %dE ',
-    \   all_non_errors,
-    \   all_errors
-    \)
+    let l:errors = l:counts.error
+    let l:warnings = l:counts.total - l:errors
+
+    if l:errors > 0
+      return '%#BE_StatuslineRedCentre# '.l:errors.' ERR '
+    endif
+
+    if l:warnings > 0
+      return '%#BE_StatuslineYellow# '.l:warnings.' WARN '
+    endif
 endfunction
 
 function! BE_ActiveStatusline()
