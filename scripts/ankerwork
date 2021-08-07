@@ -9,6 +9,7 @@ curl -OJL https://ankerwork.s3-us-west-2.amazonaws.com/prod/AnkerWork.dmg
 hdiutil attach AnkerWork.dmg
 
 pushd /Volumes/AnkerWork
+rm -r Applications/AnkerWork.app
 cp -R AnkerWork.app Applications
 
 popd; popd
