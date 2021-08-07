@@ -185,8 +185,12 @@ chmod 0700 ~/Applications
 # TODO: Link Chrome Dictionary to Dropbox
 # $HOME/Library/Application\ Support/Google/Chrome/Default/Custom\ Dictionary.txt
 
+# --- iTerm utilities ---
+
 echo "[setup] Install some of the iTerm2 utilities"
 "${CURRDIR}/iterm2-utils"
+
+# --- Middle ---
 
 # Middle.app <https://middleclick.app/> only allows to choose one option (click
 # or tap) for each device.
@@ -195,6 +199,12 @@ echo "[setup] Install some of the iTerm2 utilities"
 # working for the same device (trick shared by author of the app.)
 defaults write com.knollsoft.Middle trackpadThreeClick -bool true
 defaults write com.knollsoft.Middle trackpadThreeTap -bool true
+
+# --- PasteBot ---
+
+# hide both PasteBot's menu icon and the dock icon
+# https://tapbots.com/pastebot/help/09_troubleshooting/ > Hidden options
+defaults write com.tapbots.Pastebot2Mac UIVisibilityState 10
 
 # ------------------------------- #
 # --- Other non-brew installs --- #
