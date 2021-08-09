@@ -1504,8 +1504,8 @@ highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
 " --- ALE: shortcuts ---
 
 " mnemomic: 'd' is for 'diagnostic'
-nmap <silent> ]d <Plug>(ale_previous_wrap)
-nmap <silent> [d <Plug>(ale_next_wrap)
+nmap <silent> ]d <Plug>(ale_next_wrap)
+nmap <silent> [d <Plug>(ale_previous_wrap)
 
 " ---------------- "
 " --- vim-json --- "
