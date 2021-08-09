@@ -3,11 +3,11 @@
 set -euo pipefail
 
 # report all the directories that have any changes against a given branch
-# (default is branch 'main')
+# or in the current work in progress
 
-OTHER_BRANCH=main
+OTHER_REVISION=
 if [[ $# -gt 0 ]]; then
-  OTHER_BRANCH=$1
+  OTHER_REVISION=$1
 fi
 
 git diff \
@@ -15,6 +15,6 @@ git diff \
   --ignore-blank-lines \
   --stat \
   --name-only \
-  $OTHER_BRANCH \
+  $OTHER_REVISION \
 | sed -E -s 's/^(.+)\/[^\/]*$/\1/' \
 | sort -u
