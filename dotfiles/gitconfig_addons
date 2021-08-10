@@ -87,6 +87,9 @@
   # ignored-update = "!git rm --cached -r . ; git add . "
   # remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
 
+  # List all branches by most recent activity
+  recent = branch --all --sort=-committerdate
+
 [commit]
   verbose = true
 
