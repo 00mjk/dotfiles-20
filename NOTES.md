@@ -19,7 +19,7 @@ Leader keybindings
 `N` : toggle NERDTree
 `O` : new line in paste mode
 `P` : paste over visual selection without yanking
-`Q` : close buffer without closing window
+`Q` : toggle the quickfix list
 `R` : __alias__ for `Ctrl+R` (replace current visual selection)
 `S` : `:GoSameIdsToggle`
 `TT`: toggle TagBar (overridden by vim-table-mode plugin)
@@ -28,7 +28,7 @@ Leader keybindings
 `V` : [FREE]
 `WW`: toggle whitespace highlighting
 `W` : toggle text wrapping
-`X` : [FREE]
+`X` : close buffer without closing window
 `Y` : copy current path and line number to system clipboard
 `Z` : `:GoDiagnostics`
 

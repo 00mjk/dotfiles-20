@@ -500,7 +500,7 @@ set splitright
 
 " Close the current buffer without closing the window
 " <http://stackoverflow.com/a/8585343/417375>
-nnoremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <Leader>x :bp<bar>sp<bar>bn<bar>bd<CR>
 
 "--- Close all hidden non-special buffers ---"
 "
@@ -1478,6 +1478,21 @@ function! BE_ToggleLocationList() abort
 endfunction
 
 nmap <silent> <leader>l :call BE_ToggleLocationList()<CR>
+
+" --- Toggle quickfix list ---
+
+" TODO: use getqflist() instead
+
+" https://stackoverflow.com/a/63162084/417375
+function! BE_ToggleQuickfixList()
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
+endfunction
+
+nnoremap <silent> <leader>q :call BE_ToggleQuickfixList()<cr>
 
 " --- ALE: Visual customisations ---
 
