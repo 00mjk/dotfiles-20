@@ -62,6 +62,7 @@
   p = pull
   ps = push
   pt = push origin HEAD -u
+  re = restore
   root = rev-parse --show-toplevel
   s = status
   sb = status -s
@@ -70,6 +71,7 @@
   st = status
   sti = status --ignored
   shall = stash save --include-untracked
+  sw = switch
   undo = reset --soft HEAD^
   unstage = reset HEAD --
 
