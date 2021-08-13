@@ -5,6 +5,7 @@
 
 **/go/pkg/mod
 **/target/debug
+*Google\ Drive/
 .Trash/
 .aws/
 .bin/
@@ -12,12 +13,14 @@
 .bundle/
 .cache/
 .cargo/
+.config/
 .cups/
 .direnv/
 .docker/
-.dropbox/
 .dropbox.cache/
+.dropbox/
 .fingerprint/
+.gem/
 .git/
 .go/
 .gobrew/
@@ -25,25 +28,22 @@
 .hg/
 .jump/
 .local/
-.config/
 .ocean9/
 .oh-my-zsh/
-.rubies/
 .rbenv/
+.rubies/
 .rustup/
 .ssh/
 .svn/
 .terminfo/
-# .terraform/
-# .terraform.d/
 .vim/
 .vscode-insiders/
 .vscode/
 .zsh_sessions/
 Library/
 Movies/TV/Media.localized/
-Movies/TV/TV Library.tvlibrary/
 Movies/TV/Previous Libraries.localized/
+Movies/TV/TV Library.tvlibrary/
 Pictures/Photos Library.photoslibrary
 _old/
 _quarantine/
