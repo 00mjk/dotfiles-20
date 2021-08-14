@@ -737,6 +737,46 @@ endfunction
 autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
 autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
 
+" Automatically close the loclist when its corresponding buffer is closed
+" -----------------------------------------------------------------------
+
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
+
+" Toggle location list
+" --------------------
+
+" very neat solution from https://vi.stackexchange.com/a/18090
+
+function! BE_ToggleLocationList() abort
+  " check if location list of current window is open
+  if get(getloclist(0, {'winid':0}), 'winid', 0)
+    lclose
+  else
+    lopen
+  endif
+endfunction
+
+nmap <silent> <leader>l :call BE_ToggleLocationList()<CR>
+
+" Toggle quickfix list
+" --------------------
+
+" TODO: use getqflist() instead
+
+" https://stackoverflow.com/a/63162084/417375
+function! BE_ToggleQuickfixList()
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
+endfunction
+
+nnoremap <silent> <leader>q :call BE_ToggleQuickfixList()<cr>
+
 " ------------------------------ "
 " --- Move lines up and down --- "
 " ------------------------------ "
@@ -1456,47 +1496,10 @@ let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
 
 " --- ALE: Error list customisation ---
 
-" * open the loclist automatically on errors
-" * and close it when the buffer is closed (this is not ALE-specific)
-" * it will close anyway once all the issue have been addressed
+" open the loclist automatically on errors; it will close anyway once all the
+" issue have been addressed
 
 " let g:ale_open_list = 1
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-" --- Toggle location list ---
-
-" very neat solution from https://vi.stackexchange.com/a/18090
-"
-" this is also general, not ALE-specific
-
-function! BE_ToggleLocationList() abort
-  " check if location list of current window is open
-  if get(getloclist(0, {'winid':0}), 'winid', 0)
-    lclose
-  else
-    lopen
-  endif
-endfunction
-
-nmap <silent> <leader>l :call BE_ToggleLocationList()<CR>
-
-" --- Toggle quickfix list ---
-
-" TODO: use getqflist() instead
-
-" https://stackoverflow.com/a/63162084/417375
-function! BE_ToggleQuickfixList()
-  if empty(filter(getwininfo(), 'v:val.quickfix'))
-    copen
-  else
-    cclose
-  endif
-endfunction
-
-nnoremap <silent> <leader>q :call BE_ToggleQuickfixList()<cr>
 
 " --- ALE: Visual customisations ---
 
