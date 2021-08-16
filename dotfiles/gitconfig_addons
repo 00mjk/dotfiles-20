@@ -92,6 +92,9 @@
   # List all branches by most recent activity
   recent = branch --all --sort=-committerdate
 
+  # https://gist.github.com/l15n/3103708
+  recent-authors = "! for branch in `git branch -r | grep -v HEAD`;do echo `git show --format=\"%ai %ar by %an\" $branch | head -n 1` \t$branch; done | sort -r"
+
 [commit]
   verbose = true
 
