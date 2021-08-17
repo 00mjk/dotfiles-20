@@ -88,6 +88,7 @@ backup_and_symlink "$BIN_DIR/mob" "$HOME/.local/bin/mob"
 backup_and_symlink "$BIN_DIR/nauniq" "$HOME/.local/bin/nauniq"
 backup_and_symlink "$BIN_DIR/ssh-modern-keygen" "$HOME/.local/bin/ssh-modern-keygen"
 backup_and_symlink "$BIN_DIR/utcnow" "$HOME/.local/bin/utcnow"
+backup_and_symlink "$BIN_DIR/hgo-dep-versions" "$HOME/.local/bin/hgo-dep-versions"
 
 # -------------- #
 # --- shells --- #

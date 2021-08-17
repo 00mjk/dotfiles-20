@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# From: https://github.com/nikolaydubina/go-recipes
+go list -deps -json ./... | jq -rc 'select(.Standard!=true and .Module.GoVersion!=null) | [.Module.Path,.Module.GoVersion] | join(" ")' | sort -u
