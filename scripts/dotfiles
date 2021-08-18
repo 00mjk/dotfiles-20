@@ -11,7 +11,6 @@ CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" 
 ROOTDIR=$(git rev-parse --show-toplevel)
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
 SCRIPTS_DIR="${ROOTDIR}/scripts"
-BIN_DIR="${ROOTDIR}/bin"
 
 source "${CURRDIR}/utils.sh"
 
@@ -79,16 +78,17 @@ backup_and_symlink "$DOTFILES_DIR/gotop.procs.layout" "$LOCAL_CONFIG/gotop/layou
 # --- custom commands --- #
 # ----------------------- #
 
-backup_and_symlink "$BIN_DIR/brut" "$HOME/.local/bin/brut"
-backup_and_symlink "$BIN_DIR/epochms" "$HOME/.local/bin/epochms"
-backup_and_symlink "$BIN_DIR/free" "$HOME/.local/bin/free"
-backup_and_symlink "$BIN_DIR/gddirs" "$HOME/.local/bin/gddirs"
-backup_and_symlink "$BIN_DIR/macos-updates" "$HOME/.local/bin/macos-updates"
-backup_and_symlink "$BIN_DIR/mob" "$HOME/.local/bin/mob"
-backup_and_symlink "$BIN_DIR/nauniq" "$HOME/.local/bin/nauniq"
-backup_and_symlink "$BIN_DIR/ssh-modern-keygen" "$HOME/.local/bin/ssh-modern-keygen"
-backup_and_symlink "$BIN_DIR/utcnow" "$HOME/.local/bin/utcnow"
-backup_and_symlink "$BIN_DIR/hgo-dep-versions" "$HOME/.local/bin/hgo-dep-versions"
+backup_and_symlink "$SCRIPTS_DIR/brut" "$HOME/.local/bin/brut"
+backup_and_symlink "$SCRIPTS_DIR/epochms" "$HOME/.local/bin/epochms"
+backup_and_symlink "$SCRIPTS_DIR/free" "$HOME/.local/bin/free"
+backup_and_symlink "$SCRIPTS_DIR/gddirs" "$HOME/.local/bin/gddirs"
+backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$HOME/.local/bin/macos-updates"
+backup_and_symlink "$SCRIPTS_DIR/mob" "$HOME/.local/bin/mob"
+backup_and_symlink "$SCRIPTS_DIR/nauniq" "$HOME/.local/bin/nauniq"
+backup_and_symlink "$SCRIPTS_DIR/ssh-modern-keygen" "$HOME/.local/bin/ssh-modern-keygen"
+backup_and_symlink "$SCRIPTS_DIR/utcnow" "$HOME/.local/bin/utcnow"
+
+backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions" "$HOME/.local/bin/hgo-dep-versions"
 
 # -------------- #
 # --- shells --- #
