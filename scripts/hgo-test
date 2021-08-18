@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#
+# Only run go tests for packages that have tests, to reduce noise.
+#
+# From: https://github.com/nikolaydubina/go-recipes
+
+set -eo pipefail
+
+richgo list -json ./... \
+| jq -rc 'select((.TestGoFiles | length)!=0) | .ImportPath' \
+| xargs go test -failfast
