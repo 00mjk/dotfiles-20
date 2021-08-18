@@ -1794,6 +1794,6 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " You can put here any further customisations or overrides.
 
-if filereadable(glob("~/.vimrc.after"))
-  source ~/.vimrc.after
+if filereadable(glob("~/.vimrc.local"))
+  source ~/.vimrc.local
 endif
