@@ -7,7 +7,8 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
 
-" --- General power-ups
+" General power-ups
+" -----------------
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
@@ -22,22 +23,27 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'nanotee/zoxide.vim'
+
 " Plug 'ryanoasis/vim-devicons'
 
-" --- Search (files and code)
+" Search (files and code)
+" -----------------------
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
-" --- Navigate (files and code)
+" Navigate (files and code)
+" -------------------------
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/tagbar'
 " Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdtree'
 
-" --- Language support (including special config syntaxes)
+" Language support (including special config syntaxes)
+" ----------------------------------------------------
 
 Plug 'aklt/plantuml-syntax'
 Plug 'tyru/open-browser.vim'
@@ -58,7 +64,8 @@ Plug 'tpope/vim-git'
 Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 
-" --- Markdown
+" Markdown
+" --------
 
 " Tim Pope's Markdown plugin is included in Vim, but we want the latest
 " version.
@@ -79,13 +86,15 @@ Plug 'mzlogin/vim-markdown-toc'
 " tables
 Plug 'dhruvasagar/vim-table-mode'
 
-" --- Language Server Protocol support
+" Language Server Protocol support
+" --------------------------------
 "
 " for linting and other IDE-like features
 
 Plug 'dense-analysis/ale'
 
-" --- Colorschemes
+" Colorschemes
+" ------------
 
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'rakr/vim-one'

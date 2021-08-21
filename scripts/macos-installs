@@ -115,7 +115,8 @@ brew install --quiet --formulae \
   wdiff \
   wget \
   yq \
-  zsh-syntax-highlighting
+  zsh-syntax-highlighting \
+  zoxide
 
 echo "[setup] Install Node.js"
 brew install --quiet --formulae \
