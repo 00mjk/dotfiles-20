@@ -1641,7 +1641,7 @@ highlight BE_StatuslineBlue           cterm=bold,reverse  ctermfg=12    ctermbg=
 highlight BE_StatuslineBlueCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
 highlight BE_StatuslineMagenta        cterm=bold,reverse  ctermfg=13    ctermbg=none
 highlight BE_StatuslineMagentaCentre  cterm=bold,reverse  ctermfg=5     ctermbg=none
-highlight BE_StatuslineCyan           cterm=bold          ctermfg=none  ctermbg=14
+highlight BE_StatuslineCyan           cterm=bold,reverse  ctermfg=14    ctermbg=none
 highlight BE_StatuslineCyanCentre     cterm=bold,reverse  ctermfg=6     ctermbg=none
 highlight BE_StatuslineRed            cterm=bold,reverse  ctermfg=9     ctermbg=none
 highlight BE_StatuslineRedCentre      cterm=bold,reverse  ctermfg=1     ctermbg=none
