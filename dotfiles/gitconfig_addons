@@ -71,6 +71,7 @@
   st = status
   sti = status --ignored
   shall = stash save --include-untracked
+  pop = stash pop
   sw = switch
   undo = reset --soft HEAD^
   unstage = reset HEAD --
