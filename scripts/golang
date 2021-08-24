@@ -20,11 +20,12 @@ fi
 # --- Detect processor architecture ----------------------------------------- #
 # --------------------------------------------------------------------------- #
 
-ARCH=
-if [[ "$(uname -m)" == "x86_64" ]]; then
-  ARCH='amd64'
-elif [[ "$(uname -m)" == "arm64" ]]; then
-  ARCH='arm64'
+ARCH="$(uname -m)"
+GO_ARCH=
+if [[ $ARCH == "x86_64" ]]; then
+  GO_ARCH='amd64'
+elif [[ $ARCH == "arm64" ]]; then
+  GO_ARCH='arm64'
 else
   echo "Unsupported architecture: $(uname -m)"
   exit 1
@@ -35,7 +36,7 @@ fi
 # --------------------------------------------------------------------------- #
 
 PARAMS=""
-LOCAL_INSTALL=
+LOCAL_INSTALL="false"
 while [[ "$#" != "0" ]]; do
   case "$1" in
     -l|--local)
@@ -67,8 +68,8 @@ if [[ -z "$GO_VERSION" ]]; then
   # The most reliable way is currently to parse the official Golang downloads page.
   GO_VERSION=$(
     curl -gsL golang.org/dl \
-      | grep -m1 "${PLATFORM}-${ARCH}.tar.gz" \
-      | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-${ARCH}.tar.gz\".+|\1|"
+      | grep -m1 "${PLATFORM}-${GO_ARCH}.tar.gz" \
+      | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-${GO_ARCH}.tar.gz\".+|\1|"
   )
 fi
 
@@ -85,19 +86,22 @@ else
   GO_ROOT="/usr/local/go"
 fi
 DOWNLOAD_DIR="${HOME}/Downloads"
-FILENAME="go${GO_VERSION}.${PLATFORM}-${ARCH}.tar.gz"
+FILENAME="go${GO_VERSION}.${PLATFORM}-${GO_ARCH}.tar.gz"
 ARCHIVE_FILE="${DOWNLOAD_DIR}/${FILENAME}"
-# URL="https://storage.googleapis.com/golang/${FILENAME}"
 URL="https://golang.org/dl/${FILENAME}"
 
-echo "PLATFORM      ${PLATFORM}"
-echo "GO_VERSION    ${GO_VERSION}"
-echo "GO_ROOT       ${GO_ROOT}"
-echo "FILENAME      ${FILENAME}"
-echo "DOWNLOAD_DIR  ${DOWNLOAD_DIR}"
-echo "ARCHIVE_FILE  ${ARCHIVE_FILE}"
-echo "URL           ${URL}"
-echo "LOCAL_INSTALL ${LOCAL_INSTALL}"
+cat <<-EOF
+PLATFORM ....... ${PLATFORM}
+ARCH ........... ${ARCH}
+GO_ARCH ........ ${GO_ARCH}
+GO_VERSION ..... ${GO_VERSION}
+GO_ROOT ........ ${GO_ROOT}
+FILENAME ....... ${FILENAME}
+DOWNLOAD_DIR ... ${DOWNLOAD_DIR}
+ARCHIVE_FILE ... ${ARCHIVE_FILE}
+URL ............ ${URL}
+LOCAL_INSTALL .. ${LOCAL_INSTALL}
+EOF
 
 source "${CURRDIR}/utils.sh"
 
@@ -115,21 +119,21 @@ curl \
   --output "${ARCHIVE_FILE}"
 
 echo "Remove old installation (dir ${GO_ROOT})"
-if [[ -z "${LOCAL_INSTALL}" ]]; then
+if [[ "${LOCAL_INSTALL}" == "true" ]]; then
+  \rm -rf "${GO_ROOT}"
+else
   echo "Running command with sudo to remove previous global installation"
   sudo \rm -rf "${GO_ROOT}"
-else
-  \rm -rf "${GO_ROOT}"
 fi
 
 echo "Extract ${ARCHIVE_FILE} -> ${GO_ROOT}"
-if [[ -z "${LOCAL_INSTALL}" ]]; then
+if [[ "${LOCAL_INSTALL}" == "true" ]]; then
+  mkdir -p "${GO_ROOT}"
+  tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"
+else
   echo "Running command with sudo to perform global installation"
   sudo mkdir -p "${GO_ROOT}"
   sudo tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"
-else
-  mkdir -p "${GO_ROOT}"
-  tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"
 fi
 
 echo "Checking installation: $($GO_ROOT/bin/go version) installed at $GO_ROOT/bin/go"
@@ -140,8 +144,5 @@ echo "Checking installation: $($GO_ROOT/bin/go version) installed at $GO_ROOT/bi
 
 "${CURRDIR}/golang-zsh-completion"
 
-if [[ -z "${LOCAL_INSTALL}" ]]; then
-  export PATH="$GO_ROOT/bin:$PATH"
-
-  "${CURRDIR}/golang-packages"
-fi
+export PATH="$GO_ROOT/bin:$PATH"
+"${CURRDIR}/golang-packages"
