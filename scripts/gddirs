@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
+
 # report all the directories that have any changes against a given branch
 # or in the current work in progress
 
@@ -16,5 +18,4 @@ git diff \
   --stat \
   --name-only \
   $OTHER_REVISION \
-| sed -E -s 's/^(.+)\/[^\/]*$/\1/' \
-| sort -u
+| "$CURRDIR/onlydirs"

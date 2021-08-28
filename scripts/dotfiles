@@ -85,6 +85,7 @@ backup_and_symlink "$SCRIPTS_DIR/gddirs" "$HOME/.local/bin/gddirs"
 backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$HOME/.local/bin/macos-updates"
 backup_and_symlink "$SCRIPTS_DIR/mob" "$HOME/.local/bin/mob"
 backup_and_symlink "$SCRIPTS_DIR/nauniq" "$HOME/.local/bin/nauniq"
+backup_and_symlink "$SCRIPTS_DIR/onlydirs" "$HOME/.local/bin/onlydirs"
 backup_and_symlink "$SCRIPTS_DIR/ssh-modern-keygen" "$HOME/.local/bin/ssh-modern-keygen"
 backup_and_symlink "$SCRIPTS_DIR/utcnow" "$HOME/.local/bin/utcnow"
 

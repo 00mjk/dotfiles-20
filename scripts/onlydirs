@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -eu
+
+DIRLIST=
+
+function append_dir() {
+  local FILEPATH=$1
+
+  local DIR=
+  [ -d "${FILEPATH}" ] && DIR="${FILEPATH}" || DIR="$(dirname $FILEPATH)"
+
+  [ -z "${DIRLIST}" ] && DIRLIST="${DIR}" || DIRLIST="${DIRLIST}"$'\n'"${DIR}"
+}
+
+while read FILEPATH; do append_dir $FILEPATH; done < /dev/stdin
+
+sort -u <<< "${DIRLIST}"
