@@ -14,9 +14,9 @@
 [delta]
   light = true
   line-numbers = true
-  navigate = true
   paging = always
   features = tweaks
+  # navigate = true # messes with the less search history
 
 # adjustments to the default style, which puts too much emphasis on the hunks
 [delta "tweaks"]
