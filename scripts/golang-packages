@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+set -eu
+
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
+ROOTDIR=$(git rev-parse --show-toplevel)
+
 # go_install is needed until versions prior 1.16 are in use, because only in
 # 1.16 was the "go install" subcommand updated to be dedicated to installing
 # packages to the GOPATH, without modifying the current module if any.
@@ -52,6 +57,11 @@ go_install 'golang.org/x/tools/cmd/present'
 # go_install 'golang.org/x/exp/cmd/modgraphviz'
 # go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
 # go_install 'github.com/KyleBanks/depth/cmd/depth'
+popd
+
+echo "[setup] Install local Go scripts"
+pushd $ROOTDIR/go
+go install github.com/bravoecho/go/cmd/onlydirs
 popd
 
 echo "[setup] Update Go binaries for Vim"
