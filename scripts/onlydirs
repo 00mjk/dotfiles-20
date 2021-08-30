@@ -2,17 +2,33 @@
 
 set -eu
 
-DIRLIST=
+FILELIST="$(cat)"
 
-function append_dir() {
+declare -A SEEN
+
+function printdir() {
   local FILEPATH=$1
+  local PARENTDIR="$(dirname $FILEPATH)"
 
-  local DIR=
-  [ -d "${FILEPATH}" ] && DIR="${FILEPATH}" || DIR="$(dirname $FILEPATH)"
+  if [[ -v "SEEN[$FILEPATH]" || -v "SEEN[$PARENTDIR]" ]]; then
+    return 0
+  fi
 
-  [ -z "${DIRLIST}" ] && DIRLIST="${DIR}" || DIRLIST="${DIRLIST}"$'\n'"${DIR}"
+  local DIR=$([ -d "${FILEPATH}" ] && echo "${FILEPATH}" || echo "${PARENTDIR}")
+
+  SEEN[$DIR]="true"
+
+  echo "$DIR"
 }
 
-while read FILEPATH; do append_dir $FILEPATH; done < /dev/stdin
+# both the "for" and the "read" version are dreadfully slow, even though they
+# are reading from a variable
+IFS='
+'
+for ITEM in $FILELIST; do
+  printdir $ITEM
+done
 
-sort -u <<< "${DIRLIST}"
+# while IFS= read -r FILEPATH; do
+#   printdir $FILELIST
+# done <<< "$FILELIST"
