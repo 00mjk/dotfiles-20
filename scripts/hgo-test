@@ -6,6 +6,6 @@
 
 set -eo pipefail
 
-richgo list -json ./... \
+go list -json ./... \
 | jq -rc 'select((.TestGoFiles | length)!=0) | .ImportPath' \
-| xargs go test -failfast
+| xargs richgo test -failfast

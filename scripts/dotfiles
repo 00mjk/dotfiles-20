@@ -103,8 +103,7 @@ backup_and_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
 backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 "$CURRDIR/zsh-completions"
 
-# prevent the "last login" message on macOS
 if [[ "$(uname -s)" =~ Darwin ]]; then
-  touch ~/.hushlogin
+  touch ~/.hushlogin # prevent the "last login" message on macOS
   backup_and_symlink "$DOTFILES_DIR/shell_addons_mac" "$HOME/.shell_addons_mac"
 fi
