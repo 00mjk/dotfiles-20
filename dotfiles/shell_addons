@@ -293,7 +293,7 @@ f() {
 # -u: use selection if available, don't prompt to choose between selection and hovered entry
 
 export NNN_OPTS="CoReau"
-export NNN_PLUG='p:preview-tui-ext'
+export NNN_PLUG='p:preview-tui'
 
 # https://github.com/jarun/nnn/wiki/Basic-use-cases#configure-cd-on-quit
 n () {
