@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ as of 2018-03-05.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # taken from oh-my-zsh: macOS's $HOST changes with dhcp, etc. Use ComputerName
 # if possible.

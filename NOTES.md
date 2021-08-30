@@ -96,7 +96,7 @@ Delta themes
 
 in `./scripts/delta-themes`
 
-    #!/usr/bin/env zsh
+    #!/usr/bin/env bash
 
     curl \
       'https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig' \

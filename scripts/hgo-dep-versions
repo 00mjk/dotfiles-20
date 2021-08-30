@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # From: https://github.com/nikolaydubina/go-recipes
 go list -deps -json ./... \
