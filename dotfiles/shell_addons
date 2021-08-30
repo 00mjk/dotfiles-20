@@ -387,6 +387,7 @@ alias gr='git restore'
 alias gta='git stash --include-untracked'
 
 alias gdd='git sidediff'
+alias gdds='git sidediff --staged'
 alias gdh='git sideshow'
 alias gdl='git sidelog'
 
