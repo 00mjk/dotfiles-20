@@ -47,13 +47,13 @@ func main() {
 			fullfpath = filepath.Join(pwd, fpath)
 		}
 
-		finfo, err := os.Stat(fullfpath)
+		fileInfo, err := os.Stat(fullfpath)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		var dir string
-		if finfo.IsDir() {
+		if fileInfo.IsDir() {
 			dir = fpath
 		} else {
 			dir = dirpath
