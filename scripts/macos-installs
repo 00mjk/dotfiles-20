@@ -171,6 +171,7 @@ brew install --quiet --casks \
   istat-menus \
   iterm2 \
   middle \
+  monitorcontrol \
   pastebot \
   rectangle \
   visual-studio-code \
