@@ -49,8 +49,8 @@ _old/
 _quarantine/
 bundle/
 git/
-go/
-go/pkg/mod/
+go/bin/
+go/pkg/
 log/
 node_modules/
 vendor/
