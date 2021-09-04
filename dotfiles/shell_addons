@@ -384,12 +384,6 @@ n () {
 # do not print anything when changing env vars
 export DIRENV_LOG_FORMAT=
 
-# -------------- #
-# --- ZOXIDE --- #
-# -------------- #
-
-[ -n "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"
-
 # --------------- #
 # --- ALIASES --- #
 # --------------- #
