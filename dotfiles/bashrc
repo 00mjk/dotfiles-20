@@ -4,86 +4,6 @@
 # --- Prompt (with git integration) --- #
 # ------------------------------------- #
 
-_parse_git_branch() {
-  git rev-parse --abbrev-ref HEAD
-}
-
-_parse_git_status(){
-  # http://stackoverflow.com/a/5947802
-  # Black        0;30     Dark Gray     1;30
-  # Red          0;31     Light Red     1;31
-  # Green        0;32     Light Green   1;32
-  # Brown/Orange 0;33     Yellow        1;33
-  # Blue         0;34     Light Blue    1;34
-  # Purple       0;35     Light Purple  1;35
-  # Cyan         0;36     Light Cyan    1;36
-  # Light Gray   0;37     White         1;37
-
-  # TODO: convert to a dict
-  local        BLACK='\033[0;30m'
-  local    DARK_GRAY='\033[1;30m'
-  local         BLUE='\033[0;34m'
-  local   LIGHT_BLUE='\033[1;34m'
-  local        GREEN='\033[0;32m'
-  local  LIGHT_GREEN='\033[1;32m'
-  local         CYAN='\033[0;36m'
-  local   LIGHT_CYAN='\033[1;36m'
-  local          RED='\033[0;31m'
-  local    LIGHT_RED='\033[1;31m'
-  local       PURPLE='\033[0;35m'
-  local LIGHT_PURPLE='\033[1;35m'
-  local        BROWN='\033[0;33m'
-  local       YELLOW='\033[1;33m'
-  local   LIGHT_GRAY='\033[0;37m'
-  local        WHITE='\033[1;37m'
-  local           NC='\033[0m'
-
-  # Are there changes to the tree?
-  local fullstatus="$(git status -sb 2>/dev/null)"
-
-  if [[ -z "${fullstatus}" ]]; then
-    return
-  fi
-
-  local indicator=
-  if [[ -z "${fullstatus}" ]]; then
-    indicator=""
-  elif [[ $(echo "${fullstatus}"| wc -l) > 1 ]]; then
-    indicator="${RED}!!!${NC}"
-  else
-    indicator="${GREEN}===${NC}"
-  fi
-
-  local statusheader="$(echo "${fullstatus}" | head -n1)"
-
-  # Is the tip in sync with the tracking remote?
-  local patt=
-
-  local is_not_synced=
-  patt="\[(ahead|behind).+\]$"
-  if [[ "${statusheader}" =~ $patt ]]; then
-    is_not_synced=true
-  fi
-
-  local is_tracking_remote=
-  patt="\.\.\."
-  if [[ "${statusheader}" =~ $patt ]]; then
-    is_tracking_remote=true
-  fi
-
-  local sync_state=
-  if [[ $is_tracking_remote && $is_not_synced ]]; then
-    # ## main...origin/main [behind 2] => [behind 2]
-    sync_state="${RED}$(echo "${statusheader}" | sed -re 's|^.*(\[.*)$|\1|')${NC}"
-  elif [[ $is_tracking_remote ]]; then
-    sync_state="${GREEN}[synced]${NC}"
-  else
-    sync_state="${RED}[not tracking]${NC}"
-  fi
-
-  echo -e "${indicator} ${sync_state}"
-}
-
 _custom_bash_prompt () {
   # TODO: convert to a dict
   local        BLACK="\[\033[0;30m\]"
@@ -113,7 +33,7 @@ _custom_bash_prompt () {
       ;;
   esac
 
-  PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w$BLUE \$(_parse_git_branch) \$(_parse_git_status)$NC\n$NC\$ "
+  PS1="${TITLEBAR}$LIGHT_GREEN$USER$RED@$LIGHT_GREEN$(hostname)$DARK_GRAY: $LIGHT_CYAN\w\$(_parse_git_status)$NC\n$NC\$ "
 
   PS2='> '
 

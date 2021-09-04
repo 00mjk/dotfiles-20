@@ -3,7 +3,7 @@
 set -eu
 
 CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
-ROOTDIR=$(git rev-parse --show-toplevel)
+ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 
 # go_install is needed until versions prior 1.16 are in use, because only in
 # 1.16 was the "go install" subcommand updated to be dedicated to installing
@@ -62,6 +62,7 @@ popd
 echo "[setup] Install local Go scripts"
 pushd $ROOTDIR/go
 go install github.com/bravoecho/go/cmd/onlydirs
+go install github.com/bravoecho/go/cmd/gitparse
 popd
 
 echo "[setup] Update Go binaries for Vim"

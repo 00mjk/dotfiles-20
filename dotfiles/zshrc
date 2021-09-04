@@ -187,14 +187,6 @@ else
   bindkey '\ef' be-fzf-dir-widget
 fi
 
-function _bravoecho_git_branch() {
-  local branch_name=$(git branch --show-current 2>/dev/null)
-
-  if [[ -n "${branch_name}" ]]; then
-    echo " on %F{green}${branch_name}%f"
-  fi
-}
-
 # taken from oh-my-zsh
 # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
 function _bravoecho_hostname() {
@@ -212,19 +204,16 @@ function _bravoecho_hostname() {
 
 # Lightweight prompt, depends on oh-my-zsh:
 #
-#   * colorises the info about user and host
-#   * displays the current path
-#   * displays the current git branch if it's in a repo
+#   * current path
+#   * current git branch if it's in a repo
+#   * git status
 #   * puts the cursor into a new line
 #
 setopt PROMPT_SUBST # evaluate the shell expressions on every prompt
 prompt_newline=$'\n'
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
-  # %n = username
-  # %m = hostname, but we don't use because it changes with networks and VPNs
   # %~ = pwd with tilde
-
-  PROMPT='[%F{red}%n%f@%F{magenta}${COMPUTER_NAME}%f:%F{blue}%~%f$(_bravoecho_git_branch)]${prompt_newline}%# '
+  PROMPT='[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
 else
   PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
