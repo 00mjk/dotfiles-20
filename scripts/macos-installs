@@ -90,7 +90,6 @@ brew install --quiet --formulae \
   httpie \
   imagemagick \
   jq \
-  jump \
   lf \
   lsof \
   mosh \
