@@ -36,11 +36,12 @@ fi
 # --------------------------------------------------------------------------- #
 
 PARAMS=""
+TRUE=true
 LOCAL_INSTALL="false"
 while [[ "$#" != "0" ]]; do
   case "$1" in
     -l|--local)
-      LOCAL_INSTALL="true"
+      LOCAL_INSTALL="$TRUE"
       shift
       ;;
     -*|--*=) # unsupported flags
@@ -80,7 +81,7 @@ fi
 CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
 
 GO_ROOT=
-if [[ -n "${LOCAL_INSTALL}" ]]; then
+if [[ "${LOCAL_INSTALL}" == "$TRUE" ]]; then
   GO_ROOT="${HOME}/.go/${GO_VERSION}"
 else
   GO_ROOT="/usr/local/go"
