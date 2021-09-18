@@ -75,20 +75,27 @@ _parse_git_status(){
   local        WHITE='\033[1;37m'
   local           NC='\033[0m'
 
-  local dirty branch upstream ahead behind sync
+  local modified added branch upstream ahead behind sync changes
 
   # see gitparse in the 'go' scripts
-  IFS=, read -r dirty branch upstream ahead behind <<< "$(gitparse 2>/dev/null)"
+  IFS=, read -r modified added branch upstream ahead behind <<< "$(gitparse 2>&/dev/null)"
 
+  # print nothing if it's not a git repo
   [[ -z "${branch}" ]] && return
-  branch="${PURPLE}${branch}${NC}"
-  [[ -n "$dirty" ]] && dirty=" ${RED}✕${NC}" || dirty=" ${GREEN}✓${NC}"
+
+  branch="${PURPLE}${branch}${NC} "
+
+  [[ -z "$modified" && -z "$added" ]] && changes="${GREEN}✓${NC}"
+  [[ -n "$modified" ]] && changes="${RED}✕${NC}"
+  [[ -n "$added" ]] && changes="${changes}${RED}+${NC}"
+
   [[ -n "$upstream" && -z "$ahead" && -z "$behind" ]] && sync=" ${GREEN}↑↓${NC}"
   [[ -z "$upstream" ]] && sync=" ${RED}↑↓?${NC}"
+
   [[ -n "${ahead}" ]] && ahead=" ${RED}↑${NC}${ahead}"
   [[ -n "${behind}" ]] && behind=" ${RED}↓${NC}${behind}"
 
-  echo -e " | ${branch}${dirty}${sync}${ahead}${behind}"
+  echo -e " | ${branch}${changes}${sync}${ahead}${behind}"
 }
 
 # ------------- #
