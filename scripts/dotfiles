@@ -105,5 +105,4 @@ backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
   touch ~/.hushlogin # prevent the "last login" message on macOS
-  backup_and_symlink "$DOTFILES_DIR/shell_addons_mac" "$HOME/.shell_addons_mac"
 fi

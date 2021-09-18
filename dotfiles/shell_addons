@@ -504,3 +504,48 @@ alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -res
 # --- gotop --- #
 
 alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
+
+# -------------- #
+# --- DARWIN --- #
+# -------------- #
+
+if [[ "$(uname -s)" =~ Darwin ]]; then
+  # ------------ #
+  # --- RUBY --- #
+  # ------------ #
+
+  # export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
+  # export LDFLAGS="-L$HOMEBREW_PREFIX/opt/openssl@1.1/lib"
+  # export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig"
+  # export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openssl@1.1/include"
+
+  # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$HOMEBREW_PREFIX/opt/openssl@1.1"
+
+  # ------------ #
+  # --- PATH --- #
+  # ------------ #
+
+  PATH="$(echo $HOMEBREW_PREFIX/opt/*/libexec/gnubin | tr ' ' :):$PATH"
+
+  PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/libxml2/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/lsof/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/sqlite/bin:$PATH"
+  PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
+
+  PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+  # export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk/include" # for compilers
+
+  #---------------#
+  #--- NCURSES ---#
+  #---------------#
+
+  # brew setup to override the default, outdated ncurses that comes with macOS
+
+  # export PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
+  # export LDFLAGS="-L$HOMEBREW_PREFIX/opt/ncurses/lib"
+  # export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/ncurses/include"
+  # export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/ncurses/lib/pkgconfig"
+fi
