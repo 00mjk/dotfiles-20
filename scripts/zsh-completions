@@ -13,7 +13,7 @@ echo "[setup] Update version-dependent zsh completion scripts"
 
 mkdir -p "$HOME/.config/zsh/site-functions"
 
-ZSH_SITE_FUNCTIONS=$HOMEBREW_PREFIX/share/zsh/site-functions
+ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
 
 if [[ -n "$(command -v kubectl)" ]]; then
   echo "[setup] Kubernetes autocompletions"

@@ -109,7 +109,7 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 compdef ll='ls'
 compdef la='ls'
 
-ZSH_SITE_FUNCTIONS="$HOMEBREW_PREFIX/share/zsh/site-functions"
+ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
 
 # TODO: add missing git aliases
 if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
