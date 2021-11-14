@@ -169,7 +169,6 @@ brew install --quiet --casks \
   font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-chrome \
-  google-drive \
   istat-menus \
   iterm2 \
   middle \
@@ -321,8 +320,7 @@ echo "
   - font-dejavu
   - font-dejavu-sans-mono-nerd-font
   - font-go
-  - google-backup-and-sync
-  - google-drive-file-stream (for Google Workspace accounts, supports Shared Drives)
+  - google-drive
   - homebrew/cask-drivers/logitech-camera-settings
   - homebrew/cask/menubar-stats
   - homebrew/cask/stats
