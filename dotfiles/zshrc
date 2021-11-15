@@ -217,7 +217,9 @@ _be_command_time_preexec() {
   # reset the time message
   export COMMAND_TIME_PROMPT=""
 
-  # only keep the actual command (TODO: needs to account for inline env vars)
+  # Skip the commands specified in the dedicated env var.
+  # Account for aliases, only consider the actual command.
+  # (TODO: needs to account for inline env vars)
   if [ -n "$BE_ZSH_COMMAND_TIME_EXCLUDE" ]; then
     local cmd="$1"
     cmd=$(echo "${cmd}" | grep -Eo '^[^[:blank:]|]+')
