@@ -2,10 +2,15 @@
 
 [core]
   editor = 'vim'
-  pager = 'delta'
+
+[pager]
+  diff = delta
+  show = delta
+  log = delta
+  reflog = delta
 
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only --features=interactive
 
 [diff]
   # enable color-moved so that it can be displayed by delta
