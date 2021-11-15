@@ -190,11 +190,11 @@ be-fzf-dir-widget() {
 zle -N be-fzf-dir-widget # register the widget
 
 # Map Alt+F
-if [[ "$(uname -s)" == "Darwin" ]]; then
+# if [[ "$(uname -s)" == "Darwin" ]]; then
   bindkey 'ƒ' be-fzf-dir-widget
-else
+# else
   bindkey '\ef' be-fzf-dir-widget
-fi
+# fi
 
 # taken from oh-my-zsh
 # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
@@ -372,10 +372,10 @@ alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 bindkey -e
 
 # Some Mac specific keybinding fixes
-if [[ "$(uname -s)" == "Darwin" ]]; then
+# if [[ "$(uname -s)" == "Darwin" ]]; then
   bindkey "ç" fzf-cd-widget # Alt-C (Option-C)
   bindkey '∂' kill-word # Alt-D
-fi
+# fi
 
 # provided by ohmyzsh for now
 # # ctrl arrow left/right: move by one word
