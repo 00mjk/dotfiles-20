@@ -18,7 +18,9 @@ HOMEBREW_PREFIX=$(usr_local)
 
 export PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
-mkdir -p "$HOME/.local/bin"
+LOCAL_BIN="$HOME/.local/bin"
+
+mkdir -p $LOCAL_BIN
 mkdir -p "$HOME/.config"
 
 # ----------- #
@@ -78,23 +80,24 @@ backup_and_symlink "$DOTFILES_DIR/gotop.procs.layout" "$LOCAL_CONFIG/gotop/layou
 # --- custom commands --- #
 # ----------------------- #
 
-backup_and_symlink "$SCRIPTS_DIR/brut" "$HOME/.local/bin/brut"
-backup_and_symlink "$SCRIPTS_DIR/epochms" "$HOME/.local/bin/epochms"
-backup_and_symlink "$SCRIPTS_DIR/free" "$HOME/.local/bin/free"
-backup_and_symlink "$SCRIPTS_DIR/gddirs" "$HOME/.local/bin/gddirs"
-backup_and_symlink "$SCRIPTS_DIR/go-test" "$HOME/.local/bin/go-test"
-backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$HOME/.local/bin/macos-updates"
-backup_and_symlink "$SCRIPTS_DIR/mob" "$HOME/.local/bin/mob"
-backup_and_symlink "$SCRIPTS_DIR/nauniq" "$HOME/.local/bin/nauniq"
-backup_and_symlink "$SCRIPTS_DIR/ssh-modern-keygen" "$HOME/.local/bin/ssh-modern-keygen"
-backup_and_symlink "$SCRIPTS_DIR/utcnow" "$HOME/.local/bin/utcnow"
-backup_and_symlink "$SCRIPTS_DIR/wanip" "$HOME/.local/bin/wanip"
+backup_and_symlink "$SCRIPTS_DIR/brut" "$LOCAL_BIN/brut"
+backup_and_symlink "$SCRIPTS_DIR/epochms" "$LOCAL_BIN/epochms"
+backup_and_symlink "$SCRIPTS_DIR/free" "$LOCAL_BIN/free"
+backup_and_symlink "$SCRIPTS_DIR/gddirs" "$LOCAL_BIN/gddirs"
+backup_and_symlink "$SCRIPTS_DIR/go-test" "$LOCAL_BIN/go-test"
+backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$LOCAL_BIN/macos-updates"
+backup_and_symlink "$SCRIPTS_DIR/mob" "$LOCAL_BIN/mob"
+backup_and_symlink "$SCRIPTS_DIR/nauniq" "$LOCAL_BIN/nauniq"
+backup_and_symlink "$SCRIPTS_DIR/ssh-modern-keygen" "$LOCAL_BIN/ssh-modern-keygen"
+backup_and_symlink "$SCRIPTS_DIR/utcnow" "$LOCAL_BIN/utcnow"
+backup_and_symlink "$SCRIPTS_DIR/wanip" "$LOCAL_BIN/wanip"
+backup_and_symlink "$SCRIPTS_DIR/anygit" "$LOCAL_BIN/anygit"
 
-backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions" "$HOME/.local/bin/hgo-dep-versions"
-backup_and_symlink "$SCRIPTS_DIR/hgo-test" "$HOME/.local/bin/hgo-test"
+backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions" "$LOCAL_BIN/hgo-dep-versions"
+backup_and_symlink "$SCRIPTS_DIR/hgo-test" "$LOCAL_BIN/hgo-test"
 
 # the bash version of only dirs is too slow
-# backup_and_symlink "$SCRIPTS_DIR/onlydirs" "$HOME/.local/bin/onlydirs"
+# backup_and_symlink "$SCRIPTS_DIR/onlydirs" "$LOCAL_BIN/onlydirs"
 
 # -------------- #
 # --- shells --- #
