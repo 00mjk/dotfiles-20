@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/Downloads
+pushd ~/Downloads
+wget -O ruby-install-0.8.3.tar.gz https://github.com/postmodern/ruby-install/archive/v0.8.3.tar.gz
+tar -xzvf ruby-install-0.8.3.tar.gz
+pushd ruby-install-0.8.3/
+sudo make install
+popd; popd
