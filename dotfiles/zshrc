@@ -60,7 +60,8 @@ setopt HIST_REDUCE_BLANKS
 setopt NO_HIST_EXPIRE_DUPS_FIRST
 setopt NO_HIST_IGNORE_ALL_DUPS
 export HIST_STAMPS="yyyy-mm-dd"
-export HISTSIZE=250000 # 250K lines
+export HISTSIZE=100000
+export SAVEHIST=100000
 
 # prevents accidentally overwriting an existing file, override with >|
 setopt NO_CLOBBER
