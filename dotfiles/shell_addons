@@ -461,6 +461,8 @@ alias gdds='git sidediff --staged'
 alias gdh='git sideshow'
 alias gdl='git sidelog'
 
+alias mv='command mv -i'
+
 # --- ls --- #
 
 # alias ll='ls -l --human --almost-all --color=auto --classify --time-style=long-iso --group-directories-first'
@@ -469,7 +471,6 @@ alias gdl='git sidelog'
 
 # --header
 alias l='exa --long --git --group-directories-first --classify --group --time-style=long-iso --octal-permissions'
-# alias ee='e --all'
 alias ll='l --all'
 
 # --- tree --- #
