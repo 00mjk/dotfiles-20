@@ -78,6 +78,7 @@ brew install --quiet --formulae \
 echo "[setup] Install extra utilities"
 brew install --quiet --formulae \
   bat \
+  blueutil \
   cloc \
   direnv \
   exa \
