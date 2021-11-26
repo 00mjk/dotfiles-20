@@ -86,8 +86,8 @@ brew install --quiet --formulae \
   ffmpeg \
   fzf \
   git-delta \
-  golangci-lint \
   gnupg \
+  golangci-lint \
   htmlq \
   htop \
   httpie \
@@ -109,6 +109,7 @@ brew install --quiet --formulae \
   ruby \
   ruby-install \
   smartmontools \
+  tig \
   tmux \
   tree \
   universal-ctags \
@@ -118,8 +119,8 @@ brew install --quiet --formulae \
   wdiff \
   wget \
   yq \
-  zsh-syntax-highlighting \
   zoxide
+  zsh-syntax-highlighting \
 
 echo "[setup] Install Node.js"
 brew install --quiet --formulae \
