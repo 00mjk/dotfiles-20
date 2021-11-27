@@ -1381,7 +1381,7 @@ let g:v_autofmt_bufwritepre = 1
 
 " vim-go uses gopls by default for fmt
 " let g:go_fmt_command = 'gopls'
-" let g:go_fmt_autosave = 1
+" let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 1
 let g:go_gopls_gofumpt = v:true
 
@@ -1389,6 +1389,9 @@ let g:go_gopls_gofumpt = v:true
 
 " vim-go uses gopls by default for imports
 " let g:go_imports_autosave = 0
+
+" can be placed in a project-specific .vimrc, as exrc is enabled
+" let g:go_gopls_local = "mymodule"
 
 " let g:go_imports_mode = 'goimports'
 " autocmd FileType go let b:go_fmt_options = {
@@ -1508,11 +1511,15 @@ let g:ale_linters['html'] = []
 
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {}
-" let g:ale_fixers['go'] = ['gofumpt']
+" let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 let g:ale_fixers['python'] = ['yapf']
 let g:ale_fixers['rust'] = ['rustfmt']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
+
+" undocumented: https://github.com/dense-analysis/ale/discussions/3977
+" can be placed in a project-specific .vimrc, as exrc is enabled
+" let g:ale_go_goimports_options = "-local=mymodule"
 
 " struct literals without fields are useful, especially for special-purpose
 " types with a single field (such as custom error types)
