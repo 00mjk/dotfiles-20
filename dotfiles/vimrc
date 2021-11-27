@@ -24,6 +24,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'nanotee/zoxide.vim'
+" Plug 'psliwka/vim-smoothie'
 
 " Plug 'ryanoasis/vim-devicons'
 
@@ -203,6 +204,11 @@ set matchpairs+=<:>
 " after 4000 ms of inactivity)
 set updatetime=200
 
+" " Allow more time for loading syntax on large files
+" set redrawtime=10000
+
+set confirm
+
 " ------------------------------- "
 " --- Leader key alternatives --- "
 " ------------------------------- "
@@ -235,9 +241,9 @@ set noshowcmd                     " showcmd (on by default) is very noisy when r
 set noerrorbells visualbell t_vb= " disable all bells
 set backspace=indent,eol,start    " allow extended backspace behaviour
 set virtualedit=block             " allow placing the cursor after the last char in visual block
-set scrolloff=3                   " number of lines visible when scrolling
+set scrolloff=7                   " number of lines visible when scrolling
 set sidescroll=3
-set sidescrolloff=3
+set sidescrolloff=7
 set splitright                    " position of the new split panes
 set splitbelow
 set shortmess-=S                  " show match count in searches
@@ -643,6 +649,13 @@ nnoremap <leader>y :let @+=expand("%:p") . ':' . line(".")<CR>
 " current file
 cnoremap <expr> %% fnameescape(expand('%:h')).'/'
 
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
+" Easy insertion of a trailing ; or , from insert mode
+imap ;; <Esc>A;<Esc>
+imap ,, <Esc>A,<Esc>
+
 " ---------------------- "
 " --- Save with sudo --- "
 " ---------------------- "
@@ -953,6 +966,9 @@ endfunction
 
 nnoremap <Leader>i :call InsertPaste()<CR>
 nnoremap <Leader>o :call InsertPasteNewLine()<CR>
+
+" " https://ddrscott.github.io/blog/2016/yank-without-jank/
+" vnoremap <expr>y "my\"" . v:register . "y`y"
 
 " ------------------- "
 " --- Real delete --- "
@@ -1379,15 +1395,12 @@ let g:v_autofmt_bufwritepre = 1
 
 " --- vim-go: gofmt ---
 
-" vim-go uses gopls by default for fmt
-" let g:go_fmt_command = 'gopls'
 " let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 1
 let g:go_gopls_gofumpt = v:true
 
 " --- vim-go: goimports ---
 
-" vim-go uses gopls by default for imports
 " let g:go_imports_autosave = 0
 
 " can be placed in a project-specific .vimrc, as exrc is enabled
