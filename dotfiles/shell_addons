@@ -405,6 +405,11 @@ n () {
 # --- ALIASES --- #
 # --------------- #
 
+# --- miscellanea --- #
+
+alias free='free -h'
+alias df='df -h'
+
 # --- shell --- #
 
 # completely wipe the content of the shell buffer, instead of just scrolling
