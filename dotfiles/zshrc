@@ -242,28 +242,35 @@ _be_command_time_preexec() {
 }
 
 _be_command_time_precmd() {
-  [ $timer ] || return
-  [ -n "$TTY" ] || return
+  # nothing to do if the timer global is not set
+  if [[ -z "${timer+x}" ]]; then
+    # ensure the time is only printed once
+    unset COMMAND_TIME_PROMPT
+    return
+  fi
+
+  # [[ -n "${timer+x}" ]] || return
+  [[ -n "$TTY" ]] || return
 
   local elapsed_secs=$(($SECONDS - $timer))
   unset timer
 
-  [ $elapsed_secs -ge ${BE_ZSH_COMMAND_TIME_MIN_SECONDS:-3} ] || return
+  [[ $elapsed_secs -ge ${BE_ZSH_COMMAND_TIME_MIN_SECONDS:-3} ]] || return
 
   local elapsed_fmt=
   local hours=$(($elapsed_secs/3600))
   local minutes=$(($elapsed_secs%3600/60))
   local seconds=$(($elapsed_secs%60))
 
-  if [ $hours -gt 0 ]; then
+  if [[ $hours -gt 0 ]]; then
     elapsed_fmt=$(printf '%dh:%02dm:%02ds' ${hours} ${minutes} ${seconds})
-  elif [ $minutes -gt 0 ]; then
+  elif [[ $minutes -gt 0 ]]; then
     elapsed_fmt=$(printf '%dm:%02ds' ${minutes} ${seconds})
   else
     elapsed_fmt=$(printf '%d seconds' ${seconds})
   fi
 
-  export COMMAND_TIME_PROMPT="[%Btime: ${elapsed_fmt}%b]"$'\n'
+  export COMMAND_TIME_PROMPT="[%Btime ${elapsed_fmt}%b]"$'\n'
 }
 
 precmd_functions+=(_be_command_time_precmd)
