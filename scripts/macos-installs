@@ -86,6 +86,7 @@ brew install --quiet --formulae \
   fzf \
   git-delta \
   golangci-lint \
+  htmlq \
   htop \
   httpie \
   imagemagick \
@@ -159,7 +160,6 @@ brew tap homebrew/cask-fonts
 brew install --quiet --casks \
   authy \
   docker \
-  drawio \
   firefox \
   font-inconsolata \
   font-inconsolata-nerd-font \
@@ -296,6 +296,7 @@ echo "
   - mdcat
   - nethogs
   - nload
+  - pandoc (requires basictex cask - which provides the pdflatex binary - for markdown to pdf conversion)
   - pyenv
   - ranger
   - rbenv
@@ -312,9 +313,8 @@ echo "
 
   - alacritty
   - calibre
+  - cryptomator
   - dash
-  - dash
-  - devdocs
   - devdocs
   - font-dejavu
   - font-dejavu-sans-mono-nerd-font
@@ -344,10 +344,10 @@ echo "
   - whatsapp
 
 * Casks requiring Rosetta 2 on arm64
-  - adoptopenjdk
+  - temurin (previously adoptopenjdk)
   - microsoft-teams
   - sdformatter
-  - bitwarden (including the Safari extension)
+  - bitwarden (when installed outside of the App Store)
   - authy
   - dropbox
 
