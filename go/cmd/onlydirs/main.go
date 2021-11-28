@@ -9,15 +9,17 @@ import (
 )
 
 func main() {
+	// 1. get a list of files from stdin
 	sc := bufio.NewScanner(os.Stdin)
 
 	var pwd string
 
+	// 2. take an optional base directory...
 	args := os.Args[1:]
 	switch len(args) {
 	case 1:
 		pwd = args[0]
-	case 0:
+	case 0: // ...or 3. default to the current directory if not given
 		var err error
 		pwd, err = os.Getwd()
 		if err != nil {
@@ -27,19 +29,22 @@ func main() {
 		log.Fatal("the only argument allowed is a base directory")
 	}
 
-	dirMap := make(map[string]struct{})
+	// 4. prepare to reject duplicates
+	seen := make(map[string]struct{})
 
 	for sc.Scan() {
+		// 5. skip to the next entry if the path is already in the results
 		fpath := sc.Text()
+		if _, ok := seen[fpath]; ok {
+			continue
+		}
+
 		dirpath := filepath.Dir(fpath)
-
-		if _, ok := dirMap[fpath]; ok {
-			continue
-		}
-		if _, ok := dirMap[dirpath]; ok {
+		if _, ok := seen[dirpath]; ok {
 			continue
 		}
 
+		// 6. normalise the path to a full path
 		var fullfpath string
 		if filepath.IsAbs(fpath) {
 			fullfpath = fpath
@@ -47,11 +52,13 @@ func main() {
 			fullfpath = filepath.Join(pwd, fpath)
 		}
 
+		// 7. get the info about the path
 		fileInfo, err := os.Stat(fullfpath)
 		if err != nil {
 			log.Fatal(err)
 		}
 
+		// 8. determine the directory (could be the given path itself)
 		var dir string
 		if fileInfo.IsDir() {
 			dir = fpath
@@ -59,8 +66,10 @@ func main() {
 			dir = dirpath
 		}
 
-		dirMap[dir] = struct{}{}
+		// 9. mark the path as seen
+		seen[dir] = struct{}{}
 
+		// 10. print it
 		fmt.Println(dir)
 	}
 
