@@ -212,14 +212,12 @@ function _bravoecho_hostname() {
 [[ -n "${COMPUTER_NAME}" ]] || export COMPUTER_NAME="$(_bravoecho_hostname)"
 
 _be_command_time_preexec() {
-  # if [[ (! -z ${BE_ZSH_COMMAND_TIME_EXCLUDE+x}) && (! -z ${BE_ZSH_COMMAND_TIME_EXCLUDE[$cmd]+x}) ]]; then
-  #   return
-  # fi
   setopt local_options BASH_REMATCH
 
+  # reset the time message
   export COMMAND_TIME_PROMPT=""
-  # only keep the actual command (TODO: needs to account for inline env vars)
 
+  # only keep the actual command (TODO: needs to account for inline env vars)
   if [ -n "$BE_ZSH_COMMAND_TIME_EXCLUDE" ]; then
     local cmd="$1"
     cmd=$(echo "${cmd}" | grep -Eo '^[^[:blank:]|]+')
@@ -274,11 +272,10 @@ preexec_functions+=(_be_command_time_preexec)
 BE_ZSH_COMMAND_TIME_EXCLUDE=(
   bat
   cat
-  docker
-  docker-compose
   git
   less
   man
+  reflex
   ssh
   tmux
   vim
