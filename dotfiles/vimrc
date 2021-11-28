@@ -63,6 +63,7 @@ Plug 'ollykel/v-vim'
 Plug 'tpope/vim-git'
 Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
+Plug 'direnv/direnv.vim'
 
 " Markdown
 " --------
@@ -1174,7 +1175,7 @@ highlight def link rubyRspec Function
 " ------------------------------------------------------- "
 
 autocmd BufNewFile,BufReadPost {*zsh,*.zsh-theme} set filetype=zsh
-autocmd BufNewFile,BufReadPost {.envrc,direnvrc,.direnvrc} set filetype=bash
+" autocmd BufNewFile,BufReadPost {.envrc,direnvrc,.direnvrc} set filetype=bash
 
 " ---------------------------------------- "
 " --- Fix arrow key combos inside tmux --- "
