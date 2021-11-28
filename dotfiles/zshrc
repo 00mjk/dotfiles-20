@@ -276,6 +276,7 @@ _be_command_time_precmd() {
 precmd_functions+=(_be_command_time_precmd)
 preexec_functions+=(_be_command_time_preexec)
 
+# Switch to an allow-list instead of an exclude-list.
 BE_ZSH_COMMAND_TIME_EXCLUDE=(
   "bat"
   "cat"
@@ -292,6 +293,9 @@ BE_ZSH_COMMAND_TIME_EXCLUDE=(
   "sqlite3"
   "fg"
   "n"
+  "lf"
+  "du"
+  "watch"
 )
 # declare -A BE_ZSH_COMMAND_TIME_EXCLUDE
 # BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
