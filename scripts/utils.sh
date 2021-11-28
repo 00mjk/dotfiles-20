@@ -55,9 +55,11 @@ function append_if_missing () {
 # usr_local returns either /usr/local or /opt/homebrew depending on the system,
 # and is used to link to various support files
 function usr_local () {
-  if [[ "$(uname -m)" == "arm64" ]]; then
+	if [[ "$(uname -m)" == "arm64" && "$(uname -s)" == "Darwin" ]]; then
     echo '/opt/homebrew'
   elif [[ "$(uname -m)" == "x86_64" ]]; then
+    echo '/usr/local'
+  elif [[ "$(uname -m)" == "aarch64" && "$(uname -s)" == "Linux" ]]; then
     echo '/usr/local'
   fi
 }
