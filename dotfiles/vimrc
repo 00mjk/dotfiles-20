@@ -1521,13 +1521,15 @@ let g:ale_go_govet_options = '-composites=false'
 let g:ale_go_langserver_executable = ''
 
 let g:ale_go_gopls_options = '-remote=auto'
-let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
-\   'composites': v:false,
-\   'nilness': v:true,
-\   'unusedparams': v:true,
-\   'unusedresult': v:true,
-\   'unusedwrite': v:true,
-\ }}
+let g:ale_go_gopls_init_options = {
+\  'ui.diagnostic.analyses': {
+\    'composites': v:false,
+\    'unusedresult': v:true,
+\    'unusedwrite': v:true,
+\    'nilness': v:true,
+\    'unusedparams': v:true,
+\  },
+\}
 
 " --- ALE: Error list customisation ---
 
