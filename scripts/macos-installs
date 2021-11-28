@@ -86,6 +86,7 @@ brew install --quiet --formulae \
   fzf \
   git-delta \
   golangci-lint \
+  gnupg \
   htmlq \
   htop \
   httpie \
@@ -98,6 +99,7 @@ brew install --quiet --formulae \
   nmap \
   nnn \
   parallel \
+  pbzip2 \
   pigz \
   pipx \
   plantuml \
