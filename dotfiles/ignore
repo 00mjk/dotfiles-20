@@ -52,6 +52,7 @@ git/
 go/bin/
 go/pkg/
 log/
+logs/
 node_modules/
 vendor/
 venv*/
