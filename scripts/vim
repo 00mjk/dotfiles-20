@@ -19,10 +19,11 @@ DOTFILES_DIR="${ROOTDIR}/dotfiles"
 
 source "${CURRDIR}/utils.sh"
 
-backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
-
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# TODO: create a minimal vimrc only for bootstrapping, only to run PlugInstall for the first time
+backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
 
 vim +PlugInstall +qall
 
@@ -36,4 +37,4 @@ mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
 
 backup_and_symlink "${HOME}/Dropbox/private/dotfiles/vim/spell/en.utf-8.add" "${HOME}/.vim/spell/en.utf-8.add"
 
-"${CURRDIR}/vim-markdown-tagbar"
+# "${CURRDIR}/vim-markdown-tagbar"
