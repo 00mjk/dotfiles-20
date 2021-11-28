@@ -98,8 +98,7 @@ Plug 'dense-analysis/ale'
 
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'rakr/vim-one'
-" nord-vim only works if the terminal itself is using the 16-color Nord theme
-" Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim' nord-vim only works if the terminal itself is using the 16-color Nord theme
 " Plug 'lifepillar/vim-gruvbox8'
 " Plug 'jsit/disco.vim'
 " Plug 'sonph/onehalf', { 'rtp': 'vim' }
@@ -1421,6 +1420,7 @@ autocmd FileType go nmap     <silent> <Leader>k <Plug>(go-info)
 
 " --- vim-go: debugging ---
 
+" TODO: these mappings are useless, use some mnemonics.
 " \ 'out':        'botright 5new', " remove the output window
 let g:go_debug_windows = {
     \ 'vars':       'leftabove 30vnew',
