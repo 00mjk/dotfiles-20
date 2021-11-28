@@ -121,7 +121,7 @@ export DELTA_PAGER='less --clear-screen'
 # --- GPG --- #
 # ----------- #
 
-# export GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 # # This create-socketdir command is only required if a non default home
 # # directory is used and the /run based sockets shall be used. For the default
 # # home directory GnUPG creates a directory on the fly.
