@@ -36,7 +36,7 @@ export LS_COLORS
 # --save-marks               save marks across invocations of less
 # --mouse                    enable mouse-wheel scrolling and save clicks to the "#" mark
 # --wheel-lines              number of lines to scroll on each step of the wheel
-export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --wheel-lines=3"
+export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --mouse --wheel-lines=3"
 
 # ------------------ #
 # --- GIT PROMPT --- #
@@ -85,6 +85,7 @@ _parse_git_status(){
 
   branch="${PURPLE}${branch}${NC} "
 
+  # FIXME: Add staged files
   [[ -z "$modified" && -z "$added" ]] && changes="${GREEN}✓${NC}"
   [[ -n "$modified" ]] && changes="${RED}✕${NC}"
   [[ -n "$added" ]] && changes="${changes}${RED}+${NC}"
@@ -389,7 +390,7 @@ n () {
 # -------------- #
 
 # do not print anything when changing env vars
-export DIRENV_LOG_FORMAT=
+# export DIRENV_LOG_FORMAT=
 
 # --------------- #
 # --- ALIASES --- #
@@ -535,8 +536,17 @@ if [[ "$(uname -s)" =~ Darwin ]]; then
   PATH="$HOMEBREW_PREFIX/opt/sqlite/bin:$PATH"
   PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 
+  # JAVA
+  # ----
+
+  # caveat: this can cause problems because it overrides the built-in JDK
   PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
-  # export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk/include" # for compilers
+
+  # for compilers:
+  # export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openjdk/include"
+
+  # for system Java wrappers:
+  # sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
   #---------------#
   #--- NCURSES ---#
