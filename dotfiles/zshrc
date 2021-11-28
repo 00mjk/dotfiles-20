@@ -25,6 +25,14 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export LANG=en_GB.UTF-8
 
+# automatically run the 'time' commmand if total user time + system time is
+# greater than the specified value (in seconds)
+#
+# this isn't great because it operates on all commands, so that for example it
+# will print the result of 'time' every time vim is closed
+#
+# REPORTTIME=3
+
 # setopt alwaystoend
 # setopt autocd
 # setopt autopushd
@@ -203,8 +211,86 @@ function _bravoecho_hostname() {
 
 [[ -n "${COMPUTER_NAME}" ]] || export COMPUTER_NAME="$(_bravoecho_hostname)"
 
-# Lightweight prompt, depends on oh-my-zsh:
+_be_command_time_preexec() {
+  # if [[ (! -z ${BE_ZSH_COMMAND_TIME_EXCLUDE+x}) && (! -z ${BE_ZSH_COMMAND_TIME_EXCLUDE[$cmd]+x}) ]]; then
+  #   return
+  # fi
+  setopt local_options BASH_REMATCH
+
+  export COMMAND_TIME_PROMPT=""
+  # only keep the actual command (TODO: needs to account for inline env vars)
+
+  if [ -n "$BE_ZSH_COMMAND_TIME_EXCLUDE" ]; then
+    local cmd="$1"
+    cmd=$(echo "${cmd}" | grep -Eo '^[^[:blank:]|]+')
+
+    regex="^alias\ .+='([^[:blank:]|]+)"
+    if [[ $(command -v "${cmd}") =~ $regex ]]; then
+      cmd="${BASH_REMATCH[2]}"
+    fi
+
+    for exc ($BE_ZSH_COMMAND_TIME_EXCLUDE) do;
+      if [ "$(echo "${cmd}" | grep -Ec "^$exc\b")" -gt 0 ]; then
+        return
+      fi
+    done
+  fi
+
+  # in zsh the SECONDS env var contains the number of seconds since the shell
+  # was started
+  #
+  # (global variable for cross-function communication)
+  timer=${timer:-$SECONDS}
+}
+
+_be_command_time_precmd() {
+  [ $timer ] || return
+  [ -n "$TTY" ] || return
+
+  local elapsed_secs=$(($SECONDS - $timer))
+  unset timer
+
+  [ $elapsed_secs -ge ${BE_ZSH_COMMAND_TIME_MIN_SECONDS:-3} ] || return
+
+  local elapsed_fmt=
+  local hours=$(($elapsed_secs/3600))
+  local minutes=$(($elapsed_secs%3600/60))
+  local seconds=$(($elapsed_secs%60))
+
+  if [ $hours -gt 0 ]; then
+    elapsed_fmt=$(printf '%dh:%02dm:%02ds' ${hours} ${minutes} ${seconds})
+  elif [ $minutes -gt 0 ]; then
+    elapsed_fmt=$(printf '%dm:%02ds' ${minutes} ${seconds})
+  else
+    elapsed_fmt=$(printf '%d seconds' ${seconds})
+  fi
+
+  export COMMAND_TIME_PROMPT="[%Btime: ${elapsed_fmt}%b]"$'\n'
+}
+
+precmd_functions+=(_be_command_time_precmd)
+preexec_functions+=(_be_command_time_preexec)
+
+BE_ZSH_COMMAND_TIME_EXCLUDE=(
+  bat
+  cat
+  docker
+  docker-compose
+  git
+  less
+  man
+  ssh
+  tmux
+  vim
+  gch
+)
+# declare -A BE_ZSH_COMMAND_TIME_EXCLUDE
+# BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
+# BE_ZSH_COMMAND_TIME_EXCLUDE["docker"]=true
+
+# Custom prompt, depends on oh-my-zsh:
 #
+#   * print exit code if non-zero
 #   * current path
 #   * current git branch if it's in a repo
 #   * git status
@@ -214,7 +300,8 @@ setopt PROMPT_SUBST # evaluate the shell expressions on every prompt
 prompt_newline=$'\n'
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   # %~ = pwd with tilde
-  PROMPT='[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
+  # print warning and exit code if the previous command failed
+  PROMPT='%(?..[%B%F{red}exit code: %?%f%b]${prompt_newline})${COMMAND_TIME_PROMPT}[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
 else
   PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
