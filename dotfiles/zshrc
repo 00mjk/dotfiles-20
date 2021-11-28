@@ -270,16 +270,21 @@ precmd_functions+=(_be_command_time_precmd)
 preexec_functions+=(_be_command_time_preexec)
 
 BE_ZSH_COMMAND_TIME_EXCLUDE=(
-  bat
-  cat
-  git
-  less
-  man
-  reflex
-  ssh
-  tmux
-  vim
-  gch
+  "bat"
+  "cat"
+  "git"
+  "less"
+  "man"
+  "reflex"
+  "ssh"
+  "tmux"
+  "vim"
+  "gch"
+  "irb"
+  "pry"
+  "sqlite3"
+  "fg"
+  "n"
 )
 # declare -A BE_ZSH_COMMAND_TIME_EXCLUDE
 # BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
