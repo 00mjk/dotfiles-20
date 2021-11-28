@@ -1057,6 +1057,12 @@ let g:mkdp_preview_options = {
 command! MarkdownPlantUMLServer :execute ':silent !docker run --name plantuml_server --rm -d -p 56789:56789 plantuml/plantuml-server:jetty'
 command! MarkdownPlantUMLServerStop :execute ':silent !docker kill plantuml_server'
 
+"--------------------------"
+"--- plantuml-previewer ---"
+"--------------------------"
+
+au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = $HOME . '/.local/bin/plantuml.jar'
+
 "--------------------"
 "--- open-browser ---"
 "--------------------"
