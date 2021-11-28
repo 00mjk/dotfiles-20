@@ -1,5 +1,10 @@
 # vim: set ft=zsh:
 
+# set up local completions
+ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
+
+fpath=($ZSH_SITE_FUNCTIONS $fpath)
+
 # unfortunately this takes more than 100 ms, but zsh is hardly usable without
 # it, so we are paying this price until we port the individual features we
 # need, which is probably code for "never"
@@ -97,20 +102,15 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 # disable it
 unsetopt COMPLETE_ALIASES
 
-# set up local completions
-fpath+=~/.config/zsh/site-functions
-
-# this would normally be done by oh-my-zsh but even if was installed, some apps
-# still need it again
-autoload -Uz compinit && compinit -i
+# # this would normally be done by oh-my-zsh but even if was installed, some apps
+# # still need it again
+# autoload -Uz compinit && compinit -i
 
 # only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 compdef ll='ls'
 compdef la='ls'
-
-ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
 
 # TODO: add missing git aliases
 if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
