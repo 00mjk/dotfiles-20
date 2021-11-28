@@ -119,8 +119,8 @@ brew install --quiet --formulae \
   wdiff \
   wget \
   yq \
-  zoxide
-  zsh-syntax-highlighting \
+  zoxide \
+  zsh-syntax-highlighting
 
 echo "[setup] Install Node.js"
 brew install --quiet --formulae \
@@ -162,11 +162,6 @@ echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
 brew install --quiet --casks \
-  authy \
-  docker \
-  firefox \
-  font-inconsolata \
-  font-inconsolata-nerd-font \
   font-jetbrains-mono \
   font-jetbrains-mono-nerd-font \
   font-juliamono \
@@ -178,7 +173,6 @@ brew install --quiet --casks \
   pastebot \
   rectangle \
   visual-studio-code \
-  vlc \
   zoom
 
 echo "[setup] Ensure local ~/Applications is available only to this user"
@@ -319,6 +313,9 @@ echo "
   - cryptomator
   - dash
   - devdocs
+  - docker
+  - font-inconsolata
+  - font-inconsolata-nerd-font
   - font-dejavu
   - font-dejavu-sans-mono-nerd-font
   - font-go
@@ -341,6 +338,7 @@ echo "
   - thunderbird
   - tunnelbear
   - vagrant
+  - vlc
   - virtualbox
   - virtualbox-extension-pack
   - whatsapp
