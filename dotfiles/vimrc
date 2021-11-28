@@ -1378,21 +1378,28 @@ let g:v_autofmt_bufwritepre = 1
 " --- vim-go: gofmt ---
 
 " vim-go uses gopls by default for fmt
+" let g:go_fmt_command = 'gofumpt'
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
-let g:go_gopls_gofumpt = v:true
+" let g:go_gopls_gofumpt = v:true " this breaks the jump history and makes undo virtually unusable
 
 " --- vim-go: goimports ---
 
 " vim-go uses gopls by default for imports
-let g:go_imports_autosave = 1
+" let g:go_imports_autosave = 1
+
+" let g:go_imports_mode = 'goimports'
+" autocmd FileType go let b:go_fmt_options = {
+"   \ 'goimports': '-local ' . trim(system('{cd '. shellescape(expand('%:h')) .' && go list -m;}')),
+" \}
 
 " --- vim-go: general options ---
 
 " let g:go_fillstruct_mode = 'gopls' " not working, reverting to default (2021-06-02)
 let g:go_code_completion_icase = 1
 let g:go_gopls_complete_unimported = v:true
-let g:go_list_type = 'quickfix'
+" let g:go_list_type = 'quickfix'
+let g:go_snippet_engine = 'ultisnips'
 let g:go_gopls_use_placeholders = v:true " treat autocompletion items as anonymous snippets
 let g:go_addtags_skip_unexported = 1 " do not add JSON tags to unexported fields when using :GoAddTags
 
@@ -1404,7 +1411,9 @@ let g:go_addtags_skip_unexported = 1 " do not add JSON tags to unexported fields
 " ...after 1000 ms instead of the default 800
 " let g:go_updatetime=1000
 
- let g:go_addtags_skip_unexported = 1
+let g:go_addtags_skip_unexported = 1
+
+let g:go_test_show_name = 1
 
 " --- vim-go: mappings ---
 
@@ -1508,11 +1517,11 @@ let g:ale_go_langserver_executable = ''
 
 let g:ale_go_gopls_options = '-remote=auto'
 let g:ale_go_gopls_init_options = {'ui.diagnostic.analyses': {
-\ 'composites': v:false,
-\ 'nilness': v:true,
-\ 'unusedparams': v:true,
-\ 'unusedresult': v:true,
-\ 'unusedwrite': v:true,
+\   'composites': v:false,
+\   'nilness': v:true,
+\   'unusedparams': v:true,
+\   'unusedresult': v:true,
+\   'unusedwrite': v:true,
 \ }}
 
 " --- ALE: Error list customisation ---
