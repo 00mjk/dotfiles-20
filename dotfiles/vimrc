@@ -491,6 +491,9 @@ set cpoptions+=I
 " --------------- "
 
 " autocmd FileType python setlocal foldmethod=indent
+set foldmethod=syntax
+set foldnestmax=1
+set nofoldenable
 
 " ------------------------- "
 " --- Buffer management --- "
