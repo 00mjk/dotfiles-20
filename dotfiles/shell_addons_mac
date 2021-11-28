@@ -38,3 +38,14 @@ function _do_brew_upgrade() {
   echo "-------------- brew cleanup ---------------"
   brew cleanup --prune=all 2>&1
 }
+
+#---------------#
+#--- ncurses ---#
+#---------------#
+
+# brew setup to override the default, outdated ncurses that comes with macOS
+
+# export PATH="/usr/local/opt/ncurses/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+# export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
