@@ -52,6 +52,7 @@ go_install 'github.com/kyoh86/richgo'
 go_install 'github.com/mgechev/revive'
 go_install 'github.com/cespare/reflex'
 go_install 'github.com/dundee/gdu/v5/cmd/gdu'
+# go_install 'github.com/xxxserxxx/gotop/v4/cmd/gotop' # deprecation notices when building
 # go_install 'golang.org/x/tools/cmd/present'
 # go_install 'github.com/asciimoo/wuzz'
 # go_install 'golang.org/x/exp/cmd/modgraphviz'
