@@ -32,12 +32,15 @@ var (
 
 // File list patterns.
 var (
-	// a modified file is indicated with an M in the second column of the short
-	// status output
-	reModifiedFile = regexp.MustCompile(`^.M`)
+	// a file modified AND staged is indicated by an M in the first column of the
+	// short status output
+	reModifiedStaged = regexp.MustCompile(`^M`)
+
+	// a file modified but not staged is indicated by an M in the second column
+	reModifiedNotStaged = regexp.MustCompile(`^.M`)
 
 	// an untracked file is indicated with a ? in the first column
-	reUntrackedFile = regexp.MustCompile(`^\?`)
+	reUntracked = regexp.MustCompile(`^\?`)
 )
 
 func main() {
@@ -72,15 +75,19 @@ func ParseGit(shortGitStatus []byte) (string, error) {
 	header := sc.Text()
 
 	// 2) try and read past the header, if successful it means there are changes
-	var anyModifiedFiles, anyUntrackedFiles string
+	var anyModifiedStaged, anyModifiedNotStaged, anyUntracked string
 
 	for sc.Scan() {
-		if reModifiedFile.Match(sc.Bytes()) {
-			anyModifiedFiles = "modified"
+		if reModifiedStaged.Match(sc.Bytes()) {
+			anyModifiedStaged = "modifiedStaged"
 			continue
 		}
-		if reUntrackedFile.Match(sc.Bytes()) {
-			anyUntrackedFiles = "added"
+		if reModifiedNotStaged.Match(sc.Bytes()) {
+			anyModifiedNotStaged = "modifiedNonStaged"
+			continue
+		}
+		if reUntracked.Match(sc.Bytes()) {
+			anyUntracked = "added"
 			continue
 		}
 	}
@@ -90,9 +97,10 @@ func ParseGit(shortGitStatus []byte) (string, error) {
 
 	// 3) emit the comma separate output
 	return fmt.Sprintf(
-		"%v,%s,%s,%s,%s,%s",
-		anyModifiedFiles,
-		anyUntrackedFiles,
+		"%s,%s,%s,%s,%s,%s,%s",
+		anyModifiedStaged,
+		anyModifiedNotStaged,
+		anyUntracked,
 		extract(reBranch, header),
 		extract(reUpstream, header),
 		extract(reAhead, header),

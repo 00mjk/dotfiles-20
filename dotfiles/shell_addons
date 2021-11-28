@@ -75,20 +75,29 @@ _parse_git_status(){
   local        WHITE='\033[1;37m'
   local           NC='\033[0m'
 
-  local modified added branch upstream ahead behind sync changes
+  local modifiedStaged modifiedUnstaged newFiles branch upstream ahead behind
 
   # see gitparse in the 'go' scripts
-  IFS=, read -r modified added branch upstream ahead behind <<< "$(gitparse 2>&/dev/null)"
+  IFS=, read -r \
+    modifiedStaged \
+    modifiedUnstaged \
+    newFiles \
+    branch \
+    upstream \
+    ahead \
+    behind \
+  <<< "$(gitparse 2>&/dev/null)"
 
   # print nothing if it's not a git repo
   [[ -z "${branch}" ]] && return
 
   branch="${PURPLE}${branch}${NC} "
 
-  # FIXME: Add staged files
-  [[ -z "$modified" && -z "$added" ]] && changes="${GREEN}✓${NC}"
-  [[ -n "$modified" ]] && changes="${RED}✕${NC}"
-  [[ -n "$added" ]] && changes="${changes}${RED}+${NC}"
+  local changes=
+  [[ -n "$modifiedStaged" ]] && changes="${changes}${RED}✷${NC}"
+  [[ -n "$modifiedUnstaged" ]] && changes="${changes}${RED}✕${NC}"
+  [[ -n "$newFiles" ]] && changes="${changes}${RED}+${NC}"
+  [[ -z "${changes}" ]] && changes="${GREEN}✓${NC}"
 
   [[ -n "$upstream" && -z "$ahead" && -z "$behind" ]] && sync=" ${GREEN}↑↓${NC}"
   [[ -z "$upstream" ]] && sync=" ${RED}↑↓?${NC}"
