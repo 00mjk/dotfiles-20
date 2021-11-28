@@ -2,13 +2,17 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
+	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
 )
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+
 	// 1. get a list of files from stdin
 	sc := bufio.NewScanner(os.Stdin)
 
@@ -54,6 +58,13 @@ func main() {
 
 		// 7. get the info about the path
 		fileInfo, err := os.Stat(fullfpath)
+		// if the file doesn't exist, it could be a file removed as reported by git
+		// status, so we check the parent directory.
+		// TODO: walk up to pwd
+		if errors.Is(err, fs.ErrNotExist) {
+			fileInfo, err = os.Stat(dirpath)
+			fpath = dirpath
+		}
 		if err != nil {
 			log.Fatal(err)
 		}
