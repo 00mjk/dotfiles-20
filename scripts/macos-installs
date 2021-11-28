@@ -344,11 +344,11 @@ echo "
   - whatsapp
 
 * Casks requiring Rosetta 2 on arm64
-  - temurin (previously adoptopenjdk)
+  - temurin (formerly adoptopenjdk)
   - microsoft-teams
   - sdformatter
   - bitwarden (when installed outside of the App Store)
-  - authy
+  - authy (when installed outside of the App Store)
   - dropbox
 
 * Open Spotlight preferences to disable 'Developer' results (source code files)
