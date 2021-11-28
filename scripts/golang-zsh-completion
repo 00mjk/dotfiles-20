@@ -10,6 +10,7 @@ source "${CURRDIR}/utils.sh"
 HOMEBREW_PREFIX=$(usr_local)
 
 ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
+mkdir -p $ZSH_SITE_FUNCTIONS
 
 echo "[setup] Golang autocompletions"
 curl \
