@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -eo pipefail
+
+# Skip packages that have no tests, to reduce noise in the output.
+#
+# - TestGoFiles is for packages that can be compiled successfully
+# - XTestGoFiles is for packages that have compilation errors.
+#
+go list -json ./... \
+| jq -rc 'select(((.TestGoFiles | length)!=0) or (.XTestGoFiles | length)!=0) | .ImportPath' \
+| xargs go test -failfast -short
