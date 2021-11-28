@@ -296,6 +296,9 @@ BE_ZSH_COMMAND_TIME_EXCLUDE=(
   "lf"
   "du"
   "watch"
+  "watson"
+  "gdu"
+  "gotop"
 )
 # declare -A BE_ZSH_COMMAND_TIME_EXCLUDE
 # BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
