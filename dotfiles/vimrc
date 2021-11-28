@@ -1395,7 +1395,7 @@ let g:go_fmt_fail_silently = 1
 
 " --- vim-go: general options ---
 
-" let g:go_fillstruct_mode = 'gopls' " not working, reverting to default (2021-06-02)
+let g:go_fillstruct_mode = 'gopls' " not working, reverting to default (2021-06-02)
 let g:go_code_completion_icase = 1
 let g:go_gopls_complete_unimported = v:true
 " let g:go_list_type = 'quickfix'
@@ -1499,6 +1499,7 @@ let g:rustfmt_options = '--edition 2018'
 
 let g:ale_linters = {}
 let g:ale_linters['go'] = ['gopls', 'govet']
+" let g:ale_linters['go'] = []
 let g:ale_linters['python'] = ['flake8', 'pylint']
 let g:ale_linters['rust'] = ['analyzer']
 let g:ale_linters['javascript'] = ['eslint']
