@@ -220,6 +220,7 @@ _be_command_time_preexec() {
   # Skip the commands specified in the dedicated env var.
   # Account for aliases, only consider the actual command.
   # (TODO: needs to account for inline env vars)
+  # (TODO: needs to account for sudo)
   if [ -n "$BE_ZSH_COMMAND_TIME_EXCLUDE" ]; then
     local cmd="$1"
     cmd=$(echo "${cmd}" | grep -Eo '^[^[:blank:]|]+')
