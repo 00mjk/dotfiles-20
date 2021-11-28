@@ -58,6 +58,8 @@ venv*/
 
 # Files
 
+coverage.out
+tags
 *.class
 *.dll
 *.exe
