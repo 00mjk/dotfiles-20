@@ -711,6 +711,8 @@ autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | en
 " Navigation
 " ----------
 " Useful for any type of search and command that populates the lists.
+" TODO: isn't this already provided by the unimpaired plugin?
+
 nmap [q :cprevious<CR>
 nmap ]q :cnext<CR>
 
@@ -1025,6 +1027,7 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 \  'yaml',
 \  'vim',
 \  'java',
+\  'config',
 \]
 
 " Highlight headers formatted with underlying '-' and '=' in bold cyan
