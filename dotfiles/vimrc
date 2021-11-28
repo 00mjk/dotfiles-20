@@ -1379,15 +1379,15 @@ let g:v_autofmt_bufwritepre = 1
 " --- vim-go: gofmt ---
 
 " vim-go uses gopls by default for fmt
-" let g:go_fmt_command = 'gofumpt'
+let g:go_fmt_command = 'gopls'
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
-" let g:go_gopls_gofumpt = v:true " this breaks the jump history and makes undo virtually unusable
+let g:go_gopls_gofumpt = v:true
 
 " --- vim-go: goimports ---
 
 " vim-go uses gopls by default for imports
-" let g:go_imports_autosave = 1
+" let g:go_imports_autosave = 0
 
 " let g:go_imports_mode = 'goimports'
 " autocmd FileType go let b:go_fmt_options = {
@@ -1396,7 +1396,7 @@ let g:go_fmt_fail_silently = 1
 
 " --- vim-go: general options ---
 
-let g:go_fillstruct_mode = 'gopls' " not working, reverting to default (2021-06-02)
+let g:go_fillstruct_mode = 'gopls'
 let g:go_code_completion_icase = 1
 let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
@@ -1500,19 +1500,21 @@ let g:rustfmt_options = '--edition 2018'
 
 let g:ale_linters = {}
 let g:ale_linters['go'] = ['gopls', 'govet']
-" let g:ale_linters['go'] = []
 let g:ale_linters['python'] = ['flake8', 'pylint']
 let g:ale_linters['rust'] = ['analyzer']
 let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['html'] = []
 
-" let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_fixers = {}
+" let g:ale_fixers['go'] = ['gofumpt']
 let g:ale_fixers['python'] = ['yapf']
 let g:ale_fixers['rust'] = ['rustfmt']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
 
+" struct literals without fields are useful, especially for special-purpose
+" types with a single field (such as custom error types)
 let g:ale_go_govet_options = '-composites=false'
 
 let g:ale_go_langserver_executable = ''
@@ -1829,3 +1831,10 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 if filereadable(glob("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+" ---------------------------------------------------- "
+" --- Securely enable .vimrc for current directory --- "
+" ---------------------------------------------------- "
+
+set exrc
+set secure
