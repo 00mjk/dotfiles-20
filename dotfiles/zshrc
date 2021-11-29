@@ -169,6 +169,7 @@ fi
 
 if [[ -n "$(command -v watson)" && -n "$(command -v _watson)" ]]; then
   compdef ww='watson'
+  compdef wag='watson'
 fi
 
 # ALT-F - Custom FZF key-binding that pastes the selected directories into the
