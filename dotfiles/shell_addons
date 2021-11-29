@@ -524,6 +524,10 @@ alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -res
 
 alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
 
+# --- watson --- #
+
+alias ww="watson"
+
 # -------------- #
 # --- DARWIN --- #
 # -------------- #

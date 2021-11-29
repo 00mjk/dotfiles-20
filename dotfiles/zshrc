@@ -114,7 +114,6 @@ compdef la='ls'
 
 # TODO: add missing git aliases
 if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
-  compdef gti='git'
   compdef g='git'
   compdef ga='git'
   compdef gaa='git'
@@ -134,10 +133,22 @@ if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
   compdef gpp='git'
   compdef gps='git'
   compdef gs='git'
+  compdef gsi='git'
   compdef gss='git'
   compdef gst='git'
   compdef gsm='git'
   compdef gsd='git'
+  compdef gws='git'
+  compdef gsw='git'
+  compdef gw='git'
+  compdef sw='git'
+  compdef gre='git'
+  compdef gr='git'
+  compdef gta='git'
+  compdef gdd='git'
+  compdef gdds='git'
+  compdef gdh='git'
+  compdef gdl='git'
 fi
 
 if [[ -n "$(command -v docker)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]; then
@@ -154,6 +165,10 @@ fi
 
 if [[ -n "$(command -v kubectx)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectx" ]]; then
   compdef kx='kubectx'
+fi
+
+if [[ -n "$(command -v watson)" && -n "$(command -v _watson)" ]]; then
+  compdef ww='watson'
 fi
 
 # ALT-F - Custom FZF key-binding that pastes the selected directories into the
