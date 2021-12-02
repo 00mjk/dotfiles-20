@@ -653,8 +653,8 @@ cnoremap <expr> %% fnameescape(expand('%:h')).'/'
 map gf :edit <cfile><cr>
 
 " Easy insertion of a trailing ; or , from insert mode
-imap ;; <Esc>A;<Esc>
-imap ,, <Esc>A,<Esc>
+" imap ;; <Esc>A;<Esc>
+" imap ,, <Esc>A,<Esc>
 
 " ---------------------- "
 " --- Save with sudo --- "
