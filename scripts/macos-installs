@@ -104,7 +104,6 @@ brew install --quiet --formulae \
   pbzip2 \
   pigz \
   pipx \
-  plantuml \
   pre-commit \
   ripgrep \
   ruby \
@@ -146,6 +145,9 @@ if [[ ! $SHELL == "$BREW_PREFIX/bin/zsh" ]]; then
   chsh -s $BREW_PREFIX/bin/zsh
 fi
 
+# Ensure git is available for the subsequent scripts.
+export PATH="$BREW_PREFIX/bin:$PATH"
+
 echo "[setup] Install dotfiles"
 "${CURRDIR}/dotfiles"
 
@@ -164,7 +166,6 @@ brew tap homebrew/cask-fonts
 
 brew install --quiet --casks \
   font-jetbrains-mono \
-  font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-chrome \
   istat-menus \
@@ -177,6 +178,7 @@ brew install --quiet --casks \
   zoom
 
 echo "[setup] Ensure local ~/Applications is available only to this user"
+mkdir -p ~/Applications
 chmod 0700 ~/Applications
 
 # ------------------------------ #
@@ -215,7 +217,7 @@ echo "[setup] Install Golang"
 "${CURRDIR}/golang"
 
 echo "[setup] Install Rust"
-"${CURRDIR}/rust"
+# "${CURRDIR}/rust"
 
 # echo "[setup] Install pipx packages"
 #
@@ -295,6 +297,7 @@ echo "
   - nethogs
   - nload
   - pandoc (requires basictex cask - which provides the pdflatex binary - for markdown to pdf conversion)
+  - plantuml
   - pyenv
   - ranger
   - rbenv
@@ -319,6 +322,7 @@ echo "
   - font-inconsolata-nerd-font
   - font-dejavu
   - font-dejavu-sans-mono-nerd-font
+  - font-jetbrains-mono-nerd-font
   - font-go
   - google-drive
   - homebrew/cask-drivers/logitech-camera-settings
