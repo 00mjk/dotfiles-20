@@ -97,6 +97,7 @@ brew install --quiet --formulae \
   lsof \
   mosh \
   mtr \
+  mupdf-tools \
   nmap \
   nnn \
   parallel \
