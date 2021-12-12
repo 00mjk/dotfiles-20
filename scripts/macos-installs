@@ -88,9 +88,7 @@ brew install --quiet --formulae \
   git-delta \
   gnupg \
   golangci-lint \
-  htmlq \
   htop \
-  httpie \
   imagemagick \
   jq \
   lf \
@@ -105,6 +103,7 @@ brew install --quiet --formulae \
   pigz \
   pipx \
   pre-commit \
+  procs \
   ripgrep \
   ruby \
   ruby-install \
@@ -288,12 +287,15 @@ echo "
   - glow
   - gnupg
   - graphviz
+  - htmlq
+  - httpie
   - just
   - kubectx
   - lazygit
   - libpq
   - lolcat (requires Ruby)
   - mdcat
+  - ncdu
   - nethogs
   - nload
   - pandoc (requires basictex cask - which provides the pdflatex binary - for markdown to pdf conversion)
@@ -301,6 +303,7 @@ echo "
   - pyenv
   - ranger
   - rbenv
+  - ruby
   - ruby-build
   - slurm
   - terraform
