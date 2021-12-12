@@ -1502,7 +1502,7 @@ let g:go_debug_breakpoint_sign_text = '▶︎'
 
 let g:rustfmt_autosave = 1
 let g:rustfmt_autosave_if_config_present = 1
-let g:rustfmt_options = '--edition 2018'
+let g:rustfmt_options = '--edition 2021'
 
 " ---------------------------------------------- "
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
