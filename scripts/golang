@@ -108,6 +108,18 @@ EOF
 # --- Perform installation -------------------------------------------------- #
 # --------------------------------------------------------------------------- #
 
+if [[ "${LOCAL_INSTALL}" == "true" ]]; then
+  if [[ -d "${GO_ROOT}" ]]; then
+    echo "Desired version is already installed at ${GO_ROOT}, nothing to do"
+    exit 0
+  fi
+else
+  if test -x $GO_ROOT/bin/go && $GO_ROOT/bin/go version | grep "${GO_VERSION}"; then
+    echo "Go version ${GO_VERSION} is already installed at ${GO_ROOT}, nothing to do"
+    exit 0
+  fi
+fi
+
 echo "Downloading ${URL}"
 curl \
   "${URL}" \
