@@ -108,16 +108,18 @@ EOF
 # --- Perform installation -------------------------------------------------- #
 # --------------------------------------------------------------------------- #
 
-if [[ "${LOCAL_INSTALL}" == "true" ]]; then
-  if [[ -d "${GO_ROOT}" ]]; then
-    echo "Desired version is already installed at ${GO_ROOT}, nothing to do"
-    exit 0
-  fi
-else
-  if test -x $GO_ROOT/bin/go && $GO_ROOT/bin/go version | grep "${GO_VERSION}"; then
-    echo "Go version ${GO_VERSION} is already installed at ${GO_ROOT}, nothing to do"
-    exit 0
-  fi
+ALREDY_INSTALLED_MSG="
+Desired version is already installed at ${GO_ROOT}, nothing to do
+"
+
+if [[ "${LOCAL_INSTALL}" == "true" &&  -d "${GO_ROOT}" ]]; then
+  echo "${ALREDY_INSTALLED_MSG}"
+  exit 0
+fi
+
+if test -x $GO_ROOT/bin/go && $GO_ROOT/bin/go version | grep "${GO_VERSION}"; then
+  echo "${ALREDY_INSTALLED_MSG}"
+  exit 0
 fi
 
 echo "Downloading ${URL}"
@@ -129,10 +131,10 @@ curl \
   --fail-with-body \
   --output "${ARCHIVE_FILE}"
 
-echo "Remove old installation (dir ${GO_ROOT})"
-if [[ "${LOCAL_INSTALL}" == "true" ]]; then
-  \rm -rf "${GO_ROOT}"
-else
+# Remove old installation only if it's a global install. Local installs would
+# not reach this point, the scripts exits above if a folder for the local
+# version is already present.
+if [[ ! "${LOCAL_INSTALL}" == "true" ]]; then
   echo "Running command with sudo to remove previous global installation"
   sudo \rm -rf "${GO_ROOT}"
 fi

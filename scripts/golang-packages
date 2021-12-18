@@ -62,8 +62,8 @@ popd
 
 echo "[setup] Install local Go scripts"
 pushd $ROOTDIR/go
-go install github.com/bravoecho/dotfiles/go/cmd/onlydirs
-go install github.com/bravoecho/dotfiles/go/cmd/gitparse
+go install -v github.com/bravoecho/dotfiles/go/cmd/onlydirs
+go install -v github.com/bravoecho/dotfiles/go/cmd/gitparse
 popd
 
 echo "[setup] Update Go binaries for Vim"
