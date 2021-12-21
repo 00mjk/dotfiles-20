@@ -32,9 +32,9 @@ var (
 
 // File list patterns.
 var (
-	// a staged file is indicated by an M (if modified) or an A (if new) in the
-	// first column of the short status output
-	reModifiedStaged = regexp.MustCompile(`^M|^A`)
+	// a staged file is indicated by an M (if modified), an A (if new) or an
+	// R (if renamed) in the first column of the short status output
+	reModifiedStaged = regexp.MustCompile(`^M|^A|^R`)
 
 	// a file modified but not staged is indicated by an M in the second column
 	reModifiedNotStaged = regexp.MustCompile(`^.M`)
