@@ -5002,6 +5002,8 @@
 	<integer>5</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
+	<key>TimeBetweenTips</key>
+	<real>604800</real>
 	<key>ToolbeltTools</key>
 	<array>
 		<string>Profiles</string>
