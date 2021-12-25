@@ -464,6 +464,8 @@ alias gdh='git sideshow'
 alias gdl='git sidelog'
 
 alias mv='command mv -i'
+alias cp='command cp -i'
+alias rm='command rm -i'
 
 # --- ls --- #
 
