@@ -164,7 +164,12 @@ echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
 brew install --quiet --casks \
+  font-dejavu \
+  font-dejavu-sans-mono-nerd-font \
+  font-inconsolata \
+  font-inconsolata-nerd-font \
   font-jetbrains-mono \
+  font-jetbrains-mono-nerd-font \
   font-juliamono \
   google-chrome \
   istat-menus \
@@ -321,11 +326,6 @@ echo "
   - dash
   - devdocs
   - docker
-  - font-inconsolata
-  - font-inconsolata-nerd-font
-  - font-dejavu
-  - font-dejavu-sans-mono-nerd-font
-  - font-jetbrains-mono-nerd-font
   - font-go
   - google-drive
   - homebrew/cask-drivers/logitech-camera-settings
