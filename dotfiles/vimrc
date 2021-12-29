@@ -837,9 +837,9 @@ inoremap <C-k> <ESC>:m .-2<CR>gi
 
 set listchars=tab:▸·,trail:·,extends:>,precedes:<
 
-nmap <silent> <Leader>ww :call VisualizeWhitespace()<CR>
+nmap <silent> <Leader>ww :call ToggleVisualizeWhitespace()<CR>
 
-function VisualizeWhitespace()
+function ToggleVisualizeWhitespace()
   if &list
     echo "Whitespace OFF"
     set nolist
