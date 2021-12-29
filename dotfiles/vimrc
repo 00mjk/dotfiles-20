@@ -978,6 +978,7 @@ nnoremap <Leader>o :call InsertPasteNewLine()<CR>
 " Delete without yanking, send the deleted content to the 'black hole' register.
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
+" TODO: check and fix Alt-D on Linux via iTerm
 " if has('linux')
 "   set <M-d>=d
 " elseif has('osxdarwin')
@@ -1369,9 +1370,9 @@ nnoremap <Leader>/ :BLines<CR>
 " :History is similar to MRU buffers
 nnoremap <Leader>m :History<CR>
 
-" " ---------------------- "
-" " --- vim-commentary --- "
-" " ---------------------- "
+" ---------------------- "
+" --- vim-commentary --- "
+" ---------------------- "
 "
 " " Shortcuts
 " nmap <Leader>c gcc
@@ -1405,13 +1406,15 @@ let g:v_autofmt_bufwritepre = 1
 " --- vim-go --- "
 " -------------- "
 
-" --- vim-go: gofmt ---
+" vim-go: gofmt
+" -------------
 
 " let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 1
 let g:go_gopls_gofumpt = v:true
 
-" --- vim-go: goimports ---
+" vim-go: goimports
+" -----------------
 
 " let g:go_imports_autosave = 0
 
@@ -1423,7 +1426,8 @@ let g:go_gopls_gofumpt = v:true
 "   \ 'goimports': '-local ' . trim(system('{cd '. shellescape(expand('%:h')) .' && go list -m;}')),
 " \}
 
-" --- vim-go: general options ---
+" vim-go: general options
+" -----------------------
 
 let g:go_fillstruct_mode = 'gopls'
 let g:go_code_completion_icase = 1
@@ -1445,7 +1449,8 @@ let g:go_addtags_skip_unexported = 1
 
 let g:go_test_show_name = 1
 
-" --- vim-go: mappings ---
+" vim-go: mappings
+" ----------------
 
 autocmd FileType go nnoremap <Leader>z :GoDiagnostics<CR>
 autocmd FileType go nnoremap <Leader>t :GoTest<CR>
@@ -1457,15 +1462,16 @@ autocmd FileType go nnoremap <Leader>s :GoSameIdsToggle<CR>
 " a similar mapping to display the info in the output of the commandline.
 autocmd FileType go nmap     <silent> <Leader>k <Plug>(go-info)
 
-" --- vim-go: debugging ---
-
+" vim-go: debugging
+" -----------------
 " TODO: these mappings are useless, use some mnemonics.
-" \ 'out':        'botright 5new', " remove the output window
+
 let g:go_debug_windows = {
   \ 'vars':       'leftabove 30vnew',
   \ 'stack':      'leftabove 20new',
   \ 'goroutines': 'botright 10new',
 \ }
+" \ 'out':        'botright 5new', " remove the output window
 
 " default mappings when debugger is active:
 "
@@ -1552,7 +1558,10 @@ let g:ale_go_govet_options = '-composites=false'
 
 let g:ale_go_langserver_executable = ''
 
+" ensure only one gopls server is started, if working on multiple projects
 let g:ale_go_gopls_options = '-remote=auto'
+
+" enable non-default checks, and disable composites
 let g:ale_go_gopls_init_options = {
 \  'ui.diagnostic.analyses': {
 \    'composites': v:false,
@@ -1592,7 +1601,8 @@ highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
 " white on light blue
 highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
 
-" --- ALE: shortcuts ---
+" ALE: shortcuts and mappings
+" ---------------------------
 
 " mnemomic: 'd' is for 'diagnostic'
 nmap <silent> ]d <Plug>(ale_next_wrap)
