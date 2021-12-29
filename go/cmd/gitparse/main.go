@@ -36,8 +36,9 @@ var (
 	// R (if renamed) in the first column of the short status output
 	reModifiedStaged = regexp.MustCompile(`^M|^A|^R`)
 
-	// a file modified but not staged is indicated by an M in the second column
-	reModifiedNotStaged = regexp.MustCompile(`^.M`)
+	// a file modified but not staged is indicated by a letter in the second
+	// column, M = modified, D = deleted.
+	reModifiedNotStaged = regexp.MustCompile(`^.(M|D)`)
 
 	// an untracked file is indicated with a ? in the first column
 	reUntracked = regexp.MustCompile(`^\?`)
