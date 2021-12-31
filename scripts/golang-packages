@@ -66,5 +66,5 @@ go install -v github.com/bravoecho/dotfiles/go/cmd/onlydirs
 go install -v github.com/bravoecho/dotfiles/go/cmd/gitparse
 popd
 
-echo "[setup] Update Go binaries for Vim"
-vim +GoUpdateBinaries +qall
+# echo "[setup] Update Go binaries for Vim"
+# vim +GoUpdateBinaries +qall

@@ -219,6 +219,8 @@ defaults write com.tapbots.Pastebot2Mac UIVisibilityState 10
 
 echo "[setup] Install Golang"
 "${CURRDIR}/golang"
+"${CURRDIR}/golang-zsh-completion"
+"${CURRDIR}/golang-packages"
 
 echo "[setup] Install Rust"
 # "${CURRDIR}/rust"

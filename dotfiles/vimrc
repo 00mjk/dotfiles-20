@@ -55,7 +55,8 @@ Plug 'weirongxu/plantuml-previewer.vim'
 
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'fourjay/vim-yamsong'
 Plug 'pangloss/vim-javascript'
 Plug 'tmux-plugins/vim-tmux'

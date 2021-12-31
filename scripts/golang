@@ -150,12 +150,3 @@ else
 fi
 
 echo "Checking installation: $($GO_ROOT/bin/go version) installed at $GO_ROOT/bin/go"
-
-# --------------------------------------------------------------------------- #
-# --- Install support features ---------------------------------------------- #
-# --------------------------------------------------------------------------- #
-
-"${CURRDIR}/golang-zsh-completion"
-
-export PATH="$GO_ROOT/bin:$PATH"
-"${CURRDIR}/golang-packages"
