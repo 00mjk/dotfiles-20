@@ -19,7 +19,7 @@ curl \
   --time-cond "${ZSH_SITE_FUNCTIONS}/_golang" \
   --output "/tmp/_golang"
 
-if [[ -w $HOMEBREW_PREFIX ]]; then
+if [[ -w $ZSH_SITE_FUNCTIONS ]]; then
   mv -v /tmp/_golang $ZSH_SITE_FUNCTIONS/
 else
   sudo mv -v /tmp/_golang $ZSH_SITE_FUNCTIONS/
