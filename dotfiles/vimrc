@@ -1452,6 +1452,9 @@ let g:go_test_show_name = 1
 " vim-go: mappings
 " ----------------
 
+" use A.L.E. for go to definition and similar actions
+let g:go_def_mapping_enabled = 0
+
 autocmd FileType go nmap <Leader>z <Plug>(go-diagnostic)
 autocmd FileType go nmap <Leader>t <Plug>(go-test)
 autocmd FileType go nmap <Leader>tf <Plug>(go-test-func)
@@ -1605,9 +1608,13 @@ highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
 " ALE: shortcuts and mappings
 " ---------------------------
 
-" mnemomic: 'd' is for 'diagnostic'
+" Jump to next error or warning. Mnemomic: 'd' is for 'diagnostic'.
 nmap <silent> ]d <Plug>(ale_next_wrap)
 nmap <silent> [d <Plug>(ale_previous_wrap)
+
+nmap <silent> <C-]> <Plug>(ale_go_to_definition)
+nmap <silent> gd <Plug>(ale_go_to_definition)
+nmap <silent> <C-t> <Plug>(ale_go_to_type_definition)
 
 " ---------------- "
 " --- vim-json --- "
