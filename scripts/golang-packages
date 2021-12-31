@@ -5,37 +5,6 @@ set -eu
 CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
 ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 
-# go_install is needed until versions prior 1.16 are in use, because only in
-# 1.16 was the "go install" subcommand updated to be dedicated to installing
-# packages to the GOPATH, without modifying the current module if any.
-#
-# Prior to that "go get" needed to be run outside of a module location.
-function go_install() {
-  echo "--- ${1} ---"
-
-  if go_gte_1_16; then
-    go install "${1}@latest"
-  else
-    go get -u "${1}"
-  fi
-}
-
-# go_gte_1_16 determines whether the version of the current "go" command is at
-# least 1.16
-#
-# extracts the numeric portion of the go version by discarding head and tail,
-# and removing "go" before the numbers
-#
-# alternatively:
-#
-#   go version | grep --colour=never --extended-regexp --only-matching '([[:digit:]]|\.)+[[:space:]]'
-#
-function go_gte_1_16() {
-  local go_version=$(go version | { read _ _ v _; echo ${v#go}; })
-
-  [ "${go_version}" = $(echo -e "${go_version}\n1.16" | sort -Vr | head -n1) ]
-}
-
 cat << EOF
 -------------------------------------------------------------------------------
 Go version: $(go version)
@@ -46,18 +15,20 @@ GOPATH:     $(go env GOPATH)
 EOF
 
 pushd ~
-go_install 'mvdan.cc/gofumpt'
-go_install 'honnef.co/go/tools/cmd/staticcheck'
-go_install 'github.com/kyoh86/richgo'
-go_install 'github.com/mgechev/revive'
-go_install 'github.com/cespare/reflex'
-go_install 'github.com/dundee/gdu/v5/cmd/gdu'
-# go_install 'github.com/xxxserxxx/gotop/v4/cmd/gotop' # deprecation notices when building
-# go_install 'golang.org/x/tools/cmd/present'
-# go_install 'github.com/asciimoo/wuzz'
-# go_install 'golang.org/x/exp/cmd/modgraphviz'
-# go_install 'github.com/jfeliu007/goplantuml/cmd/goplantuml'
-# go_install 'github.com/KyleBanks/depth/cmd/depth'
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install golang.org/x/tools/gopls@latest
+go install mvdan.cc/gofumpt@latest
+go install honnef.co/go/tools/cmd/staticcheck@latest
+go install github.com/kyoh86/richgo@latest
+go install github.com/mgechev/revive@latest
+go install github.com/cespare/reflex@latest
+go install github.com/dundee/gdu/v5/cmd/gdu@latest
+# go install github.com/xxxserxxx/gotop/v4/cmd/gotop@latest # deprecation notices when building
+# go install golang.org/x/tools/cmd/present@latest
+# go install github.com/asciimoo/wuzz@latest
+# go install golang.org/x/exp/cmd/modgraphviz@latest
+# go install github.com/jfeliu007/goplantuml/cmd/goplantuml@latest
+# go install github.com/KyleBanks/depth/cmd/depth@latest
 popd
 
 echo "[setup] Install local Go scripts"
