@@ -226,9 +226,15 @@ echo "[setup] Install Rust"
 # "${CURRDIR}/rust"
 
 # echo "[setup] Install pipx packages"
-#
+
 pipx ensurepath
-# pipx install --force litecli
+
+pipx install yapf
+pipx install pylint
+pipx install flake8
+pipx install mypy
+pipx install litecli
+
 # pipx install --force glances
 # pipx install --force ydiff
 

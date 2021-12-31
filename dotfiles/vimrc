@@ -1531,7 +1531,8 @@ let g:rustfmt_options = '--edition 2021'
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
-" --- ALE: Language settings ---
+" ALE: Language settings
+" ----------------------
 
 " set to 1 to disable all linters unless explicitly enabled, default 0
 " let g:ale_linters_explicit = 1
@@ -1539,17 +1540,19 @@ let g:rustfmt_options = '--edition 2021'
 " let g:ale_lint_on_save = 1
 
 let g:ale_linters = {}
-let g:ale_linters['go'] = ['gopls', 'govet']
-let g:ale_linters['python'] = ['flake8', 'pylint']
 let g:ale_linters['rust'] = ['analyzer']
 let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['html'] = []
 
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {}
-" let g:ale_fixers['go'] = ['gofumpt', 'goimports']
-let g:ale_fixers['python'] = ['yapf']
+let g:ale_fixers = {} " see also language specific settings
 let g:ale_fixers['rust'] = ['rustfmt']
+
+" ALE: Golang-specific settings
+" -----------------------------
+
+let g:ale_linters['go'] = ['gopls', 'govet']
+" let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
 
@@ -1577,14 +1580,27 @@ let g:ale_go_gopls_init_options = {
 \  },
 \}
 
-" --- ALE: Error list customisation ---
+autocmd FileType go nmap <silent> <C-]> <Plug>(ale_go_to_definition)
+autocmd FileType go nmap <silent> gd <Plug>(ale_go_to_definition)
+autocmd FileType go nmap <silent> <C-t> <Plug>(ale_go_to_type_definition)
+
+" ALE: Python
+" -----------
+
+let g:ale_linters['python'] = ['flake8', 'pylint', 'mypy']
+let g:ale_fixers['python'] = ['yapf']
+autocmd FileType python set omnifunc=ale#completion#OmniFunc
+
+" ALE: Error list
+" ---------------
 
 " open the loclist automatically on errors; it will close anyway once all the
 " issue have been addressed
 
 " let g:ale_open_list = 1
 
-" --- ALE: Visual customisations ---
+" ALE: Visual customisations
+" --------------------------
 
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
@@ -1612,10 +1628,6 @@ highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
 " Jump to next error or warning. Mnemomic: 'd' is for 'diagnostic'.
 nmap <silent> ]d <Plug>(ale_next_wrap)
 nmap <silent> [d <Plug>(ale_previous_wrap)
-
-nmap <silent> <C-]> <Plug>(ale_go_to_definition)
-nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> <C-t> <Plug>(ale_go_to_type_definition)
 
 " ---------------- "
 " --- vim-json --- "
