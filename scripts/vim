@@ -27,11 +27,11 @@ backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
 
 vim +PlugInstall +qall
 
-if [[ -n "$(command -v go)" ]]; then
-  vim +GoInstallBinaries +qall
-else
-  echo "Golang is not installed, skipping vim-go binaries"
-fi
+# if [[ -n "$(command -v go)" ]]; then
+#   vim +GoInstallBinaries +qall
+# else
+#   echo "Golang is not installed, skipping vim-go binaries"
+# fi
 
 mkdir -pv ~/.vim/{backup,swp,undo,fzf-history}
 

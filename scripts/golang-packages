@@ -15,6 +15,8 @@ GOPATH:     $(go env GOPATH)
 EOF
 
 pushd ~
+go install golang.org/x/tools/cmd/goimports@latest
+go install github.com/kisielk/errcheck@latest
 go install github.com/koron/iferr@latest
 go install github.com/jstemmer/gotags@latest
 go install github.com/go-delve/delve/cmd/dlv@latest
