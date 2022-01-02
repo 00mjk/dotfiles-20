@@ -1430,6 +1430,14 @@ let g:go_gopls_gofumpt = v:true
 " vim-go: general options
 " -----------------------
 
+" let g:go_doc_balloon = 1
+" let g:go_doc_popup_window = 1
+" set ballooneval
+" set balloonevalterm
+" autocmd FileType go set balloonexpr=go#tool#DescribeBalloon()
+
+" let g:go_code_completion_enabled = 0
+
 let g:go_fillstruct_mode = 'gopls'
 let g:go_code_completion_icase = 1
 let g:go_gopls_complete_unimported = v:true
@@ -1454,17 +1462,19 @@ let g:go_test_show_name = 1
 " ----------------
 
 " use A.L.E. for go to definition and similar actions
-let g:go_def_mapping_enabled = 0
+" let g:go_def_mapping_enabled = 0
 
-autocmd FileType go nmap <Leader>z <Plug>(go-diagnostic)
-autocmd FileType go nmap <Leader>t <Plug>(go-test)
-autocmd FileType go nmap <Leader>tf <Plug>(go-test-func)
-autocmd FileType go nmap <Leader>e <Plug>(go-decls)
-autocmd FileType go nmap <Leader>ee <Plug>(go-decls-dir)
-autocmd FileType go nmap <Leader>s <Plug>(go-same-ids-toggle)
+autocmd FileType go nmap <buffer> <Leader>z <Plug>(go-diagnostic)
+autocmd FileType go nmap <buffer> <Leader>t <Plug>(go-test)
+autocmd FileType go nmap <buffer> <Leader>tf <Plug>(go-test-func)
+autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-decls)
+autocmd FileType go nmap <buffer> <Leader>ee <Plug>(go-decls-dir)
+autocmd FileType go nmap <buffer> <Leader>s <Plug>(go-same-ids-toggle)
 " Since Shift+K in vim-go opens the docs for the current element, we use
 " a similar mapping to display the info in the output of the commandline.
-autocmd FileType go nmap     <silent> <Leader>k <Plug>(go-info)
+autocmd FileType go nmap <buffer> <Leader>k <Plug>(go-info)
+
+autocmd FileType go nmap <buffer> <silent> <C-t> <Plug>(go-def-type)
 
 " vim-go: debugging
 " -----------------
@@ -1492,9 +1502,9 @@ let g:go_debug_mappings = {
    \ '(go-debug-stepout)':  {'key': '<F12>'},
 \ }
 
-autocmd FileType go nmap <F2> <Plug>(go-debug-test-func)
-autocmd FileType go nmap <F4> <Plug>(go-debug-start)
-autocmd FileType go nmap <F9> <Plug>(go-debug-breakpoint)
+autocmd FileType go nmap <buffer> <F2> <Plug>(go-debug-test-func)
+autocmd FileType go nmap <buffer> <F4> <Plug>(go-debug-start)
+autocmd FileType go nmap <buffer> <F9> <Plug>(go-debug-breakpoint)
 
 " vim-go: syntax highlighting
 " ---------------------------
@@ -1531,6 +1541,8 @@ let g:rustfmt_options = '--edition 2021'
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
+" let g:ale_completion_enabled = 1
+
 " ALE: Language settings
 " ----------------------
 
@@ -1551,7 +1563,7 @@ let g:ale_fixers['rust'] = ['rustfmt']
 " ALE: Golang-specific settings
 " -----------------------------
 
-let g:ale_linters['go'] = ['gopls', 'govet']
+let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck']
 " let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
@@ -1580,9 +1592,9 @@ let g:ale_go_gopls_init_options = {
 \  },
 \}
 
-autocmd FileType go nmap <silent> <C-]> <Plug>(ale_go_to_definition)
-autocmd FileType go nmap <silent> gd <Plug>(ale_go_to_definition)
-autocmd FileType go nmap <silent> <C-t> <Plug>(ale_go_to_type_definition)
+" autocmd FileType go nmap <buffer> <silent> <C-]> <Plug>(ale_go_to_definition)
+" autocmd FileType go nmap <buffer> <silent> gd <Plug>(ale_go_to_definition)
+" autocmd FileType go nmap <buffer> <silent> <C-t> <Plug>(ale_go_to_type_definition)
 
 " ALE: Python
 " -----------
@@ -1590,6 +1602,9 @@ autocmd FileType go nmap <silent> <C-t> <Plug>(ale_go_to_type_definition)
 let g:ale_linters['python'] = ['flake8', 'pylint', 'mypy']
 let g:ale_fixers['python'] = ['yapf']
 autocmd FileType python set omnifunc=ale#completion#OmniFunc
+autocmd FileType python nmap <buffer> <silent> <C-]> <Plug>(ale_go_to_definition)
+autocmd FileType python nmap <buffer> <silent> gd <Plug>(ale_go_to_definition)
+autocmd FileType python nmap <buffer> <silent> <C-t> <Plug>(ale_go_to_type_definition)
 
 " ALE: Error list
 " ---------------
