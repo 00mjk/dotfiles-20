@@ -252,7 +252,7 @@ set shortmess-=S                  " show match count in searches
 
 if exists('+colorcolumn')
   set colorcolumn=80,100 " display vertical rulers for line length
-  autocmd FileType qf,help,loclist set colorcolumn=
+  autocmd FileType qf set colorcolumn=
 endif
 
 " Compute syntax highlighting from beginning of file. (By default, vim only
@@ -260,78 +260,17 @@ endif
 " long files.)
 autocmd BufEnter * :syntax sync fromstart
 
-" --------------------------------------- "
-" --- Syntax highlight customisations --- "
-" --------------------------------------- "
+" --- custom highlighting ---
 
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
-highlight VertSplit     cterm=none    ctermfg=7   ctermbg=7
+highlight VertSplit     cterm=none,reverse    ctermfg=8   ctermbg=8
 highlight EndOfBuffer   cterm=none            ctermfg=15
-highlight ColorColumn                                     ctermbg=0
+highlight ColorColumn                                     ctermbg=15
 highlight WildMenu      cterm=bold            ctermfg=0   ctermbg=11
-highlight LineNr        cterm=none            ctermfg=8   ctermbg=none
-highlight CursorLineNr  cterm=none,underline  ctermfg=none   ctermbg=none
+highlight LineNr        cterm=none            ctermfg=7   ctermbg=none
+highlight CursorLineNr  cterm=none,underline  ctermfg=8   ctermbg=none
 highlight SignColumn    cterm=none                        ctermbg=none
-highlight StatusLineNC  cterm=none ctermfg=0   ctermbg=7
-
-" normalise the search highlight colours
-" This black text/bright yellow background works really well with Tango Light
-" and most other terminal themes, but might require tweaking in the
-" ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
-" Pastel...)
-" TODO:
-highlight Search        ctermfg=0  ctermbg=3
-
-highlight Todo    cterm=bold ctermfg=7   ctermbg=0
-" highlight Visual term=reverse cterm=reverse ctermbg=7 gui=reverse guifg=Grey80 guibg=fg
-" highlight Visual term=reverse cterm=reverse      ctermfg=0   ctermbg=none
-highlight Visual term=none cterm=none ctermfg=7 ctermbg=8
-
-" ALE highlighting
-" ----------------
-
-" white on dark red
-highlight ALEErrorSign cterm=bold ctermfg=none ctermbg=1
-" white on dark yellow
-" highlight ALEWarningSign cterm=bold ctermfg=3 ctermbg=none
-" black on bright yellow
-highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
-" white on light blue
-highlight ALEInfoSign cterm=bold ctermfg=12 ctermbg=none
-
-" Pandoc highlighting
-" -------------------
-
-" Highlight headers formatted with underlying '-' and '=' in bold cyan
-highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
-highlight pandocAtxHeader ctermfg=6 ctermbg=none
-
-highlight def link rubyRspec Function
-
-" Diff highlighting
-" -----------------
-
-" use simple ansi-colours for readability in any terminal with an ANSI palette
-highlight DiffAdd     cterm=none,bold   ctermfg=2   ctermbg=15
-highlight DiffDelete  cterm=none        ctermfg=13  ctermbg=15
-highlight DiffChange  cterm=none        ctermfg=8   ctermbg=15
-highlight DiffText    cterm=none,bold   ctermfg=4   ctermbg=15
-
-" Whitespace highlighting
-" -----------------------
-
-" <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
-"
-" only in normal mode
-highlight ExtraWhitespace cterm=bold ctermfg=1 ctermbg=none
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" Todo highlighting
 
 " Add keywords to be highlighted as TODOs (https://vi.stackexchange.com/a/19043)
 " The synTodo line:
@@ -353,21 +292,6 @@ augroup Todo_CustomKeywords
   autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
 augroup END
 
-" Highlighting helper
-" -------------------
-
-" Show syntax highlighting groups for word under cursor
-" https://stackoverflow.com/a/5825964
-" nmap <leader>z :call <SID>SynStack()<CR>
-function! ShowSynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-command! ShowSynStack call ShowSynStack()
-
 " ---------------------- "
 " --- Search options --- "
 " ---------------------- "
@@ -377,6 +301,15 @@ set smartcase   " ...unless one upper case letter is present in the word
 set gdefault    " replace all the occurences in the line by default
 set incsearch   " start searching without pressing enter
 set hlsearch    " highlight results
+" normalise the search highlight colours
+" This black text/bright yellow background works really well with Tango Light
+" and most other terminal themes, but might require tweaking in the
+" ~/.vimrc.local for some unconventional terminal themes (Solarized Light,
+" Pastel...)
+" See the README/TODO for more options.
+highlight Search  term=reverse cterm=reverse      ctermfg=11  ctermbg=0
+highlight Todo    term=reverse cterm=reverse,bold ctermfg=7   ctermbg=0
+highlight Visual  term=reverse cterm=reverse      ctermfg=7   ctermbg=0
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
@@ -917,6 +850,17 @@ function ToggleVisualizeWhitespace()
   endif
 endfunction
 
+" --- highlight unwanted trailing whitespace --- "
+" <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
+"
+" only in normal mode
+highlight ExtraWhitespace cterm=reverse,bold ctermfg=1 ctermbg=none
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " --- Strip whitespace ---
 
 " function! <SID>StripExtraWhitespace()
@@ -1107,6 +1051,10 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 \  'json',
 \]
 
+" Highlight headers formatted with underlying '-' and '=' in bold cyan
+highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
+highlight pandocAtxHeader ctermfg=6 ctermbg=none
+
 " ----------------------------- "
 " --- markdown-preview.nvim --- "
 " ----------------------------- "
@@ -1241,6 +1189,8 @@ autocmd BufRead {*_spec.rb,spec_helper.rb} syn keyword rubyRspec
       \ no_args
       \ match_array
 
+highlight def link rubyRspec Function
+
 " ------------------------------------------------------- "
 " --- File types for non-standard filename extensions --- "
 " ------------------------------------------------------- "
@@ -1303,12 +1253,12 @@ let g:grepper = {}
 " list the possible search tools (backends) in order of preference, only the
 " available executables will remain available once the plugin loads
 let g:grepper.tools = [
-\  'rg',
-\  'ag',
-\  'pt',
-\  'ack',
-\  'git',
-\  'grep',
+  \'rg',
+  \'ag',
+  \'pt',
+  \'ack',
+  \'git',
+  \'grep',
 \]
 
 let g:grepper.highlight = 1 " highlight matches
@@ -1382,7 +1332,6 @@ xmap gs <plug>(GrepperOperator)
 " Shortcut to open/close
 map <Leader>n :NERDTreeToggle<CR>
 " Highlight the current buffer (think of 'find')
-" TODO: consider <Leader>j instead, for jump
 map <Leader>f :NERDTreeFind<CR>
 
 let NERDTreeMinimalUI=1
@@ -1676,6 +1625,18 @@ let g:ale_sign_error = ' ▶︎'
 let g:ale_sign_warning = ' ▶︎'
 let g:ale_sign_info = ' ▶︎'
 
+" white on dark red
+highlight ALEErrorSign cterm=reverse,bold ctermfg=1 ctermbg=none
+
+" white on dark yellow
+" highlight ALEWarningSign cterm=reverse,bold ctermfg=3 ctermbg=none
+
+" black on bright yellow
+highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
+
+" white on light blue
+highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
+
 " ALE: shortcuts and mappings
 " ---------------------------
 
@@ -1733,6 +1694,16 @@ let g:tagbar_type_markdown = {
 
 let g:vista#renderer#enable_icon = 0
 
+" ------------------------- "
+" --- Diff highlighting --- "
+" ------------------------- "
+
+" use simple ansi-colours for readability in any terminal with an ANSI palette
+highlight DiffAdd     cterm=none,bold   ctermfg=2   ctermbg=15
+highlight DiffDelete  cterm=none        ctermfg=13  ctermbg=15
+highlight DiffChange  cterm=none        ctermfg=8   ctermbg=15
+highlight DiffText    cterm=none,bold   ctermfg=4   ctermbg=15
+
 " ------------------ "
 " --- Statusline --- "
 " ------------------ "
@@ -1767,22 +1738,23 @@ let g:be_buffer_types = {
   \ 'help'     : { 'name': 'HELP',      'highlight': 'BE_StatuslineCyan' },
 \}
 
-" highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
+highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
+highlight StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
-highlight BE_StatuslineGreen          cterm=bold  ctermfg=0  ctermbg=10
-highlight BE_StatuslineGreenCentre    cterm=bold  ctermfg=0  ctermbg=2
-highlight BE_StatuslineBlue           cterm=bold  ctermfg=0  ctermbg=12
-highlight BE_StatuslineBlueCentre     cterm=bold  ctermfg=0  ctermbg=4
-highlight BE_StatuslineMagenta        cterm=bold  ctermfg=0  ctermbg=13
-highlight BE_StatuslineMagentaCentre  cterm=bold  ctermfg=0  ctermbg=5
-highlight BE_StatuslineCyan           cterm=bold  ctermfg=0  ctermbg=14
-highlight BE_StatuslineCyanCentre     cterm=bold  ctermfg=0  ctermbg=6
-highlight BE_StatuslineRed            cterm=bold  ctermfg=0  ctermbg=9
-highlight BE_StatuslineRedCentre      cterm=bold  ctermfg=0  ctermbg=1
-highlight BE_StatuslineGrey           cterm=bold  ctermfg=8  ctermbg=7
-highlight BE_StatuslineGreyCentre     cterm=bold  ctermfg=0  ctermbg=8
-highlight BE_StatuslineYellow         cterm=bold  ctermfg=11 ctermbg=none
-highlight BE_StatuslineYellowCentre   cterm=bold  ctermfg=0  ctermbg=3
+highlight BE_StatuslineGreen          cterm=bold,reverse  ctermfg=10    ctermbg=none
+highlight BE_StatuslineGreenCentre    cterm=bold,reverse  ctermfg=2     ctermbg=none
+highlight BE_StatuslineBlue           cterm=bold,reverse  ctermfg=12    ctermbg=none
+highlight BE_StatuslineBlueCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
+highlight BE_StatuslineMagenta        cterm=bold,reverse  ctermfg=13    ctermbg=none
+highlight BE_StatuslineMagentaCentre  cterm=bold,reverse  ctermfg=5     ctermbg=none
+highlight BE_StatuslineCyan           cterm=bold,reverse  ctermfg=14    ctermbg=none
+highlight BE_StatuslineCyanCentre     cterm=bold,reverse  ctermfg=6     ctermbg=none
+highlight BE_StatuslineRed            cterm=bold,reverse  ctermfg=9     ctermbg=none
+highlight BE_StatuslineRedCentre      cterm=bold,reverse  ctermfg=1     ctermbg=none
+highlight BE_StatuslineGrey           cterm=bold,reverse  ctermfg=7     ctermbg=8
+highlight BE_StatuslineGreyCentre     cterm=bold,reverse  ctermfg=8     ctermbg=none
+highlight BE_StatuslineYellow         cterm=bold          ctermfg=none  ctermbg=11
+highlight BE_StatuslineYellowCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
 
 " let g:BE_statusline_centre = ' %<%f %m%r%h%w %='
 let g:BE_statusline_right = ' %4l:%-3c %6([%L]%)'
