@@ -536,6 +536,13 @@ alias wag='watson aggregate --from "$(date +%Y-%m-%d)" --to "$(date +%Y-%m-%d)"'
 # -------------- #
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
+  # ---------------- #
+  # --- HOMEBREW --- #
+  # ---------------- #
+
+  export HOMEBREW_UPDATE_REPORT_ONLY_INSTALLED=true
+  export HOMEBREW_BAT=true
+
   # ------------ #
   # --- RUBY --- #
   # ------------ #
