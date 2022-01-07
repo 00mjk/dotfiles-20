@@ -20,18 +20,18 @@
   light = true
   line-numbers = true
   paging = always
-  features = tweaks
+  # features = tweaks
   # navigate = true # messes with the less search history
 
 # adjustments to the default style, which puts too much emphasis on the hunks
-[delta "tweaks"]
-  commit-decoration-style = box ul bold brightblack
-  file-decoration-style = box black
-  file-style = brightblack bold
-  hunk-header-line-number-style = blue bold
-  hunk-header-decoration-style =
-  hunk-header-file-style = brightblack
-  hunk-header-style = syntax brightwhite bold line-number
+# [delta "tweaks"]
+#   commit-decoration-style = box ul bold brightblack
+#   file-decoration-style = box black
+#   file-style = brightblack bold
+#   hunk-header-line-number-style = blue bold
+#   hunk-header-decoration-style =
+#   hunk-header-file-style = brightblack
+#   hunk-header-style = syntax brightwhite bold line-number
 
 [pull]
 	ff = only

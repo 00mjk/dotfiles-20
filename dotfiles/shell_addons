@@ -289,9 +289,9 @@ export FZF_DEFAULT_OPTS="\
 --preview-window=hidden \
 --preview='[ -f {} ] && head -n 200 {}' \
 --ansi \
---color='bg:-1,bg+:15,fg:8,fg+:-1,hl:12,hl+:4,info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
---color='info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
 "
+# --color='bg:-1,bg+:15,fg:8,fg+:-1,hl:12,hl+:4,info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
+# --color='info:2,border:7,spinner:1,header:5,pointer:4,marker:1,prompt:6' \
 
 # if available, use fd to feed fzf
 # see also the global fd ignore file
