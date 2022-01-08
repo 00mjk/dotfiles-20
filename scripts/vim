@@ -24,6 +24,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # TODO: create a minimal vimrc only for bootstrapping, only to run PlugInstall for the first time
 backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
+backup_and_symlink "${DOTFILES_DIR}/vimrc.highlights" "${HOME}/.vimrc.highglights"
 
 vim +PlugInstall +qall
 
