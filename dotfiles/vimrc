@@ -17,8 +17,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
-" Plug 'tpope/vim-commentary'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
+" Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -1334,18 +1334,18 @@ nnoremap <Leader>m :History<CR>
 " ---------------------- "
 " --- vim-commentary --- "
 " ---------------------- "
-"
-" " Shortcuts
-" nmap <Leader>c gcc
-" vmap <Leader>c gc
-" " The underscore (_) represents the forward slash (/).
-" " See :help :map-special-keys.
-" " NOTE: this will not work with nnoremap and vnoremap
-" nmap <C-_> gcc
-" vmap <C-_> gc
-"
-" autocmd FileType proto setlocal commentstring=//\ %s
-" autocmd FileType sql setlocal commentstring=--\ %s
+
+" Shortcuts
+nmap <Leader>c gcc
+vmap <Leader>c gc
+" The underscore (_) represents the forward slash (/).
+" See :help :map-special-keys.
+" NOTE: this will not work with nnoremap and vnoremap
+nmap <C-_> gcc
+vmap <C-_> gc
+
+autocmd FileType proto setlocal commentstring=//\ %s
+autocmd FileType sql setlocal commentstring=--\ %s
 
 " ---------------- "
 " --- tcomment --- "
