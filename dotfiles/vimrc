@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 " General power-ups
 " -----------------
 
+Plug 'gerw/vim-HiLinkTrace'
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
@@ -107,6 +109,8 @@ Plug 'dense-analysis/ale'
 " Plug 'jsit/disco.vim'
 " Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " Plug 'romainl/apprentice'
+" Plug 'jeffkreeftmeijer/vim-dim'
+" Plug 'noahfrederick/vim-noctu'
 
 call plug#end()
 
@@ -128,6 +132,8 @@ set nocompatible
 " --- Colorscheme --- "
 " ------------------- "
 
+set t_Co=16
+
 " Try to use 'peachpuff' if available, because it's a 16-color scheme that
 " adapts acceptably well to dark and light background terminals as long as they
 " use a standard 16-color palette (4-bit ANSI colours).
@@ -135,7 +141,7 @@ set nocompatible
 " This is is useful for pairing in shared sessions.
 try
   colorscheme peachpuff
-  catch
+catch
     echom "'peachpuff' colorscheme not available, defaulting to 'default'"
   try
     colorscheme default
@@ -272,8 +278,8 @@ augroup END
 " --- Syntax highlight customisations --- "
 " --------------------------------------- "
 
-if filereadable(glob("~/.vimrc.highlights"))
-  source ~/.vimrc.highlights
+if filereadable(glob($HOME."/.vimrc.highlights"))
+  source $HOME/.vimrc.highlights
 endif
 
 " ---------------------- "

@@ -1,3 +1,5 @@
+autocmd! bufwritepost ~/.vimrc.highlights source ~/.vimrc.highlights
+
 " --------------------------------------- "
 " --- Syntax highlight customisations --- "
 " --------------------------------------- "
@@ -7,81 +9,94 @@
 
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
-" highlight VertSplit      cterm=none,reverse    ctermfg=8   ctermbg=8
-" highlight EndOfBuffer    cterm=none            ctermfg=15
-" highlight ColorColumn                                      ctermbg=15
-" highlight WildMenu       cterm=bold            ctermfg=0   ctermbg=11
-" highlight LineNr         cterm=none            ctermfg=7   ctermbg=none
-" highlight CursorLineNr   cterm=none,underline  ctermfg=8   ctermbg=none
-" highlight SignColumn     cterm=none                        ctermbg=none
-" highlight Search         cterm=reverse         ctermfg=11  ctermbg=0
-" highlight Todo           cterm=reverse,bold    ctermfg=7   ctermbg=0
-" highlight Visual         cterm=reverse         ctermfg=7   ctermbg=0
+highlight VertSplit     ctermbg=8     ctermfg=8     cterm=none
+highlight NonText                     ctermfg=7     cterm=none
+highlight ColorColumn   ctermbg=0
+highlight WildMenu      ctermbg=11                  ctermfg=0
+highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
+highlight CursorLineNr  ctermbg=none  ctermfg=15    cterm=none,underline
+highlight CursorLine                                cterm=underline       ctermul=4
+highlight SignColumn    ctermbg=none                cterm=none
+highlight Search        ctermbg=0     ctermfg=11    cterm=reverse
+highlight Todo          ctermbg=none  ctermfg=4     cterm=reverse,italic
+highlight Visual        ctermbg=8     ctermfg=15    cterm=none
+highlight Comment                                   cterm=italic
+highlight SpellBad      ctermbg=none  ctermfg=1     cterm=reverse
+highlight SpellCap      ctermbg=0     ctermfg=12    cterm=reverse
+highlight SpellRare     ctermbg=0     ctermfg=13    cterm=reverse
+highlight SpellLocal    ctermbg=0     ctermfg=14    cterm=reverse
+highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
+highlight Pmenu         ctermbg=0     ctermfg=none
+highlight PmenuSel      ctermbg=8     ctermfg=12
+highlight PmenuSbar     ctermbg=8
+highlight PmenuThumb    ctermbg=4
+highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
+highlight ErrorMsg      ctermbg=0     ctermfg=9
+" Statement includes Keyword
+highlight Statement                   ctermfg=3
+
+" TODO:
+" - vim-go: lines where coverage is not applicable: customise instead of
+"   linking to Comment, disable the italic
 
 " Highlight: Whitespace
 " --------------------------------
 
 " ExtraWhitespace is a new, custom highlight group
-" highlight ExtraWhitespace cterm=reverse,bold ctermfg=1 ctermbg=none
-" match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=none ctermfg=1 cterm=reverse,bold
+match ExtraWhitespace /\s\+$/
 
 " --- highlight unwanted trailing whitespace --- "
 " <https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command>
 "
 " * only in normal mode
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" autocmd BufWinLeave * call clearmatches()
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " Highlight: Pandoc
 " -----------------
 
-" Highlight headers formatted with underlying '-' and '=' in bold cyan
-" highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
-" highlight pandocAtxHeader ctermfg=6 ctermbg=none
+" Highlight headers formatted with underlying '-' and '='
+highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
+highlight pandocAtxHeader ctermfg=6 ctermbg=none
 
 " Highlight: A.L.E. (ALE)
 " -----------------------
 
-" white on dark red
-" highlight ALEErrorSign cterm=reverse,bold ctermfg=1 ctermbg=none
-" white on dark yellow
-" highlight ALEWarningSign cterm=reverse,bold ctermfg=3 ctermbg=none
-" black on bright yellow
-" highlight ALEWarningSign cterm=bold ctermfg=none ctermbg=11
-" white on light blue
-" highlight ALEInfoSign cterm=reverse,bold ctermfg=12 ctermbg=none
+highlight ALEErrorSign    ctermbg=none  ctermfg=1   cterm=reverse,bold
+highlight ALEWarningSign  ctermbg=none  ctermfg=3   cterm=reverse,bold
+highlight ALEInfoSign     ctermbg=none  ctermfg=12  cterm=reverse,bold
 
 " Highlight: Statusline
 " ---------------------
 
-" highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
-" highlight StatusLineNC cterm=none ctermfg=15 ctermbg=8
+highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
+highlight StatusLineNC cterm=none ctermfg=15 ctermbg=8
 
-" highlight BE_StatuslineGreen          cterm=bold,reverse  ctermfg=10    ctermbg=none
-" highlight BE_StatuslineGreenCentre    cterm=bold,reverse  ctermfg=2     ctermbg=none
-" highlight BE_StatuslineBlue           cterm=bold,reverse  ctermfg=12    ctermbg=none
-" highlight BE_StatuslineBlueCentre     cterm=bold,reverse  ctermfg=4     ctermbg=none
-" highlight BE_StatuslineMagenta        cterm=bold,reverse  ctermfg=13    ctermbg=none
-" highlight BE_StatuslineMagentaCentre  cterm=bold,reverse  ctermfg=5     ctermbg=none
-" highlight BE_StatuslineCyan           cterm=bold,reverse  ctermfg=14    ctermbg=none
-" highlight BE_StatuslineCyanCentre     cterm=bold,reverse  ctermfg=6     ctermbg=none
-" highlight BE_StatuslineRed            cterm=bold,reverse  ctermfg=9     ctermbg=none
-" highlight BE_StatuslineRedCentre      cterm=bold,reverse  ctermfg=1     ctermbg=none
-" highlight BE_StatuslineGrey           cterm=bold,reverse  ctermfg=7     ctermbg=8
-" highlight BE_StatuslineGreyCentre     cterm=bold,reverse  ctermfg=8     ctermbg=none
-" highlight BE_StatuslineYellow         cterm=bold          ctermfg=none  ctermbg=11
-" highlight BE_StatuslineYellowCentre   cterm=bold,reverse  ctermfg=3     ctermbg=none
+highlight BE_StatuslineGreen          ctermbg=8   ctermfg=10  cterm=bold
+highlight BE_StatuslineGreenCentre    ctermbg=8   ctermfg=2   cterm=bold
+highlight BE_StatuslineBlue           ctermbg=8   ctermfg=12  cterm=bold
+highlight BE_StatuslineBlueCentre     ctermbg=8   ctermfg=4   cterm=bold
+highlight BE_StatuslineMagenta        ctermbg=8   ctermfg=13  cterm=bold
+highlight BE_StatuslineMagentaCentre  ctermbg=8   ctermfg=5   cterm=bold
+highlight BE_StatuslineCyan           ctermbg=8   ctermfg=14  cterm=bold
+highlight BE_StatuslineCyanCentre     ctermbg=8   ctermfg=6   cterm=bold
+highlight BE_StatuslineRed            ctermbg=8   ctermfg=9   cterm=bold
+highlight BE_StatuslineRedCentre      ctermbg=8   ctermfg=1   cterm=bold
+highlight BE_StatuslineGrey           ctermbg=8   ctermfg=7   cterm=bold
+highlight BE_StatuslineGreyCentre     ctermbg=8   ctermfg=15   cterm=bold
+highlight BE_StatuslineYellow         ctermbg=8   ctermfg=11  cterm=bold
+highlight BE_StatuslineYellowCentre   ctermbg=8   ctermfg=3   cterm=bold
 
 " Highlight: Diffs
 " ----------------
 
-" use simple ansi-colours for readability in any terminal with an ANSI palette
-" highlight DiffAdd     cterm=none,bold   ctermfg=2   ctermbg=15
-" highlight DiffDelete  cterm=none        ctermfg=13  ctermbg=15
-" highlight DiffChange  cterm=none        ctermfg=8   ctermbg=15
-" highlight DiffText    cterm=none,bold   ctermfg=4   ctermbg=15
+highlight DiffAdd     ctermbg=8   ctermfg=2   cterm=none
+highlight DiffDelete  ctermbg=8   ctermfg=9   cterm=none
+highlight DiffChange  ctermbg=8   ctermfg=15  cterm=none
+highlight DiffText    ctermbg=8   ctermfg=4   cterm=none
 
 " Highlight: Extra todo-like keywords
 " -----------------------------------
@@ -93,15 +108,15 @@
 " 3. filter it to only contain lines with syntax group name that ends with Todo (filter(..., { i,v -> match(v, '^\w*Todo\>') == 0}))
 " 4. remove everything after syntax group name (map(..., {i,v -> substitute(v, ' .*$', '', '')}))
 " result -> a list of syntax group names that end with Todo.
-" function! UpdateTodoKeywords(...)
-"   let newKeywords = join(a:000, " ")
-"   let synTodo = map(filter(split(execute("syntax list"), '\n') , { i,v -> match(v, '^\w*Todo\>') == 0}), {i,v -> substitute(v, ' .*$', '', '')})
-"   for synGrp in synTodo
-"     execute "syntax keyword " . synGrp . " contained " . newKeywords
-"   endfor
-" endfunction
-"
-" augroup Todo_CustomKeywords
-"   autocmd!
-"   autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
-" augroup END
+function! UpdateTodoKeywords(...)
+  let newKeywords = join(a:000, " ")
+  let synTodo = map(filter(split(execute("syntax list"), '\n') , { i,v -> match(v, '^\w*Todo\>') == 0}), {i,v -> substitute(v, ' .*$', '', '')})
+  for synGrp in synTodo
+    execute "syntax keyword " . synGrp . " contained " . newKeywords
+  endfor
+endfunction
+
+augroup Todo_CustomKeywords
+  autocmd!
+  autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
+augroup END
