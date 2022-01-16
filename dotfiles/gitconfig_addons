@@ -1,4 +1,4 @@
-# vim: set ft=gitconfig:
+; vim: set ft=gitconfig:
 
 [core]
   editor = 'vim'
@@ -13,25 +13,38 @@
   diffFilter = delta --color-only --features=interactive
 
 [diff]
-  # enable color-moved so that it can be displayed by delta
+  ; enable color-moved so that it can be displayed by delta
   colorMoved = default
 
+; recommended for delta
+; [merge]
+;   conflictstyle = diff3
+
 [delta]
-  light = true
   line-numbers = true
   paging = always
-  # features = tweaks
-  # navigate = true # messes with the less search history
+  features = tweaks
+  ; navigate = true # messes with the less search history
 
-# adjustments to the default style, which puts too much emphasis on the hunks
-# [delta "tweaks"]
-#   commit-decoration-style = box ul bold brightblack
-#   file-decoration-style = box black
-#   file-style = brightblack bold
-#   hunk-header-line-number-style = blue bold
-#   hunk-header-decoration-style =
-#   hunk-header-file-style = brightblack
-#   hunk-header-style = syntax brightwhite bold line-number
+; Custom delta theme
+[delta "tweaks"]
+  syntax-theme = ansi ; irrelevant, as we do not use it, only red/green
+  commit-decoration-style = box ul bold white
+  file-decoration-style = box white
+  file-style = white bold
+  hunk-header-line-number-style = normal
+  hunk-header-decoration-style = normal brightblack dim
+  hunk-header-file-style = brightblack
+  hunk-header-style = normal brightblack line-number
+  zero-style = white normal
+  minus-style = red normal
+  minus-emph-style = brightmagenta black bold
+  plus-style = green normal
+  plus-emph-style = brightgreen black bold
+  line-numbers-minus-style = red normal
+  line-numbers-plus-style = green normal
+  line-numbers-zero-style = white normal
+  whitespace-error-style = black red
 
 [pull]
 	ff = only
@@ -56,13 +69,13 @@
   ds = diff --staged
   f = fetch
   fc = fetch
-  # When "forcing with lease", it's essential that the working tree is up to
-  # date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/
+  ; When "forcing with lease", it's essential that the working tree is up to
+  ; date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/
   force = push --force-with-lease
   graph = log --all --decorate --oneline --graph
   hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(reset)%s - %an%C(bold yellow)%d%C(reset)' --all
   l = log
-  # requires GNU version of sort
+  ; requires GNU version of sort
   new-prs="!git log --oneline --merges ...$(git tag | sort -Vr | head -n1)"
   p = pull
   ps = push
@@ -81,24 +94,24 @@
   undo = reset --soft HEAD^
   unstage = reset HEAD --
 
-  # delta shortcuts for side-to-side comparison
+  ; delta shortcuts for side-to-side comparison
   sidediff = -c delta.side-by-side=true diff --ignore-blank-lines --ignore-all-space
   sideshow = -c delta.side-by-side=true show --ignore-blank-lines --ignore-all-space
   sidelog = -c delta.side-by-side=true log -p --ignore-blank-lines --ignore-all-space
 
-  # Attempt to determine the original author, by ignoring trivial changes
-  # -w  white space
-  # -M  text moved within the file
-  # -C  text moved across files
+  ; Attempt to determine the original author, by ignoring trivial changes
+  ; -w  white space
+  ; -M  text moved within the file
+  ; -C  text moved across files
   hardblame = blame -wMCCC
 
-  # ignored-update = "!git rm --cached -r . ; git add . "
-  # remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
+  ; ignored-update = "!git rm --cached -r . ; git add . "
+  ; remove-merged = "!f() { git branch --merged main | grep -v \"\\* main\" | xargs -n 1 git branch -d; }; f"
 
-  # List all branches by most recent activity
+  ; List all branches by most recent activity
   recent = branch --all --sort=-committerdate
 
-  # https://gist.github.com/l15n/3103708
+  ; https://gist.github.com/l15n/3103708
   recent-authors = "! for branch in $(git branch -r | grep -v HEAD);do echo $(TZ=UTC git log -n1 --date=iso-local --format=\"%ad (%ar) [by %an]\" $branch) \t$branch; done | sort -r"
 
 [commit]
