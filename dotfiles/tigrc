@@ -1,13 +1,16 @@
-set tab-size = 2
+set tab-size                      = 2
 
-set mouse = true
+set mouse                         = true
 
-set line-graphics = utf-8
+set line-graphics                 = utf-8
 
-set main-view-date-display = custom
-set main-view-date-format = %Y-%m-%d
-set main-view-commit-title-graph = v2
-set main-view-id = true
-set main-view-commit-title-refs = true
+set main-view-date-display        = custom
+set main-view-date-format         = %Y-%m-%d
+set main-view-commit-title-graph  = v2
+set main-view-id                  = true
+set main-view-commit-title-refs   = true
 
-# set diff-view-line-number-display = true
+color status      default default normal
+color cursor      0       2       bold
+color title-focus 0       4       bold
+color title-blur  8       4       normal
