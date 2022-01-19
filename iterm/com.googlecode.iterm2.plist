@@ -12509,7 +12509,7 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>B6D5717F-1495-42B6-A60F-FE3DBCF163FF</string>
+	<string>09FE1A12-008F-4A52-ABE7-AD169EE06A4D</string>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
 	<key>DoubleClickPerformsSmartSelection</key>
@@ -17104,13 +17104,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.48674371652305126</real>
+				<real>0.5725490196078431</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.54826772053704798</real>
+				<real>0.5725490196078431</real>
 				<key>Red Component</key>
-				<real>0.999725341796875</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 1 Color (Light)</key>
 			<dict>
@@ -17221,13 +17221,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.96905517578125</real>
+				<real>0.9986572265625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.80293989181518555</real>
+				<real>0.83747130822678173</real>
 				<key>Red Component</key>
-				<real>0.392865389585495</real>
+				<real>0.51136687025427818</real>
 			</dict>
 			<key>Ansi 12 Color (Light)</key>
 			<dict>
@@ -17303,9 +17303,9 @@
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.98235291242599487</real>
+				<real>0.9941373841757013</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.66778564453125</real>
 			</dict>
 			<key>Ansi 14 Color (Light)</key>
 			<dict>
@@ -17455,13 +17455,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.838287353515625</real>
+				<real>0.851531982421875</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.63916516304016113</real>
+				<real>0.66143110251777704</real>
 				<key>Red Component</key>
-				<real>0.33177945017814636</real>
+				<real>0.36797158420085907</real>
 			</dict>
 			<key>Ansi 4 Color (Light)</key>
 			<dict>
@@ -17494,13 +17494,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.9085693359375</real>
+				<real>0.78058383943104959</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.63509462401270866</real>
+				<real>0.64329005777835846</real>
 				<key>Red Component</key>
-				<real>0.82433532949295452</real>
+				<real>0.8037109375</real>
 			</dict>
 			<key>Ansi 5 Color (Light)</key>
 			<dict>
@@ -17572,26 +17572,26 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.7435302734375</real>
+				<real>0.57330196909606457</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.7435302734375</real>
+				<real>0.57330196909606457</real>
 				<key>Red Component</key>
-				<real>0.7435302734375</real>
+				<real>0.5770263671875</real>
 			</dict>
 			<key>Ansi 7 Color (Light)</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.49129709601402283</real>
+				<real>0.740478515625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.49129709601402283</real>
+				<real>0.740478515625</real>
 				<key>Red Component</key>
-				<real>0.491424560546875</real>
+				<real>0.740478515625</real>
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
@@ -17650,13 +17650,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.1527252197265625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.2685377118177712</real>
 				<key>Red Component</key>
-				<real>0.98663330078125</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 9 Color (Light)</key>
 			<dict>
@@ -17754,7 +17754,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
