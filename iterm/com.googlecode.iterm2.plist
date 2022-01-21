@@ -12524,6 +12524,10 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_09FE1A12-008F-4A52-ABE7-AD169EE06A4D</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_09FE1A12-008F-4A52-ABE7-AD169EE06A4D_selection</key>
+	<integer>0</integer>
 	<key>NeverWarnAboutShortLivedSessions_B6D5717F-1495-42B6-A60F-FE3DBCF163FF</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B6D5717F-1495-42B6-A60F-FE3DBCF163FF_selection</key>
@@ -13748,7 +13752,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNerdFontCompleteM-Regular 12</string>
+			<string>JetBrainsMonoNL-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -14666,7 +14670,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
@@ -15258,7 +15262,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNerdFontCompleteM-Regular 12</string>
+			<string>JetBrainsMonoNL-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -16210,7 +16214,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
@@ -16802,7 +16806,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNerdFontCompleteM-Regular 12</string>
+			<string>JetBrainsMonoNL-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -18346,7 +18350,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNerdFontCompleteM-Regular 12</string>
+			<string>JetBrainsMonoNL-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
