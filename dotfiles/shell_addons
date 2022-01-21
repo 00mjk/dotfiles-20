@@ -98,13 +98,13 @@ _parse_git_status(){
   [[ -n "$modifiedStaged" ]] && changes="${changes}${BLUE}${BOLD}🞥${NC}"
   [[ -n "$modifiedUnstaged" ]] && changes="${changes}${RED}${BOLD}x${NC}"
   [[ -n "$newFiles" ]] && changes="${changes}${RED}${BOLD}?${NC}"
-  [[ -z "${changes}" ]] && changes="${GREEN}✓${NC}"
+  [[ -z "${changes}" ]] && changes="${GREEN}${BOLD}✓${NC}"
 
-  [[ -n "$upstream" && -z "$ahead" && -z "$behind" ]] && sync=" ${GREEN}↑↓${NC}"
-  [[ -z "$upstream" ]] && sync=" ${RED}↑↓?${NC}"
+  [[ -n "$upstream" && -z "$ahead" && -z "$behind" ]] && sync=" ${GREEN}${BOLD}↑↓${NC}"
+  [[ -z "$upstream" ]] && sync=" ${RED}${BOLD}↑↓?${NC}"
 
-  [[ -n "${ahead}" ]] && ahead=" ${RED}↑${NC}${ahead}"
-  [[ -n "${behind}" ]] && behind=" ${RED}↓${NC}${behind}"
+  [[ -n "${ahead}" ]] && ahead=" ${RED}${BOLD}↑${NC}${ahead}"
+  [[ -n "${behind}" ]] && behind=" ${RED}${BOLD}↓${NC}${behind}"
 
   echo -e " | ${branch}${changes}${sync}${ahead}${behind}"
 }

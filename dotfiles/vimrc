@@ -278,8 +278,8 @@ augroup END
 " --- Syntax highlight customisations --- "
 " --------------------------------------- "
 
-if filereadable(glob($HOME."/.vimrc.highlights"))
-  source $HOME/.vimrc.highlights
+if filereadable(glob("~/.vimrc.highlights"))
+  source ~/.vimrc.highlights
 endif
 
 " ---------------------- "

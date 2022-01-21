@@ -17,11 +17,11 @@ vim +PlugUpdate +qall
 echo "[update] Update natively installed Golang packages"
 "${CURRDIR}/golang-packages"
 
-echo "[update] Update Rust"
-"${CURRDIR}/rust"
+# echo "[update] Update Rust"
+# "${CURRDIR}/rust"
 
-echo "[update] Update iTerm utilities"
-"${CURRDIR}/iterm2-utils"
+# echo "[update] Update iTerm utilities"
+# "${CURRDIR}/iterm2-utils"
 
 if [[ -n "$(command -v pipx)" ]]; then
   echo "[update] Upgrade pipx packages"

@@ -233,6 +233,7 @@ _be_command_time_preexec() {
   setopt local_options BASH_REMATCH
 
   # reset the time message
+  # The time info needs to be exported to be available in the zsh prompt.
   export COMMAND_TIME_PROMPT=""
 
   # Skip the commands specified in the dedicated env var.
@@ -291,6 +292,7 @@ _be_command_time_precmd() {
     elapsed_fmt=$(printf '%d seconds' ${seconds})
   fi
 
+  # The time info needs to be exported to be available in the zsh prompt.
   export COMMAND_TIME_PROMPT="[%Btime ${elapsed_fmt}%b]"$'\n'
 }
 
@@ -340,6 +342,7 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   # %~ = pwd with tilde
   # print warning and exit code if the previous command failed
   PROMPT='%(?..[%B%F{red}exit code: %?%f%b]${prompt_newline})${COMMAND_TIME_PROMPT}[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
+  # PROMPT='${COMMAND_TIME_PROMPT}[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
 else
   PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
@@ -365,7 +368,7 @@ alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 #--- JUMP ---#
 #------------#
 
-[ -n "$(command -v jump)" ] && eval "$(jump shell zsh)"
+# [ -n "$(command -v jump)" ] && eval "$(jump shell zsh)"
 
 # -------------- #
 # --- ZOXIDE --- #
