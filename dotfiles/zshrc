@@ -5,21 +5,19 @@ ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
 
 fpath=($ZSH_SITE_FUNCTIONS $fpath)
 
-# unfortunately this takes more than 100 ms, but zsh is hardly usable without
-# it, so we are paying this price until we port the individual features we
-# need, which is probably code for "never"
+# this takes more than 100 ms
 export ZSH="${HOME}/.oh-my-zsh"
 plugins=()
 source $ZSH/oh-my-zsh.sh
 
 HOMEBREW_PREFIX=
-if [[ "$(uname -m)" == "arm64" ]]; then
+if [[ "$(uname -s)" == "Darwin" && "$(uname -m)" == "arm64" ]]; then
   HOMEBREW_PREFIX='/opt/homebrew'
-elif [[ "$(uname -m)" == "x86_64" ]]; then
+else
   HOMEBREW_PREFIX='/usr/local'
 fi
 
-# from brew shellenv
+# from 'brew shellenv'
 export HOMEBREW_PREFIX
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
@@ -29,30 +27,6 @@ export MANPATH="$HOMEBREW_PREFIX/share/man:$HOMEBREW_PREFIX/opt/curl/share/man:$
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export LANG=en_GB.UTF-8
-
-# automatically run the 'time' commmand if total user time + system time is
-# greater than the specified value (in seconds)
-#
-# this isn't great because it operates on all commands, so that for example it
-# will print the result of 'time' every time vim is closed
-#
-# REPORTTIME=3
-
-# setopt alwaystoend
-# setopt autocd
-# setopt autopushd
-# setopt completeinword
-# setopt extendedhistory
-# setopt histignorespace
-# setopt histverify
-# setopt interactivecomments
-# setopt longlistjobs
-# setopt monitor
-# setopt noflowcontrol
-# setopt pushdignoredups
-# setopt pushdminus
-# setopt sharehistory
-# setopt zle
 
 # don't add history entry if it's a duplicate of the previous command (and only
 # if it's exactly the previous one, older duplicates don't count)
@@ -342,7 +316,6 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   # %~ = pwd with tilde
   # print warning and exit code if the previous command failed
   PROMPT='%(?..[%B%F{red}exit code: %?%f%b]${prompt_newline})${COMMAND_TIME_PROMPT}[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
-  # PROMPT='${COMMAND_TIME_PROMPT}[%F{blue}%~%f$(_parse_git_status)]${prompt_newline}%# '
 else
   PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
