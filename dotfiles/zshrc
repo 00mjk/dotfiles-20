@@ -396,13 +396,15 @@ typeset -aU path
 typeset -aU manpath
 typeset -aU infopath
 
-# the direnv hook must be at the end of the rc file
-[[ -n "$(command -v direnv)" ]] && eval "$(direnv hook zsh)"
-
 # # Assuming it was installed with Homebrew
 # ZSH_HIGHLIGHT_SOURCE=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# # || true is necessary to avoid the exit code is 1 when a new shell is open,
-# # because this is the last statement in the zshrc
 # [[ -f $ZSH_HIGHLIGHT_SOURCE ]] && source $ZSH_HIGHLIGHT_SOURCE || true
 # uncomment if receiving error "highlighters directory not found"
 # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
+
+# the direnv hook must be at the end of the rc file
+#
+# `|| true` is necessary in case direnv is not (yet) installed, to avoid the
+# exit code is 1 when a new shell is open, because this is the last statement
+# in the zshrc
+[[ -n "$(command -v direnv)" ]] && eval "$(direnv hook zsh)" || true
