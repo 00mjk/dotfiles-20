@@ -198,3 +198,12 @@ Additional zsh options
     setopt pushdminus
     setopt sharehistory
     setopt zle
+
+Zsh command line highlighting
+-----------------------------
+
+    # # Assuming it was installed with Homebrew
+    # ZSH_HIGHLIGHT_SOURCE=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # [[ -f $ZSH_HIGHLIGHT_SOURCE ]] && source $ZSH_HIGHLIGHT_SOURCE || true
+    # uncomment if receiving error "highlighters directory not found"
+    # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
