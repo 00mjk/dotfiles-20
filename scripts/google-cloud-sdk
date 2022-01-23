@@ -2,41 +2,26 @@
 
 set -e
 
-# If gcloud is installed locally, just update it and exit.
-if [[ "$(which gcloud)" == "${HOME}/google-cloud-sdk/bin/gcloud" ]]; then
-  echo "Google Cloud SDK already installed for the current user, updating and installing additional components."
-  gcloud components update --quiet
-  gcloud components install --quiet kubectl app-engine-python beta alpha
-  exit 0
+INSTALL_PATH=$HOME/google-cloud-sdk
+
+if [[ -e $INSTALL_PATH ]]; then
+  echo "Google Cloud SDK already installed at ~/google-cloud-sdk"
 fi
 
-if [[ $(uname -s) == 'Linux' ]]; then
-  # Remove the system-wide gcloud, because it doesn't support some modules.
-  sudo snap remove google-cloud-sdk
+DOWNLOAD_DIR=$HOME/Downloads
+mkdir -p $DOWNLOAD_DIR
 
-  sudo apt-get update -q
-  sudo apt-get install -yq wget unzip python3-pip
-fi
+FILENAME="google-cloud-sdk.tar.gz"
+URL=https://dl.google.com/dl/cloudsdk/release/$FILENAME
 
-DOWNLOAD_DIR="${HOME}/Downloads"
-mkdir -p "${DOWNLOAD_DIR}"
-
-FILENAME="google-cloud-sdk.zip"
-URL="https://dl.google.com/dl/cloudsdk/release/${FILENAME}"
+DEST=$DOWNLOAD_DIR/$FILENAME
 
 echo "Downloading ${URL}"
-wget -N -P "${DOWNLOAD_DIR}" "${URL}"
+curl -L -o $DEST --time-cond $DEST $URL
 
-unzip "${DOWNLOAD_DIR}/${FILENAME}" -d "${HOME}"
+tar -C $HOME -xzf "$DEST"
 
-# tab completion and path need not be installed because already included in the
-# bash addons
-"${HOME}"/google-cloud-sdk/install.sh \
-  --quiet \
+$INSTALL_PATH/install.sh \
   --usage-reporting false \
   --command-completion false \
-  --path-update false \
-  --additional-components kubectl app-engine-python beta alpha
-
-# https://github.com/GoogleCloudPlatform/gsutil/issues/378
-pip3 install google-compute-engine
+  --path-update false

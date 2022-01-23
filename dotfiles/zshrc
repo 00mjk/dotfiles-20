@@ -383,6 +383,17 @@ bindkey -e
 # whole line.
 bindkey \^U backward-kill-line
 
+# ------------------------
+# --- Google Cloud SDK ---
+# ------------------------
+
+export PATH=$HOME/google-cloud-sdk/bin:$PATH
+gcloud_zsh_completion="$HOME/google-cloud-sdk/completion.zsh.inc"
+[ -f $gcloud_zsh_completion ] && source $gcloud_zsh_completion
+
+# As of 2022-01-23 gcloud still relies on Python 3.9 (needs 'Mapping'.)
+export CLOUDSDK_PYTHON=python3.9
+
 # -------------------------------------- #
 # --- Additional shell configuration --- #
 # -------------------------------------- #

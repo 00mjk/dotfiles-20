@@ -195,24 +195,6 @@ alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux
 #
 # update_auth_sock()
 
-# ------------------------
-# --- Google Cloud SDK ---
-# ------------------------
-
-# if [[ $SHELL =~ bash ]]; then
-#   [[ -f $HOME/.google-cloud-sdk/path.bash.inc ]] && source $HOME/.google-cloud-sdk/path.bash.inc
-#   [[ -f $HOME/google-cloud-sdk/path.bash.inc ]] && source $HOME/google-cloud-sdk/path.bash.inc
-#   [[ -f $HOME/.google-cloud-sdk/completion.bash.inc ]] && source $HOME/.google-cloud-sdk/completion.bash.inc
-#   [[ -f $HOME/google-cloud-sdk/completion.bash.inc ]] && source $HOME/google-cloud-sdk/completion.bash.inc
-# fi
-
-# if [[ $SHELL =~ zsh ]]; then
-#   [[ -f $HOME/.google-cloud-sdk/path.zsh.inc ]] && source $HOME/.google-cloud-sdk/path.zsh.inc
-#   [[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc
-#   [[ -f $HOME/.google-cloud-sdk/completion.zsh.inc ]] && source $HOME/.google-cloud-sdk/completion.zsh.inc
-#   [[ -f $HOME/google-cloud-sdk/completion.zsh.inc ]] && source $HOME/google-cloud-sdk/completion.zsh.inc
-# fi
-
 # ----------------------------------- #
 # --- Kubernetes CLI autocomplete --- #
 # ----------------------------------- #
