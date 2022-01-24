@@ -148,7 +148,6 @@
       - font-inconsolata
       - font-inconsolata-nerd-font
       - istat-menus
-      - monitorcontrol
       - font-jetbrains-mono-nerd-font
 
     * Casks requiring Rosetta 2 on arm64

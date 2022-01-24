@@ -140,6 +140,7 @@ brew install --cask font-juliamono
 brew install --cask google-chrome
 brew install --cask iterm2
 brew install --cask middle
+brew install --cask monitorcontrol # external display brightness
 brew install --cask pastebot
 brew install --cask rectangle
 brew install --cask visual-studio-code
