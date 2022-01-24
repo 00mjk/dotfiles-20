@@ -1,0 +1,8 @@
+[options]
+confirm_new_project = true
+confirm_new_tag = true
+stop_on_start = true
+stop_on_restart = true
+report_current = true
+log_current = true
+pager = false
