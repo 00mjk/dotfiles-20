@@ -394,6 +394,14 @@ gcloud_zsh_completion="$HOME/google-cloud-sdk/completion.zsh.inc"
 # As of 2022-01-23 gcloud still relies on Python 3.9 (needs 'Mapping'.)
 export CLOUDSDK_PYTHON=python3.9
 
+# ----------------- #
+# --- Terraform --- #
+# ----------------- #
+
+autoload -U +X bashcompinit && bashcompinit
+TERRAFORM_AUTOCOMPLETE=$HOMEBREW_PREFIX/bin/terraform
+[ -f $TERRAFORM_AUTOCOMPLETE ] && complete -o nospace -C $TERRAFORM_AUTOCOMPLETE terraform
+
 # -------------------------------------- #
 # --- Additional shell configuration --- #
 # -------------------------------------- #
