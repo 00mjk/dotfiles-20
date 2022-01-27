@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo dnf install -y \
+  bat \
+  bind-utils \
+  ctags \
+  direnv \
+  exa \
+  fd-find \
+  gcc \
+  git \
+  git-delta \
+  glibc \
+  groff \
+  htop \
+  jq \
+  lsof \
+  make \
+  mlocate \
+  mosh \
+  mtr \
+  nmap \
+  nnn \
+  nodejs \
+  ntpsec \
+  openssl \
+  pbzip2 \
+  pigz \
+  pipx \
+  podman \
+  python3.9 \
+  ripgrep \
+  rsync \
+  ruby \
+  sqlite \
+  tar \
+  tig \
+  tmux \
+  tree \
+  unzip \
+  util-linux-user \
+  vim-enhanced \
+  wget \
+  yarnpkg \
+  zip \
+  zoxide \
+  zsh
