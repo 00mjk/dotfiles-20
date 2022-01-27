@@ -26,6 +26,7 @@
 .gobrew/
 .goenv/
 .hg/
+.idea/
 .jump/
 .local/
 .ocean9/
