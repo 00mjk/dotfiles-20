@@ -206,3 +206,19 @@ Zsh command line highlighting
     # [[ -f $ZSH_HIGHLIGHT_SOURCE ]] && source $ZSH_HIGHLIGHT_SOURCE || true
     # uncomment if receiving error "highlighters directory not found"
     # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
+
+Vim colorschemes
+----------------
+
+    " Colorschemes
+    " ------------
+
+    " Plug 'altercation/vim-colors-solarized'
+    " Plug 'rakr/vim-one'
+    " Plug 'arcticicestudio/nord-vim' nord-vim only works if the terminal itself is using the 16-color Nord theme
+    " Plug 'lifepillar/vim-gruvbox8'
+    " Plug 'jsit/disco.vim'
+    " Plug 'sonph/onehalf', { 'rtp': 'vim' }
+    " Plug 'romainl/apprentice'
+    " Plug 'jeffkreeftmeijer/vim-dim'
+    " Plug 'noahfrederick/vim-noctu'

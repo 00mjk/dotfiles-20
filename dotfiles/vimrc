@@ -17,18 +17,22 @@ Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-" Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'nanotee/zoxide.vim'
-" Plug 'psliwka/vim-smoothie'
 
+" Plug 'tpope/vim-unimpaired'
+" Plug 'tomtom/tcomment_vim'
+
+" Eye-candy
+" ---------
+
+" Plug 'psliwka/vim-smoothie'
 " Plug 'ryanoasis/vim-devicons'
 
 " Search (files and code)
@@ -43,21 +47,22 @@ Plug 'mhinz/vim-grepper'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/tagbar'
-" Plug 'liuchengxu/vista.vim'
 Plug 'preservim/nerdtree'
+
+" Plug 'liuchengxu/vista.vim'
 
 " Language support (including special config syntaxes)
 " ----------------------------------------------------
 
 Plug 'aklt/plantuml-syntax'
 Plug 'tyru/open-browser.vim'
+
 " plantuml-previewer.vim requires adoptopenjdk
 " (https://github.com/weirongxu/plantuml-previewer.vim/issues/40)
 Plug 'weirongxu/plantuml-previewer.vim'
 
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'fatih/vim-go'
 Plug 'fourjay/vim-yamsong'
 Plug 'pangloss/vim-javascript'
@@ -94,23 +99,8 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " Language Server Protocol support
 " --------------------------------
-"
-" for linting and other IDE-like features
 
 Plug 'dense-analysis/ale'
-
-" Colorschemes
-" ------------
-
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'rakr/vim-one'
-" Plug 'arcticicestudio/nord-vim' nord-vim only works if the terminal itself is using the 16-color Nord theme
-" Plug 'lifepillar/vim-gruvbox8'
-" Plug 'jsit/disco.vim'
-" Plug 'sonph/onehalf', { 'rtp': 'vim' }
-" Plug 'romainl/apprentice'
-" Plug 'jeffkreeftmeijer/vim-dim'
-" Plug 'noahfrederick/vim-noctu'
 
 call plug#end()
 
