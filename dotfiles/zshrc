@@ -49,7 +49,9 @@ setopt NO_CLOBBER
 # disable messing with redirection (treat redirection and pipes like bash)
 setopt NO_MULTIOS
 
-export COMPLETION_WAITING_DOTS="true"
+# Disabled because sometimes eating lines above prompt. See https://github.com/ohmyzsh/ohmyzsh/issues/5765.
+# export COMPLETION_WAITING_DOTS=true
+
 # autocomplete hidden files...
 setopt GLOB_DOTS
 # ...but exclude "." and ".."
