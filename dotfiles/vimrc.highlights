@@ -18,7 +18,7 @@ highlight ColorColumn   ctermbg=0
 highlight WildMenu      ctermbg=11                  ctermfg=0
 highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
 highlight CursorLineNr  ctermbg=none  ctermfg=15    cterm=none,underline
-highlight CursorLine                                cterm=underline       ctermul=4
+highlight CursorLine    ctermbg=none                cterm=none,underline   ctermul=4
 highlight SignColumn    ctermbg=none                cterm=none
 highlight Search        ctermbg=0     ctermfg=11    cterm=reverse
 highlight Todo          ctermbg=none  ctermfg=4     cterm=none,bold,italic
@@ -36,6 +36,7 @@ highlight PmenuThumb    ctermbg=4
 highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
 highlight ErrorMsg      ctermbg=0     ctermfg=9
 highlight Function                    ctermfg=6     cterm=bold
+highlight EndOfBuffer                 ctermfg=0
 " highlight Special                     ctermfg=5
 
 " Statement includes Keyword
@@ -46,7 +47,7 @@ highlight Statement                   ctermfg=3
 "   linking to Comment, disable the italic
 
 " Highlight: Whitespace
-" --------------------------------
+" ---------------------
 
 " ExtraWhitespace is a new, custom highlight group
 highlight ExtraWhitespace ctermbg=none ctermfg=1 cterm=reverse,bold
