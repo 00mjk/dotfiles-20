@@ -72,9 +72,9 @@ highlight pandocAtxHeader ctermfg=6 ctermbg=none
 " Highlight: A.L.E. (ALE)
 " -----------------------
 
-highlight ALEErrorSign    ctermbg=none  ctermfg=1   cterm=reverse,bold
-highlight ALEWarningSign  ctermbg=none  ctermfg=3   cterm=reverse,bold
-highlight ALEInfoSign     ctermbg=none  ctermfg=12  cterm=reverse,bold
+highlight ALEErrorSign    ctermbg=8  ctermfg=9   cterm=none
+highlight ALEWarningSign  ctermbg=8  ctermfg=3   cterm=none
+highlight ALEInfoSign     ctermbg=8  ctermfg=12  cterm=none
 
 " Highlight: Statusline
 " ---------------------
