@@ -102,7 +102,32 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'dense-analysis/ale'
 
+Plug 'ycm-core/YouCompleteMe'
+
 call plug#end()
+
+" --------------------------- "
+" --- YouCompleteMe / YCM --- "
+" --------------------------- "
+
+" Tentative configuration
+" -----------------------
+
+" let g:ycm_gopls_binary_path = [$GOPATH.'/gopls']
+let g:ycm_gopls_binary_path = 'gopls'
+let g:ycm_gopls_args = ['-remote=auto']
+
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_update_diagnostics_in_insert_mode = 0
+let g:ycm_auto_hover = ''
+
+let g:ycm_min_num_of_chars_for_completion = 3
+" let g:ycm_auto_trigger = 0
+" let g:ycm_key_invoke_completion = '<C-Space>'
+" let g:ycm_key_list_select_completion = ['<Down>']
+" let g:ycm_key_invoke_completion = '<Tab>'
+" let g:ycm_key_invoke_completion = '<C-X><C-O>'
+" let g:ycm_autoclose_preview_window_after_completion = 1 " breaks argument hints
 
 " ------------------------------- "
 " --- Disable unused features --- "
@@ -1364,6 +1389,8 @@ let g:v_autofmt_bufwritepre = 1
 " -------------- "
 " --- vim-go --- "
 " -------------- "
+
+let g:go_code_completion_enabled = 0
 
 " vim-go: gofmt
 " -------------
