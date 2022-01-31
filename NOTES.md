@@ -147,6 +147,7 @@
       - font-dejavu-sans-mono-nerd-font
       - font-inconsolata
       - font-inconsolata-nerd-font
+      - font-mulish
       - istat-menus
       - font-jetbrains-mono-nerd-font
 

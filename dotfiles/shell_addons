@@ -224,12 +224,12 @@ alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux
 # --- rbenv --- #
 # ------------- #
 
-export PATH="$HOME/.rbenv/bin:$PATH"
 # SLOW: rbenv init takes more than 150 ms. Use alias when needed.
 # if [[ $(command -v rbenv) ]]; then
 #   eval "$(rbenv init -)"
 # fi
-alias _init_rbenv='eval "$(rbenv init -)"'
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# alias _init_rbenv='eval "$(rbenv init -)"'
 
 # ------------- #
 # --- pyenv --- #
