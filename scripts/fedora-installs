@@ -5,6 +5,8 @@ set -e
 sudo dnf install -y \
   bat \
   bind-utils \
+  clang \
+  cmake \
   ctags \
   direnv \
   exa \
@@ -30,6 +32,7 @@ sudo dnf install -y \
   pigz \
   pipx \
   podman \
+  python3-devel \
   python3.9 \
   ripgrep \
   rsync \
