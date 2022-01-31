@@ -37,6 +37,9 @@ highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
 highlight ErrorMsg      ctermbg=0     ctermfg=9
 highlight Function                    ctermfg=6     cterm=bold
 highlight EndOfBuffer                 ctermfg=0
+" highlight MatchParen    ctermbg=none  ctermfg=none  cterm=none,bold,reverse
+" highlight MatchParen    ctermbg=none  ctermfg=7     cterm=none,bold,reverse
+highlight MatchParen    ctermbg=8     ctermfg=12    cterm=none,bold
 " highlight Special                     ctermfg=5
 
 " Statement includes Keyword
@@ -62,12 +65,18 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Highlight: vim-go
+" -----------------
+
+highlight link goFormatSpecifier Identifier
+highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
+
 " Highlight: Pandoc
 " -----------------
 
 " Highlight headers formatted with underlying '-' and '='
 highlight pandocSetexHeader cterm=bold ctermfg=6 ctermbg=none
-highlight pandocAtxHeader ctermfg=6 ctermbg=none
+highlight pandocAtxHeader   ctermfg=6 ctermbg=none
 
 " Highlight: A.L.E. (ALE)
 " -----------------------
