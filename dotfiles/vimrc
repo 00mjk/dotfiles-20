@@ -859,7 +859,7 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " --------------------------- "
 " --- YouCompleteMe / YCM --- "
@@ -876,7 +876,11 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_update_diagnostics_in_insert_mode = 0
 let g:ycm_auto_hover = ''
 
-let g:ycm_min_num_of_chars_for_completion = 99
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
+let g:ycm_key_list_select_completion = ['<Down>']
+
+" let g:ycm_min_num_of_chars_for_completion = 99
 " let g:ycm_auto_trigger = 0 " breaks argument hints
 " let g:ycm_key_invoke_completion = '<C-Space>'
 " let g:ycm_key_invoke_completion = '<C-#>'
@@ -1379,6 +1383,7 @@ let g:v_autofmt_bufwritepre = 1
 " --- vim-go --- "
 " -------------- "
 
+" vim-go: completion, compatibility with YCM and Ultisnips
 let g:go_code_completion_enabled = 0
 
 " vim-go: gofmt
@@ -1413,11 +1418,7 @@ let g:go_gopls_gofumpt = v:true
 " let g:go_code_completion_enabled = 0
 
 let g:go_fillstruct_mode = 'gopls'
-let g:go_code_completion_icase = 1
-let g:go_gopls_complete_unimported = v:true
 let g:go_list_type = 'quickfix'
-let g:go_snippet_engine = 'ultisnips'
-let g:go_gopls_use_placeholders = v:true " treat autocompletion items as anonymous snippets
 let g:go_addtags_skip_unexported = 1 " do not add JSON tags to unexported fields when using :GoAddTags
 
 " Show information about the identifier under the cursor (functions, vars..)...
