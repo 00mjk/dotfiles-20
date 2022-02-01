@@ -10,8 +10,6 @@ call plug#begin('~/.vim/plugged')
 " General power-ups
 " -----------------
 
-Plug 'gerw/vim-HiLinkTrace'
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
@@ -24,16 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'nanotee/zoxide.vim'
-
-" Plug 'tpope/vim-unimpaired'
-" Plug 'tomtom/tcomment_vim'
-
-" Eye-candy
-" ---------
-
-" Plug 'psliwka/vim-smoothie'
-" Plug 'ryanoasis/vim-devicons'
 
 " Search (files and code)
 " -----------------------
@@ -48,8 +36,6 @@ Plug 'mhinz/vim-grepper'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
-
-" Plug 'liuchengxu/vista.vim'
 
 " Language support (including special config syntaxes)
 " ----------------------------------------------------

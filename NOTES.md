@@ -223,3 +223,21 @@ Vim colorschemes
     " Plug 'romainl/apprentice'
     " Plug 'jeffkreeftmeijer/vim-dim'
     " Plug 'noahfrederick/vim-noctu'
+
+Other vim plugins
+-----------------
+
+    " Eye-candy
+    " ---------
+
+    " Plug 'psliwka/vim-smoothie'
+    " Plug 'ryanoasis/vim-devicons'
+    " Plug 'nanotee/zoxide.vim'
+
+    " Power-ups
+    " ---------
+
+    " Plug 'gerw/vim-HiLinkTrace'
+    " Plug 'tpope/vim-unimpaired'
+    " Plug 'tomtom/tcomment_vim'
+    " Plug 'liuchengxu/vista.vim'
