@@ -6,6 +6,7 @@ sudo dnf install -y \
   bat \
   bind-utils \
   clang \
+  cloc \
   cmake \
   ctags \
   direnv \
