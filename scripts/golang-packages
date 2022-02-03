@@ -17,38 +17,39 @@ EOF
 pushd ~
 
 # Editor support
-go install golang.org/x/tools/cmd/goimports@latest
-go install github.com/fatih/gomodifytags@latest
-go install github.com/fatih/motion@latest
-go install github.com/kisielk/errcheck@latest
-go install github.com/koron/iferr@latest
-go install github.com/josharian/impl@latest
-go install github.com/jstemmer/gotags@latest
-go install github.com/go-delve/delve/cmd/dlv@latest
-go install golang.org/x/tools/gopls@latest
-go install mvdan.cc/gofumpt@latest
+go install -v golang.org/x/tools/cmd/goimports@latest
+go install -v github.com/fatih/gomodifytags@latest
+go install -v github.com/fatih/motion@latest
+go install -v github.com/kisielk/errcheck@latest
+go install -v github.com/koron/iferr@latest
+go install -v github.com/josharian/impl@latest
+go install -v github.com/jstemmer/gotags@latest
+go install -v github.com/go-delve/delve/cmd/dlv@latest
+go install -v golang.org/x/tools/gopls@latest
+go install -v mvdan.cc/gofumpt@latest
 
 # Linters
-go install honnef.co/go/tools/cmd/staticcheck@latest
-go install github.com/mgechev/revive@latest
+go install -v honnef.co/go/tools/cmd/staticcheck@latest
+go install -v github.com/mgechev/revive@latest
 
 # Utils
-go install github.com/kyoh86/richgo@latest
-go install github.com/cespare/reflex@latest
-go install github.com/dundee/gdu/v5/cmd/gdu@latest
+go install -v github.com/kyoh86/richgo@latest
+go install -v github.com/cespare/reflex@latest
+go install -v github.com/dundee/gdu/v5/cmd/gdu@latest
 
 # Other
-# go install github.com/xxxserxxx/gotop/v4/cmd/gotop@latest # deprecation notices when building
-# go install golang.org/x/tools/cmd/present@latest
-# go install github.com/asciimoo/wuzz@latest
-# go install golang.org/x/exp/cmd/modgraphviz@latest
-# go install github.com/jfeliu007/goplantuml/cmd/goplantuml@latest
-# go install github.com/KyleBanks/depth/cmd/depth@latest
+# go install -v github.com/xxxserxxx/gotop/v4/cmd/gotop@latest # deprecation notices when building
+# go install -v golang.org/x/tools/cmd/present@latest
+# go install -v github.com/asciimoo/wuzz@latest
+# go install -v golang.org/x/exp/cmd/modgraphviz@latest
+# go install -v github.com/jfeliu007/goplantuml/cmd/goplantuml@latest
+# go install -v github.com/KyleBanks/depth/cmd/depth@latest
 
 popd
 
 echo "[setup] Install local Go scripts"
 pushd $ROOTDIR/go
+go install -v github.com/bravoecho/dotfiles/go/cmd/colorcombos
 go install -v github.com/bravoecho/dotfiles/go/cmd/onlydirs
 go install -v github.com/bravoecho/dotfiles/go/cmd/gitparse
 popd
