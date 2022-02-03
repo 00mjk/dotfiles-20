@@ -512,7 +512,10 @@ alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
 # --- watson --- #
 
 alias ww="watson"
-alias wag='watson aggregate --from "$(date +%Y-%m-%d)" --to "$(date +%Y-%m-%d)"'
+alias wad='watson aggregate --from "$(date +%Y-%m-%d)"'
+alias waw='watson aggregate --from "$(date -dlast-monday +%Y-%m-%d)"'
+alias wld='watson log --day'
+alias wlw='watson log --week'
 
 # -------------- #
 # --- DARWIN --- #
