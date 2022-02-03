@@ -15014,7 +15014,7 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>09FE1A12-008F-4A52-ABE7-AD169EE06A4D</string>
+	<string>030E2D32-F66B-419D-9C96-65698EB627E4</string>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
 	<key>DoubleClickPerformsSmartSelection</key>
@@ -16355,7 +16355,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>20000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
