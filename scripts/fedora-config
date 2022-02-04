@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -ex
+
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
+ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
+
+source "${CURRDIR}/utils.sh"
+
+# ------------------------------ #
+# --- Use existing VIM setup --- #
+# ------------------------------ #
+
+sudo ln -sf -T $HOME/.vimrc             /root/.vimrc
+sudo ln -sf -T $HOME/.vimrc.highlights  /root/.vimrc.highlights
+sudo ln -sf -T $HOME/.vim               /root/.vim
+
+# ----------------------------------------------------------------------------
+# --- Disable SSH password authentication ----------------------------------- #
+# --------------------------------------------------------------------------- #
+
+SSH_PASSWORD_AUTH_PATTERN='^[[:space:]]*PasswordAuthentication[[:space:]]+no'
+if ! sudo grep -E $SSH_PASSWORD_AUTH_PATTERN /etc/ssh/sshd_config; then
+  sudo tee -a /etc/ssh/sshd_config <<< "PasswordAuthentication no"
+fi
