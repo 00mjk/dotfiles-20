@@ -2,6 +2,23 @@
 
 set -e
 
+# ------------------ #
+# --- References --- #
+# ------------------ #
+#
+# * https://docs.docker.com/engine/install/fedora/
+# * https://docs.docker.com/engine/install/linux-postinstall/
+#
+# * https://docs.docker.com/compose/install/ > Alternative install options
+# * https://docs.docker.com/compose/completion/
+# * https://docs.docker.com/compose/cli-command/#installing-compose-v2
+# * https://github.com/docker/compose#linux
+#
+
+# ------------------- #
+# --- 1. Clean up --- #
+# ------------------- #
+
 sudo dnf remove -y \
   docker\
   docker-client\
@@ -14,9 +31,17 @@ sudo dnf remove -y \
   docker-engine-selinux\
   docker-engine
 
+# ---------------------------- #
+# --- 2. Set up repository --- #
+# ---------------------------- #
+
 sudo dnf -y install dnf-plugins-core
 
 sudo dnf config-manager --add-repo -y https://download.docker.com/linux/fedora/docker-ce.repo
+
+# -------------------------------- #
+# --- 3. Install Docker Engine --- #
+# -------------------------------- #
 
 sudo dnf install -y docker-ce docker-ce-cli containerd.io
 
@@ -27,3 +52,33 @@ sudo systemctl start docker
 newgrp docker
 
 docker run hello-world
+
+# --------------------------------------------------------------------- #
+# --- 4. Install docker-compose from the standard Fedora repository --- #
+# --------------------------------------------------------------------- #
+
+pipx install docker-compose
+
+# -------------------------------------- #
+# --- 5. Install zsh autocompletions --- #
+# -------------------------------------- #
+
+ZSH_LOCAL_SITE_FUNCTIONS=~/.config/zsh/site-functions
+
+mkdir -p $ZSH_LOCAL_SITE_FUNCTIONS
+
+ln -sf -T /usr/share/zsh/vendor-completions/_docker $ZSH_LOCAL_SITE_FUNCTIONS/_docker
+
+curl \
+    -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose \
+    -o $ZSH_LOCAL_SITE_FUNCTIONS/_docker-compose
+
+rm -rf ~/.zcompdump* && compinit
+
+# ----------------- #
+# --- 6. Finish --- #
+# ----------------- #
+
+echo "
+==> Close this terminal and open a new one.
+"
