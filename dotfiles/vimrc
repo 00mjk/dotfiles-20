@@ -868,7 +868,12 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Tentative configuration
 " -----------------------
 
-" let g:ycm_gopls_binary_path = [$GOPATH.'/gopls']
+" don't override <Leader-d>
+let g:ycm_key_detailed_diagnostics = ''
+
+let g:ycm_complete_in_comments = 1
+let g:ycm_filepath_completion_use_working_dir = 1
+
 let g:ycm_gopls_binary_path = 'gopls'
 let g:ycm_gopls_args = ['-remote=auto']
 
@@ -876,21 +881,21 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_update_diagnostics_in_insert_mode = 0
 let g:ycm_auto_hover = ''
 
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
+" disable tab, or it won't be possible to expand the Ultisnips snippet
 let g:ycm_key_list_select_completion = ['<Down>']
 
 " let g:ycm_min_num_of_chars_for_completion = 99
-" let g:ycm_auto_trigger = 0 " breaks argument hints
-" let g:ycm_key_invoke_completion = '<C-Space>'
+" let g:ycm_auto_trigger = 0 " also disables argument hints (signature help)
+
+" None of these seems to work
+" ---------------------------
+"
+" so it doesn't seem to be possible to free up the <C-space> for tmux
+"
 " let g:ycm_key_invoke_completion = '<C-#>'
 " let g:ycm_key_invoke_completion = '<C-x><C-x>'
-" set completefunc=youcompleteme#Complete
-
-" let g:ycm_key_list_select_completion = ['<Down>']
-" let g:ycm_key_invoke_completion = '<Tab>'
 " let g:ycm_key_invoke_completion = '<C-X><C-O>'
-" let g:ycm_autoclose_preview_window_after_completion = 1 " breaks argument hints
+" let g:ycm_key_invoke_completion = '<Tab>'
 
 " ---------------------- "
 " --- Copy and Paste --- "

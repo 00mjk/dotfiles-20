@@ -39,10 +39,11 @@ highlight SpellCap      ctermbg=0     ctermfg=12    cterm=reverse
 highlight SpellRare     ctermbg=0     ctermfg=13    cterm=reverse
 highlight SpellLocal    ctermbg=0     ctermfg=14    cterm=reverse
 highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
-highlight Pmenu         ctermbg=0     ctermfg=none
-highlight PmenuSel      ctermbg=8     ctermfg=12
+highlight Pmenu        ctermbg=none ctermfg=4  cterm=reverse
+" highlight Pmenu         ctermbg=none ctermfg=7 cterm=reverse
+highlight PmenuSel      ctermbg=8 ctermfg=12
 highlight PmenuSbar     ctermbg=8
-highlight PmenuThumb    ctermbg=4
+highlight PmenuThumb    ctermbg=7
 highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
 highlight ErrorMsg      ctermbg=0     ctermfg=9
 highlight Function                    ctermfg=6     cterm=bold
