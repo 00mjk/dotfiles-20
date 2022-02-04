@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+set -ex
+
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
+ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
+
+source "${CURRDIR}/utils.sh"
+
+# --------------------------------------------------------------------------- #
+# --- Google Authenticator 2FA setup ---------------------------------------- #
+# --------------------------------------------------------------------------- #
+
+sudo dnf install -y google-authenticator
+
+google-authenticator \
+  --force \
+  --time-based \
+  --disallow-reuse \
+  --window-size=3 \
+  --qr-mode=utf8 \
+  --rate-limit=3 \
+  --rate-time=120 \
+  --emergency-codes=0
+
+# --------------------------------------------------------------------------- #
+# --- PAM authentication setup for Google Authenticator --------------------- #
+# --------------------------------------------------------------------------- #
+
+# disable (comment out) password authentication for PAM
+sudo sed \
+  -i.bkp \
+  -r \
+  -e 's/(^[[:space:]]*auth[[:space:]]*substack[[:space:]]*password-auth)/#\1/' \
+  /etc/pam.d/sshd
+
+GOOGLE_AUTH_PAM_PATTERN='^[[:space:]]*auth[[:space:]]*required[[:space:]]*pam_google_authenticator.so'
+
+# enforce the use of the Google Authenticator
+if ! sudo grep -E $GOOGLE_AUTH_PAM_PATTERN /etc/pam.d/sshd; then
+  sudo tee -a /etc/pam.d/sshd <<< "auth required pam_google_authenticator.so"
+fi
+
+# --------------------------------------------------------------------------- #
+# --- SSH daemon setup ------------------------------------------------------ #
+# --------------------------------------------------------------------------- #
+
+sudo cp -n /etc/ssh/sshd_config{,.bkp}
+
+# To accept an OTP as password, PasswordAuthentication must be enabled, but it
+# won't be the user password, it will be the OTP token. For this reason we need
+# to comment out the line that disables it, if present.
+sudo sed \
+  -i.bkp \
+  -r \
+  -e 's/(^[[:space:]]*PasswordAuthentication[[:space:]]*no)/#\1/' \
+  /etc/ssh/sshd_config
+
+# Harden the SSH server, and set it up for multifactor authentication.
+sudo tee -a /etc/ssh/sshd_config <<-EOT
+
+# --------------------------------------------------------------------------- #
+# --- Custom settings ------------------------------------------------------- #
+# --------------------------------------------------------------------------- #
+
+PermitRootLogin                 no
+MaxAuthTries                    3
+LoginGraceTime                  20
+KerberosAuthentication          no
+GSSAPIAuthentication            no
+X11Forwarding                   no
+PermitUserEnvironment           no
+
+# --------------------------------------------------------------------------- #
+# --- Multifactor for public key auth --------------------------------------- #
+# --------------------------------------------------------------------------- #
+
+# Because the Google Authenticator PAM module is enabled,
+# password here means 'OTP token', not user password.
+
+ChallengeResponseAuthentication yes
+UsePAM                          yes
+AuthenticationMethods           publickey,password publickey,keyboard-interactive
+EOT
+
+# --------------------------------------------------------------------------- #
+# --- Test ------------------------------------------------------------------ #
+# --------------------------------------------------------------------------- #
+
+# Print detailed errors if the SSH daemon configuration is incorrect, and exit.
+sudo sshd -T
+
+# --------------------------------------------------------------------------- #
+# --- Finalise -------------------------------------------------------------- #
+# --------------------------------------------------------------------------- #
+
+# Ensure the new configuration is active.
+sudo systemctl restart sshd.service
