@@ -15031,6 +15031,10 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_030E2D32-F66B-419D-9C96-65698EB627E4</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_030E2D32-F66B-419D-9C96-65698EB627E4_selection</key>
+	<integer>0</integer>
 	<key>NeverWarnAboutShortLivedSessions_09FE1A12-008F-4A52-ABE7-AD169EE06A4D</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_09FE1A12-008F-4A52-ABE7-AD169EE06A4D_selection</key>
