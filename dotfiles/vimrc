@@ -884,7 +884,7 @@ let g:ycm_auto_hover = ''
 " disable tab, or it won't be possible to expand the Ultisnips snippet
 let g:ycm_key_list_select_completion = ['<Down>']
 
-" let g:ycm_min_num_of_chars_for_completion = 99
+let g:ycm_min_num_of_chars_for_completion = 99
 " let g:ycm_auto_trigger = 0 " also disables argument hints (signature help)
 
 " None of these seems to work
@@ -1339,6 +1339,8 @@ let g:fzf_tags_command = 'ctags -R'
 " disable the preview window
 let g:fzf_preview_window = []
 " do not jump to the existing window if the buffer is already visible
+" (sometimes we want to use the same buffer in a different window, for
+" comparison or reference)
 let g:fzf_buffers_jump = 0
 " set fzf history specifically for use within Vim, separately from the global fzf history
 let s:fzf_history_dir = $HOME . "/.vim/fzf-history//"

@@ -18,6 +18,8 @@ highlight ColorColumn   ctermbg=0
 highlight WildMenu      ctermbg=11                  ctermfg=0
 highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
 highlight CursorLineNr  ctermbg=0     ctermfg=15    cterm=none
+" remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
+" signature help unusable.
 " highlight CursorLine    ctermbg=0                   cterm=none              ctermul=4
 highlight CursorLine    cterm=none
 highlight SignColumn    ctermbg=none                cterm=none
@@ -29,11 +31,11 @@ highlight Comment                     ctermfg=7     cterm=italic
 " highlight SpellBad      ctermbg=none  ctermfg=1     cterm=reverse
 " highlight SpellBad      ctermbg=none  ctermfg=13 cterm=none,reverse
 " highlight SpellBad      ctermbg=8  ctermfg=9 cterm=none,underline
+" highlight SpellBad      ctermbg=8  ctermfg=15 cterm=none
 
-" white on red unusable on in light version
+" white on red unusable in the light version
 " highlight SpellBad      ctermbg=9  ctermfg=15 cterm=none,underline
 
-" highlight SpellBad      ctermbg=8  ctermfg=15 cterm=none
 highlight SpellBad      ctermbg=8     ctermfg=1 cterm=none
 
 highlight SpellCap      ctermbg=0     ctermfg=12    cterm=reverse
@@ -41,8 +43,10 @@ highlight SpellRare     ctermbg=0     ctermfg=13    cterm=reverse
 highlight SpellLocal    ctermbg=0     ctermfg=14    cterm=reverse
 highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
 highlight Pmenu        ctermbg=8 ctermfg=none
-" highlight Pmenu         ctermbg=none ctermfg=7 cterm=reverse
+
+" NOTE: PmenuSel is also used as part of YCM's (YouCompleteMe) signature help.
 highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold
+
 highlight PmenuSbar     ctermbg=8
 highlight PmenuThumb    ctermbg=7
 highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
