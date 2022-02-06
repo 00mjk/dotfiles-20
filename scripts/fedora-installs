@@ -18,6 +18,7 @@ sudo dnf install -y \
   glibc \
   groff \
   htop \
+  jo \
   jq \
   lsof \
   make \
