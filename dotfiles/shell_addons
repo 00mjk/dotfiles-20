@@ -497,8 +497,9 @@ alias glow='glow --pager'
 
 # --- PlantUML server --- #
 
-alias umlup='docker run --name plantuml --rm -d -p 8080:8080 plantuml/plantuml-server:jetty'
-alias umldown='docker stop plantuml'
+# build image first with ./scripts/plantuml-server-image
+alias umlup='docker run --name=plantuml --rm -d -p 56789:8080 local/plantuml-server:jetty'
+alias umldown='docker kill plantuml'
 
 # --- ImageMagick --- #
 
