@@ -152,6 +152,11 @@ if [[ -n "$(command -v watson)" && -n "$(command -v _watson)" ]]; then
   compdef wlw='watson'
 fi
 
+if [[ -n "$(command -v tmux)" && -n "$(command -v _tmux)" ]]; then
+  compdef tmax='tmux'
+  compdef tumx='tmux'
+fi
+
 # ALT-F - Custom FZF key-binding that pastes the selected directories into the
 # command line.
 #

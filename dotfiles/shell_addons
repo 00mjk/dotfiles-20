@@ -517,6 +517,12 @@ alias waw='watson aggregate --from "$(date -dlast-monday +%Y-%m-%d)"'
 alias wld='watson log --day'
 alias wlw='watson log --week'
 
+# --- Miscellanea --- #
+
+alias clocksync='sudo ntpdate pool.ntp.org'
+alias tmax='tmux'
+alias tumx='tmux'
+
 # -------------- #
 # --- DARWIN --- #
 # -------------- #
