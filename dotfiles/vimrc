@@ -1243,7 +1243,7 @@ let g:grepper.tools = [
 \]
 
 let g:grepper.highlight = 1 " highlight matches
-" let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
+let g:grepper.stop = 1000 " stop searching after 1000 results, instead of the default 5000
 
 " the following two settings will use the standard 10-line quickfix window
 " no matter how many matches found; see ':h grepper-faq-4'
