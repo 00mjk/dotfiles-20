@@ -14,7 +14,6 @@ source "${CURRDIR}/utils.sh"
 sudo dnf install -y google-authenticator
 
 google-authenticator \
-  --force \
   --time-based \
   --disallow-reuse \
   --window-size=3 \
@@ -87,12 +86,12 @@ EOT
 # --- Test ------------------------------------------------------------------ #
 # --------------------------------------------------------------------------- #
 
-# Print detailed errors if the SSH daemon configuration is incorrect, and exit.
+# Print detailed errors if the SSH daemon configuration is incorrect, and exits.
 sudo sshd -T
 
 # --------------------------------------------------------------------------- #
 # --- Finalise -------------------------------------------------------------- #
 # --------------------------------------------------------------------------- #
 
-# Ensure the new configuration is active.
+# Ensure the new configuration is effective immediately.
 sudo systemctl restart sshd.service
