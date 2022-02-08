@@ -1451,12 +1451,15 @@ autocmd FileType go nmap <buffer> <Leader>t <Plug>(go-test)
 autocmd FileType go nmap <buffer> <Leader>tf <Plug>(go-test-func)
 autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-decls)
 autocmd FileType go nmap <buffer> <Leader>ee <Plug>(go-decls-dir)
-autocmd FileType go nmap <buffer> <Leader>s <Plug>(go-same-ids-toggle)
+autocmd FileType go nmap <buffer> <Leader>s :GoSameIdsToggle<CR>
 " Since Shift+K in vim-go opens the docs for the current element, we use
 " a similar mapping to display the info in the output of the commandline.
-autocmd FileType go nmap <buffer> <Leader>k <Plug>(go-info)
-
-autocmd FileType go nmap <buffer> <silent> <C-t> <Plug>(go-def-type)
+autocmd FileType go nmap <Leader>k <Plug>(go-info)
+" to complement gd (go-def) which is provided by vim-go by default
+autocmd FileType go nmap <buffer> gt <Plug>(go-def-type)
+autocmd FileType go nmap <buffer> gc <Plug>(go-callers)
+autocmd FileType go nmap <buffer> gl <Plug>(go-implements)
+autocmd FileType go nmap <buffer> gn <Plug>(go-rename)
 
 " vim-go: debugging
 " -----------------
@@ -1624,7 +1627,8 @@ let g:vim_json_syntax_conceal = 0
 " --- TagBar --- "
 " -------------- "
 
-nnoremap gt :TagbarToggle<CR>
+" We cannot use <C-t>, as it's taken by vim-go.
+nnoremap <silent> gb :TagbarToggle<CR>
 
 " let g:tagbar_sort = 0 " list tags in order of appearance in the file
 
