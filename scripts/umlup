@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# NOTE: run from the root of a diagram repository.
+
+set -ex
+
+docker run \
+  --name=plantuml \
+  --rm \
+  -d \
+  -p 56789:8080 \
+  -w /usr/diagrams \
+  -v "$(pwd):/usr/diagrams" \
+  -e ALLOW_PLANTUML_INCLUDE=true \
+  local/plantuml-server:jetty

@@ -495,12 +495,6 @@ alias kx='kubectx'
 
 alias glow='glow --pager'
 
-# --- PlantUML server --- #
-
-# build image first with ./scripts/plantuml-server-image
-alias umlup='docker run --name=plantuml --rm -d -p 56789:8080 local/plantuml-server:jetty'
-alias umldown='docker kill plantuml'
-
 # --- ImageMagick --- #
 
 # create a compressed JPG copy of each PNG in the current directory

@@ -92,6 +92,11 @@ backup_and_symlink "$SCRIPTS_DIR/anygit" "$LOCAL_BIN/anygit"
 backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions" "$LOCAL_BIN/hgo-dep-versions"
 backup_and_symlink "$SCRIPTS_DIR/hgo-test" "$LOCAL_BIN/hgo-test"
 
+backup_and_symlink "$SCRIPTS_DIR/plantuml-server-image" "$LOCAL_BIN/plantuml-server-image"
+backup_and_symlink "$SCRIPTS_DIR/plantuml-c4model-stdlib" "$LOCAL_BIN/plantuml-c4model-stdlib"
+backup_and_symlink "$SCRIPTS_DIR/umlup" "$LOCAL_BIN/umlup"
+backup_and_symlink "$SCRIPTS_DIR/umldown" "$LOCAL_BIN/umldown"
+
 # -------------- #
 # --- shells --- #
 # -------------- #

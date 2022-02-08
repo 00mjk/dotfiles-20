@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# NOTE: run from the root of a diagram repository.
+
+set -ex
+
+BASE_URL=https://github.com/plantuml-stdlib/C4-PlantUML/raw/master
+
+mkdir -p c4
+pushd c4
+
+curl -OLS $BASE_URL/C4.puml
+curl -OLS $BASE_URL/C4_Component.puml
+curl -OLS $BASE_URL/C4_Container.puml
+curl -OLS $BASE_URL/C4_Context.puml
+curl -OLS $BASE_URL/C4_Deployment.puml
+curl -OLS $BASE_URL/C4_Dynamic.puml
+
+popd
