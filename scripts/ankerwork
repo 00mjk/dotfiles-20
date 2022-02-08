@@ -4,14 +4,15 @@ set -ex
 
 mkdir -p ~/Downloads
 pushd ~/Downloads
-curl -OJL https://ankerwork.s3-us-west-2.amazonaws.com/prod/AnkerWork.dmg
+curl -OJL https://ankerwork.s3.us-west-2.amazonaws.com/prod/AnkerWork_Official.dmg
 
 hdiutil attach AnkerWork.dmg
 
 pushd /Volumes/AnkerWork
-rm -r Applications/AnkerWork.app
-cp -R AnkerWork.app Applications
+rm -r ~/Applications/AnkerWork.app
+cp -R AnkerWork.app ~/Applications/
 
-popd; popd
+popd
+popd
 
 hdiutil unmount /Volumes/AnkerWork
