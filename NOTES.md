@@ -1,3 +1,18 @@
+Remarkable dofile repositories
+------------------------------
+
+* <https://github.com/seejohnrun/dotfiles>
+* <https://github.com/fabi1cazenave/dotFiles/>
+* <https://github.com/ygt-mikekchar/dotfiles>
+
+Vim plugins to consider
+-----------------------
+
+* <https://github.com/regedarek/ZoomWin>
+* <https://github.com/szw/vim-maximizer>
+
+macOS old installation notes
+----------------------------
 
     # ------------------ #
     # --- Next steps --- #
