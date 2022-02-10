@@ -231,6 +231,8 @@ if exists('+colorcolumn')
   set colorcolumn=100 " display a vertical ruler for line length
   autocmd FileType qf,help,nerdtree,loclist set colorcolumn=
 endif
+" alternatively, https://github.com/seejohnrun/dotfiles
+" au BufWinEnter * let w:m2=matchadd ( 'ErrorMsg' "18>80v. \+' -1)
 
 " Compute syntax highlighting from beginning of file. (By default, vim only
 " looks 200 lines back, which can make it highlight code incorrectly in some
