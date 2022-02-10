@@ -241,3 +241,36 @@ Other vim plugins
     " Plug 'tpope/vim-unimpaired'
     " Plug 'tomtom/tcomment_vim'
     " Plug 'liuchengxu/vista.vim'
+    " Plug 'tpope/vim-dispatch'
+
+Vim PlantUML Previewer
+----------------------
+
+    Plug 'tyru/open-browser.vim'
+
+    " plantuml-previewer.vim requires adoptopenjdk
+    " (https://github.com/weirongxu/plantuml-previewer.vim/issues/40)
+    Plug 'weirongxu/plantuml-previewer.vim'
+
+    "--------------------------"
+    "--- plantuml-previewer ---"
+    "--------------------------"
+
+    au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = $HOME . '/.local/bin/plantuml.jar'
+
+    "--------------------"
+    "--- open-browser ---"
+    "--------------------"
+
+    " let g:openbrowser_browser_commands = [{'background': 1, 'name': 'open', 'args': ['{browser}', '{uri}']}]
+
+    " let g:openbrowser_browser_commands = [
+    " \ {
+    " \   'background': 1,
+    " \   'name': 'open',
+    " \   'args': [
+    " \     '-a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
+    " \     '{uri}',
+    " \   ],
+    " \ },
+    " \]
