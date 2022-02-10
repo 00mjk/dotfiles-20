@@ -12,4 +12,5 @@ docker run \
   -w /usr/diagrams \
   -v "$(pwd):/usr/diagrams" \
   -e ALLOW_PLANTUML_INCLUDE=true \
+  -e PLANTUML_LIMIT_SIZE=8192 \
   local/plantuml-server:jetty
