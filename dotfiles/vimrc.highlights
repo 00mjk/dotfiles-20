@@ -42,7 +42,7 @@ highlight SpellCap      ctermbg=0     ctermfg=12    cterm=reverse
 highlight SpellRare     ctermbg=0     ctermfg=13    cterm=reverse
 highlight SpellLocal    ctermbg=0     ctermfg=14    cterm=reverse
 highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
-highlight Pmenu        ctermbg=8 ctermfg=none
+highlight Pmenu         ctermbg=8 ctermfg=none
 
 " NOTE: PmenuSel is also used as part of YCM's (YouCompleteMe) signature help.
 highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold
@@ -86,6 +86,7 @@ autocmd BufWinLeave * call clearmatches()
 
 highlight link goFormatSpecifier Identifier
 highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
+" highlight goSameId ctermbg=8
 
 " Highlight: Pandoc
 " -----------------
