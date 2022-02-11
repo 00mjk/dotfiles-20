@@ -289,3 +289,25 @@ Vim PlantUML Previewer
     " \   ],
     " \ },
     " \]
+
+Vim unused highlights
+---------------------
+
+" RED Lumy: ff9292
+" RED VS Code: d7997f
+
+    " highlight SpellBad      ctermbg=none  ctermfg=1     cterm=reverse
+    " highlight SpellBad      ctermbg=none  ctermfg=13 cterm=none,reverse
+    " highlight SpellBad      ctermbg=8  ctermfg=9 cterm=none,underline
+    " highlight SpellBad      ctermbg=8  ctermfg=15 cterm=none
+
+" white on red unusable in the light version
+" highlight SpellBad      ctermbg=9  ctermfg=15 cterm=none,underline
+
+" remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
+" signature help unusable.
+" highlight CursorLine    ctermbg=0                   cterm=none              ctermul=4
+
+" highlight MatchParen    ctermbg=none  ctermfg=none  cterm=none,bold,reverse
+" highlight MatchParen    ctermbg=none  ctermfg=7     cterm=none,bold,reverse
+" highlight Special                     ctermfg=5

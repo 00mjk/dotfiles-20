@@ -7,9 +7,6 @@ autocmd! bufwritepost ~/.vimrc.highlights source ~/.vimrc.highlights
 " Highlight: tweaks
 " -----------------
 
-" RED Lumy: ff9292
-" RED VS Code: d7997f
-
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
 highlight VertSplit     ctermbg=8     ctermfg=8     cterm=none
@@ -20,21 +17,12 @@ highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
 highlight CursorLineNr  ctermbg=0     ctermfg=15    cterm=none
 " remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
 " signature help unusable.
-" highlight CursorLine    ctermbg=0                   cterm=none              ctermul=4
 highlight CursorLine    cterm=none
 highlight SignColumn    ctermbg=none                cterm=none
 highlight Search        ctermbg=0     ctermfg=11    cterm=reverse
 highlight Todo          ctermbg=none  ctermfg=4     cterm=none,bold,italic
 highlight Visual        ctermbg=8     ctermfg=15    cterm=none
 highlight Comment                     ctermfg=7     cterm=italic
-
-" highlight SpellBad      ctermbg=none  ctermfg=1     cterm=reverse
-" highlight SpellBad      ctermbg=none  ctermfg=13 cterm=none,reverse
-" highlight SpellBad      ctermbg=8  ctermfg=9 cterm=none,underline
-" highlight SpellBad      ctermbg=8  ctermfg=15 cterm=none
-
-" white on red unusable in the light version
-" highlight SpellBad      ctermbg=9  ctermfg=15 cterm=none,underline
 
 highlight SpellBad      ctermbg=8     ctermfg=1 cterm=none
 
@@ -53,10 +41,7 @@ highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
 highlight ErrorMsg      ctermbg=0     ctermfg=9
 highlight Function                    ctermfg=6     cterm=bold
 highlight EndOfBuffer                 ctermfg=0
-" highlight MatchParen    ctermbg=none  ctermfg=none  cterm=none,bold,reverse
-" highlight MatchParen    ctermbg=none  ctermfg=7     cterm=none,bold,reverse
 highlight MatchParen    ctermbg=8     ctermfg=12    cterm=none,bold
-" highlight Special                     ctermfg=5
 
 " Statement includes Keyword
 highlight Statement                   ctermfg=3
