@@ -7,6 +7,7 @@
 **/target/debug
 *Google\ Drive/
 .Trash/
+.android/
 .aws/
 .bin/
 .build/
@@ -25,6 +26,8 @@
 .go/
 .gobrew/
 .goenv/
+.gradle/
+.gnupg/
 .hg/
 .idea/
 .jump/
@@ -37,6 +40,7 @@
 .ssh/
 .svn/
 .terminfo/
+.transforms/
 .vim/
 .vscode-insiders/
 .vscode/
@@ -46,12 +50,14 @@ Movies/TV/Media.localized/
 Movies/TV/Previous Libraries.localized/
 Movies/TV/TV Library.tvlibrary/
 Pictures/Photos Library.photoslibrary
+Sync.Cache/
 _old/
 _quarantine/
 bundle/
 git/
 go/bin/
 go/pkg/
+google-cloud-sdk/
 log/
 logs/
 node_modules/
