@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -ex
+
+KITTY_VERSION=0.24.2
+OS_ARCH=arm64
+
+mkdir -p ~/Downloads/kitty.app
+
+pushd ~/Downloads/kitty.app
+  curl -OsL https://github.com/kovidgoyal/kitty/releases/download/v$KITTY_VERSION/kitty-$KITTY_VERSION-$OS_ARCH.txz
+  tar xf kitty-$KITTY_VERSION-$OS_ARCH.txz
+  rm kitty-$KITTY_VERSION-$OS_ARCH.txz
+popd
+
+mkdir -p ~/.local/bin
+mv ~/Downloads/kitty.app ~/.local/
+ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
