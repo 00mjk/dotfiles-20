@@ -60,50 +60,51 @@ tic "${ROOTDIR}/dotfiles/tmux-256color.terminfo"
 
 LOCAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-backup_and_symlink "$DOTFILES_DIR/ignore" "$LOCAL_CONFIG/fd/ignore"
-backup_and_symlink "$DOTFILES_DIR/ripgreprc" "$HOME/.ripgreprc"
-backup_and_symlink "$DOTFILES_DIR/ignore" "$HOME/.rgignore"
-backup_and_symlink "$DOTFILES_DIR/htoprc" "$LOCAL_CONFIG/htop/htoprc"
-backup_and_symlink "$DOTFILES_DIR/sqliterc" "$HOME/.sqliterc"
-backup_and_symlink "$DOTFILES_DIR/lfrc" "$LOCAL_CONFIG/lf/lfrc"
-backup_and_symlink "$DOTFILES_DIR/tigrc" "$HOME/.tigrc"
-backup_and_symlink "$DOTFILES_DIR/bat_config" "$LOCAL_CONFIG/bat/config"
-backup_and_symlink "$DOTFILES_DIR/direnvrc" "$HOME/.direnvrc"
-backup_and_symlink "$DOTFILES_DIR/curlrc" "$HOME/.curlrc"
-backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
-backup_and_symlink "${DOTFILES_DIR}/vimrc.highlights" "${HOME}/.vimrc.highlights"
-backup_and_symlink "$DOTFILES_DIR/watson" "$LOCAL_CONFIG/watson/config"
+backup_and_symlink "$DOTFILES_DIR/ignore"           "$LOCAL_CONFIG/fd/ignore"
+backup_and_symlink "$DOTFILES_DIR/ripgreprc"        "$HOME/.ripgreprc"
+backup_and_symlink "$DOTFILES_DIR/ignore"           "$HOME/.rgignore"
+backup_and_symlink "$DOTFILES_DIR/htoprc"           "$LOCAL_CONFIG/htop/htoprc"
+backup_and_symlink "$DOTFILES_DIR/sqliterc"         "$HOME/.sqliterc"
+backup_and_symlink "$DOTFILES_DIR/lfrc"             "$LOCAL_CONFIG/lf/lfrc"
+backup_and_symlink "$DOTFILES_DIR/tigrc"            "$HOME/.tigrc"
+backup_and_symlink "$DOTFILES_DIR/bat_config"       "$LOCAL_CONFIG/bat/config"
+backup_and_symlink "$DOTFILES_DIR/direnvrc"         "$HOME/.direnvrc"
+backup_and_symlink "$DOTFILES_DIR/curlrc"           "$HOME/.curlrc"
+backup_and_symlink "$DOTFILES_DIR/vimrc"            "${HOME}/.vimrc"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights" "${HOME}/.vimrc.highlights"
+backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config"
+backup_and_symlink "$DOTFILES_DIR/kitty.conf"       "$LOCAL_CONFIG/kitty/kitty.conf"
 
 # ----------------------- #
 # --- custom commands --- #
 # ----------------------- #
 
-backup_and_symlink "$SCRIPTS_DIR/brut" "$LOCAL_BIN/brut"
-backup_and_symlink "$SCRIPTS_DIR/epochms" "$LOCAL_BIN/epochms"
-backup_and_symlink "$SCRIPTS_DIR/free" "$LOCAL_BIN/free"
-backup_and_symlink "$SCRIPTS_DIR/gddirs" "$LOCAL_BIN/gddirs"
-backup_and_symlink "$SCRIPTS_DIR/go-test" "$LOCAL_BIN/go-test"
-backup_and_symlink "$SCRIPTS_DIR/macos-updates" "$LOCAL_BIN/macos-updates"
-backup_and_symlink "$SCRIPTS_DIR/nauniq" "$LOCAL_BIN/nauniq"
-backup_and_symlink "$SCRIPTS_DIR/utcnow" "$LOCAL_BIN/utcnow"
-backup_and_symlink "$SCRIPTS_DIR/wanip" "$LOCAL_BIN/wanip"
-backup_and_symlink "$SCRIPTS_DIR/anygit" "$LOCAL_BIN/anygit"
+backup_and_symlink "$SCRIPTS_DIR/brut"                    "$LOCAL_BIN/brut"
+backup_and_symlink "$SCRIPTS_DIR/epochms"                 "$LOCAL_BIN/epochms"
+backup_and_symlink "$SCRIPTS_DIR/free"                    "$LOCAL_BIN/free"
+backup_and_symlink "$SCRIPTS_DIR/gddirs"                  "$LOCAL_BIN/gddirs"
+backup_and_symlink "$SCRIPTS_DIR/go-test"                 "$LOCAL_BIN/go-test"
+backup_and_symlink "$SCRIPTS_DIR/macos-updates"           "$LOCAL_BIN/macos-updates"
+backup_and_symlink "$SCRIPTS_DIR/nauniq"                  "$LOCAL_BIN/nauniq"
+backup_and_symlink "$SCRIPTS_DIR/utcnow"                  "$LOCAL_BIN/utcnow"
+backup_and_symlink "$SCRIPTS_DIR/wanip"                   "$LOCAL_BIN/wanip"
+backup_and_symlink "$SCRIPTS_DIR/anygit"                  "$LOCAL_BIN/anygit"
 
-backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions" "$LOCAL_BIN/hgo-dep-versions"
-backup_and_symlink "$SCRIPTS_DIR/hgo-test" "$LOCAL_BIN/hgo-test"
+backup_and_symlink "$SCRIPTS_DIR/hgo-dep-versions"        "$LOCAL_BIN/hgo-dep-versions"
+backup_and_symlink "$SCRIPTS_DIR/hgo-test"                "$LOCAL_BIN/hgo-test"
 
-backup_and_symlink "$SCRIPTS_DIR/plantuml-server-image" "$LOCAL_BIN/plantuml-server-image"
+backup_and_symlink "$SCRIPTS_DIR/plantuml-server-image"   "$LOCAL_BIN/plantuml-server-image"
 backup_and_symlink "$SCRIPTS_DIR/plantuml-c4model-stdlib" "$LOCAL_BIN/plantuml-c4model-stdlib"
-backup_and_symlink "$SCRIPTS_DIR/umlup" "$LOCAL_BIN/umlup"
-backup_and_symlink "$SCRIPTS_DIR/umldown" "$LOCAL_BIN/umldown"
+backup_and_symlink "$SCRIPTS_DIR/umlup"                   "$LOCAL_BIN/umlup"
+backup_and_symlink "$SCRIPTS_DIR/umldown"                 "$LOCAL_BIN/umldown"
 
 # -------------- #
 # --- shells --- #
 # -------------- #
 
 backup_and_symlink "$DOTFILES_DIR/shell_addons" "$HOME/.shell_addons"
-backup_and_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
-backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
+backup_and_symlink "$DOTFILES_DIR/bashrc"       "$HOME/.bashrc"
+backup_and_symlink "$DOTFILES_DIR/zshrc"        "$HOME/.zshrc"
 "$CURRDIR/zsh-completions"
 
 if [[ "$(uname -s)" =~ Darwin ]]; then
