@@ -48,15 +48,14 @@ func main() {
 		color.FgHiWhite,
 	}
 
-	fmt.Println()
-	fmt.Println("▶▶▶ NO COLOURS")
+	fmt.Println("————————————————————————————————————————————————————————————————————————")
+	fmt.Println("▶ NO COLOURS")
 	color.Unset()
 	fmt.Printf(" FG/BG █ ")
 	color.Unset()
 	color.Set(color.ReverseVideo)
 	fmt.Println(" BG/FG █ ")
 	color.Unset()
-	// fmt.Println()
 
 	printSimple("NORMAL FOREGROUND / DEFAULT BACKGROUND (AND REVERSE)", normalForegrounds)
 	printSimple("BRIGHT FOREGROUND / DEFAULT BACKGROUND (AND REVERSE)", brightForegrounds)
@@ -64,20 +63,20 @@ func main() {
 	printSimple("DEFAULT FOREGROUND / BRIGHT BACKGROUND (AND REVERSE)", brightBackgrounds)
 
 	printCombo("NORMAL FOREGROUNDS / NORMAL BACKGROUNDS", normalForegrounds, normalBackgrounds)
-	printCombo("NORMAL FOREGROUNDS / BRIGHT	BACKGROUNDS", normalForegrounds, brightBackgrounds)
-	printCombo("BRIGHT FOREGROUNDS / NORMAL	BACKGROUNDS", brightForegrounds, normalBackgrounds)
-	printCombo("BRIGHT FOREGROUNDS / BRIGHT	BACKGROUNDS", brightForegrounds, brightBackgrounds)
+	printCombo("NORMAL FOREGROUNDS / BRIGHT BACKGROUNDS", normalForegrounds, brightBackgrounds)
+	printCombo("BRIGHT FOREGROUNDS / NORMAL BACKGROUNDS", brightForegrounds, normalBackgrounds)
+	printCombo("BRIGHT FOREGROUNDS / BRIGHT BACKGROUNDS", brightForegrounds, brightBackgrounds)
 }
 
 func toANSI(c color.Attribute) color.Attribute {
 	switch {
-	case c <= 37: // normal foreground
+	case c <= normalFgLimit:
 		return c - 30
-	case c <= 47: // normal backgrund
+	case c <= normalBgLimit:
 		return c - 40
-	case c <= 97: // bright foreground
+	case c <= brightFgLimit:
 		return c - 82
-	case c <= 107: // bright backgrund
+	case c <= brightBgLimit:
 		return c - 92
 	default:
 		panic("check the values")
@@ -85,24 +84,29 @@ func toANSI(c color.Attribute) color.Attribute {
 }
 
 func printTitle(text string) {
-	// fmt.Println("————————————————————————————————————————————————————————————————————————")
-	// fmt.Println()
-	fmt.Println("▶▶▶", text)
-	// fmt.Println()
+	fmt.Println("————————————————————————————————————————————————————————————————————————")
+	fmt.Println("▶", text)
 }
+
+const (
+	normalFgLimit = 37
+	normalBgLimit = 47
+	brightFgLimit = 97
+	brightBgLimit = 107
+)
 
 func printFGBG(c color.Attribute) {
 	color.Set(c)
 	defer color.Unset()
 
 	switch {
-	case c <= 37: // normal foreground
+	case c <= normalFgLimit:
 		fmt.Printf(" %2v|BG █ ", toANSI(c))
-	case c <= 47: // normal backgrund
+	case c <= normalBgLimit:
 		fmt.Printf(" FG|%-2v █ ", toANSI(c))
-	case c <= 97: // bright foreground
+	case c <= brightFgLimit:
 		fmt.Printf(" %2v|BG █ ", toANSI(c))
-	case c <= 107: // bright backgrund
+	case c <= brightBgLimit:
 		fmt.Printf(" FG|%-2v █ ", toANSI(c))
 	default:
 		panic("check the values")
@@ -114,13 +118,13 @@ func printFGBGReverse(c color.Attribute) {
 	defer color.Unset()
 
 	switch {
-	case c <= 37: // normal foreground
+	case c <= normalFgLimit:
 		fmt.Printf(" BG|%-2v █ ", toANSI(c))
-	case c <= 47: // normal backgrund
+	case c <= normalBgLimit:
 		fmt.Printf(" %2v|FG █ ", toANSI(c))
-	case c <= 97: // bright foreground
+	case c <= brightFgLimit:
 		fmt.Printf(" BG|%-2v █ ", toANSI(c))
-	case c <= 107: // bright backgrund
+	case c <= brightBgLimit:
 		fmt.Printf(" %2v|FG █ ", toANSI(c))
 	default:
 		panic("check the values")
@@ -151,5 +155,4 @@ func printCombo(title string, normalForegrounds, normalBackgrounds []color.Attri
 		}
 		fmt.Println()
 	}
-	// fmt.Println()
 }
