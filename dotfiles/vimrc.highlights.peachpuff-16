@@ -66,6 +66,11 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Highlight: YouCompleteMe, YCM
+" -----------------------------
+
+highlight YCMInverse cterm=reverse ctermfg=15 ctermbg=none
+
 " Highlight: vim-go
 " -----------------
 
