@@ -6,6 +6,9 @@ Notable dotfile repositories
 * <https://github.com/ygt-mikekchar/dotfiles>
 * <https://github.com/nicknisi/dotfiles>
 * <https://github.com/ChristianChiarulli/nvim>
+* <https://github.com/terminalforlife/VimConfig>
+* <https://github.com/terminalforlife/BashConfig>
+* <
 
 Vim plugins
 -----------
@@ -20,6 +23,9 @@ Vim plugins
 * <https://tomtom/tcomment_vim>
 * <https://liuchengxu/vista.vim>
 * <https://tpope/vim-dispatch>
+* <https://github.com/JimmyHuang454/EasyCompleteYou>
+* <https://github.com/jayli/vim-easycomplete>
+* <https://github.com/prabirshrestha/asyncomplete.vim>
 
 Vim colorschemes
 ----------------
@@ -33,6 +39,13 @@ Vim colorschemes
 * <https://romainl/apprentice>
 * <https://jeffkreeftmeijer/vim-dim>
 * <https://noahfrederick/vim-noctu>
+
+ANSI colorscheme tools
+----------------------
+
+* <https://terminal.sexy/>
+* <https://bottosson.github.io/misc/colorpicker/>
+* <https://www.hsluv.org/>
 
 macOS old installation notes
 ----------------------------
