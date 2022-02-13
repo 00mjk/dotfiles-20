@@ -1,4 +1,4 @@
-autocmd! bufwritepost ~/.vimrc.highlights source ~/.vimrc.highlights
+autocmd! bufwritepost ~/.vimrc.highlights.onedark-16 source ~/.vimrc.highlights.onedark-16
 
 " --------------------------------------- "
 " --- Syntax highlight customisations --- "

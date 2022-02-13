@@ -1,4 +1,4 @@
-autocmd! bufwritepost ~/.vimrc.highlights source ~/.vimrc.highlights
+autocmd! bufwritepost ~/.vimrc.highlights.peachpuff-16 source ~/.vimrc.highlights.peachpuff-16
 
 " --------------------------------------- "
 " --- Syntax highlight customisations --- "
@@ -39,7 +39,7 @@ highlight PmenuSbar     ctermbg=8
 highlight PmenuThumb    ctermbg=7
 highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
 highlight ErrorMsg      ctermbg=0     ctermfg=9
-highlight Function                    ctermfg=6     cterm=bold
+highlight Function                    ctermfg=12     cterm=bold
 highlight EndOfBuffer                 ctermfg=0
 highlight MatchParen    ctermbg=8     ctermfg=12    cterm=none,bold
 
@@ -71,8 +71,10 @@ autocmd BufWinLeave * call clearmatches()
 
 highlight link goFormatSpecifier Identifier
 highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
+highlight goTypeConstructor cterm=none ctermbg=none ctermfg=6
 " highlight goSameId ctermbg=8
 highlight goSameId cterm=underline
+highlight goFunctionCall cterm=none ctermbg=none ctermfg=4
 
 " Highlight: Pandoc
 " -----------------
