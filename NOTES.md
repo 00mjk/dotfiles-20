@@ -1,94 +1,107 @@
-Remarkable dofile repositories
-------------------------------
+Notable dotfile repositories
+----------------------------
 
 * <https://github.com/seejohnrun/dotfiles>
 * <https://github.com/fabi1cazenave/dotFiles/>
 * <https://github.com/ygt-mikekchar/dotfiles>
+* <https://github.com/nicknisi/dotfiles>
+* <https://github.com/ChristianChiarulli/nvim>
 
-Vim plugins to consider
------------------------
+Vim plugins
+-----------
 
 * <https://github.com/regedarek/ZoomWin>
 * <https://github.com/szw/vim-maximizer>
+* <https://psliwka/vim-smoothie>
+* <https://ryanoasis/vim-devicons>
+* <https://nanotee/zoxide.vim>
+* <https://gerw/vim-HiLinkTrace>
+* <https://tpope/vim-unimpaired>
+* <https://tomtom/tcomment_vim>
+* <https://liuchengxu/vista.vim>
+* <https://tpope/vim-dispatch>
+
+Vim colorschemes
+----------------
+
+* <https://altercation/vim-colors-solarized>
+* <https://rakr/vim-one>
+* <https://arcticicestudio/nord-vim>
+* <https://lifepillar/vim-gruvbox8>
+* <https://jsit/disco.vim>
+* <https://sonph/onehalf>
+* <https://romainl/apprentice>
+* <https://jeffkreeftmeijer/vim-dim>
+* <https://noahfrederick/vim-noctu>
 
 macOS old installation notes
 ----------------------------
 
-    # ------------------ #
-    # --- Next steps --- #
-    # ------------------ #
+* Other GNU utilities:
 
-    echo "
+  - autoconf
+  - binutils
+  - ed
+  - emacs
+  - flex
+  - gdb
+  - gnu-units
+  - m4
+  - screen
+  - util-linux
+  - awscli
+  - amazon-ecs-cli
+  - git-remote-codecommit
+  - terraform
 
-    -------------
-    --- NOTES ---
-    -------------
+* Other formulae:
 
-    * Many packages installed depend on the shell configuration provided.
-      Run './scripts/dotfiles' to install it.
+  - bmon
+  - cmark
+  - colordiff
+  - fff
+  - figlet
+  - glow
+  - graphviz
+  - htmlq
+  - httpie
+  - just
+  - kubectx
+  - lazygit
+  - libpq
+  - lolcat (requires Ruby)
+  - mdcat
+  - ncdu
+  - nethogs
+  - nload
+  - pandoc (requires basictex cask - which provides the pdflatex binary - for markdown to pdf conversion)
+  - plantuml
+  - pyenv
+  - ranger
+  - rbenv
+  - ruby
+  - ruby-build
+  - slurm
+  - terraform
+  - the_silver_searcher
+  - trash
+  - timewarrior (time tracking)
+  - timetrap (to be installed as a Ruby gem, no brew package)
+  - perl
+  - ruby-install
+  - ruby
+  - imagemagick
+  - blueutil
+  - golangci-lint
+  - mupdf-tools
+  - pre-commit
+  - yq
+  - zsh-syntax-highlighting
+  - python
+  - lf
+  - ffmpeg
 
-    * Other GNU utilities:
-
-      - autoconf
-      - binutils
-      - ed
-      - emacs
-      - flex
-      - gdb
-      - gnu-units
-      - m4
-      - screen
-      - util-linux
-      - awscli
-      - amazon-ecs-cli
-      - git-remote-codecommit
-      - terraform
-
-    * Other formulae:
-      - bmon
-      - cmark
-      - colordiff
-      - fff
-      - figlet
-      - glow
-      - graphviz
-      - htmlq
-      - httpie
-      - just
-      - kubectx
-      - lazygit
-      - libpq
-      - lolcat (requires Ruby)
-      - mdcat
-      - ncdu
-      - nethogs
-      - nload
-      - pandoc (requires basictex cask - which provides the pdflatex binary - for markdown to pdf conversion)
-      - plantuml
-      - pyenv
-      - ranger
-      - rbenv
-      - ruby
-      - ruby-build
-      - slurm
-      - terraform
-      - the_silver_searcher
-      - trash
-      - timewarrior (time tracking)
-      - timetrap (to be installed as a Ruby gem, no brew package)
-      - perl
-      - ruby-install
-      - ruby
-      - imagemagick
-      - blueutil
-      - golangci-lint
-      - mupdf-tools
-      - pre-commit
-      - yq
-      - zsh-syntax-highlighting
-      - python
-      - lf
-      - ffmpeg
+* Miscellanea
 
       # echo "[setup] Python post-install setup"
       # brew link --overwrite --force python@3.9
@@ -222,41 +235,6 @@ Zsh command line highlighting
     # [[ -f $ZSH_HIGHLIGHT_SOURCE ]] && source $ZSH_HIGHLIGHT_SOURCE || true
     # uncomment if receiving error "highlighters directory not found"
     # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
-
-Vim colorschemes
-----------------
-
-    " Colorschemes
-    " ------------
-
-    " Plug 'altercation/vim-colors-solarized'
-    " Plug 'rakr/vim-one'
-    " Plug 'arcticicestudio/nord-vim' nord-vim only works if the terminal itself is using the 16-color Nord theme
-    " Plug 'lifepillar/vim-gruvbox8'
-    " Plug 'jsit/disco.vim'
-    " Plug 'sonph/onehalf', { 'rtp': 'vim' }
-    " Plug 'romainl/apprentice'
-    " Plug 'jeffkreeftmeijer/vim-dim'
-    " Plug 'noahfrederick/vim-noctu'
-
-Other vim plugins
------------------
-
-    " Eye-candy
-    " ---------
-
-    " Plug 'psliwka/vim-smoothie'
-    " Plug 'ryanoasis/vim-devicons'
-    " Plug 'nanotee/zoxide.vim'
-
-    " Power-ups
-    " ---------
-
-    " Plug 'gerw/vim-HiLinkTrace'
-    " Plug 'tpope/vim-unimpaired'
-    " Plug 'tomtom/tcomment_vim'
-    " Plug 'liuchengxu/vista.vim'
-    " Plug 'tpope/vim-dispatch'
 
 Vim PlantUML Previewer
 ----------------------
