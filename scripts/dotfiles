@@ -11,6 +11,7 @@ CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" 
 ROOTDIR=$(git rev-parse --show-toplevel)
 DOTFILES_DIR="${ROOTDIR}/dotfiles"
 SCRIPTS_DIR="${ROOTDIR}/scripts"
+LOCAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 source "${CURRDIR}/utils.sh"
 
@@ -52,13 +53,29 @@ backup_and_symlink "${DOTFILES_DIR}/tmux.conf" "${HOME}/.tmux.conf"
 tic "${ROOTDIR}/dotfiles/tmux.terminfo"
 tic "${ROOTDIR}/dotfiles/tmux-256color.terminfo"
 
+# ----------- #
+# --- Vim --- #
+# ----------- #
+
+backup_and_symlink "$DOTFILES_DIR/vimrc"                         "$HOME/.vimrc"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.peachpuff-16" "$HOME/.vimrc.highlights.peachpuff-16"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.onedark-16"   "$HOME/.vimrc.highlights.onedark-16"
+
+# ------------- #
+# --- Kitty --- #
+# ------------- #
+
+mkdir -p $LOCAL_CONFIG/kitty/themes
+backup_and_symlink "$DOTFILES_DIR/kitty.conf"                 "$LOCAL_CONFIG/kitty/kitty.conf"
+backup_and_symlink "$DOTFILES_DIR/kitty-bravoecho-dark.conf"  "$LOCAL_CONFIG/kitty/themes/BravoechoDark.conf"
+backup_and_symlink "$DOTFILES_DIR/kitty-bravoecho-light.conf" "$LOCAL_CONFIG/kitty/themes/BravoechoLight.conf"
+backup_and_symlink "$DOTFILES_DIR/kitty-onedark.conf"         "$LOCAL_CONFIG/kitty/themes/OneDark.conf"
+
 # ------------------- #
 # --- miscellanea --- #
 # ------------------- #
 
 "${CURRDIR}/nnn-plugins"
-
-LOCAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 backup_and_symlink "$DOTFILES_DIR/ignore"           "$LOCAL_CONFIG/fd/ignore"
 backup_and_symlink "$DOTFILES_DIR/ripgreprc"        "$HOME/.ripgreprc"
@@ -71,11 +88,6 @@ backup_and_symlink "$DOTFILES_DIR/bat_config"       "$LOCAL_CONFIG/bat/config"
 backup_and_symlink "$DOTFILES_DIR/direnvrc"         "$HOME/.direnvrc"
 backup_and_symlink "$DOTFILES_DIR/curlrc"           "$HOME/.curlrc"
 backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config"
-backup_and_symlink "$DOTFILES_DIR/kitty.conf"       "$LOCAL_CONFIG/kitty/kitty.conf"
-
-backup_and_symlink "$DOTFILES_DIR/vimrc"                         "$HOME/.vimrc"
-backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.peachpuff-16" "$HOME/.vimrc.highlights.peachpuff-16"
-backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.onedark-16"   "$HOME/.vimrc.highlights.onedark-16"
 
 # ----------------------- #
 # --- custom commands --- #
