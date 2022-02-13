@@ -311,3 +311,59 @@ Vim unused highlights
 " highlight MatchParen    ctermbg=none  ctermfg=none  cterm=none,bold,reverse
 " highlight MatchParen    ctermbg=none  ctermfg=7     cterm=none,bold,reverse
 " highlight Special                     ctermfg=5
+
+Colorscheme notes
+=================
+
+HSLuv 02
+--------
+
+normal: S=60,	L=80
+
+- red			H=355
+- green		H=121
+- yellow		H=68.5
+- blue			H=218
+- magenta	H=274
+- cyan			H=173
+
+bright: S=100, L=80
+
+(same hues)
+
+HSLuv 03
+--------
+
+background = 1a1a1a (26, 26, 26)
+foreground = a2a2a2 (162, 162, 162)
+
+normal: S=80,	L=50
+
+- red			H=12
+- green		H=120
+- yellow		H=35
+- blue			H=242
+- magenta	H=276 // adjusted manually
+- cyan			H=196
+
+bright: S=70, L=65
+
+(same hues)
+
+OKHSL 01
+--------
+
+normal: S=60,	L=60
+
+- red			H=360
+- green		H=136
+- yellow		H=62
+- blue			H=255
+- magenta	H=312
+- cyan			H=196
+
+bright: S=70, L=70
+
+- red			H=0
+
+(same hues)
