@@ -1409,7 +1409,7 @@ let g:go_addtags_skip_unexported = 1
 let g:go_test_show_name = 1
 
 " works well only if both pairs are using a dedicated base16 colorscheme
-" let g:go_auto_sameids = 1
+let g:go_auto_sameids = 1
 
 " vim-go: mappings
 " ----------------

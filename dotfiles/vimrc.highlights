@@ -72,6 +72,7 @@ autocmd BufWinLeave * call clearmatches()
 highlight link goFormatSpecifier Identifier
 highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
 " highlight goSameId ctermbg=8
+highlight goSameId cterm=underline
 
 " Highlight: Pandoc
 " -----------------
