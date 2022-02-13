@@ -1,0 +1,76 @@
+autocmd! bufwritepost ~/.vimrc.highlights source ~/.vimrc.highlights
+
+" --------------------------------------- "
+" --- Syntax highlight customisations --- "
+" --------------------------------------- "
+
+" Highlight: tweaks
+" -----------------
+
+" for some reason the vertsplit highlight needs to be placed after the set
+" colorcolumn option
+highlight VertSplit     ctermbg=8     ctermfg=8     cterm=none
+highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
+" remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
+" signature help unusable.
+highlight CursorLine    cterm=none ctermbg=none
+
+" Highlight: A.L.E. (ALE)
+" -----------------------
+
+highlight ALEErrorSign    ctermbg=8  ctermfg=9   cterm=none
+highlight ALEWarningSign  ctermbg=8  ctermfg=3   cterm=none
+highlight ALEInfoSign     ctermbg=8  ctermfg=12  cterm=none
+
+" Highlight: Statusline
+" ---------------------
+
+highlight StatusLine   cterm=none ctermfg=15 ctermbg=8
+highlight StatusLineNC cterm=none ctermfg=15 ctermbg=8
+
+highlight BE_StatuslineGreen          ctermbg=8   ctermfg=10  cterm=bold
+highlight BE_StatuslineGreenCentre    ctermbg=8   ctermfg=2   cterm=bold
+highlight BE_StatuslineBlue           ctermbg=8   ctermfg=12  cterm=bold
+highlight BE_StatuslineBlueCentre     ctermbg=8   ctermfg=4   cterm=bold
+highlight BE_StatuslineMagenta        ctermbg=8   ctermfg=13  cterm=bold
+highlight BE_StatuslineMagentaCentre  ctermbg=8   ctermfg=5   cterm=bold
+highlight BE_StatuslineCyan           ctermbg=8   ctermfg=14  cterm=bold
+highlight BE_StatuslineCyanCentre     ctermbg=8   ctermfg=6   cterm=bold
+highlight BE_StatuslineRed            ctermbg=8   ctermfg=9   cterm=bold
+highlight BE_StatuslineRedCentre      ctermbg=8   ctermfg=1   cterm=bold
+highlight BE_StatuslineGrey           ctermbg=8   ctermfg=7   cterm=bold
+highlight BE_StatuslineGreyCentre     ctermbg=8   ctermfg=15  cterm=bold
+highlight BE_StatuslineYellow         ctermbg=8   ctermfg=11  cterm=bold
+highlight BE_StatuslineYellowCentre   ctermbg=8   ctermfg=3   cterm=bold
+
+" Highlight: Diffs
+" ----------------
+
+highlight DiffAdd     ctermbg=8   ctermfg=2   cterm=none
+highlight DiffDelete  ctermbg=8   ctermfg=9   cterm=none
+highlight DiffChange  ctermbg=8   ctermfg=15  cterm=none
+highlight DiffText    ctermbg=8   ctermfg=4   cterm=none
+" TODO: for this to work, fold highlighting also needs to change
+
+" Highlight: Extra todo-like keywords
+" -----------------------------------
+
+" Add keywords to be highlighted as TODOs (https://vi.stackexchange.com/a/19043)
+" The synTodo line:
+" 1. list all syntax items (execute("syntax list"))
+" 2. split it into a list of lines (split(..., '\n'))
+" 3. filter it to only contain lines with syntax group name that ends with Todo (filter(..., { i,v -> match(v, '^\w*Todo\>') == 0}))
+" 4. remove everything after syntax group name (map(..., {i,v -> substitute(v, ' .*$', '', '')}))
+" result -> a list of syntax group names that end with Todo.
+function! UpdateTodoKeywords(...)
+  let newKeywords = join(a:000, " ")
+  let synTodo = map(filter(split(execute("syntax list"), '\n') , { i,v -> match(v, '^\w*Todo\>') == 0}), {i,v -> substitute(v, ' .*$', '', '')})
+  for synGrp in synTodo
+    execute "syntax keyword " . synGrp . " contained " . newKeywords
+  endfor
+endfunction
+
+augroup Todo_CustomKeywords
+  autocmd!
+  autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
+augroup END

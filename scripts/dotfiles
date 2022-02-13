@@ -70,10 +70,12 @@ backup_and_symlink "$DOTFILES_DIR/tigrc"            "$HOME/.tigrc"
 backup_and_symlink "$DOTFILES_DIR/bat_config"       "$LOCAL_CONFIG/bat/config"
 backup_and_symlink "$DOTFILES_DIR/direnvrc"         "$HOME/.direnvrc"
 backup_and_symlink "$DOTFILES_DIR/curlrc"           "$HOME/.curlrc"
-backup_and_symlink "$DOTFILES_DIR/vimrc"            "${HOME}/.vimrc"
-backup_and_symlink "$DOTFILES_DIR/vimrc.highlights" "${HOME}/.vimrc.highlights"
 backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config"
 backup_and_symlink "$DOTFILES_DIR/kitty.conf"       "$LOCAL_CONFIG/kitty/kitty.conf"
+
+backup_and_symlink "$DOTFILES_DIR/vimrc"                         "$HOME/.vimrc"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.peachpuff-16" "$HOME/.vimrc.highlights.peachpuff-16"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.onedark-16"   "$HOME/.vimrc.highlights.onedark-16"
 
 # ----------------------- #
 # --- custom commands --- #

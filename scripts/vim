@@ -23,8 +23,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # TODO: create a minimal vimrc only for bootstrapping, only to run PlugInstall for the first time
-backup_and_symlink "${DOTFILES_DIR}/vimrc" "${HOME}/.vimrc"
-backup_and_symlink "${DOTFILES_DIR}/vimrc.highlights" "${HOME}/.vimrc.highlights"
+backup_and_symlink "$DOTFILES_DIR/vimrc"                         "$HOME/.vimrc"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.peachpuff-16" "$HOME/.vimrc.highlights.peachpuff-16"
+backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.onedark-16"   "$HOME/.vimrc.highlights.onedark-16"
 
 vim +PlugInstall +qall
 

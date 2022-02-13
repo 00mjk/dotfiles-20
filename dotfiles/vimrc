@@ -7,8 +7,8 @@ scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
 
-" General power-ups
-" -----------------
+" Plugins: General power-ups
+" --------------------------
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
@@ -22,22 +22,22 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 
-" Search (files and code)
-" -----------------------
+" Plugins: Search (files and code)
+" --------------------------------
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
-" Navigate (files and code)
-" -------------------------
+" Plugins: Navigate (files and code)
+" ----------------------------------
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/tagbar'
 Plug 'preservim/nerdtree'
 
-" Language support (including special config syntaxes)
-" ----------------------------------------------------
+" Plugins: Language support (including special config syntaxes)
+" -------------------------------------------------------------
 
 Plug 'aklt/plantuml-syntax'
 Plug 'ekalinin/Dockerfile.vim'
@@ -54,8 +54,8 @@ Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 Plug 'direnv/direnv.vim'
 
-" Markdown
-" --------
+" Plugins: Markdown
+" -----------------
 
 " Tim Pope's Markdown plugin is included in Vim, but we want the latest
 " version.
@@ -76,11 +76,16 @@ Plug 'mzlogin/vim-markdown-toc'
 " tables
 Plug 'dhruvasagar/vim-table-mode'
 
-" Language Server Protocol support
-" --------------------------------
+" Plugins: Language Server Protocol support
+" -----------------------------------------
 
 Plug 'dense-analysis/ale'
 Plug 'ycm-core/YouCompleteMe'
+
+" Plugins: Colorschemes
+" ---------------------
+
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -102,23 +107,15 @@ set nocompatible
 " --- Colorscheme --- "
 " ------------------- "
 
+" Limiting themes to the 16 ANSI colours.
+" Combined with suitable terminal palettes this makes it easier to use dark or
+" light themes at the same time, for the purpose of pairing.
 set t_Co=16
 
-" Try to use 'peachpuff' if available, because it's a 16-color scheme that
-" adapts acceptably well to dark and light background terminals as long as they
-" use a standard 16-color palette (4-bit ANSI colours).
-"
-" This is is useful for pairing in shared sessions.
-try
-  colorscheme peachpuff
-catch
-    echom "'peachpuff' colorscheme not available, defaulting to 'default'"
-  try
-    colorscheme default
-  catch
-    echom "'default' colorscheme not available, not setting the colorscheme"
-  endtry
-endtry
+colorscheme peachpuff " part of the standard Vim distribution
+
+" let g:onedark_termcolors=16
+" colorscheme onedark
 
 " ----------------------- "
 " --- General options --- "
@@ -251,8 +248,12 @@ augroup END
 " --- Syntax highlight customisations --- "
 " --------------------------------------- "
 
-if filereadable(glob("~/.vimrc.highlights"))
-  source ~/.vimrc.highlights
+if g:colors_name ==? "onedark" && filereadable(glob("~/.vimrc.highlights.onedark-16"))
+  source ~/.vimrc.highlights.onedark-16
+endif
+
+if g:colors_name ==? "peachpuff" && filereadable(glob("~/.vimrc.highlights.peachpuff-16"))
+  source ~/.vimrc.highlights.peachpuff-16
 endif
 
 " ---------------------- "
@@ -1409,7 +1410,7 @@ let g:go_addtags_skip_unexported = 1
 let g:go_test_show_name = 1
 
 " works well only if both pairs are using a dedicated base16 colorscheme
-let g:go_auto_sameids = 1
+" let g:go_auto_sameids = 1
 
 " vim-go: mappings
 " ----------------
