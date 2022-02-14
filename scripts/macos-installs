@@ -102,6 +102,7 @@ formula watch
 formula watson
 formula wdiff
 formula wget
+formula yq
 formula zoxide
 
 echo "[setup] Install Node.js"
