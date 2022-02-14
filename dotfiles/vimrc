@@ -121,7 +121,12 @@ colorscheme peachpuff " part of the standard Vim distribution
 " --- General options --- "
 " ----------------------- "
 
-set wildmode=list:longest,full " open a list of all the matches (list) *and* cycle through them (full)
+" open a list of all the matches (list) *and* cycle through them (full)
+" NOTE: disabled because currently (2022-02-14) incompatible with the popup option
+" set wildmode=list:longest,full
+
+set wildoptions+=pum
+
 set wildignorecase
 set wildignore+=*.swp,*/tmp/
 
