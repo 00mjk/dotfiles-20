@@ -8,7 +8,7 @@ Notable dotfile repositories
 * <https://github.com/ChristianChiarulli/nvim>
 * <https://github.com/terminalforlife/VimConfig>
 * <https://github.com/terminalforlife/BashConfig>
-* <
+* <https://github.com/benawad/dotfiles>
 
 Vim plugins
 -----------
