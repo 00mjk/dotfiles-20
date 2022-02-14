@@ -9,7 +9,7 @@ Notable dotfile repositories
 * <https://github.com/terminalforlife/VimConfig>
 * <https://github.com/terminalforlife/BashConfig>
 * <https://github.com/benawad/dotfiles>
-* < https://github.com/ztlevi/dotty>
+* <https://github.com/ztlevi/dotty>
 
 Vim plugins
 -----------
