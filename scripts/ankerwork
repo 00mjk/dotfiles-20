@@ -2,14 +2,16 @@
 
 set -ex
 
+ANKERWORK_APP_URL=https://ankerwork.s3.us-west-2.amazonaws.com/prod/AnkerWork_Official.dmg
+
 mkdir -p ~/Downloads
 pushd ~/Downloads
-curl -OJL https://ankerwork.s3.us-west-2.amazonaws.com/prod/AnkerWork_Official.dmg
+curl -z AnkerWork.dmg -o AnkerWork.dmg -JL $ANKERWORK_APP_URL
 
 hdiutil attach AnkerWork.dmg
 
 pushd /Volumes/AnkerWork
-rm -r ~/Applications/AnkerWork.app
+rm -rvf ~/Applications/AnkerWork.app
 cp -R AnkerWork.app ~/Applications/
 
 popd
