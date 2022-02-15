@@ -1,3 +1,4 @@
 .direnv/
 tags
 .DS_store
+kitty.conf.bak
