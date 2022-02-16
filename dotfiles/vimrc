@@ -81,6 +81,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'dense-analysis/ale'
 Plug 'ycm-core/YouCompleteMe'
+" Plug 'jayli/vim-easycomplete'
 
 " Plugins: Colorschemes
 " ---------------------
@@ -868,7 +869,10 @@ set omnifunc=syntaxcomplete#Complete
 
 " instruct supertab to try and detect the most appropriate autocompletion
 " method, thus minimising the need for pressing the `<C-x><C-o>` combination
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
+
+" let g:SuperTabMappingForward  = '<s-tab>'
+" let g:SuperTabMappingBackward = '<tab>'
 
 " Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
@@ -895,8 +899,31 @@ let g:ycm_update_diagnostics_in_insert_mode = 0
 let g:ycm_auto_hover = ''
 
 " disable tab, or it won't be possible to expand the Ultisnips snippet
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+" let g:ycm_key_list_select_completion = ['<Down>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
+
+" " https://stackoverflow.com/a/22253548
+" " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+" " better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" https://gist.github.com/lencioni/dff45cd3d1f0e5e23fe6
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+" let g:UltiSnipsExpandTrigger           = '<tab>'
+" let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+" let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:UltiSnipsExpandTrigger           = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger      = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger     = '<C-k>'
+" let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
 let g:ycm_min_num_of_chars_for_completion = 99
 " let g:ycm_auto_trigger = 0 " also disables argument hints (signature help)
