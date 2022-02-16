@@ -393,6 +393,11 @@ n () {
 
 alias free='free -h'
 alias df='df -h'
+alias clocksync='sudo ntpdate pool.ntp.org'
+alias tmax='tmux'
+alias tumx='tmux'
+alias kdark=' kitty +kitten themes --reload-in=all Bravoecho Dark'
+alias klight=' kitty +kitten themes --reload-in=all Bravoecho Light'
 
 # --- shell --- #
 
@@ -513,10 +518,6 @@ alias wld='watson log --day'
 alias wlw='watson log --week'
 
 # --- Miscellanea --- #
-
-alias clocksync='sudo ntpdate pool.ntp.org'
-alias tmax='tmux'
-alias tumx='tmux'
 
 # -------------- #
 # --- DARWIN --- #
