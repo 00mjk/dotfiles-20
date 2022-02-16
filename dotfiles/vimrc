@@ -660,6 +660,18 @@ endif
 if !exists(":Xa")
   command Xa  xa
 endif
+if !exists(":Vs")
+  command Vs  vs
+endif
+if !exists(":VS")
+  command VS  vs
+endif
+if !exists(":Sp")
+  command Sp  sp
+endif
+if !exists(":SP")
+  command SP  sp
+endif
 
 " -------------------------- "
 " --- Intuitive home key --- "
