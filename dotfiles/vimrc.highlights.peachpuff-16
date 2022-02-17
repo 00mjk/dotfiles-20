@@ -46,10 +46,6 @@ highlight MatchParen    ctermbg=8     ctermfg=12    cterm=none,bold
 " Statement includes Keyword
 highlight Statement                   ctermfg=3
 
-" TODO:
-" - vim-go: lines where coverage is not applicable: customise instead of
-"   linking to Comment, disable the italic
-
 " Highlight: Whitespace
 " ---------------------
 
@@ -74,9 +70,13 @@ highlight YCMInverse cterm=reverse ctermfg=15 ctermbg=none
 " Highlight: vim-go
 " -----------------
 
+" TODO:
+" - vim-go: lines where coverage is not applicable: customise instead of
+"   linking to Comment, disable the italic
+
 highlight link goFormatSpecifier Identifier
 highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
-highlight goTypeConstructor cterm=none ctermbg=none ctermfg=6
+highlight goTypeConstructor cterm=none ctermbg=none ctermfg=2
 " highlight goSameId ctermbg=8
 highlight goSameId cterm=underline
 highlight goFunctionCall cterm=none ctermbg=none ctermfg=4
