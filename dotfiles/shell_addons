@@ -398,6 +398,7 @@ alias tmax='tmux'
 alias tumx='tmux'
 alias kdark=' kitty +kitten themes --reload-in=all Bravoecho Dark'
 alias klight=' kitty +kitten themes --reload-in=all Bravoecho Light'
+alias fedora-old-kernels='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q)'
 
 # --- shell --- #
 
