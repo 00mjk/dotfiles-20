@@ -132,6 +132,7 @@ set wildoptions+=pum
 
 set wildignorecase
 set wildignore+=*.swp,*/tmp/
+set undolevels=5000
 
 let s:swap_dir = $HOME . "/.vim/swp//"
 let s:bkp_dir = $HOME . "/.vim/backup//"
