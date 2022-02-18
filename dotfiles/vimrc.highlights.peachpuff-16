@@ -21,7 +21,7 @@ highlight CursorLine    cterm=none
 highlight SignColumn    ctermbg=none                cterm=none
 highlight Search        ctermbg=0     ctermfg=11    cterm=reverse
 highlight Todo          ctermbg=none  ctermfg=4     cterm=none,bold,italic
-highlight Visual        ctermbg=8     ctermfg=15    cterm=none
+highlight Visual        ctermbg=8                   cterm=none
 highlight Comment                     ctermfg=7     cterm=italic
 
 highlight SpellBad      ctermbg=8     ctermfg=1 cterm=none
@@ -65,6 +65,7 @@ autocmd BufWinLeave * call clearmatches()
 " Highlight: YouCompleteMe, YCM
 " -----------------------------
 
+" make current param in signature help more visible
 highlight YCMInverse cterm=reverse ctermfg=15 ctermbg=none
 
 " Highlight: vim-go
