@@ -95,6 +95,11 @@ highlight ALEErrorSign    ctermbg=8  ctermfg=9   cterm=none
 highlight ALEWarningSign  ctermbg=8  ctermfg=3   cterm=none
 highlight ALEInfoSign     ctermbg=8  ctermfg=12  cterm=none
 
+" Highlight: vim-current-search-match
+" -----------------------------------
+
+highlight BE_CurrentSearch  ctermbg=none ctermfg=1 cterm=reverse
+
 " Highlight: Statusline
 " ---------------------
 

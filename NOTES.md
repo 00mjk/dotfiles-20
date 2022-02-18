@@ -359,3 +359,77 @@ bright: S=70, L=70
 - red			H=0
 
 (same hues)
+
+Vim, highlight current match
+============================
+
+    Highlight matches when jumping to next
+    --------------------------------------
+
+    " More instantly better Vim, https://youtu.be/aHm36-na4-4
+    "
+    " http://radar.oreilly.com/2013/10/more-instantly-better-vim.html
+    "
+
+    " This rewires n and N to do the highlighing...
+    nnoremap <silent> n   n:call HLNext(0.4)<cr>
+    nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+    " Highlight the match in red...
+    function! HLNext (blinktime)
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let target_pat = '\c\%#'.@/
+        let ring = matchadd('ErrorMsg', target_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+    endfunction
+
+    " StackOverflow: https://vi.stackexchange.com/a/18555
+    " ---------------------------------------------------
+    let g:searchString = ''
+
+    function! HighlightSearch(timer)
+        if (g:firstCall)
+            let g:originalStatusLineHLGroup = execute("hi StatusLine")
+            let g:firstCall = 0
+        endif
+        if (exists("g:searching") && g:searching)
+            let searchString = getcmdline()
+            if searchString == ""
+                let searchString = "."
+            endif
+            let newBG = search(searchString) != 0 ? "green" : "red"
+            if searchString == "."
+                set whichwrap+=h
+                normal h
+                set whichwrap-=h
+            endif
+            execute("hi StatusLine ctermfg=" . newBG)
+            let g:highlightTimer = timer_start(50, 'HighlightSearch')
+            let g:searchString = searchString
+        else
+            let originalBG = matchstr(g:originalStatusLineHLGroup, 'ctermfg=\zs[^ ]\+')
+            execute("hi StatusLine ctermfg=" . originalBG)
+            if exists("g:highlightTimer")
+                call timer_stop(g:highlightTimer)
+                call HighlightCursorMatch()
+            endif
+        endif
+    endfunction
+    function! HighlightCursorMatch()
+        try
+            let l:patt = '\%#'
+            if &ic | let l:patt = '\c' . l:patt | endif
+            exec 'match IncSearch /' . l:patt . g:searchString . '/'
+        endtry
+    endfunction
+    nnoremap n n:call HighlightCursorMatch()<CR>
+    nnoremap N N:call HighlightCursorMatch()<CR>
+    augroup betterSeachHighlighting
+        autocmd!
+        autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
+        autocmd CmdlineLeave * let g:searching = 0
+    augroup END

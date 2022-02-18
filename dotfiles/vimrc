@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 " Plugins: General power-ups
 " --------------------------
 
+Plug 'airblade/vim-current-search-match'
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
@@ -277,6 +279,12 @@ map <Leader>h :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<C-M>
 
 " search and replace current word
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
+
+" -------------------------------- "
+" --- vim-current-search-match --- "
+" -------------------------------- "
+
+let g:current_search_match = 'BE_CurrentSearch'
 
 " ----------------------------------- "
 " --- Search for visual selection --- "
