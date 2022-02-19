@@ -9,20 +9,23 @@ autocmd! bufwritepost ~/.vimrc.highlights.peachpuff-16 source ~/.vimrc.highlight
 
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
-highlight VertSplit     ctermbg=8     ctermfg=8     cterm=none
-highlight NonText                     ctermfg=7     cterm=none
-highlight ColorColumn   ctermbg=0
-highlight WildMenu      ctermbg=11                  ctermfg=0
-highlight LineNr        ctermbg=none  ctermfg=7     cterm=none
-highlight CursorLineNr  ctermbg=0     ctermfg=15    cterm=none
+highlight VertSplit       ctermbg=8     ctermfg=8     cterm=none
+highlight NonText                       ctermfg=7     cterm=none
+highlight ColorColumn     ctermbg=0
+highlight WildMenu        ctermbg=11                  ctermfg=0
+highlight LineNr          ctermbg=none  ctermfg=7     cterm=none
+highlight CursorLineNr    ctermbg=0     ctermfg=15    cterm=none
 " remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
 " signature help unusable.
-highlight CursorLine    cterm=none
-highlight SignColumn    ctermbg=none                cterm=none
-highlight Search        ctermbg=0     ctermfg=11    cterm=reverse
-highlight Todo          ctermbg=none  ctermfg=4     cterm=none,bold,italic
-highlight Visual        ctermbg=8                   cterm=none
-highlight Comment                     ctermfg=7     cterm=italic
+highlight CursorLine                                   cterm=none
+highlight CursorLineFold  ctermbg=8                    cterm=none
+highlight Folded          ctermbg=8     ctermfg=4      cterm=none
+highlight FoldColumn      ctermbg=8     ctermfg=4      cterm=none
+highlight SignColumn      ctermbg=none  cterm=none
+highlight Search          ctermbg=0     ctermfg=11     cterm=reverse
+highlight Todo            ctermbg=none  ctermfg=4      cterm=none,bold,italic
+highlight Visual          ctermbg=8     cterm=none
+highlight Comment         ctermfg=7     cterm=italic
 
 highlight SpellBad      ctermbg=8     ctermfg=1 cterm=none
 
