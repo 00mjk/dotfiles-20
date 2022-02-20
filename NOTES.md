@@ -27,6 +27,7 @@ Vim plugins
 * <https://github.com/JimmyHuang454/EasyCompleteYou>
 * <https://github.com/jayli/vim-easycomplete>
 * <https://github.com/prabirshrestha/asyncomplete.vim>
+* <https://github.com/fourjay/vim-yamsong> forces sorting of the content
 
 Vim colorschemes
 ----------------

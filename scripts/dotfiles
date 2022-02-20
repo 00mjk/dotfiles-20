@@ -93,6 +93,7 @@ backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config
 # --- custom commands --- #
 # ----------------------- #
 
+backup_and_symlink "$SCRIPTS_DIR/asyaml"                  "$LOCAL_BIN/asyaml"
 backup_and_symlink "$SCRIPTS_DIR/brut"                    "$LOCAL_BIN/brut"
 backup_and_symlink "$SCRIPTS_DIR/epochms"                 "$LOCAL_BIN/epochms"
 backup_and_symlink "$SCRIPTS_DIR/free"                    "$LOCAL_BIN/free"

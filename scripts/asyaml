@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -eu
+
+if [[ ! $# == 1 ]]; then
+  >$2 echo "Pass a single file"
+  exit 1
+fi
+
+json_file="${1}"
+
+if [[ ! -f "${1}" ]]; then
+  >$2 echo "The given path is not a file"
+  exit 1
+fi
+
+tmp_json_file=$(mktemp --suffix .json)
+tmp_yaml_file=$(mktemp --suffix .yaml)
+
+yq --prettyPrint --no-colors < "${json_file}" > $tmp_yaml_file
+
+$EDITOR $tmp_yaml_file
+
+yq --output-format json  < $tmp_yaml_file > $tmp_json_file
+
+mv $tmp_json_file "${json_file}"

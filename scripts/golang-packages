@@ -6,11 +6,12 @@ CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" 
 ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 
 cat << EOF
--------------------------------------------------------------------------------
-Go version: $(go version)
-GOROOT:     $(go env GOROOT)
-GOPATH:     $(go env GOPATH)
--------------------------------------------------------------------------------
+
+GOVERSION .... $(go env GOVERSION)
+GOOS ......... $(go env GOOS)
+GOARCH ....... $(go env GOARCH)
+GOROOT ....... $(go env GOROOT)
+GOPATH ....... $(go env GOPATH)
 
 EOF
 

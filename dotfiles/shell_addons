@@ -245,8 +245,8 @@ alias _init_pyenv='eval "$(pyenv init -)"'
 # --- Editor --- #
 # -------------- #
 
-export EDITOR=$(command -v vim)
-export VISUAL=$(command -v vim)
+# export EDITOR=$(command -v vim)
+# export VISUAL=$(command -v vim)
 
 # ----------- #
 # --- FZF --- #
