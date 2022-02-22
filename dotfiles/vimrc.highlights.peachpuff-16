@@ -102,7 +102,7 @@ highlight ALEInfoSign     ctermbg=8  ctermfg=12  cterm=none
 " Highlight: vim-current-search-match
 " -----------------------------------
 
-highlight BE_CurrentSearch  ctermbg=none ctermfg=1 cterm=reverse
+highlight BE_CurrentSearch  ctermbg=none ctermfg=6 cterm=reverse
 
 " Highlight: Statusline
 " ---------------------
