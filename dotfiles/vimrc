@@ -225,9 +225,9 @@ set noshowcmd                     " showcmd (on by default) is very noisy when r
 set noerrorbells visualbell t_vb= " disable all bells
 set backspace=indent,eol,start    " allow extended backspace behaviour
 set virtualedit=block             " allow placing the cursor after the last char in visual block
-set scrolloff=7                   " number of lines visible when scrolling
+set scrolloff=3                   " number of lines and columns visible when scrolling
 set sidescroll=3
-set sidescrolloff=7
+set sidescrolloff=3
 set splitright                    " position of the new split panes
 set splitbelow
 set shortmess-=S                  " show match count in searches
