@@ -24,14 +24,15 @@ highlight FoldColumn      ctermbg=8     ctermfg=4      cterm=none
 highlight SignColumn      ctermbg=none  cterm=none
 highlight Search          ctermbg=0     ctermfg=11     cterm=reverse
 highlight Todo            ctermbg=none  ctermfg=4      cterm=none,bold,italic
-highlight Visual          ctermbg=8     cterm=none
+" Visual needs to be reversed, to correctly override other reversed styles when selecting them
+highlight Visual          ctermbg=15  ctermfg=8    cterm=reverse
 highlight Comment         ctermfg=7     cterm=italic
 
-highlight SpellBad      ctermbg=8     ctermfg=1 cterm=none
+highlight SpellBad ctermbg=9 ctermfg=8 cterm=reverse,bold
 
-highlight SpellCap      ctermbg=0     ctermfg=12    cterm=reverse
-highlight SpellRare     ctermbg=0     ctermfg=13    cterm=reverse
-highlight SpellLocal    ctermbg=0     ctermfg=14    cterm=reverse
+highlight SpellCap      ctermbg=12     ctermfg=8   cterm=reverse,bold
+highlight SpellRare     ctermbg=13     ctermfg=8   cterm=reverse,bold
+highlight SpellLocal    ctermbg=14     ctermfg=8   cterm=reverse,bold
 highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
 highlight Pmenu         ctermbg=8 ctermfg=none
 
@@ -40,7 +41,7 @@ highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold
 
 highlight PmenuSbar     ctermbg=8
 highlight PmenuThumb    ctermbg=7
-highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse
+highlight MatchParen    ctermbg=none  ctermfg=6     cterm=reverse,bold
 highlight ErrorMsg      ctermbg=0     ctermfg=9
 highlight Function                    ctermfg=12     cterm=bold
 highlight EndOfBuffer                 ctermfg=0
