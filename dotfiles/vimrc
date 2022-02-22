@@ -1489,6 +1489,7 @@ autocmd FileType go nmap <Leader>k <Plug>(go-info)
 " to complement gd (go-def) which is provided by vim-go by default
 autocmd FileType go nmap <buffer> gt <Plug>(go-def-type)
 autocmd FileType go nmap <buffer> gr <Plug>(go-callers)
+autocmd FileType go nmap <buffer> ge <Plug>(go-referrers)
 autocmd FileType go nmap <buffer> gl <Plug>(go-implements)
 autocmd FileType go nmap <buffer> gn <Plug>(go-rename)
 
