@@ -234,7 +234,7 @@ set shortmess-=S                  " show match count in searches
 
 if exists('+colorcolumn')
   " https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=bdc48fa11e46f867ea4d75fa59ee87a7f48be144
-  set colorcolumn=100 " display a vertical ruler for line length
+  set colorcolumn=101 " display a vertical ruler for line length
   autocmd FileType qf,help,nerdtree,loclist set colorcolumn=
 endif
 " alternatively, https://github.com/seejohnrun/dotfiles
@@ -436,7 +436,7 @@ nnoremap < <<
 "
 " For auto-formatting of text (not just comments) to work, textwidth must be
 " explicitly set (it's 0 by default).
-set textwidth=79
+set textwidth=100
 
 " some of these options require that 'autoindent' is set
 set formatoptions+=1 " don't break a line after a one letter word, but before
