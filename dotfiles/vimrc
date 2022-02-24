@@ -219,7 +219,7 @@ filetype plugin indent on " automatically detect file types.
 syntax on
 
 " show name of syntax element under the cursor (https://vi.stackexchange.com/a/19043)
-command! SynName  echo synIDattr(synID(line("."), col("."), 1), "name")
+command! SynName echo synIDattr(synID(line("."), col("."), 1), "name")
 
 set noshowcmd                     " showcmd (on by default) is very noisy when running long commands, such as Ack
 set noerrorbells visualbell t_vb= " disable all bells
@@ -1613,6 +1613,13 @@ let g:ale_go_gopls_init_options = {
 " autocmd FileType go nmap <buffer> <silent> <C-]> <Plug>(ale_go_to_definition)
 " autocmd FileType go nmap <buffer> <silent> gd <Plug>(ale_go_to_definition)
 " autocmd FileType go nmap <buffer> <silent> <C-t> <Plug>(ale_go_to_type_definition)
+
+if executable('golines')
+  autocmd FileType go command! GoLines ALEFix golines
+endif
+
+" run 'golines --help' for more options
+let g:ale_go_golines_options = '--max-len=120'
 
 " ALE: Python
 " -----------
