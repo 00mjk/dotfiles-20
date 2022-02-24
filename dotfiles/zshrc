@@ -99,6 +99,7 @@ if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
   compdef gba='git'
   compdef gci='git'
   compdef gcim='git'
+  compdef gcinv='git'
   compdef gco='git'
   compdef gcl='git'
   compdef gd='git'
