@@ -524,8 +524,10 @@ nnoremap <Leader>ch :call CloseHiddenBuffers()<CR>
 " --- Wrapping --- "
 " ---------------- "
 
-set nowrap " Do not visually wrap lines by default.
-autocmd FileType markdown set wrap
+" Do not visually wrap lines by default...
+set nowrap
+" ...but enable it for files that often have long lines
+autocmd FileType markdown setlocal wrap
 
 set breakindent " Align visually wrapped lines with the original indentation.
 set linebreak " Break between words when wrapping (don't break within words).
