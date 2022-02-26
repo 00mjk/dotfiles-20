@@ -39,7 +39,7 @@ Vim colorschemes
 * <https://jsit/disco.vim>
 * <https://sonph/onehalf>
 * <https://romainl/apprentice>
-* <https://jeffkreeftmeijer/vim-dim>
+* <https://jeffkreeftmeijer/vim-dim>, also see <https://jeffkreeftmeijer.com/vim-16-color/>
 * <https://noahfrederick/vim-noctu>
 
 ANSI colorscheme tools
