@@ -25,6 +25,7 @@ export LS_COLORS
 # --- LESS --- #
 # ------------ #
 
+export PAGER="${HOMEBREW_PREFIX}/bin/less"
 # --ignore-case         (-i) case-insensitive search
 # --chop-long-lines     (-S) truncate long lines, and allow horizontal scrolling instead of wrapping
 # --RAW-CONTROL-CHARS   (-R) forward only colour escape sequences, so that they are displayed
@@ -37,6 +38,15 @@ export LS_COLORS
 # --mouse                    enable mouse-wheel scrolling and save clicks to the "#" mark
 # --wheel-lines              number of lines to scroll on each step of the wheel
 export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --mouse --wheel-lines=3"
+
+# Colours for man pages
+export LESS_TERMCAP_mb=$'\e[1;34m'   # begin blinking         # 31 – red
+export LESS_TERMCAP_md=$'\e[1;34m'   # begin bold             # 32 – green
+export LESS_TERMCAP_me=$'\e[0m'      # end mode               # 33 – yellow
+export LESS_TERMCAP_se=$'\e[0m'      # end standout-mode      # 34 – blue
+export LESS_TERMCAP_so=$'\e[01;33m'  # begin standout-mode    # 35 – magenta
+export LESS_TERMCAP_ue=$'\e[0m'      # end underline          # 36 – cyan
+export LESS_TERMCAP_us=$'\e[1;4;31m' # begin underline
 
 # ------------------ #
 # --- GIT PROMPT --- #
