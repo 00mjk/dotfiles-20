@@ -1,12 +1,5 @@
 # vim: set ft=zsh:
 
-# ---------------------------------- #
-# --- Common shell configuration --- #
-# ---------------------------------- #
-
-[[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
-[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
-
 # ----------------------- #
 # --- zsh completions --- #
 # ----------------------- #
@@ -20,12 +13,6 @@ fpath=($ZSH_SITE_FUNCTIONS $fpath)
 # export ZSH="${HOME}/.oh-my-zsh"
 # plugins=()
 # source $ZSH/oh-my-zsh.sh
-
-#################################
-#                               #
-#   WITHOUT OH-MY-ZSH [START]   #
-#                               #
-#################################
 
 # append to the history file instead of replacing it
 setopt appendhistory
@@ -113,7 +100,7 @@ setopt pushdminus
 # alias -g .....='../../../..'
 # alias -g ......='../../../../..'
 
-# alias -- -='cd -'
+alias -- -='cd -'
 # alias 1='cd -1'
 # alias 2='cd -2'
 # alias 3='cd -3'
@@ -147,12 +134,7 @@ setopt pushdminus
 # --------------------------- #
 
 ## History command configuration
-# setopt extendedhistory       # record timestamp of command in HISTFILE
 # setopt histexpiredupsfirst # delete duplicates first when HISTFILE size exceeds HISTSIZE
-# setopt histignoredups       # ignore duplicated commands history list
-# setopt histignorespace      # ignore commands that start with space
-# setopt histverify            # show command with history expansion to user before running it
-# setopt sharehistory          # share command history data
 
 # -------------------------------- #
 # --- omz/lib/key-bindings.zsh --- #
@@ -243,12 +225,11 @@ setopt pushdminus
 # # automatically load bash completion functions
 # autoload -U +X bashcompinit && bashcompinit
 
-###############################
-#                             #
-#   WITHOUT OH-MY-ZSH [END]   #
-#                             #
-###############################
+# ------------------------------------- #
+# --- Integrate shell with Homebrew --- #
+# ------------------------------------- #
 
+# TODO: should these go into the common config?
 HOMEBREW_PREFIX=
 if [[ "$(uname -s)" == "Darwin" && "$(uname -m)" == "arm64" ]]; then
   HOMEBREW_PREFIX='/opt/homebrew'
@@ -265,7 +246,22 @@ export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man:$HOMEBREW_PREFIX/opt/curl/share/man:$HOMEBREW_PREFIX/lib/node_modules/npm/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
+# ---------------------------------- #
+# --- Common shell configuration --- #
+# ---------------------------------- #
+
+[[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
+[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
+
+# ------------------------- #
+# --- Language settings --- #
+# ------------------------- #
+
 export LANG=en_GB.UTF-8
+
+# ------------------- #
+# --- Zsh options --- #
+# ------------------- #
 
 # don't add history entry if it's a duplicate of the previous command (and only
 # if it's exactly the previous one, older duplicates don't count)
@@ -315,9 +311,9 @@ setopt nomultios
 # Disabled because sometimes eating lines above prompt. See https://github.com/ohmyzsh/ohmyzsh/issues/5765.
 # export COMPLETION_WAITING_DOTS=true
 
-# --------------------- #
-# --- other options --- #
-# --------------------- #
+# ---------------------- #
+# --- Zsh UI options --- #
+# ---------------------- #
 
 autoload -U colors && colors
 
@@ -327,16 +323,23 @@ zle_highlight=('paste:none')
 # never emit the beep sequence
 unsetopt beep
 
+# ------------------ #
+# --- Completion --- #
+# ------------------ #
+
 autoload -Uz compinit
-zstyle ':completion:*' menu select
+
+# highlight current completion option
+zstyle ':completion:*:*:*:*:*' menu select
+# zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complete
 zmodload zsh/complist
 # compinit
-_comp_options+=(globdots)		# Include hidden files.
+# _comp_options+=(globdots)	# Include hidden files.
 
 ## autocomplete hidden files...
-#setopt globdots
+setopt globdots
 # ...but exclude "." and ".."
 zstyle ':completion:*' special-dirs false
 
@@ -344,14 +347,13 @@ zstyle ':completion:*' special-dirs false
 # completing the command with all the matches
 setopt globcomplete
 
-## use the same colors for completion as ls
-#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' # this seems to break git autocompletion
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
-## highlight current completion option
-#zstyle ':completion:*' menu select
-
-## case insensitive completion
-#zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+# use the same colors for completion as ls
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 ## enable autocompletion for aliases defined in shell_addons;
 ## each alias will use the give command as the underlying target for the
@@ -360,13 +362,16 @@ setopt globcomplete
 ## the "completealiases" option prevents aliases on the command line from
 ## being internally substituted before completion is attempted, so we need to
 ## disable it
-#unsetopt completealiases
+# unsetopt completealiases
 
 ## only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 ## miscellanea
 #_comp_options+=(globdots)		# Include hidden files.
+
+# automatically load bash completion functions
+autoload -U +X bashcompinit && bashcompinit
 
 # # this would normally be done by oh-my-zsh but even if was installed, some apps
 # # still need it again
