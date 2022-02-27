@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+# https://unix.stackexchange.com/questions/117331/in-zsh-how-can-i-dump-all-configuration
+
+echo "# Options"
+echo "# -------"
+setopt | tee
+
+echo "# Keybindings"
+echo "# -----------"
+for m ($keymaps) bindkey -LM $m | tee
+
+echo "# ZLE User widgets"
+echo "# ----------------"
+zle -lL | tee
+
+echo "# Styles"
+echo "# ------"
+zstyle -L | tee
+
+echo "# Loaded modules"
+echo "# --------------"
+zmodload -L | tee
+
+echo "# Variables"
+echo "# ---------"
+typeset -p +H -m '*' | tee

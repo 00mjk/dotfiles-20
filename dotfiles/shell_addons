@@ -284,7 +284,6 @@ if [[ -n "$(command -v fd)" ]]; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="${fzf_base_command} --type directory"
   export FZF_ALT_F_COMMAND="${FZF_ALT_C_COMMAND}"
-
 fi
 
 # the `~` key is normally easier to reach on both US and UK keyboards, PC and
@@ -314,22 +313,22 @@ export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 # --- RUST --- #
 # ------------ #
 
-PATH="$PATH:$HOME/.cargo/bin"
+PATH="$HOME/.cargo/bin:$PATH"
 
 # ------------------------ #
 # --- FFF FILE MANAGER --- #
 # ------------------------ #
 
-export FFF_HIDDEN=1 # show hidden files by default
-export FFF_COL2=7 # status line background
-export FFF_COL5=0 # status line foreground
-export FFF_COL4=4 # cursor (blue)
+# export FFF_HIDDEN=1 # show hidden files by default
+# export FFF_COL2=7 # status line background
+# export FFF_COL5=0 # status line foreground
+# export FFF_COL4=4 # cursor (blue)
 
-export FFF_CD_ON_EXIT=1
-f() {
-    fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-}
+# export FFF_CD_ON_EXIT=1
+# f() {
+#     fff "$@"
+#     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+# }
 
 # ------------------------ #
 # --- NNN FILE MANAGER --- #
@@ -410,7 +409,7 @@ alias cls="clear && printf '\e[3J'"
 
 # width refers to each column if side-by-side; we set it to half the current
 # number of columns in the terminal
-alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
+# alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
 
 alias gti='git'
 
@@ -509,7 +508,7 @@ alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -res
 
 # --- gotop --- #
 
-alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
+# alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
 
 # --- watson --- #
 
