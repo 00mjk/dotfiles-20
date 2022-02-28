@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 " Plugins: General power-ups
 " --------------------------
 
-Plug 'airblade/vim-current-search-match'
+" Plug 'airblade/vim-current-search-match'
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
