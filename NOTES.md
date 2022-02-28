@@ -434,3 +434,9 @@ Vim, highlight current match
         autocmd CmdlineEnter * if (index(['?', '/'], getcmdtype()) >= 0) | let g:searching = 1 | let g:firstCall = 1 | call timer_start(1, 'HighlightSearch') | endif
         autocmd CmdlineLeave * let g:searching = 0
     augroup END
+
+zsh complete aliases
+--------------------
+
+the "completealiases" option prevents aliases on the command line from being internally substituted
+before completion is attempted, so we might need to disable it

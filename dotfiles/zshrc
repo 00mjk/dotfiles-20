@@ -203,11 +203,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # enable autocompletion for aliases defined in shell_addons; each alias will use the given command
 # as the underlying target for the autocompletion
-#
-# the "completealiases" option prevents aliases on the command line from
-# being internally substituted before completion is attempted, so we need to
-# disable it
-# unsetopt completealiases
+setopt completealiases
 
 ## only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
