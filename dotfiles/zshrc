@@ -1,21 +1,8 @@
 # vim: set ft=zsh:
 
 # ----------------------- #
-# --- zsh completions --- #
+# --- General options --- #
 # ----------------------- #
-
-# set up local completions
-ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
-
-fpath=($ZSH_SITE_FUNCTIONS $fpath)
-
-# this takes more than 100 ms
-# export ZSH="${HOME}/.oh-my-zsh"
-# plugins=()
-# source $ZSH/oh-my-zsh.sh
-
-# append to the history file instead of replacing it
-setopt appendhistory
 
 # cd into dir by simply entering its path
 setopt autocd
@@ -23,207 +10,59 @@ setopt autocd
 # Make cd push the old directory onto the directory stack.
 setopt autopushd
 
-# Treat the `#', `~' and `^' characters as part of patterns for filename generation, etc.
-# (An initial unquoted `~' always produces named directory expansion.)
-setopt extendedglob
-
-# allow comments in interactive shell
-setopt interactivecomments
-
-# On an ambiguous completion, instead of listing possibilities or beeping, insert the first match
-# immediately. Then when completion is requested again, remove the first match and insert the
-# second match, etc. When there are no more matches, go back to the first one again.
-# This option overrides AUTO_MENU.
-setopt menucomplete
-
-# NOMATCH (+3) <C> <Z> If a pattern for filename generation has no matches, print an error, instead
-# of leaving it unchanged in the argument list.  This also applies to file expansion of an initial
-# `~' or `='.
-setopt nomatch
-
-# If a completion is performed with the cursor within a word, and a full completion is inserted, the
-# cursor is moved to the end of the word.
-setopt alwaystoend
-
-# Do not allow `>' redirection to truncate existing files.
-# `>!' or `>|' must be used to truncate a file.
-setopt noclobber
-
-# Do not report error when using >> to append to a file that doesn't exist yet, but create it.
-# Requires noclobber.
-setopt appendcreate
-
-# Assume that the terminal displays combining characters correctly (characters that modify the
-# preceding character)
-setopt combiningchars
-
-# If unset, the cursor is set to the end of the word if completion is started. Otherwise it stays
-# there and completion is done from both ends.
-# setopt completeinword
-
-# If this option is unset, output flow control via start/stop characters (usually assigned to ^S/^Q)
-# is disabled in the shell's editor.
-# setopt noflowcontrol
-
-# When the current word has a glob pattern, do not insert all the words resulting from the expansion
-# but generate matches as for completion and cycle through them like MENU_COMPLETE.
-setopt globcomplete
-
-# Do not require a leading `.' in a filename to be matched explicitly.
-setopt globdots
-
-# Print job notifications in the long format by default.Print job notifications in the long format
-# by default.
-setopt longlistjobs
-
-# If set, parameter expansion, command substitution and arithmetic expansion are performed in
-# prompts. Substitutions within prompts do not affect the command status.
-setopt promptsubst
-
 # Don't push multiple copies of the same directory onto the directory stack.
 setopt pushdignoredups
 
 # Exchange the meanings of `+' and `-' when used with a number to specify a directory in the stack.
 setopt pushdminus
 
-# ------------------------------- #
-# --- omz/lib/directories.zsh --- #
-# ------------------------------- #
+# Treat the `#', `~' and `^' characters as part of patterns for filename generation, etc.
+# (An initial unquoted `~' always produces named directory expansion.)
+# setopt extendedglob
 
-# Changing/making/removing directory
-# setopt auto_pushd
-# setopt pushd_ignore_dups
-# setopt pushdminus
+# allow comments in interactive shell
+setopt interactivecomments
 
-# alias -g ...='../..'
-# alias -g ....='../../..'
-# alias -g .....='../../../..'
-# alias -g ......='../../../../..'
+# NOMATCH (+3) <C> <Z> If a pattern for filename generation has no matches, print an error, instead
+# of leaving it unchanged in the argument list. This also applies to file expansion of an initial
+# `~' or `='.
+setopt nomatch
 
-alias -- -='cd -'
-# alias 1='cd -1'
-# alias 2='cd -2'
-# alias 3='cd -3'
-# alias 4='cd -4'
-# alias 5='cd -5'
-# alias 6='cd -6'
-# alias 7='cd -7'
-# alias 8='cd -8'
-# alias 9='cd -9'
+# Do not allow `>' redirection to truncate existing files.
+# `>!' or `>|' must be used to truncate a file.
+# prevents accidentally overwriting an existing file, override with >|
+setopt noclobber
 
-# alias md='mkdir -p'
-# alias rd=rmdir
+# Do not report error when using >> to append to a file that doesn't exist yet, but create it.
+# Requires noclobber.
+setopt appendcreate
 
-# function d () {
-#   if [[ -n $1 ]]; then
-#     dirs "$@"
-#   else
-#     dirs -v | head -n 10
-#   fi
-# }
-# compdef _dirs d
+# disable messing with redirection (treat redirection and pipes like bash)
+setopt nomultios
 
-# # List directory contents
-# alias lsa='ls -lah'
-# alias l='ls -lah'
-# alias ll='ls -lh'
-# alias la='ls -lAh'
+# If this option is unset, output flow control via start/stop characters (usually assigned to ^S/^Q)
+# is disabled in the shell's editor.
+# setopt noflowcontrol
 
-# --------------------------- #
-# --- omg/lib/history.zsh --- #
-# --------------------------- #
+# Print job notifications in the long format by default.Print job notifications in the long format
+# by default.
+setopt longlistjobs
 
-## History command configuration
-# setopt histexpiredupsfirst # delete duplicates first when HISTFILE size exceeds HISTSIZE
+# ------------------ #
+# --- UI options --- #
+# ------------------ #
 
-# -------------------------------- #
-# --- omz/lib/key-bindings.zsh --- #
-# -------------------------------- #
+autoload -U colors && colors
 
-# TBC
+# do not highlight pasted content
+zle_highlight=('paste:none')
 
-# -------------------------------- #
-# --- omz/lib/completion.zsh --- #
-# -------------------------------- #
+# never emit the beep sequence
+unsetopt beep
 
-# # fixme - the load process here seems a bit bizarre
-# zmodload -i zsh/complist
-
-# WORDCHARS=''
-
-# unsetopt menu_complete   # do not autoselect the first completion entry
-# unsetopt flowcontrol
-# setopt auto_menu         # show completion menu on successive tab press
-# setopt complete_in_word
-# setopt always_to_end
-
-# # should this be in keybindings?
-# bindkey -M menuselect '^o' accept-and-infer-next-history
-# zstyle ':completion:*:*:*:*:*' menu select
-
-# # case insensitive (all), partial-word and substring completion
-# if [[ "$CASE_SENSITIVE" = true ]]; then
-#   zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
-# else
-#   if [[ "$HYPHEN_INSENSITIVE" = true ]]; then
-#     zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-#   else
-#     zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-#   fi
-# fi
-# unset CASE_SENSITIVE HYPHEN_INSENSITIVE
-
-# # Complete . and .. special directories
-# zstyle ':completion:*' special-dirs true
-
-# zstyle ':completion:*' list-colors ''
-# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-# if [[ "$OSTYPE" = solaris* ]]; then
-#   zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm"
-# else
-#   zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
-# fi
-
-# # disable named-directories autocompletion
-# zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-
-# # Use caching so that commands like apt and dpkg complete are useable
-# zstyle ':completion:*' use-cache yes
-# zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
-
-# # Don't complete uninteresting users
-# zstyle ':completion:*:*:*:users' ignored-patterns \
-#         adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-#         clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
-#         gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-#         ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
-#         named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
-#         operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-#         rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
-#         usbmux uucp vcsa wwwrun xfs '_*'
-
-# # ... unless we really want to.
-# zstyle '*' single-ignored show
-
-# if [[ ${COMPLETION_WAITING_DOTS:-false} != false ]]; then
-#   expand-or-complete-with-dots() {
-#     # use $COMPLETION_WAITING_DOTS either as toggle or as the sequence to show
-#     [[ $COMPLETION_WAITING_DOTS = true ]] && COMPLETION_WAITING_DOTS="%F{red}…%f"
-#     # turn off line wrapping and print prompt-expanded "dot" sequence
-#     printf '\e[?7l%s\e[?7h' "${(%)COMPLETION_WAITING_DOTS}"
-#     zle expand-or-complete
-#     zle redisplay
-#   }
-#   zle -N expand-or-complete-with-dots
-#   # Set the function as the default tab completion widget
-#   bindkey -M emacs "^I" expand-or-complete-with-dots
-#   bindkey -M viins "^I" expand-or-complete-with-dots
-#   bindkey -M vicmd "^I" expand-or-complete-with-dots
-# fi
-
-# # automatically load bash completion functions
-# autoload -U +X bashcompinit && bashcompinit
+# Assume that the terminal displays combining characters correctly (characters that modify the
+# preceding character)
+setopt combiningchars
 
 # ------------------------------------- #
 # --- Integrate shell with Homebrew --- #
@@ -259,9 +98,12 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export LANG=en_GB.UTF-8
 
-# ------------------- #
-# --- Zsh options --- #
-# ------------------- #
+# --------------- #
+# --- History --- #
+# --------------- #
+
+# append to the history file instead of replacing it
+setopt appendhistory
 
 # don't add history entry if it's a duplicate of the previous command (and only
 # if it's exactly the previous one, older duplicates don't count)
@@ -302,32 +144,32 @@ export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 export HISTFILE=~/.zsh_history
 
-# prevents accidentally overwriting an existing file, override with >|
-setopt noclobber
-
-# disable messing with redirection (treat redirection and pipes like bash)
-setopt nomultios
-
-# Disabled because sometimes eating lines above prompt. See https://github.com/ohmyzsh/ohmyzsh/issues/5765.
-# export COMPLETION_WAITING_DOTS=true
-
-# ---------------------- #
-# --- Zsh UI options --- #
-# ---------------------- #
-
-autoload -U colors && colors
-
-# do not highlight pasted content
-zle_highlight=('paste:none')
-
-# never emit the beep sequence
-unsetopt beep
+alias -- -='cd -' # from oh-my-zsh
 
 # ------------------ #
 # --- Completion --- #
 # ------------------ #
 
+# set up local completions
+ZSH_SITE_FUNCTIONS=$HOME/.config/zsh/site-functions
+
+fpath=($ZSH_SITE_FUNCTIONS $fpath)
+
 autoload -Uz compinit
+
+# If unset, the cursor is set to the end of the word if completion is started. Otherwise it stays
+# there and completion is done from both ends.
+# setopt completeinword
+
+# On an ambiguous completion, instead of listing possibilities or beeping, insert the first match
+# immediately. Then when completion is requested again, remove the first match and insert the
+# second match, etc. When there are no more matches, go back to the first one again.
+# This option overrides AUTO_MENU.
+setopt menucomplete
+
+# If a completion is performed with the cursor within a word, and a full completion is inserted, the
+# cursor is moved to the end of the word.
+setopt alwaystoend
 
 # highlight current completion option
 zstyle ':completion:*:*:*:*:*' menu select
@@ -338,44 +180,41 @@ zmodload zsh/complist
 # compinit
 # _comp_options+=(globdots)	# Include hidden files.
 
-## autocomplete hidden files...
+## autocomplete hidden files (Do not require a leading `.' in a filename to be matched explicitly.)
 setopt globdots
-# ...but exclude "." and ".."
+#_comp_options+=(globdots)		# TODO: remove if not needed
+# ...but don't list "." and ".."
 zstyle ':completion:*' special-dirs false
 
-# allow to choose matching options when a command has a wildcard, instead of
-# completing the command with all the matches
+# When the current word has a glob pattern, do not insert all the words resulting from the expansion
+# but generate matches as for completion and cycle through them like MENU_COMPLETE.
+# Allow to choose matching options when a command has a wildcard, instead of
+# completing the command with all the matches.
 setopt globcomplete
 
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' # this seems to break git autocompletion
+# these seem to break git autocompletion
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 # zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-## enable autocompletion for aliases defined in shell_addons;
-## each alias will use the give command as the underlying target for the
-## autocompletion
-##
-## the "completealiases" option prevents aliases on the command line from
-## being internally substituted before completion is attempted, so we need to
-## disable it
+# enable autocompletion for aliases defined in shell_addons; each alias will use the given command
+# as the underlying target for the autocompletion
+#
+# the "completealiases" option prevents aliases on the command line from
+# being internally substituted before completion is attempted, so we need to
+# disable it
 # unsetopt completealiases
 
 ## only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
-## miscellanea
-#_comp_options+=(globdots)		# Include hidden files.
-
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
-# # this would normally be done by oh-my-zsh but even if was installed, some apps
-# # still need it again
-# autoload -Uz compinit && compinit -i
 compinit -i
 
 compdef ll='ls'
@@ -450,6 +289,10 @@ if [[ -n "$(command -v tmux)" && -n "$(command -v _tmux)" ]]; then
   compdef tumx='tmux'
 fi
 
+# -------------------------- #
+# --- FZF customisations --- #
+# -------------------------- #
+
 # ALT-F - Custom FZF key-binding that pastes the selected directories into the
 # command line.
 #
@@ -491,6 +334,10 @@ zle -N be-fzf-dir-widget # register the widget
   bindkey '\ef' be-fzf-dir-widget
 # fi
 
+# ---------------- #
+# --- Hostname --- #
+# ---------------- #
+
 # taken from oh-my-zsh
 # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
 function _bravoecho_hostname() {
@@ -505,6 +352,10 @@ function _bravoecho_hostname() {
 }
 
 [[ -n "${COMPUTER_NAME}" ]] || export COMPUTER_NAME="$(_bravoecho_hostname)"
+
+# ------------------------------------------------------------------ #
+# --- Prompt timer: print time elopsed for long-running commands --- #
+# ------------------------------------------------------------------ #
 
 _be_command_time_preexec() {
   setopt local_options BASH_REMATCH
@@ -608,15 +459,23 @@ BE_ZSH_COMMAND_TIME_EXCLUDE=(
 # BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
 # BE_ZSH_COMMAND_TIME_EXCLUDE["docker"]=true
 
-# Custom prompt, depends on oh-my-zsh:
-#
+# ------------------------- #
+# --- Prompt formatting --- #
+# ------------------------- #
+
+#   Requires the '_parse_git_status' helper (see the shell_addons file)
 #   * print exit code if non-zero
 #   * current path
 #   * current git branch if it's in a repo
 #   * git status
 #   * puts the cursor into a new line
+
+# evaluate the shell expressions on every prompt
 #
-setopt promptsubst # evaluate the shell expressions on every prompt
+# If set, parameter expansion, command substitution and arithmetic expansion are performed in
+# prompts. Substitutions within prompts do not affect the command status.
+setopt promptsubst
+
 prompt_newline=$'\n'
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   # %~ = pwd with tilde
@@ -636,13 +495,13 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 
 #------------#
-#--- JUMP ---#
+#--- Jump ---#
 #------------#
 
 # [ -n "$(command -v jump)" ] && eval "$(jump shell zsh)"
 
 # -------------- #
-# --- ZOXIDE --- #
+# --- Zoxide --- #
 # -------------- #
 
 [ -n "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"
@@ -673,13 +532,15 @@ bindkey -M emacs '^[[4~'   end-of-line
 
 # delete key
 bindkey -M emacs '^[[3~'  delete-char
-# bindkey -M emacs "^[3;5~" delete-char
+# bindkey -M emacs "^[3;5~" delete-char # from oh-my-zsh
 
 # ctrl-delete
 bindkey -M emacs '^[[3;5~' kill-word
 
 # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to
 # anchor the search to the beginning of the line.
+#
+# Superseded by FZF.
 # bindkey '^r' history-incremental-search-backward
 
 # Edit the current command line in $EDITOR
@@ -706,7 +567,7 @@ export CLOUDSDK_PYTHON=python3.9
 # --- Terraform --- #
 # ----------------- #
 
-autoload -U +X bashcompinit && bashcompinit
+# requires: autoload -U +X bashcompinit && bashcompinit
 TERRAFORM_AUTOCOMPLETE=$HOMEBREW_PREFIX/bin/terraform
 [ -f $TERRAFORM_AUTOCOMPLETE ] && complete -o nospace -C $TERRAFORM_AUTOCOMPLETE terraform
 
@@ -725,7 +586,7 @@ typeset -aU infopath
 # ----------- #
 
 # fzf widgets should be loaded as last, to ensure they are not overridden by
-# native shell functionality
+# other shell functionality
 if [[ -e "${HOME}/.fzf.zsh" ]]; then
   source ~/.fzf.zsh
 fi
