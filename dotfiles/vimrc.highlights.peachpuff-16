@@ -37,7 +37,7 @@ highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
 highlight Pmenu         ctermbg=8 ctermfg=none
 
 " NOTE: PmenuSel is also used as part of YCM's (YouCompleteMe) signature help.
-highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold
+highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold,reverse
 
 highlight PmenuSbar     ctermbg=8
 highlight PmenuThumb    ctermbg=7
