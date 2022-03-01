@@ -211,6 +211,10 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
+if [[ -n "${terminfo[kcbt]}" ]]; then
+  bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
+fi
+
 compinit -i
 
 compdef ll='ls'
