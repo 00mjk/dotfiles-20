@@ -165,7 +165,7 @@ autoload -Uz compinit
 # immediately. Then when completion is requested again, remove the first match and insert the
 # second match, etc. When there are no more matches, go back to the first one again.
 # This option overrides AUTO_MENU.
-setopt menucomplete
+# setopt menucomplete
 
 # If a completion is performed with the cursor within a word, and a full completion is inserted, the
 # cursor is moved to the end of the word.
