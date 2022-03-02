@@ -46,7 +46,7 @@ var (
 
 func main() {
 	log.SetFlags(0)
-	log.SetPrefix("gitparse")
+	log.SetPrefix("gitprompt")
 
 	gitStatus, err := exec.Command("/usr/bin/env", "bash", "-c", "git status --branch --short").Output()
 	if err != nil {
@@ -81,15 +81,12 @@ func ParseGit(shortGitStatus []byte) (string, error) {
 	for sc.Scan() {
 		if reModifiedStaged.Match(sc.Bytes()) {
 			anyModifiedStaged = "modifiedStaged"
-			continue
 		}
 		if reModifiedNotStaged.Match(sc.Bytes()) {
 			anyModifiedNotStaged = "modifiedNonStaged"
-			continue
 		}
 		if reUntracked.Match(sc.Bytes()) {
 			anyUntracked = "added"
-			continue
 		}
 	}
 	if sc.Err() != nil {

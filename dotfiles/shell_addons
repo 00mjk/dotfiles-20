@@ -88,7 +88,7 @@ _parse_git_status(){
 
   local modifiedStaged modifiedUnstaged newFiles branch upstream ahead behind
 
-  # see gitparse in the 'go' scripts
+  # see gitprompt in the 'go' scripts
   IFS=, read -r \
     modifiedStaged \
     modifiedUnstaged \
@@ -97,7 +97,7 @@ _parse_git_status(){
     upstream \
     ahead \
     behind \
-  <<< "$(gitparse 2>&/dev/null)"
+  <<< "$(gitprompt 2>&/dev/null)"
 
   # print nothing if it's not a git repo
   [[ -z "${branch}" ]] && return

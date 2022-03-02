@@ -55,7 +55,7 @@ pushd $ROOTDIR/go
 go mod tidy
 go install -v github.com/bravoecho/dotfiles/go/cmd/colorcombos
 go install -v github.com/bravoecho/dotfiles/go/cmd/onlydirs
-go install -v github.com/bravoecho/dotfiles/go/cmd/gitparse
+go install -v github.com/bravoecho/dotfiles/go/cmd/gitprompt
 popd
 
 # echo "[setup] Update Go binaries for Vim"
