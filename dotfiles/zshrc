@@ -16,17 +16,8 @@ setopt pushdignoredups
 # Exchange the meanings of `+' and `-' when used with a number to specify a directory in the stack.
 setopt pushdminus
 
-# Treat the `#', `~' and `^' characters as part of patterns for filename generation, etc.
-# (An initial unquoted `~' always produces named directory expansion.)
-# setopt extendedglob
-
 # allow comments in interactive shell
 setopt interactivecomments
-
-# NOMATCH (+3) <C> <Z> If a pattern for filename generation has no matches, print an error, instead
-# of leaving it unchanged in the argument list. This also applies to file expansion of an initial
-# `~' or `='.
-setopt nomatch
 
 # Do not allow `>' redirection to truncate existing files.
 # `>!' or `>|' must be used to truncate a file.
@@ -167,6 +158,15 @@ autoload -Uz compinit
 # This option overrides AUTO_MENU.
 # setopt menucomplete
 
+# Treat the `#', `~' and `^' characters as part of patterns for filename generation, etc.
+# (An initial unquoted `~' always produces named directory expansion.)
+setopt extendedglob
+
+# NOMATCH (+3) <C> <Z> If a pattern for filename generation has no matches, print an error, instead
+# of leaving it unchanged in the argument list. This also applies to file expansion of an initial
+# `~' or `='.
+setopt nomatch
+
 # If a completion is performed with the cursor within a word, and a full completion is inserted, the
 # cursor is moved to the end of the word.
 setopt alwaystoend
@@ -201,9 +201,12 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # use the same colors for completion as ls
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# enable autocompletion for aliases defined in shell_addons; each alias will use the given command
-# as the underlying target for the autocompletion
-setopt completealiases
+# autocompletion for aliases must be disabled, otherwise it won't work for
+# secondary commands; for example, if completealiases is active, when trying to
+# complete a git alias that translates to "git switch", the autocompletion will
+# only offer options for "git", not the specific options for "switch", which
+# makes it less useful
+unsetopt completealiases
 
 ## only autocomplete targets for make, not files <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
@@ -215,13 +218,14 @@ if [[ -n "${terminfo[kcbt]}" ]]; then
   bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
 fi
 
-compinit -i
+# compinit -i
+compinit -u -C -d
 
 compdef ll='ls'
 compdef la='ls'
 
 # TODO: add missing git aliases
-if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
+if [[ -n "$(command -v git)" && -n "$(command -v _git)" ]]; then
   compdef g='git'
   compdef ga='git'
   compdef gaa='git'
@@ -260,19 +264,19 @@ if [[ -n "$(command -v git)" && -r "${ZSH_SITE_FUNCTIONS}/_git" ]]; then
   compdef gdl='git'
 fi
 
-if [[ -n "$(command -v docker)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]; then
+if [[ -n "$(command -v docker)" && -n "$(command -v _docker)" ]]; then
   compdef dk='docker'
 fi
 
-if [[ -n "$(command -v docker-compose)" && -r "${ZSH_SITE_FUNCTIONS}/_docker" ]]; then
+if [[ -n "$(command -v docker-compose)" && -n "$(command -v _docker)" ]]; then
   compdef dc='docker-compose'
 fi
 
-if [[ -n "$(command -v kubectl)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectl" ]]; then
+if [[ -n "$(command -v kubectl)" && -n "$(command -v _kubectl)" ]]; then
   compdef kc='kubectl'
 fi
 
-if [[ -n "$(command -v kubectx)" && -r "${ZSH_SITE_FUNCTIONS}/_kubectx" ]]; then
+if [[ -n "$(command -v kubectx)" && -n "$(command -v _kubectx)" ]]; then
   compdef kx='kubectx'
 fi
 
