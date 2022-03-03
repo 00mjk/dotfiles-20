@@ -18,9 +18,9 @@ highlight CursorLineNr    ctermbg=0     ctermfg=15    cterm=none
 " remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
 " signature help unusable.
 highlight CursorLine                                   cterm=none
-highlight CursorLineFold  ctermbg=8                    cterm=none
-highlight Folded          ctermbg=8     ctermfg=4      cterm=none
-highlight FoldColumn      ctermbg=8     ctermfg=4      cterm=none
+highlight CursorLineFold                               cterm=none
+highlight Folded          ctermbg=0     ctermfg=4      cterm=none
+highlight FoldColumn      ctermbg=0     ctermfg=4      cterm=none
 highlight SignColumn      ctermbg=none  cterm=none
 highlight Search          ctermbg=0     ctermfg=11     cterm=reverse
 highlight Todo            ctermbg=none  ctermfg=4      cterm=none,bold,italic
@@ -129,10 +129,10 @@ highlight BE_StatuslineYellowCentre   ctermbg=8   ctermfg=3   cterm=bold
 " Highlight: Diffs
 " ----------------
 
-highlight DiffAdd     ctermbg=8   ctermfg=2   cterm=none
-highlight DiffDelete  ctermbg=8   ctermfg=9   cterm=none
-highlight DiffChange  ctermbg=8   ctermfg=15  cterm=none
-highlight DiffText    ctermbg=8   ctermfg=4   cterm=none
+highlight DiffAdd     ctermbg=0   ctermfg=2   cterm=none
+highlight DiffDelete  ctermbg=0   ctermfg=9   cterm=none
+highlight DiffChange  ctermbg=0   ctermfg=15  cterm=none
+highlight DiffText    ctermbg=0   ctermfg=4   cterm=none
 
 " Highlight: Extra todo-like keywords
 " -----------------------------------
