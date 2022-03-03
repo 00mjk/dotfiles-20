@@ -1584,7 +1584,8 @@ let g:ale_fixers['rust'] = ['rustfmt']
 " ALE: Golang-specific settings
 " -----------------------------
 
-let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck', 'staticcheck']
+" let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck', 'staticcheck']
+let g:ale_linters['go'] = ['govet', 'staticcheck', 'errcheck']
 " let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
 let g:ale_go_golangci_lint_options = '' " only use defaults
