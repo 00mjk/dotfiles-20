@@ -1026,17 +1026,19 @@ nnoremap <Leader>o :call InsertPasteNewLine()<CR>
 " http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
 " TODO: check and fix Alt-D on Linux via iTerm
 " if has('linux')
-"   set <M-d>=d
+  " set <M-d>=d
 " elseif has('osxdarwin')
-  set <M-d>=∂
+  " set <M-d>=∂
 " endif
 
 " ...then, the actual mapping:
 " current line in normal and insert mode
 nnoremap <M-d> "_dd
+nnoremap d "_dd
 nnoremap <Leader>d "_dd
 " selection in visual mode
 vnoremap <M-d> "_d
+vnoremap d "_d
 vnoremap <Leader>d "_d
 
 " also prevent 'x' from overriding what's in the clipboard

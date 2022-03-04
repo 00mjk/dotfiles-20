@@ -55,6 +55,52 @@ unsetopt beep
 # preceding character)
 setopt combiningchars
 
+# -------------------- #
+# --- Key bindings --- #
+# -------------------- #
+
+# Use emacs keybindings; the full list can be seen with the command:
+# 'bindkey -M emacs'.
+bindkey -e
+
+# Some Mac specific keybinding fixes
+# if [[ "$(uname -s)" == "Darwin" ]]; then
+  bindkey "ç" fzf-cd-widget # Alt-C (Option-C)
+  bindkey '∂' kill-word # Alt-D
+# fi
+
+# provided by ohmyzsh for now
+# # ctrl arrow left/right: move by one word
+# # note: this works for the xterm family of terminal emulators, including tmux
+bindkey -M emacs '^[[1;5C' forward-word
+bindkey -M emacs '^[[1;5D' backward-word
+
+# home/end keys
+bindkey -M emacs '^[[1~'   beginning-of-line
+bindkey -M emacs '^[[4~'   end-of-line
+
+# delete key
+bindkey -M emacs '^[[3~'  delete-char
+# bindkey -M emacs "^[3;5~" delete-char # from oh-my-zsh
+
+# ctrl-delete
+bindkey -M emacs '^[[3;5~' kill-word
+
+# [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to
+# anchor the search to the beginning of the line.
+#
+# Superseded by FZF.
+# bindkey '^r' history-incremental-search-backward
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# emulate bash, cut to beginning of line with Ctrl+U instead of cutting the
+# whole line.
+bindkey \^U backward-kill-line
+
 # ------------------------------------- #
 # --- Integrate shell with Homebrew --- #
 # ------------------------------------- #
@@ -333,10 +379,12 @@ zle -N be-fzf-dir-widget # register the widget
 
 # Map Alt+F
 # if [[ "$(uname -s)" == "Darwin" ]]; then
-  bindkey 'ƒ' be-fzf-dir-widget
+  # bindkey 'ƒ' be-fzf-dir-widget
 # else
-  bindkey '\ef' be-fzf-dir-widget
+  # bindkey '\ef' be-fzf-dir-widget
 # fi
+
+bindkey '^[f' be-fzf-dir-widget
 
 # ---------------- #
 # --- Hostname --- #
@@ -509,52 +557,6 @@ alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 # -------------- #
 
 [ -n "$(command -v zoxide)" ] && eval "$(zoxide init zsh)"
-
-# -------------------- #
-# --- Key bindings --- #
-# -------------------- #
-
-# Use emacs keybindings; the full list can be seen with the command:
-# 'bindkey -M emacs'.
-bindkey -e
-
-# Some Mac specific keybinding fixes
-# if [[ "$(uname -s)" == "Darwin" ]]; then
-  bindkey "ç" fzf-cd-widget # Alt-C (Option-C)
-  bindkey '∂' kill-word # Alt-D
-# fi
-
-# provided by ohmyzsh for now
-# # ctrl arrow left/right: move by one word
-# # note: this works for the xterm family of terminal emulators, including tmux
-bindkey -M emacs '^[[1;5C' forward-word
-bindkey -M emacs '^[[1;5D' backward-word
-
-# home/end keys
-bindkey -M emacs '^[[1~'   beginning-of-line
-bindkey -M emacs '^[[4~'   end-of-line
-
-# delete key
-bindkey -M emacs '^[[3~'  delete-char
-# bindkey -M emacs "^[3;5~" delete-char # from oh-my-zsh
-
-# ctrl-delete
-bindkey -M emacs '^[[3;5~' kill-word
-
-# [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to
-# anchor the search to the beginning of the line.
-#
-# Superseded by FZF.
-# bindkey '^r' history-incremental-search-backward
-
-# Edit the current command line in $EDITOR
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
-
-# emulate bash, cut to beginning of line with Ctrl+U instead of cutting the
-# whole line.
-bindkey \^U backward-kill-line
 
 # ------------------------
 # --- Google Cloud SDK ---
