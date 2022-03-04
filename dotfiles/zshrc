@@ -507,6 +507,7 @@ BE_ZSH_COMMAND_TIME_EXCLUDE=(
   "watson"
   "ww"
   "vimdiff"
+  "tm"
 )
 # declare -A BE_ZSH_COMMAND_TIME_EXCLUDE
 # BE_ZSH_COMMAND_TIME_EXCLUDE["vim"]=true
