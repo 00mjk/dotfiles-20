@@ -1,5 +1,6 @@
 # vim: set ft=zsh:
 
+# start=$(/opt/homebrew/bin/gdate '+%s.%N')
 # ----------------------- #
 # --- General options --- #
 # ----------------------- #
@@ -609,3 +610,8 @@ fi
 # exit code is 1 when a new shell is open, because this is the last statement
 # in the zshrc
 [[ -n "$(command -v direnv)" ]] && eval "$(direnv hook zsh)" || true
+
+end=$(/opt/homebrew/bin/gdate '+%s.%N')
+
+# runtime=$( echo "$end - $start" | bc -l )
+# echo $runtime
