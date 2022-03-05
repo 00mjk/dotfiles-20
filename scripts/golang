@@ -3,33 +3,16 @@
 set -e
 
 # --------------------------------------------------------------------------- #
-# --- Detect the operating system ------------------------------------------- #
+# --- Detect operating system type ------------------------------------------ #
 # --------------------------------------------------------------------------- #
 
-PLATFORM=
-if [[ "$(uname -s)" =~ Darwin ]]; then
-  PLATFORM='darwin'
-elif [[ "$(uname -s)" =~ Linux ]]; then
-  PLATFORM='linux'
-else
-  echo "Unsupported platform: $(uname -s)"
-  exit 1
-fi
+OS_NAME=$(uname -s)
+GO_PLATFORM=$( [[ $OS_NAME =~ (Darwin|Linux) ]] && echo $OS_NAME | tr '[[:upper:]]' '[[:lower:]]' )
+[[ -z "${GO_PLATFORM}" ]] && echo "${OS_NAME} not supported" && exit 1
 
-# --------------------------------------------------------------------------- #
-# --- Detect processor architecture ----------------------------------------- #
-# --------------------------------------------------------------------------- #
-
-ARCH="$(uname -m)"
-GO_ARCH=
-if [[ $ARCH == "x86_64" ]]; then
-  GO_ARCH='amd64'
-elif [[ $ARCH == "arm64" || $ARCH == "aarch64" ]]; then
-  GO_ARCH='arm64'
-else
-  echo "Unsupported architecture: $(uname -m)"
-  exit 1
-fi
+OS_ARCH="$(uname -m)"
+GO_ARCH=$( [[ $OS_ARCH = "x86_64" ]] && echo "amd64" || ( [[ $OS_ARCH =~ (arm64|aarch64) ]] && echo "arm64" ) )
+[[ -z "${GO_ARCH}" ]] && echo "${OS_ARCH} not supported" && exit 1
 
 # --------------------------------------------------------------------------- #
 # --- Parse params ---------------------------------------------------------- #
@@ -69,8 +52,8 @@ if [[ -z "$GO_VERSION" ]]; then
   # The most reliable way is currently to parse the official Golang downloads page.
   GO_VERSION=$(
     curl -gsL golang.org/dl \
-      | grep -m1 "${PLATFORM}-${GO_ARCH}.tar.gz" \
-      | sed -E "s|.*\"/dl/go(.+)\.${PLATFORM}-${GO_ARCH}.tar.gz\".+|\1|"
+      | grep -m1 "${GO_PLATFORM}-${GO_ARCH}.tar.gz" \
+      | sed -E "s|.*\"/dl/go(.+)\.${GO_PLATFORM}-${GO_ARCH}.tar.gz\".+|\1|"
   )
 fi
 
@@ -87,13 +70,14 @@ else
   GO_ROOT="/usr/local/go"
 fi
 DOWNLOAD_DIR="${HOME}/Downloads"
-FILENAME="go${GO_VERSION}.${PLATFORM}-${GO_ARCH}.tar.gz"
+FILENAME="go${GO_VERSION}.${GO_PLATFORM}-${GO_ARCH}.tar.gz"
 ARCHIVE_FILE="${DOWNLOAD_DIR}/${FILENAME}"
 URL="https://golang.org/dl/${FILENAME}"
 
 cat <<-EOF
-PLATFORM ....... ${PLATFORM}
-ARCH ........... ${ARCH}
+OS_NAME ........ ${OS_NAME}
+GO_PLATFORM .... ${GO_PLATFORM}
+OS_ARCH ........ ${OS_ARCH}
 GO_ARCH ........ ${GO_ARCH}
 GO_VERSION ..... ${GO_VERSION}
 GO_ROOT ........ ${GO_ROOT}
