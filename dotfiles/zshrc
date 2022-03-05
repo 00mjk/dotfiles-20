@@ -479,7 +479,7 @@ _be_command_time_precmd() {
   fi
 
   # The time info needs to be exported to be available in the zsh prompt.
-  export COMMAND_TIME_PROMPT="[%Btime ${elapsed_fmt}%b]"$'\n'
+  export COMMAND_TIME_PROMPT="[%B%F{cyan}${elapsed_fmt}%f%b]"$'\n'
 }
 
 precmd_functions+=(_be_command_time_precmd)
