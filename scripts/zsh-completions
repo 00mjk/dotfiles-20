@@ -47,4 +47,12 @@ if [[ -n "$(command -v yq)" ]]; then
   yq shell-completion zsh > "${ZSH_SITE_FUNCTIONS}/_yq"
 fi
 
+echo "[setup] git autocompletions"
+# ensure we always use the latest version provided by zsh itself
+ZSH_GIT_COMPLETION_URL="https://raw.githubusercontent.com/zsh-users/zsh/master/Completion/Unix/Command/_git"
+curl \
+  --time-cond "${ZSH_SITE_FUNCTIONS}/_git" \
+  --output "${ZSH_SITE_FUNCTIONS}/_git" \
+  "${ZSH_GIT_COMPLETION_URL}"
+
 "$CURRDIR/golang-zsh-completion"
