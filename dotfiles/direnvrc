@@ -11,5 +11,15 @@ use_ruby() {
 use_go() {
   local go_dir=$HOME/.go/$1
   load_prefix $go_dir
-  layout go
+
+  # 'layout go'—see the layout_go() function in direnv/stdlib.sh—would create
+  # a separate environment for each repository, leading to use of extra disk
+  # space, which can be significant when the number of Go repositories grows (1+
+  # GB per repository)
+  #
+  # this design choice was probably made when Go didn't have modules, to ensure
+  # isolation; however this seems no longer necessary, and using the $go_dir as
+  # it's intended is safe and saves us disk space
+  path_add GOPATH $go_dir
+  PATH_add $go_dir/bin
 }
