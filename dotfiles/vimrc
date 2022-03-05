@@ -55,7 +55,7 @@ Plug 'ollykel/v-vim'
 Plug 'tpope/vim-git'
 Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
-Plug 'direnv/direnv.vim'
+" Plug 'direnv/direnv.vim'
 
 " Plugins: Markdown
 " -----------------
