@@ -57,52 +57,6 @@ unsetopt beep
 # that modify the preceding character)
 setopt combiningchars
 
-# -------------------- #
-# --- Key bindings --- #
-# -------------------- #
-
-# Use emacs keybindings; the full list can be seen with the command:
-# 'bindkey -M emacs'.
-bindkey -e
-
-# Some Mac specific keybinding fixes
-# if [[ "$(uname -s)" == "Darwin" ]]; then
-  bindkey "ç" fzf-cd-widget # Alt-C (Option-C)
-  bindkey '∂' kill-word # Alt-D
-# fi
-
-# provided by ohmyzsh for now
-# # ctrl arrow left/right: move by one word
-# # note: this works for the xterm family of terminal emulators, including tmux
-bindkey -M emacs '^[[1;5C' forward-word
-bindkey -M emacs '^[[1;5D' backward-word
-
-# home/end keys
-bindkey -M emacs '^[[1~'   beginning-of-line
-bindkey -M emacs '^[[4~'   end-of-line
-
-# delete key
-bindkey -M emacs '^[[3~'  delete-char
-# bindkey -M emacs "^[3;5~" delete-char # from oh-my-zsh
-
-# ctrl-delete
-bindkey -M emacs '^[[3;5~' kill-word
-
-# [Ctrl-r] - Search backward incrementally for a specified string. The string
-# may begin with ^ to anchor the search to the beginning of the line.
-#
-# Superseded by FZF.
-# bindkey '^r' history-incremental-search-backward
-
-# Edit the current command line in $EDITOR
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
-
-# emulate bash, cut to beginning of line with Ctrl+U instead of cutting the
-# whole line.
-bindkey \^U backward-kill-line
-
 # ------------------------------------- #
 # --- Integrate shell with Homebrew --- #
 # ------------------------------------- #
@@ -271,7 +225,7 @@ if [[ -n "${terminfo[kcbt]}" ]]; then
 fi
 
 # compinit -i
-compinit -u -C -d
+compinit -u -C -d # TODO: what do these options mean
 
 compdef ll='ls'
 compdef la='ls'
@@ -345,6 +299,14 @@ if [[ -n "$(command -v tmux)" && -n "$(command -v _tmux)" ]]; then
   compdef tumx='tmux'
 fi
 
+# ----------- #
+# --- FZF --- #
+# ----------- #
+
+if [[ -e "${HOME}/.fzf.zsh" ]]; then
+  source ~/.fzf.zsh
+fi
+
 # -------------------------- #
 # --- FZF customisations --- #
 # -------------------------- #
@@ -354,7 +316,7 @@ fi
 #
 # <https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh>
 # <https://github.com/junegunn/fzf/wiki/Examples#changing-directory>
-#
+
 __be_dsel() {
   local cmd="${FZF_ALT_F_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d -print \
@@ -382,15 +344,60 @@ be-fzf-dir-widget() {
 }
 
 zle -N be-fzf-dir-widget # register the widget
+# bindkey -M emacs '^[f' be-fzf-dir-widget
+bindkey -M emacs '\ef' be-fzf-dir-widget
 
-# Map Alt+F
-# if [[ "$(uname -s)" == "Darwin" ]]; then
-  # bindkey 'ƒ' be-fzf-dir-widget
-# else
-  # bindkey '\ef' be-fzf-dir-widget
-# fi
+# -------------------- #
+# --- Key-bindings --- #
+# -------------------- #
 
-bindkey '^[f' be-fzf-dir-widget
+# Use emacs keybindings; the full list can be seen with the command:
+# 'bindkey -M emacs'.
+bindkey -e
+
+# ctrl arrow left/right: move by one word
+# note: this works for the xterm family of terminal emulators, including tmux
+bindkey -M emacs '^[[1;5C' forward-word
+bindkey -M emacs '^[[1;5D' backward-word
+
+# home/end keys
+bindkey -M emacs '^[[1~'   beginning-of-line
+bindkey -M emacs '^[[4~'   end-of-line
+
+# delete key
+bindkey -M emacs '^[[3~'  delete-char
+# bindkey -M emacs "^[3;5~" delete-char # from oh-my-zsh
+
+# ctrl-delete
+bindkey -M emacs '^[[3;5~' kill-word
+
+# [Ctrl-r] - Search backward incrementally for a specified string. The string
+# may begin with ^ to anchor the search to the beginning of the line.
+#
+# Superseded by FZF.
+# bindkey '^r' history-incremental-search-backward
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# emulate bash, cut to beginning of line with Ctrl+U instead of cutting the
+# whole line.
+bindkey \^U backward-kill-line
+
+# ---------------------------------------------- #
+# --- Key-bindings: Fixes for Alt+<x> on Mac --- #
+# ---------------------------------------------- #
+
+# These should not be neeeded for iTerm if the Option key is mapped to Esc+.
+#
+# However, they are still needed for Kitty, despite having set:
+# 'macos_option_as_alt yes'
+
+bindkey -M emacs 'ç' fzf-cd-widget     # Alt-C
+bindkey -M emacs '∂' kill-word         # Alt-D
+bindkey -M emacs 'ƒ' be-fzf-dir-widget # Alt-F
 
 # ---------------- #
 # --- Hostname --- #
@@ -593,16 +600,6 @@ TERRAFORM_AUTOCOMPLETE=$HOMEBREW_PREFIX/bin/terraform
 typeset -aU path
 typeset -aU manpath
 typeset -aU infopath
-
-# ----------- #
-# --- FZF --- #
-# ----------- #
-
-# fzf widgets should be loaded as last, to ensure they are not overridden by
-# other shell functionality
-if [[ -e "${HOME}/.fzf.zsh" ]]; then
-  source ~/.fzf.zsh
-fi
 
 # --------------
 # --- Direnv ---

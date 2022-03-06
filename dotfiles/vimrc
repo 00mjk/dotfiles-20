@@ -1040,6 +1040,9 @@ nnoremap <Leader>d "_dd
 vnoremap <M-d> "_d
 vnoremap d "_d
 vnoremap <Leader>d "_d
+" same, for Kitty on Mac
+nnoremap ∂ "_dd
+vnoremap ∂ "_d
 
 " also prevent 'x' from overriding what's in the clipboard
 noremap x "_x
