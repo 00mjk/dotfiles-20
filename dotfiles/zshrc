@@ -576,12 +576,13 @@ alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
 # --- Google Cloud SDK ---
 # ------------------------
 
-export PATH=$HOME/google-cloud-sdk/bin:$PATH
 gcloud_zsh_completion="$HOME/google-cloud-sdk/completion.zsh.inc"
-[ -f $gcloud_zsh_completion ] && source $gcloud_zsh_completion
-
-# As of 2022-01-23 gcloud still relies on Python 3.9 (needs 'Mapping'.)
-export CLOUDSDK_PYTHON=python3.9
+if [[ -f $gcloud_zsh_completion ]]; then
+  export PATH=$HOME/google-cloud-sdk/bin:$PATH
+  source $gcloud_zsh_completion
+  # As of 2022-01-23 gcloud still relies on Python 3.9 (needs 'Mapping'.)
+  export CLOUDSDK_PYTHON=python3.9
+fi
 
 # ----------------- #
 # --- Terraform --- #
