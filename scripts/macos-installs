@@ -79,6 +79,7 @@ formula fzf
 formula git-delta
 formula gnupg
 formula htop
+formula imagemagick
 formula jo
 formula jq
 formula lsof
