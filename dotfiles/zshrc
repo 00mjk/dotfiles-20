@@ -57,27 +57,6 @@ unsetopt beep
 # that modify the preceding character)
 setopt combiningchars
 
-# ------------------------------------- #
-# --- Integrate shell with Homebrew --- #
-# ------------------------------------- #
-
-# TODO: should these go into the common config?
-HOMEBREW_PREFIX=
-if [[ "$(uname -s)" == "Darwin" && "$(uname -m)" == "arm64" ]]; then
-  HOMEBREW_PREFIX='/opt/homebrew'
-else
-  HOMEBREW_PREFIX='/usr/local'
-fi
-
-# from 'brew shellenv'
-export HOMEBREW_PREFIX
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
-# export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
-export MANPATH="$HOMEBREW_PREFIX/share/man:$HOMEBREW_PREFIX/opt/curl/share/man:$HOMEBREW_PREFIX/lib/node_modules/npm/man${MANPATH+:$MANPATH}:"
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
-
 # ---------------------------------- #
 # --- Common shell configuration --- #
 # ---------------------------------- #
@@ -344,7 +323,7 @@ be-fzf-dir-widget() {
 }
 
 zle -N be-fzf-dir-widget # register the widget
-# bindkey -M emacs '^[f' be-fzf-dir-widget
+# '^[f' can be used instead of '\ef'
 bindkey -M emacs '\ef' be-fzf-dir-widget
 
 # -------------------- #
@@ -589,8 +568,16 @@ fi
 # ----------------- #
 
 # requires: autoload -U +X bashcompinit && bashcompinit
-TERRAFORM_AUTOCOMPLETE=$HOMEBREW_PREFIX/bin/terraform
-[ -f $TERRAFORM_AUTOCOMPLETE ] && complete -o nospace -C $TERRAFORM_AUTOCOMPLETE terraform
+if [[ -n "${HOMEBREW_PREFIX}" ]]; then
+  terraform_completion=$HOMEBREW_PREFIX/bin/terraform
+  [ -f $terraform_completion ] && complete -o nospace -C $terraform_completion terraform
+fi
+
+# ----------------- #
+# --- LOCAL BIN --- #
+# ----------------- #
+
+PATH="${HOME}/.local/bin:${PATH}"
 
 # -------------------------------------- #
 # --- Additional shell configuration --- #
