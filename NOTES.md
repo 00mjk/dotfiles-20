@@ -10,6 +10,13 @@ Notable dotfile repositories
 * <https://github.com/terminalforlife/BashConfig>
 * <https://github.com/benawad/dotfiles>
 * <https://github.com/ztlevi/dotty>
+* ___Making Vim Amazing___, in particular the custom presentation mode
+  <https://github.com/awesome-streamers/awesome-streamerrc/tree/master/ThePrimeagen>
+* ___Presentations___ in Vim
+  - <https://github.com/sdaschner/dotfiles>
+  - <https://youtu.be/GDa7hrbcCB8>
+* <https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f>
+* <https://github.com/garybernhardt/dotfiles/blob/main/.vimrc>
 
 Vim plugins
 -----------
