@@ -17,7 +17,7 @@ EOF
 
 pushd ~
 
-# Editor support
+# Editor support - Go
 go install -v golang.org/x/tools/cmd/goimports@latest
 go install -v github.com/fatih/gomodifytags@latest
 go install -v github.com/fatih/motion@latest
@@ -32,6 +32,9 @@ go install -v golang.org/x/tools/cmd/guru@latest
 if [[ ! "$(go env GOVERSION)" =~ ^go1\.18 ]]; then
   go install -v github.com/segmentio/golines@latest
 fi
+
+# Editor support - Terraform
+go install -v github.com/hashicorp/terraform-ls@latest
 
 # Linters
 go install -v honnef.co/go/tools/cmd/staticcheck@latest
