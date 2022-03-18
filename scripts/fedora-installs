@@ -18,7 +18,7 @@ sudo dnf install -y \
   glibc \
   groff \
   htop \
-  imagemagick \
+  ImageMagick \
   jo \
   jq \
   lsof \
