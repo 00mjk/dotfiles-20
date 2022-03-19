@@ -84,7 +84,12 @@ Plug 'dhruvasagar/vim-table-mode'
 " -----------------------------------------
 
 Plug 'dense-analysis/ale'
-Plug 'ycm-core/YouCompleteMe'
+
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Plug 'ycm-core/YouCompleteMe'
 " Plug 'jayli/vim-easycomplete'
 
 " Plugins: Colorschemes
@@ -162,6 +167,8 @@ set autoread
 set timeout timeoutlen=500 ttimeoutlen=100
 
 set completeopt-=preview " do not open Preview split with docs for completion entries
+set completeopt+=noinsert " do not automatically insert any text
+set completeopt+=noselect " do not automatically select any result
 
 " --- history --- "
 set history=10000
@@ -1431,6 +1438,7 @@ let g:v_autofmt_bufwritepre = 1
 
 " vim-go: completion, compatibility with YCM and Ultisnips
 let g:go_code_completion_enabled = 0
+" let g:go_gopls_use_placeholders = 1
 
 " vim-go: gofmt
 " -------------
@@ -1570,6 +1578,7 @@ let g:rustfmt_options = '--edition 2021'
 " ---------------------------------------------- "
 
 " let g:ale_completion_enabled = 1
+" set omnifunc=ale#completion#OmniFunc
 
 " ALE: Language settings
 " ----------------------
@@ -1676,11 +1685,30 @@ let g:ale_sign_info = ' ▶︎'
 nmap <silent> ]d <Plug>(ale_next_wrap)
 nmap <silent> [d <Plug>(ale_previous_wrap)
 
+" -------------------- "
+" --- asyncomplete --- "
+" -------------------- "
+
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_completion_documentation_enabled = 0
+let g:lsp_fold_enabled = 0
+" highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-remote=auto']},
+        \ 'allowlist': ['go'],
+        \ })
+    " autocmd BufWritePre *.go LspDocumentFormatSync
+endif
+
 " ---------------- "
 " --- vim-json --- "
 " ---------------- "
 
-let g:vim_json_syntax_conceal = 0
+" let g:vim_json_syntax_conceal = 0
 
 " -------------- "
 " --- TagBar --- "
