@@ -1478,8 +1478,7 @@ let g:go_gopls_gofumpt = v:true
 " set ballooneval
 " set balloonevalterm
 " autocmd FileType go set balloonexpr=go#tool#DescribeBalloon()
-
-" let g:go_code_completion_enabled = 0
+" let g:go_auto_type_info = 0
 
 let g:go_fillstruct_mode = 'gopls'
 let g:go_list_type = 'quickfix'
