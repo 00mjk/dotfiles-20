@@ -887,6 +887,14 @@ command! WhitespaceTrailing call BE_StripTrailingWhitespace()
 " appropriate (like vim-go).
 set omnifunc=syntaxcomplete#Complete
 
+" Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" ---------------- "
+" --- SuperTab --- "
+" ---------------- "
+
 " instruct supertab to try and detect the most appropriate autocompletion
 " method, thus minimising the need for pressing the `<C-x><C-o>` combination
 " let g:SuperTabDefaultCompletionType = "context"
@@ -894,9 +902,34 @@ set omnifunc=syntaxcomplete#Complete
 " let g:SuperTabMappingForward  = '<s-tab>'
 " let g:SuperTabMappingBackward = '<tab>'
 
-" Allow the `enter' key to chose from the omnicompletion window, instead of <C-y>
-" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+" https://gist.github.com/lencioni/dff45cd3d1f0e5e23fe6
+" let g:SuperTabDefaultCompletionType    = '<C-n>'
+
+" the Enter behaviour in the popup menu is already handled in this vimrc
+" let g:SuperTabCrMapping                = 0
+let g:SuperTabCrMapping                = 1
+" for some unholy reason after installing YCM, SuperTab works in reverse, so we
+" need to swap the two mappings
+let g:SuperTabMappingForward  = '<s-tab>'
+let g:SuperTabMappingBackward = '<tab>'
+
+" ----------------- "
+" --- UltiSnips --- "
+" ----------------- "
+
+" " better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" let g:UltiSnipsExpandTrigger           = '<tab>'
+" let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+" let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:UltiSnipsExpandTrigger           = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger      = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger     = '<C-k>'
 
 " --------------------------- "
 " --- YouCompleteMe / YCM --- "
@@ -926,29 +959,6 @@ let g:ycm_auto_hover = ''
 " " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-"
-" " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" https://gist.github.com/lencioni/dff45cd3d1f0e5e23fe6
-" let g:SuperTabDefaultCompletionType    = '<C-n>'
-
-" the Enter behaviour in the popup menu is already handled in this vimrc
-" let g:SuperTabCrMapping                = 0
-let g:SuperTabCrMapping                = 1
-" for some unholy reason after installing YCM, SuperTab works in reverse, so we
-" need to swap the two mappings
-let g:SuperTabMappingForward  = '<s-tab>'
-let g:SuperTabMappingBackward = '<tab>'
-" let g:UltiSnipsExpandTrigger           = '<tab>'
-" let g:UltiSnipsJumpForwardTrigger      = '<tab>'
-" let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-let g:UltiSnipsExpandTrigger           = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger      = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger     = '<C-k>'
 " let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
@@ -1436,7 +1446,7 @@ let g:v_autofmt_bufwritepre = 1
 " --- vim-go --- "
 " -------------- "
 
-" vim-go: completion, compatibility with YCM and Ultisnips
+" vim-go: completion, disable for compatibility with other completion clients
 let g:go_code_completion_enabled = 0
 " let g:go_gopls_use_placeholders = 1
 
@@ -1577,8 +1587,15 @@ let g:rustfmt_options = '--edition 2021'
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
+" ALE: Completion
+" ---------------
+"
 " let g:ale_completion_enabled = 1
 " set omnifunc=ale#completion#OmniFunc
+"
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
+" \ }))
+" \ 'priority': 10, " Provide your own overrides here
 
 " ALE: Language settings
 " ----------------------
@@ -1622,10 +1639,6 @@ let g:ale_go_gopls_executable = 'gopls'
 let g:ale_go_gopls_use_global = 1
 " ensure only one gopls server is started, if working on multiple projects
 let g:ale_go_gopls_options = '-remote=auto'
-
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
-" \ }))
-" \ 'priority': 10, " Provide your own overrides here
 
 " enable non-default checks, and disable composites
 let g:ale_go_gopls_init_options = {
@@ -1685,30 +1698,36 @@ let g:ale_sign_info = ' ▶︎'
 nmap <silent> ]d <Plug>(ale_next_wrap)
 nmap <silent> [d <Plug>(ale_previous_wrap)
 
-" -------------------- "
-" --- asyncomplete --- "
-" -------------------- "
+" ------------------------------ "
+" --- asyncomplete / vim-lsp --- "
+" ------------------------------ "
+
+" See also: ALE Completion config
 
 let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_completion_documentation_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_fold_enabled = 0
 " highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+let g:lsp_signature_help_delay = 100
 
 if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-remote=auto']},
-        \ 'allowlist': ['go'],
-        \ })
-    " autocmd BufWritePre *.go LspDocumentFormatSync
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'gopls',
+    \ 'cmd': {server_info->['gopls', '-remote=auto']},
+    \ 'allowlist': ['go'],
+    \ })
+
+  " autocmd BufWritePre *.go LspDocumentFormatSync
 endif
 
 " ---------------- "
 " --- vim-json --- "
 " ---------------- "
 
-" let g:vim_json_syntax_conceal = 0
+let g:vim_json_syntax_conceal = 0
 
 " -------------- "
 " --- TagBar --- "
