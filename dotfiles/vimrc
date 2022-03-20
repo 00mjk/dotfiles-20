@@ -243,7 +243,7 @@ set shortmess-=S                  " show match count in searches
 
 if exists('+colorcolumn')
   " https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=bdc48fa11e46f867ea4d75fa59ee87a7f48be144
-  set colorcolumn=101 " display a vertical ruler for line length
+  set colorcolumn=80,100 " display a vertical ruler for line length
   autocmd FileType qf,help,nerdtree,loclist set colorcolumn=
 endif
 " alternatively, https://github.com/seejohnrun/dotfiles
