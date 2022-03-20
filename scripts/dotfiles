@@ -94,12 +94,9 @@ backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config
 # ----------------------- #
 
 backup_and_symlink "$SCRIPTS_DIR/asyaml"                  "$LOCAL_BIN/asyaml"
-backup_and_symlink "$SCRIPTS_DIR/brut"                    "$LOCAL_BIN/brut"
 backup_and_symlink "$SCRIPTS_DIR/epochms"                 "$LOCAL_BIN/epochms"
-backup_and_symlink "$SCRIPTS_DIR/free"                    "$LOCAL_BIN/free"
 backup_and_symlink "$SCRIPTS_DIR/gddirs"                  "$LOCAL_BIN/gddirs"
 backup_and_symlink "$SCRIPTS_DIR/go-test"                 "$LOCAL_BIN/go-test"
-backup_and_symlink "$SCRIPTS_DIR/macos-updates"           "$LOCAL_BIN/macos-updates"
 backup_and_symlink "$SCRIPTS_DIR/nauniq"                  "$LOCAL_BIN/nauniq"
 backup_and_symlink "$SCRIPTS_DIR/utcnow"                  "$LOCAL_BIN/utcnow"
 backup_and_symlink "$SCRIPTS_DIR/wanip"                   "$LOCAL_BIN/wanip"
@@ -112,6 +109,16 @@ backup_and_symlink "$SCRIPTS_DIR/plantuml-server-image"   "$LOCAL_BIN/plantuml-s
 backup_and_symlink "$SCRIPTS_DIR/plantuml-c4model-stdlib" "$LOCAL_BIN/plantuml-c4model-stdlib"
 backup_and_symlink "$SCRIPTS_DIR/umlup"                   "$LOCAL_BIN/umlup"
 backup_and_symlink "$SCRIPTS_DIR/umldown"                 "$LOCAL_BIN/umldown"
+
+if [[ "$(uname -s)" =~ Darwin ]]; then
+  backup_and_symlink "$SCRIPTS_DIR/brut"                  "$LOCAL_BIN/brut"
+  backup_and_symlink "$SCRIPTS_DIR/free"                  "$LOCAL_BIN/free"
+  backup_and_symlink "$SCRIPTS_DIR/macos-updates"         "$LOCAL_BIN/macos-updates"
+fi
+
+if [[ -n "$(command -v dnf)" ]]; then
+  backup_and_symlink "$SCRIPTS_DIR/fedora-updates"        "$LOCAL_BIN/fedora-updates"
+fi
 
 # -------------- #
 # --- shells --- #
