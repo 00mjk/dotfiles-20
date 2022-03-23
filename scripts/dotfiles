@@ -86,6 +86,7 @@ backup_and_symlink "$DOTFILES_DIR/lfrc"             "$LOCAL_CONFIG/lf/lfrc"
 backup_and_symlink "$DOTFILES_DIR/tigrc"            "$HOME/.tigrc"
 backup_and_symlink "$DOTFILES_DIR/bat_config"       "$LOCAL_CONFIG/bat/config"
 backup_and_symlink "$DOTFILES_DIR/direnvrc"         "$HOME/.direnvrc"
+backup_and_symlink "$DOTFILES_DIR/direnv.toml"      "$LOCAL_CONFIG/direnv/direnv.toml"
 backup_and_symlink "$DOTFILES_DIR/curlrc"           "$HOME/.curlrc"
 backup_and_symlink "$DOTFILES_DIR/watson"           "$LOCAL_CONFIG/watson/config"
 
