@@ -75,6 +75,7 @@ formula cloc
 formula direnv
 formula exa
 formula fd
+formula fswatch
 formula fzf
 formula git-delta
 formula gnupg

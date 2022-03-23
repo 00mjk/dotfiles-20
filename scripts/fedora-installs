@@ -12,6 +12,7 @@ sudo dnf install -y \
   direnv \
   exa \
   fd-find \
+  fswatch \
   gcc \
   git \
   git-delta \
