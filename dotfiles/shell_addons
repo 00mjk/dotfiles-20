@@ -214,7 +214,16 @@ RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
 # --- Golang --- #
 # -------------- #
 
-PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
+# if [[ -d "/usr/local/go/bin" ]]; then
+#   PATH="/usr/local/go/bin:$PATH"
+# fi
+
+default_local_go="${HOME}/.go/1.18"
+
+if [[ -d "${default_local_go}" ]]; then
+  export PATH="${default_local_go}/bin:$PATH"
+  export GOPATH="${default_local_go}"
+fi
 
 # -------------- #
 # --- WATSON --- #

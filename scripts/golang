@@ -21,10 +21,15 @@ GO_ARCH=$( [[ $OS_ARCH = "x86_64" ]] && echo "amd64" || ( [[ $OS_ARCH =~ (arm64|
 PARAMS=""
 TRUE=true
 LOCAL_INSTALL="false"
+SET_DEFAULT="false"
 while [[ "$#" != "0" ]]; do
   case "$1" in
     -l|--local)
       LOCAL_INSTALL="$TRUE"
+      shift
+      ;;
+    -d|--default)
+      SET_DEFAULT="$TRUE"
       shift
       ;;
     -*|--*=) # unsupported flags
@@ -39,6 +44,11 @@ while [[ "$#" != "0" ]]; do
 done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
+
+if [[ "${SET_DEFAULT}" == "$TRUE" && "${LOCAL_INSTALL}" != "$TRUE" ]]; then
+  >&2 echo "'--default' can only be used when '--local' is set"
+  exit 1
+fi
 
 # --------------------------------------------------------------------------- #
 # --- Go version (given or latest) ------------------------------------------ #
@@ -89,7 +99,7 @@ LOCAL_INSTALL .. ${LOCAL_INSTALL}
 EOF
 
 # --------------------------------------------------------------------------- #
-# --- Perform installation -------------------------------------------------- #
+# --- Check installed ------------------------------------------------------- #
 # --------------------------------------------------------------------------- #
 
 ALREDY_INSTALLED_MSG="
@@ -101,10 +111,14 @@ if [[ "${LOCAL_INSTALL}" == "true" &&  -d "${GO_ROOT}" ]]; then
   exit 0
 fi
 
-if test -x $GO_ROOT/bin/go && $GO_ROOT/bin/go version | grep "${GO_VERSION}"; then
+if test -x $GO_ROOT/bin/go && $GO_ROOT/bin/go version | grep -w "go${GO_VERSION}"; then
   echo "${ALREDY_INSTALLED_MSG}"
   exit 0
 fi
+
+# --------------------------------------------------------------------------- #
+# --- Perform installation -------------------------------------------------- #
+# --------------------------------------------------------------------------- #
 
 echo "Downloading ${URL}"
 curl \
@@ -131,6 +145,12 @@ else
   echo "Running command with sudo to perform global installation"
   sudo mkdir -p "${GO_ROOT}"
   sudo tar --directory "${GO_ROOT}" --strip-components=1 -xzf "${ARCHIVE_FILE}"
+fi
+
+\rm -v "${ARCHIVE_FILE}"
+
+if [[ "${LOCAL_INSTALL}" == "true" && "${SET_DEFAULT}" == "true" ]]; then
+  ln --symbolic --verbose --force --relative "${GO_ROOT}" "${HOME}/.go/default"
 fi
 
 echo "Checking installation: $($GO_ROOT/bin/go version) installed at $GO_ROOT/bin/go"
