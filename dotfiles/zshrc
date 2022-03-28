@@ -203,9 +203,10 @@ if [[ -n "${terminfo[kcbt]}" ]]; then
   bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
 fi
 
-# compinit -i
-compinit -u -C -d # TODO: what do these options mean
+# compinit -i # most typical, from oh-my-zsh
+compinit -u -C -d # TODO: what do these options mean? where were they originally copied from?
 
+# TODO: fix for zoxide
 compdef ll='ls'
 compdef la='ls'
 

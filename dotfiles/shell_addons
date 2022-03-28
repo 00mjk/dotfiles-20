@@ -89,17 +89,21 @@ else
 fi
 
 # --ignore-case         (-i) case-insensitive search
-# --chop-long-lines     (-S) truncate long lines, and allow horizontal scrolling instead of wrapping
+# --chop-long-lines     (-S) truncate long lines, and allow horizontal scrolling
+#                            instead of wrapping
+# --clear-screen        (-c) repaint screen from the top, useful with chop-long-lines,
+#                            to avoid jumping when scrolling
 # --RAW-CONTROL-CHARS   (-R) forward only colour escape sequences, so that they are displayed
 # --tabs=2              (-x) use two spaces to render tab characters
 # --LONG-PROMPT         (-M) show all the available info about the buffer, at the bottom
 # --shift=3             (-#) how many columns to move when scrolling horizontally
-# --use-color                enable coloured text in various places (like prompt, search results...)
+# --use-color                enable coloured text in various places (like
+#                            prompt, search results...)
 # --no-histdups              only keep the last occurrence of a search string in the history
 # --save-marks               save marks across invocations of less
 # --mouse                    enable mouse-wheel scrolling and save clicks to the "#" mark
 # --wheel-lines              number of lines to scroll on each step of the wheel
-export LESS="--ignore-case --use-color --chop-long-lines --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --mouse --wheel-lines=3"
+export LESS="--ignore-case --use-color --chop-long-lines --clear-screen --RAW-CONTROL-CHARS --tabs=2 --LONG-PROMPT --shift=3 --no-histdups --save-marks --mouse --wheel-lines=3"
 
 # Colours for man pages
 export LESS_TERMCAP_mb=$'\e[1;34m'   # begin blinking         # 31 – red
