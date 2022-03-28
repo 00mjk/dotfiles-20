@@ -9,7 +9,16 @@ use_ruby() {
 
 # TODO: allow to customise the base path for global Go runtimes
 use_go() {
-  local go_dir=$HOME/.go/$1
+  local go_version=$1
+
+  if [[ -n $(command -v go) && "$(go env GOVERSION)" == "go$go_version" ]]; then
+    >&2 echo "direnv: Go is already the desired version, nothing to do"
+    return 0
+  fi
+
+  local go_dir=$HOME/.go/$go_version
+
+  # TODO: is this actually necessary?
   load_prefix $go_dir
 
   # 'layout go' — see the layout_go() function in direnv/stdlib.sh — would

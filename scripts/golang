@@ -21,17 +21,17 @@ GO_ARCH=$( [[ $OS_ARCH = "x86_64" ]] && echo "amd64" || ( [[ $OS_ARCH =~ (arm64|
 PARAMS=""
 TRUE=true
 LOCAL_INSTALL="false"
-SET_DEFAULT="false"
+# SET_DEFAULT="false"
 while [[ "$#" != "0" ]]; do
   case "$1" in
     -l|--local)
       LOCAL_INSTALL="$TRUE"
       shift
       ;;
-    -d|--default)
-      SET_DEFAULT="$TRUE"
-      shift
-      ;;
+    # -d|--default)
+    #   SET_DEFAULT="$TRUE"
+    #   shift
+    #   ;;
     -*|--*=) # unsupported flags
       echo "Error: Unknown flag $1" >&2
       exit 1
@@ -45,10 +45,10 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
-if [[ "${SET_DEFAULT}" == "$TRUE" && "${LOCAL_INSTALL}" != "$TRUE" ]]; then
-  >&2 echo "'--default' can only be used when '--local' is set"
-  exit 1
-fi
+# if [[ "${SET_DEFAULT}" == "$TRUE" && "${LOCAL_INSTALL}" != "$TRUE" ]]; then
+#   >&2 echo "'--default' can only be used when '--local' is set"
+#   exit 1
+# fi
 
 # --------------------------------------------------------------------------- #
 # --- Go version (given or latest) ------------------------------------------ #
@@ -149,8 +149,8 @@ fi
 
 \rm -v "${ARCHIVE_FILE}"
 
-if [[ "${LOCAL_INSTALL}" == "true" && "${SET_DEFAULT}" == "true" ]]; then
-  ln --symbolic --verbose --force --relative "${GO_ROOT}" "${HOME}/.go/default"
-fi
+# if [[ "${LOCAL_INSTALL}" == "true" && "${SET_DEFAULT}" == "true" ]]; then
+#   ln --symbolic --verbose --force --relative "${GO_ROOT}" "${HOME}/.go/default"
+# fi
 
 echo "Checking installation: $($GO_ROOT/bin/go version) installed at $GO_ROOT/bin/go"
