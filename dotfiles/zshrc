@@ -199,12 +199,13 @@ unsetopt completealiases
 # <https://unix.stackexchange.com/a/499322>
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
+# Map shift-tab to previous element in the list
 if [[ -n "${terminfo[kcbt]}" ]]; then
   bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
 fi
 
-# compinit -i # most typical, from oh-my-zsh
-compinit -u -C -d # TODO: what do these options mean? where were they originally copied from?
+compinit -i # most typical, from oh-my-zsh
+# compinit -u -C -d # TODO: what do these options mean? where were they originally copied from?
 
 # TODO: fix for zoxide
 compdef ll='ls'
