@@ -292,16 +292,22 @@ fi
 # --- FZF customisations --- #
 # -------------------------- #
 
-# ALT-F - Custom FZF key-binding that pastes the selected directories into the
-# command line.
+# ALT-F - Custom FZF key-binding to select directories
+# ----------------------------------------------------
+
+# Ripped from:
 #
 # <https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh>
 # <https://github.com/junegunn/fzf/wiki/Examples#changing-directory>
 
-__be_dsel() {
-  local cmd="${FZF_ALT_F_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print \
-    2> /dev/null | cut -b3-"}"
+__be_fzfcmd() {
+  [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
+    echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
+}
+
+__be_fzf_dir_select() {
+  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"}"
   setopt localoptions pipefail no_aliases 2> /dev/null
   local item
   eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__be_fzfcmd) -m "$@" | while read item; do
@@ -312,13 +318,8 @@ __be_dsel() {
   return $ret
 }
 
-__be_fzfcmd() {
-  [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
-    echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
-}
-
 be-fzf-dir-widget() {
-  LBUFFER="${LBUFFER}$(__be_dsel)"
+  LBUFFER="${LBUFFER}$(__be_fzf_dir_select)"
   local ret=$?
   zle reset-prompt
   return $ret
@@ -327,6 +328,36 @@ be-fzf-dir-widget() {
 zle -N be-fzf-dir-widget # register the widget
 # '^[f' can be used instead of '\ef'
 bindkey -M emacs '\ef' be-fzf-dir-widget
+bindkey -M vicmd '\ef' be-fzf-dir-widget
+bindkey -M viins '\ef' be-fzf-dir-widget
+
+# ALT-G - Custom FZF key-binding to select git branches
+# -----------------------------------------------------
+
+__be_fzf_branch_select() {
+  local cmd="git --no-pager branch --no-color --no-column -a | grep -v HEAD | sed -Es -e 's/.{2}//' -e 's/\bremotes\/origin\///'"
+  setopt localoptions pipefail no_aliases 2> /dev/null
+  local item
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__be_fzfcmd) -m "$@" | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+
+be-fzf-branch-widget() {
+  LBUFFER="${LBUFFER}$(__be_fzf_branch_select)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+
+zle -N be-fzf-branch-widget # register the widget
+# '^[g' can be used instead of '\ef'
+bindkey -M emacs '\eg' be-fzf-branch-widget
+bindkey -M vicmd '\eg' be-fzf-branch-widget
+bindkey -M viins '\eg' be-fzf-branch-widget
 
 # -------------------- #
 # --- Key-bindings --- #
