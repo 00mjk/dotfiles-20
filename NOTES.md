@@ -447,3 +447,148 @@ zsh complete aliases
 
 the "completealiases" option prevents aliases on the command line from being internally substituted
 before completion is attempted, so we might need to disable it
+
+old Docker aliases
+------------------
+
+    alias rmimages='docker rmi $(docker images -a -q)'
+    alias rmcontainers='docker rm $(docker ps -a -f status=exited -q)'
+    alias dkcont-nuke='docker ps -aq | xargs --no-run-if-empty docker stop | xargs --no-run-if-empty docker rm -v'
+    alias dkimg-nuke=$'docker ps --filter=status=exited --quiet  | xargs --no-run-if-empty docker rm && docker images --filter=dangling=true --quiet | xargs --no-run-if-empty docker rmi && docker volume ls --filter=dangling=true --quiet | awk \'$0 ~ "^[0-9a-f]{64}$"\' | xargs --no-run-if-empty docker volume rm'
+    alias rmkube='docker stop $(docker ps -q --filter name=k8s); docker rm $(docker ps -aq --filter name=k8s)'
+
+unused aliases
+--------------
+
+    # --- bundler --- #
+
+    alias be='bundle exec'
+
+    # --- glow --- #
+
+    alias glow='glow --pager'
+
+    # --- gotop --- #
+
+    alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
+
+    # --- git --- #
+
+    # width refers to each column if side-by-side; we set it to half the current
+    # number of columns in the terminal
+    alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
+
+unused config
+-------------
+
+    # -------------- #
+    # --- DIRENV --- #
+    # -------------- #
+
+    # do not print anything when changing env vars
+    export DIRENV_LOG_FORMAT=
+
+    # ------------------------ #
+    # --- FFF FILE MANAGER --- #
+    # ------------------------ #
+
+    export FFF_HIDDEN=1 # show hidden files by default
+    export FFF_COL2=7 # status line background
+    export FFF_COL5=0 # status line foreground
+    export FFF_COL4=4 # cursor (blue)
+
+    export FFF_CD_ON_EXIT=1
+    f() {
+        fff "$@"
+        cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+    }
+
+    # -------------- #
+    # --- Golang --- #
+    # -------------- #
+
+    if [[ -d "/usr/local/go/bin" ]]; then
+      PATH="/usr/local/go/bin:$PATH"
+    fi
+
+    default_local_go="${HOME}/.go/1.18"
+
+    if [[ -d "${default_local_go}" ]]; then
+      export PATH="${default_local_go}/bin:$PATH"
+      export GOPATH="${default_local_go}"
+    fi
+
+    # ---------------- #
+    # --- TIMETRAP --- #
+    # ---------------- #
+
+    # another timetracker
+    export SHEET_FILE="$HOME/.config/tt/time-entries.json"
+
+    # ------------ #
+    # --- Tmux --- #
+    # ------------ #
+
+    update_auth_sock() {
+      SOCK="/tmp/ssh-agent-$USER-screen"
+
+      if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+      then
+        rm -f /tmp/ssh-agent-$USER-screen
+        ln -sf $SSH_AUTH_SOCK $SOCK
+        export SSH_AUTH_SOCK=$SOCK
+      fi
+    }
+
+    update_auth_sock()
+
+    # ----------------------------------- #
+    # --- Kubernetes CLI autocomplete --- #
+    # ----------------------------------- #
+
+    # TODO: this is very slow, because `kubectl completion bash` is slow,
+    #       replace with a file containing the output of the kubectl command
+    if [[ -n "$(command -v kubectl)" ]]; then
+      source <(kubectl completion bash)
+    fi
+
+    # ---------------- #
+    # --- Minikube --- #
+    # ---------------- #
+
+    export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
+    export MINIKUBE_WANTUPDATENOTIFICATION=false
+    export MINIKUBE_WANTREPORTERRORPROMPT=false
+    export MINIKUBE_HOME=$HOME
+    export CHANGE_MINIKUBE_NONE_USER=true
+
+    mkdir -p $HOME/.kube
+    touch $HOME/.kube/config
+
+    export KUBECONFIG=$HOME/.kube/config
+
+    # ------------- #
+    # --- rbenv --- #
+    # ------------- #
+
+    # SLOW: rbenv init takes more than 150 ms. Use alias when needed.
+    if [[ $(command -v rbenv) ]]; then
+      eval "$(rbenv init -)"
+    fi
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    alias _init_rbenv='eval "$(rbenv init -)"'
+
+    # ----------- #
+    # --- NVM --- #
+    # ----------- #
+
+    # SLOW: nvm init takes more than 700 ms. Use alias when needed.
+    # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    # alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+
+    #------------#
+    #--- Jump ---#
+    #------------#
+
+    # [ -n "$(command -v jump)" ] && eval "$(jump shell zsh)"

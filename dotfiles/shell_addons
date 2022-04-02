@@ -28,7 +28,6 @@ if [[ "$(uname -s)" =~ Darwin ]]; then
   # --- Integrate shell with Homebrew --- #
   # ------------------------------------- #
 
-  # TODO: should these go into the common config?
   os_arch="$(uname -m)"
   HOMEBREW_PREFIX=
   if [[ "${os_arch}" == "arm64" ]]; then
@@ -199,6 +198,7 @@ export DELTA_PAGER='less --clear-screen'
 # ----------- #
 
 export GPG_TTY=$(tty)
+
 # # This create-socketdir command is only required if a non default home
 # # directory is used and the /run based sockets shall be used. For the default
 # # home directory GnUPG creates a directory on the fly.
@@ -220,17 +220,6 @@ RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
 
 export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
 
-# if [[ -d "/usr/local/go/bin" ]]; then
-#   PATH="/usr/local/go/bin:$PATH"
-# fi
-
-# default_local_go="${HOME}/.go/1.18"
-
-# if [[ -d "${default_local_go}" ]]; then
-#   export PATH="${default_local_go}/bin:$PATH"
-#   export GOPATH="${default_local_go}"
-# fi
-
 # -------------- #
 # --- WATSON --- #
 # -------------- #
@@ -239,13 +228,6 @@ export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
 #
 # Use the common config instead of the macOS specific one (~/Library).
 export WATSON_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/watson"
-
-# ---------------- #
-# --- TIMETRAP --- #
-# ---------------- #
-
-# another timetracker
-export SHEET_FILE="$HOME/.config/tt/time-entries.json"
 
 # --------------------- #
 # --- Output stream --- #
@@ -268,55 +250,6 @@ fi
 
 # attach to current session if there is only one, or start a new one
 alias tm='if [[ "$(tmux ls 2>&1 | grep -i created | wc -l)" == "1" ]]; then tmux attach; else tmux; fi'
-
-# update_auth_sock() {
-#   SOCK="/tmp/ssh-agent-$USER-screen"
-#
-#   if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
-#   then
-#     rm -f /tmp/ssh-agent-$USER-screen
-#     ln -sf $SSH_AUTH_SOCK $SOCK
-#     export SSH_AUTH_SOCK=$SOCK
-#   fi
-# }
-#
-# update_auth_sock()
-
-# ----------------------------------- #
-# --- Kubernetes CLI autocomplete --- #
-# ----------------------------------- #
-
-# TODO: this is very slow, because `kubectl completion bash` is slow,
-#       replace with a file containing the output of the kubectl command
-# if [[ -n "$(command -v kubectl)" ]]; then
-#   source <(kubectl completion bash)
-# fi
-
-# ---------------- #
-# --- Minikube --- #
-# ---------------- #
-
-# export MINIKUBE_WANTKUBECTLDOWNLOADMSG=false
-# export MINIKUBE_WANTUPDATENOTIFICATION=false
-# export MINIKUBE_WANTREPORTERRORPROMPT=false
-# export MINIKUBE_HOME=$HOME
-# export CHANGE_MINIKUBE_NONE_USER=true
-#
-# mkdir -p $HOME/.kube
-# touch $HOME/.kube/config
-#
-# export KUBECONFIG=$HOME/.kube/config
-
-# ------------- #
-# --- rbenv --- #
-# ------------- #
-
-# SLOW: rbenv init takes more than 150 ms. Use alias when needed.
-# if [[ $(command -v rbenv) ]]; then
-#   eval "$(rbenv init -)"
-# fi
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# alias _init_rbenv='eval "$(rbenv init -)"'
 
 # ------------- #
 # --- pyenv --- #
@@ -398,21 +331,6 @@ export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 PATH="$HOME/.cargo/bin:$PATH"
 
 # ------------------------ #
-# --- FFF FILE MANAGER --- #
-# ------------------------ #
-
-# export FFF_HIDDEN=1 # show hidden files by default
-# export FFF_COL2=7 # status line background
-# export FFF_COL5=0 # status line foreground
-# export FFF_COL4=4 # cursor (blue)
-
-# export FFF_CD_ON_EXIT=1
-# f() {
-#     fff "$@"
-#     cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-# }
-
-# ------------------------ #
 # --- NNN FILE MANAGER --- #
 # ------------------------ #
 
@@ -459,13 +377,6 @@ n () {
   fi
 }
 
-# -------------- #
-# --- DIRENV --- #
-# -------------- #
-
-# do not print anything when changing env vars
-# export DIRENV_LOG_FORMAT=
-
 # --------------- #
 # --- ALIASES --- #
 # --------------- #
@@ -488,10 +399,6 @@ alias fedora-old-kernels='sudo dnf remove $(dnf repoquery --installonly --latest
 alias cls="clear && printf '\e[3J'"
 
 # --- git --- #
-
-# width refers to each column if side-by-side; we set it to half the current
-# number of columns in the terminal
-# alias yd='ydiff --width $(expr $(stty size | cut -d" " -f2) / 2) --side-by-side'
 
 alias gti='git'
 
@@ -560,37 +467,20 @@ alias jy='yq eval --prettyPrint -'
 # takes YAML from stdin and converts it to JSON
 alias yj='yq eval --tojson -'
 
-# --- bundler --- #
-
-alias be='bundle exec'
-
 # --- docker --- #
 
 alias dk='docker'
 alias dc='docker-compose'
-alias rmimages='docker rmi $(docker images -a -q)'
-alias rmcontainers='docker rm $(docker ps -a -f status=exited -q)'
-alias dkcont-nuke='docker ps -aq | xargs --no-run-if-empty docker stop | xargs --no-run-if-empty docker rm -v'
-alias dkimg-nuke=$'docker ps --filter=status=exited --quiet  | xargs --no-run-if-empty docker rm && docker images --filter=dangling=true --quiet | xargs --no-run-if-empty docker rmi && docker volume ls --filter=dangling=true --quiet | awk \'$0 ~ "^[0-9a-f]{64}$"\' | xargs --no-run-if-empty docker volume rm'
-alias rmkube='docker stop $(docker ps -q --filter name=k8s); docker rm $(docker ps -aq --filter name=k8s)'
 
 # --- kubernetes --- #
 
 alias kc='kubectl'
 alias kx='kubectx'
 
-# --- glow --- #
-
-alias glow='glow --pager'
-
 # --- ImageMagick --- #
 
 # create a compressed JPG copy of each PNG in the current directory
 alias screenshot-minify='mogrify -verbose -strip -unsharp 0.25x0.25+8+0.065 -resize 80% -quality 85 -format jpg *.png'
-
-# --- gotop --- #
-
-# alias gotop="gotop -C $HOME/.config/gotop/gotop.conf"
 
 # --- watson --- #
 

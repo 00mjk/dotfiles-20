@@ -61,8 +61,8 @@ setopt combiningchars
 # --- Common shell configuration --- #
 # ---------------------------------- #
 
-[[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
-[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
+ [[ -e "${HOME}/.shell_addons" ]] && source ~/.shell_addons
+#[[ -e "${HOME}/.shell_addons_local" ]] && source ~/.shell_addons_local
 
 # ------------------------- #
 # --- Language settings --- #
@@ -562,21 +562,6 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
 else
   PROMPT='[%n@%m:%~]${prompt_newline}%# '
 fi
-
-# ----------- #
-# --- NVM --- #
-# ----------- #
-
-# SLOW: nvm init takes more than 700 ms. Use alias when needed.
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-alias _init_nvm='[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-
-#------------#
-#--- Jump ---#
-#------------#
-
-# [ -n "$(command -v jump)" ] && eval "$(jump shell zsh)"
 
 # -------------- #
 # --- Zoxide --- #
