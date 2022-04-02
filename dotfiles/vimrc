@@ -1586,6 +1586,8 @@ let g:rustfmt_options = '--edition 2021'
 " --- ALE (A.L.E., Asynchronous Lint Engine) --- "
 " ---------------------------------------------- "
 
+let g:ale_use_global_executables = 1
+
 " ALE: Completion
 " ---------------
 "
@@ -1682,8 +1684,10 @@ autocmd FileType python nmap <buffer> <silent> <C-t> <Plug>(ale_go_to_type_defin
 " ALE: Visual customisations
 " --------------------------
 
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
+" let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 1
 
 let g:ale_sign_error = ' ▶︎'
