@@ -280,14 +280,6 @@ if [[ -n "$(command -v tmux)" && -n "$(command -v _tmux)" ]]; then
   compdef tumx='tmux'
 fi
 
-# ----------- #
-# --- FZF --- #
-# ----------- #
-
-if [[ -e "${HOME}/.fzf.zsh" ]]; then
-  source ~/.fzf.zsh
-fi
-
 # -------------------------- #
 # --- FZF customisations --- #
 # -------------------------- #
@@ -607,6 +599,14 @@ PATH="${HOME}/.local/bin:${PATH}"
 typeset -aU path
 typeset -aU manpath
 typeset -aU infopath
+
+# ----------- #
+# --- FZF --- #
+# ----------- #
+
+# IMPORTANT: This REALLY needs to be as much towards the end of the zshrc as
+# possible, or some of the FZF functionality will not be available.
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # --------------
 # --- Direnv ---
