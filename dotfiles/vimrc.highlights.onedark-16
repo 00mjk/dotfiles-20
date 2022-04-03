@@ -51,26 +51,3 @@ highlight DiffDelete  ctermbg=8   ctermfg=9   cterm=none
 highlight DiffChange  ctermbg=8   ctermfg=15  cterm=none
 highlight DiffText    ctermbg=8   ctermfg=4   cterm=none
 " TODO: for this to work, fold highlighting also needs to change
-
-" Highlight: Extra todo-like keywords
-" -----------------------------------
-
-" Add keywords to be highlighted as TODOs (https://vi.stackexchange.com/a/19043)
-" The synTodo line:
-" 1. list all syntax items (execute("syntax list"))
-" 2. split it into a list of lines (split(..., '\n'))
-" 3. filter it to only contain lines with syntax group name that ends with Todo (filter(..., { i,v -> match(v, '^\w*Todo\>') == 0}))
-" 4. remove everything after syntax group name (map(..., {i,v -> substitute(v, ' .*$', '', '')}))
-" result -> a list of syntax group names that end with Todo.
-function! UpdateTodoKeywords(...)
-  let newKeywords = join(a:000, " ")
-  let synTodo = map(filter(split(execute("syntax list"), '\n') , { i,v -> match(v, '^\w*Todo\>') == 0}), {i,v -> substitute(v, ' .*$', '', '')})
-  for synGrp in synTodo
-    execute "syntax keyword " . synGrp . " contained " . newKeywords
-  endfor
-endfunction
-
-augroup Todo_CustomKeywords
-  autocmd!
-  autocmd Syntax * call UpdateTodoKeywords("NOTE", "NOTES", "INFO", "REVIEW", "IDEA", "BUG", "TBD")
-augroup END

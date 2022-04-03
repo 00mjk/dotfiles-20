@@ -266,11 +266,42 @@ augroup END
 " --- Syntax highlight customisations --- "
 " --------------------------------------- "
 
+" Highlight: Extra todo-like keywords
+" -----------------------------------
+
+" Add keywords to be highlighted as TODOs (https://vi.stackexchange.com/a/19043)
+" The synTodo line:
+" 1. list all syntax items (execute("syntax list"))
+" 2. split it into a list of lines (split(..., '\n'))
+" 3. filter it to only contain lines with syntax group name that ends with Todo (filter(..., { i,v -> match(v, '^\w*Todo\>') == 0}))
+" 4. remove everything after syntax group name (map(..., {i,v -> substitute(v, ' .*$', '', '')}))
+" result -> a list of syntax group names that end with Todo.
+function! UpdateTodoKeywords(...)
+  let newKeywords = join(a:000, " ")
+  let synTodo = map(filter(split(execute("syntax list"), '\n') , { i,v -> match(v, '^\w*Todo\>') == 0}), {i,v -> substitute(v, ' .*$', '', '')})
+  for synGrp in synTodo
+    execute "syntax keyword " . synGrp . " contained " . newKeywords
+  endfor
+endfunction
+
+augroup Todo_CustomKeywords
+  autocmd!
+  autocmd Syntax * call UpdateTodoKeywords(
+    \ "NOTE",
+    \ "NOTES",
+    \ "INFO",
+    \ "REVIEW",
+    \ "IDEA",
+    \ "BUG",
+    \ "TBD",
+    \ "TBC",
+    \ "IMPORTANT",
+  \ )
+augroup END
+
 if g:colors_name ==? "onedark" && filereadable(glob("~/.vimrc.highlights.onedark-16"))
   source ~/.vimrc.highlights.onedark-16
-endif
-
-if g:colors_name ==? "peachpuff" && filereadable(glob("~/.vimrc.highlights.peachpuff-16"))
+elseif filereadable(glob("~/.vimrc.highlights.peachpuff-16"))
   source ~/.vimrc.highlights.peachpuff-16
 endif
 
