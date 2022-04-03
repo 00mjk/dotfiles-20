@@ -72,7 +72,7 @@ Plug 'tpope/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " this way of installing markdown-preview assumes that node and yarn are available
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " generate inline TOCs; for tagbar TOC support see TagBar config below
 Plug 'mzlogin/vim-markdown-toc'

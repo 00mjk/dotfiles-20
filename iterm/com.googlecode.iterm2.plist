@@ -13,7 +13,7 @@
 	<key>BootstrapDaemon</key>
 	<false/>
 	<key>Command</key>
-	<string>arch-x86_64zsh--login</string>
+	<string></string>
 	<key>CopySelection</key>
 	<false/>
 	<key>Custom Color Presets</key>
@@ -16913,7 +16913,7 @@
 			<key>Columns</key>
 			<integer>238</integer>
 			<key>Command</key>
-			<string></string>
+			<string>/bin/zsh</string>
 			<key>Cursor Boost</key>
 			<real>0.0</real>
 			<key>Cursor Boost (Dark)</key>

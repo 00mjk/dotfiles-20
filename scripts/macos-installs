@@ -28,9 +28,6 @@ fi
 
 export PATH="$BREW_PREFIX/bin:$PATH"
 
-function formula() { brew install --formula $1; }
-function cask()    { brew install --cask    $1; }
-
 # ---------------- #
 # --- Formulae --- #
 # ---------------- #
@@ -38,78 +35,81 @@ function cask()    { brew install --cask    $1; }
 # NOTE: docker is installed as cask (desktop app), because even if a docker
 # formulae exists, that requires VirtualBox.
 
-echo "[setup] Install GNU utilities"
-formula coreutils
-formula cmake
-formula diffutils
-formula findutils
-formula gawk
-formula gnu-getopt
-formula gnu-indent
-formula gnu-sed
-formula gnu-tar
-formula gnu-time
-formula gnu-which
-formula gpatch
-formula grep
-formula gzip
-formula inetutils
+# echo "[setup] Install Node.js"
+# formula node
+# formula yarn
 
-echo "[setup] Install recent versions of macOS built-in utilities"
-formula bash
-formula curl
-formula git
-formula tidy-html5
-formula less
-formula libxml2
-formula make
-formula nano
-formula openssh
-formula rsync
-formula sqlite
-formula ssh
+# formula tidy-html5
 
-echo "[setup] Install extra utilities"
-formula bat
-formula cloc
-formula direnv
-formula exa
-formula fd
-formula fswatch
-formula fzf
-formula git-delta
-formula gnupg
-formula htop
-formula imagemagick
-formula jo
-formula jq
-formula lsof
-formula mosh
-formula mtr
-formula nmap
-formula nnn
-formula parallel
-formula pbzip2
-formula pigz
-formula pipx
-formula procs
-formula ripgrep
-formula smartmontools
-formula tig
-formula tmux
-formula tree
-formula universal-ctags
-formula vim
-formula watch
-formula watson
-formula wdiff
-formula wget
-formula yq
-formula zoxide
+# GNU utilities
+brew install --formula -q \
+  coreutils \
+  cmake \
+  diffutils \
+  findutils \
+  gawk \
+  gnu-getopt \
+  gnu-indent \
+  gnu-sed \
+  gnu-tar \
+  gnu-time \
+  gnu-which \
+  gpatch \
+  grep \
+  gzip \
+  inetutils
 
-echo "[setup] Install Node.js"
-formula node
-formula yarn
+# modern versions of macOS built-ins
+brew install --formula -q \
+  bash \
+  curl \
+  git \
+  less \
+  libxml2 \
+  make \
+  nano \
+  openssh \
+  rsync \
+  sqlite
+
+# extra utilities
+brew install --formula -q \
+  bat \
+  cloc \
+  direnv \
+  exa \
+  fd \
+  fswatch \
+  fzf \
+  git-delta \
+  gnupg \
+  htop \
+  imagemagick \
+  jo \
+  jq \
+  lsof \
+  mosh \
+  mtr \
+  nmap \
+  nnn \
+  parallel \
+  pbzip2 \
+  pigz \
+  pipx \
+  procs \
+  ripgrep \
+  smartmontools \
+  tig \
+  tmux \
+  tree \
+  universal-ctags \
+  vim \
+  watch \
+  watson \
+  wdiff \
+  wget \
+  yq \
+  zoxide
 
 # --------------------------------- #
 # --- Post install for formulae --- #
@@ -132,9 +132,6 @@ export PATH="$BREW_PREFIX/bin:$PATH"
 echo "[setup] Install dotfiles"
 "${CURRDIR}/dotfiles"
 
-echo "[setup] Install Oh My Zsh"
-"$CURRDIR/ohmyzsh"
-
 # ------------- #
 # --- Casks --- #
 # ------------- #
@@ -142,17 +139,19 @@ echo "[setup] Install Oh My Zsh"
 echo "[setup] Install Apps and Fonts as Casks"
 brew tap homebrew/cask-fonts
 
-cask firefox
-cask font-jetbrains-mono
-cask font-juliamono
-cask google-chrome
-cask iterm2
-cask middle
-cask monitorcontrol # external display brightness
-cask pastebot
-cask rectangle
-cask visual-studio-code
-cask zoom
+brew install --cask -q \
+  font-jetbrains-mono \
+  font-juliamono \
+  google-chrome \
+  iterm2 \
+  middle \
+  monitorcontrol \
+  pastebot \
+  rectangle \
+  visual-studio-code
+
+# cask firefox
+# cask zoom
 
 echo "[setup] Ensure local ~/Applications is available only to this user"
 mkdir -p ~/Applications
@@ -186,11 +185,12 @@ defaults write com.tapbots.Pastebot2Mac UIVisibilityState 10
 
 pipx ensurepath
 
-pipx install yapf
-pipx install pylint
-pipx install flake8
-pipx install mypy
-pipx install litecli
+# pipx install \
+#   yapf \
+#   pylint \
+#   flake8 \
+#   mypy \
+#   litecli \
 
 # ---------------------------------------------------- #
 # --- Fix source code files appearing in Spotlight --- #
