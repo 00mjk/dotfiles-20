@@ -552,6 +552,7 @@ BE_ZSH_COMMAND_TIME_EXCLUDE=(
 #
 # If set, parameter expansion, command substitution and arithmetic expansion are performed in
 # prompts. Substitutions within prompts do not affect the command status.
+
 setopt promptsubst
 
 prompt_newline=$'\n'
@@ -611,7 +612,7 @@ typeset -aU infopath
 # --- Direnv ---
 # --------------
 
-# the direnv hook must be at the end of the rc file
+# IMPORTANT: the direnv hook MUST be at the end of the rc file.
 #
 # `|| true` is necessary in case direnv is not (yet) installed, to avoid the
 # exit code is 1 when a new shell is open, because this is the last statement

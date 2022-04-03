@@ -312,6 +312,13 @@ Vim unused highlights
 " highlight MatchParen    ctermbg=none  ctermfg=7     cterm=none,bold,reverse
 " highlight Special                     ctermfg=5
 
+Vim - Other unused settings
+---------------------------
+
+    " Easy insertion of a trailing ; or , from insert mode
+    imap ;; <Esc>A;<Esc>
+    imap ,, <Esc>A,<Esc>
+
 Colorscheme notes
 =================
 

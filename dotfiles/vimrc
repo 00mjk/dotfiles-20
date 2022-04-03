@@ -636,10 +636,6 @@ cnoremap <expr> %% fnameescape(expand('%:h')).'/'
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
 
-" Easy insertion of a trailing ; or , from insert mode
-" imap ;; <Esc>A;<Esc>
-" imap ,, <Esc>A,<Esc>
-
 " ---------------------- "
 " --- Save with sudo --- "
 " ---------------------- "
@@ -714,6 +710,7 @@ imap <silent> <Home> <C-O><Home>
 " force quickfix to always use the full width of the terminal at the bottom
 " (and only the quickfix, not the location list, which instead belongs to each
 " specific buffer)
+"
 " https://stackoverflow.com/a/59823132/417375
 autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif
 
@@ -804,7 +801,9 @@ nnoremap <silent> <leader>q :call BE_ToggleQuickfixList()<cr>
 " --- Move lines up and down --- "
 " ------------------------------ "
 
-" Move lines up and down with Ctrl-arrowup/down and Ctrl-j/k (in normal, visual and insert mode)
+" Move lines up and down with Ctrl-arrowup/down and Ctrl-j/k (in normal, visual
+" and insert mode.)
+"
 " NOTE: only meant for small selections and small movements, will break moving
 " multiple lines down beyond the bottom.
 nnoremap <C-Down> :m .+1<CR>
@@ -910,8 +909,8 @@ set omnifunc=syntaxcomplete#Complete
 " the Enter behaviour in the popup menu is already handled in this vimrc
 " let g:SuperTabCrMapping                = 0
 let g:SuperTabCrMapping                = 1
-" for some unholy reason after installing YCM, SuperTab works in reverse, so we
-" need to swap the two mappings
+" for some unholy reason SuperTab seems to work in reverse, so we need to swap
+" the two mappings
 let g:SuperTabMappingForward  = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 
