@@ -19,17 +19,17 @@ set -e
 # --- 1. Clean up --- #
 # ------------------- #
 
-sudo dnf remove -y \
-  docker\
-  docker-client\
-  docker-client-latest\
-  docker-common\
-  docker-latest\
-  docker-latest-logrotate\
-  docker-logrotate\
-  docker-selinux\
-  docker-engine-selinux\
-  docker-engine
+# sudo dnf remove -y \
+#   docker\
+#   docker-client\
+#   docker-client-latest\
+#   docker-common\
+#   docker-latest\
+#   docker-latest-logrotate\
+#   docker-logrotate\
+#   docker-selinux\
+#   docker-engine-selinux\
+#   docker-engine
 
 # ---------------------------- #
 # --- 2. Set up repository --- #
@@ -37,7 +37,7 @@ sudo dnf remove -y \
 
 sudo dnf -y install dnf-plugins-core
 
-sudo dnf config-manager --add-repo -y https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf -y config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
 # -------------------------------- #
 # --- 3. Install Docker Engine --- #
