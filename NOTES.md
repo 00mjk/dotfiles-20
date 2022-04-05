@@ -17,6 +17,7 @@ Notable dotfile repositories
   - <https://youtu.be/GDa7hrbcCB8>
 * <https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f>
 * <https://github.com/garybernhardt/dotfiles/blob/main/.vimrc>
+* <https://github.com/mathiasbynens/dotfiles>
 
 Vim plugins
 -----------
