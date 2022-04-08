@@ -34,7 +34,7 @@ var (
 var (
 	// a staged file is indicated by an M (if modified), an A (if new) or an
 	// R (if renamed) in the first column of the short status output
-	reModifiedStaged = regexp.MustCompile(`^M|^A|^R`)
+	reModifiedStaged = regexp.MustCompile(`^M|^A|^R|^D`)
 
 	// a file modified but not staged is indicated by a letter in the second
 	// column, M = modified, D = deleted.
