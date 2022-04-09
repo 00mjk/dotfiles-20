@@ -10,10 +10,9 @@ Notable dotfile repositories
 * <https://github.com/terminalforlife/BashConfig>
 * <https://github.com/benawad/dotfiles>
 * <https://github.com/ztlevi/dotty>
-* ___Making Vim Amazing___, in particular the custom presentation mode
+* "Making Vim Amazing", in particular the custom presentation mode
   <https://github.com/awesome-streamers/awesome-streamerrc/tree/master/ThePrimeagen>
-* ___Presentations___ in Vim
-  - <https://github.com/sdaschner/dotfiles>
+* "Presentations" in Vim <https://github.com/sdaschner/dotfiles>
   - <https://youtu.be/GDa7hrbcCB8>
 * <https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f>
 * <https://github.com/garybernhardt/dotfiles/blob/main/.vimrc>
@@ -165,52 +164,54 @@ macOS old installation notes
       #
       # Error installing pgcli.
 
-    * Other casks:
+* Other casks:
 
-      - alacritty
-      - calibre
-      - cryptomator
-      - dash
-      - devdocs
-      - docker
-      - font-go
-      - google-drive
-      - homebrew/cask-drivers/logitech-camera-settings
-      - homebrew/cask/menubar-stats
-      - homebrew/cask/stats
-      - istat-menus
-      - libreoffice
-      - mdrp
-      - menubar-stats
-      - menumeters
-      - onedrive
-      - postman
-      - signal
-      - stats
-      - telegram
-      - the-unarchiver
-      - thunderbird
-      - tunnelbear
-      - vagrant
-      - vlc
-      - whatsapp
-      - font-dejavu
-      - font-dejavu-sans-mono-nerd-font
-      - font-inconsolata
-      - font-inconsolata-nerd-font
-      - font-mulish
-      - istat-menus
-      - font-jetbrains-mono-nerd-font
+  - alacritty
+  - calibre
+  - cryptomator
+  - dash
+  - devdocs
+  - docker
+  - font-go
+  - google-drive
+  - homebrew/cask-drivers/logitech-camera-settings
+  - homebrew/cask/menubar-stats
+  - homebrew/cask/stats
+  - istat-menus
+  - libreoffice
+  - maccy (clipboard manager, <https://maccy.app/>,
+    <https://github.com/p0deje/Maccy>)
+  - mdrp
+  - menubar-stats
+  - menumeters
+  - onedrive
+  - postman
+  - signal
+  - stats
+  - telegram
+  - the-unarchiver
+  - thunderbird
+  - tunnelbear
+  - vagrant
+  - vlc
+  - whatsapp
+  - font-dejavu
+  - font-dejavu-sans-mono-nerd-font
+  - font-inconsolata
+  - font-inconsolata-nerd-font
+  - font-mulish
+  - istat-menus
+  - font-jetbrains-mono-nerd-font
 
-    * Casks requiring Rosetta 2 on arm64
-      - temurin (formerly adoptopenjdk)
-      - microsoft-teams
-      - sdformatter
-      - bitwarden (when installed outside of the App Store)
-      - authy (when installed outside of the App Store)
-      - dropbox
+* Casks requiring Rosetta 2 on arm64
+  - temurin (formerly adoptopenjdk)
+  - microsoft-teams
+  - sdformatter
+  - bitwarden (when installed outside of the App Store)
+  - authy (when installed outside of the App Store)
+  - dropbox
 
-    * Open Spotlight preferences to disable 'Developer' results (source code files)
+* Open Spotlight preferences to disable 'Developer' results (source code files)
 
     "
 
