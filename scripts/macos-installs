@@ -201,3 +201,9 @@ pipx ensurepath
 echo "[setup] Fix Spotlight bug not showing the 'Developer' option."
 echo "        Remember to disable 'Developer' in Spotlight."
 touch /Applications/Xcode.app
+
+# -------------------------------- #
+# --- Save screenshots as JPEG --- #
+# -------------------------------- #
+
+defaults write com.apple.screencapture type jpg
