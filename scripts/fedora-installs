@@ -2,6 +2,9 @@
 
 set -e
 
+CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
+ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
+
 sudo dnf install -y \
   bat \
   bind-utils \
@@ -53,3 +56,18 @@ sudo dnf install -y \
   zip \
   zoxide \
   zsh
+
+$ROOTDIR/scripts/fzf
+
+$ROOTDIR/scripts/golang
+$ROOTDIR/scripts/golang-packages
+$ROOTDIR/scripts/golang-zsh-completion
+
+$ROOTDIR/scripts/fedora-config
+
+$ROOTDIR/scripts/vim
+
+$ROOTDIR/scripts/fedora-updates
+
+# Must be executed last, because it causes this script to exit even when successful
+$ROOTDIR/scripts/docker-fedora
