@@ -69,7 +69,9 @@
   fc = fetch
   ; When "forcing with lease", it's essential that the working tree is up to
   ; date with the remote, see: https://developer.atlassian.com/blog/2015/04/force-with-lease/
-  force = push --force-with-lease
+  ;
+  ; --force-if-includes, more recent, can be added to guarantee that
+  insist = push --force-with-lease --force-if-includes
   graph = log --all --decorate --oneline --graph
   hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(reset)%s - %an%C(bold yellow)%d%C(reset)' --all
   l = log
