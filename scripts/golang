@@ -61,7 +61,7 @@ if [[ -z "$GO_VERSION" ]]; then
   # The Golang project does not use github releases properly (2021-05-14).
   # The most reliable way is currently to parse the official Golang downloads page.
   GO_VERSION=$(
-    curl -gsL golang.org/dl \
+    curl -gsL go.dev/dl \
       | grep -m1 "${GO_PLATFORM}-${GO_ARCH}.tar.gz" \
       | sed -E "s|.*\"/dl/go(.+)\.${GO_PLATFORM}-${GO_ARCH}.tar.gz\".+|\1|"
   )
@@ -82,7 +82,7 @@ fi
 DOWNLOAD_DIR="${HOME}/Downloads"
 FILENAME="go${GO_VERSION}.${GO_PLATFORM}-${GO_ARCH}.tar.gz"
 ARCHIVE_FILE="${DOWNLOAD_DIR}/${FILENAME}"
-URL="https://golang.org/dl/${FILENAME}"
+URL="https://go.dev/dl/${FILENAME}"
 
 cat <<-EOF
 OS_NAME ........ ${OS_NAME}
