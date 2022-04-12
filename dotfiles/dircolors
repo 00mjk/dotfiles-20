@@ -60,18 +60,18 @@ TERM xterm*
 # --- File types --- #
 # ------------------ #
 
-RESET 0 # reset to "normal" color
-NORMAL 00 # no color code at all
-FILE 00 # regular file: use no color at all
-DIR 34 # directory
-MULTIHARDLINK 00 # regular file with more than one link
-LINK 32 # symbolic link. (If you set this to 'target' instead of a
- # numerical value, the color is as for the file pointed to.)
-FIFO 97;104 # pipe
-SOCK 97;102 # socket
-DOOR 97;102 # door
-BLK 105;97 # block device driver
-CHR 105;97 # character device driver
+RESET 0           # reset to "normal" color
+NORMAL 00         # no color code at all
+FILE 00           # regular file: use no color at all
+DIR 34            # directory
+MULTIHARDLINK 00  # regular file with more than one link
+LINK 32           # symbolic link. (If you set this to 'target' instead of a
+                  # numerical value, the color is as for the file pointed to.)
+FIFO 97;104       # pipe
+SOCK 97;102       # socket
+DOOR 97;102       # door
+BLK 105;97        # block device driver
+CHR 105;97        # character device driver
 
 # ------------------- #
 # --- Executables --- #
