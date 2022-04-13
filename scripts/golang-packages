@@ -33,6 +33,7 @@ go install -v github.com/ramya-rao-a/go-outline@latest
 go install -v github.com/cweill/gotests/gotests@latest
 go install -v github.com/haya14busa/goplay/cmd/goplay@latest
 go install -v github.com/segmentio/golines@latest
+go install -v mvdan.cc/unparam@latest
 
 # Editor support - Terraform
 go install -v github.com/hashicorp/terraform-ls@latest
@@ -40,6 +41,10 @@ go install -v github.com/hashicorp/terraform-ls@latest
 # Linters
 go install -v honnef.co/go/tools/cmd/staticcheck@latest
 go install -v github.com/mgechev/revive@latest
+brew install --formula -q golangci-lint
+# or, if the latest version as soon as released is needed:
+# brew tap golangci/tap
+# brew install golangci/tap/golangci-lint
 
 # Utils
 go install -v github.com/kyoh86/richgo@latest
