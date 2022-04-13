@@ -1661,7 +1661,8 @@ let g:ale_fixers['terraform'] = ['terraform']
 
 " let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck', 'staticcheck']
 " gopls must be included in the linters for LSP features to work
-let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'golangci-lint']
+" let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'golangci-lint']
+let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'errcheck']
 " let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
 let g:ale_go_golangci_lint_options = '--disable-all --enable=errcheck'
@@ -1671,6 +1672,11 @@ let g:ale_go_golangci_lint_package = 1
 " ST1020, ST1021, ST1022 = documentation for exported symbols
 let g:ale_go_staticcheck_options = '-tests -checks=all,-ST1000,-ST1020,-ST1021,-ST1022'
 let g:ale_go_staticcheck_lint_package = 1
+
+" let g:ale_go_errcheck_executable =
+let g:ale_go_errcheck_options = '-ignoregenerated=true -asserts=true'
+" let g:ale_go_errcheck_lint_package = 1
+" let g:ale_go_errcheck_use_global = 0
 
 " undocumented: https://github.com/dense-analysis/ale/discussions/3977
 " can be placed in a project-specific .vimrc, as exrc is enabled

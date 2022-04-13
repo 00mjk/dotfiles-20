@@ -260,6 +260,14 @@ Zsh command line highlighting
     # uncomment if receiving error "highlighters directory not found"
     # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
 
+Custom ALE linters
+------------------
+
+* <https://vi.stackexchange.com/questions/34522/write-a-custom-linter-for-ale-to-consume-the-output-of-command-line-utility>
+* <https://dmerej.info/blog/post/lets-have-a-pint-of-vim-ale/>
+* <https://github.com/dense-analysis/ale/issues/391>
+* <https://github.com/dense-analysis/ale/blob/master/ale_linters/go/staticcheck.vim>
+
 Vim PlantUML Previewer
 ----------------------
 

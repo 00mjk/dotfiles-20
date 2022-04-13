@@ -60,6 +60,7 @@ tic "${ROOTDIR}/dotfiles/tmux-256color.terminfo"
 backup_and_symlink "$DOTFILES_DIR/vimrc"                         "$HOME/.vimrc"
 backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.peachpuff-16" "$HOME/.vimrc.highlights.peachpuff-16"
 backup_and_symlink "$DOTFILES_DIR/vimrc.highlights.onedark-16"   "$HOME/.vimrc.highlights.onedark-16"
+backup_and_symlink "$DOTFILES_DIR/errcheck.vim"                  "$HOME/.vim/ale_linters/go/errcheck.vim"
 
 # ------------- #
 # --- Kitty --- #
