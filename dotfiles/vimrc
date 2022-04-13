@@ -1604,6 +1604,15 @@ let g:go_highlight_variable_declarations = 1
 let g:go_highlight_debug = 0
 let g:go_debug_breakpoint_sign_text = '▶︎'
 
+" vim-go: golangci-lint
+" ---------------------
+
+let g:go_jump_to_error = 0
+" let g:go_metalinter_command = 'golangci-lint'
+" let g:go_metalinter_enabled = ['errcheck', 'unparam']
+" let g:go_metalinter_autosave = 1
+" let g:go_metalinter_autosave_enabled = ['errcheck', 'unparam']
+
 " ------------ "
 " --- Rust --- "
 " ------------ "
@@ -1652,10 +1661,15 @@ let g:ale_fixers['terraform'] = ['terraform']
 
 " let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck', 'staticcheck']
 " gopls must be included in the linters for LSP features to work
-let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls']
+let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'golangci-lint']
 " let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
-let g:ale_go_golangci_lint_options = '' " only use defaults
+let g:ale_go_golangci_lint_options = '--disable-all --enable=errcheck'
+let g:ale_go_golangci_lint_package = 1
+
+" ST1000 = package comment
+" ST1020, ST1021, ST1022 = documentation for exported symbols
+let g:ale_go_staticcheck_options = '-tests -checks=all,-ST1000,-ST1020,-ST1021,-ST1022'
 let g:ale_go_staticcheck_lint_package = 1
 
 " undocumented: https://github.com/dense-analysis/ale/discussions/3977
@@ -1674,13 +1688,16 @@ let g:ale_go_gopls_options = '-remote=auto'
 " enable non-default checks, and disable composites
 let g:ale_go_gopls_init_options = {
 \  'ui.diagnostic.analyses': {
-\    'composites': v:false,
-\    'unusedresult': v:true,
-\    'unusedwrite': v:true,
-\    'nilness': v:true,
+\    'composites':   v:true,
+\    'unusedwrite':  v:true,
+\    'nilness':      v:true,
 \    'unusedparams': v:true,
+\    'useany':       v:true,
+\    'shadow':       v:true,
 \  },
 \}
+" \    'unusedresult': v:true, " this is already a default
+" \    'fieldalignment': v:true,
 
 " autocmd FileType go nmap <buffer> <silent> <C-]> <Plug>(ale_go_to_definition)
 " autocmd FileType go nmap <buffer> <silent> gd <Plug>(ale_go_to_definition)
