@@ -1608,8 +1608,8 @@ let g:go_debug_breakpoint_sign_text = '▶︎'
 " ---------------------
 
 let g:go_jump_to_error = 0
-" let g:go_metalinter_command = 'golangci-lint'
-" let g:go_metalinter_enabled = ['errcheck', 'unparam']
+let g:go_metalinter_command = 'golangci-lint'
+let g:go_metalinter_enabled = ['errcheck', 'unparam']
 " let g:go_metalinter_autosave = 1
 " let g:go_metalinter_autosave_enabled = ['errcheck', 'unparam']
 
@@ -1661,7 +1661,6 @@ let g:ale_fixers['terraform'] = ['terraform']
 
 " let g:ale_linters['go'] = ['gopls', 'govet', 'errcheck', 'staticcheck']
 " gopls must be included in the linters for LSP features to work
-" let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'golangci-lint']
 let g:ale_linters['go'] = ['govet', 'staticcheck', 'gopls', 'errcheck']
 " let g:ale_fixers['go'] = ['gofumpt', 'goimports']
 
@@ -1694,7 +1693,7 @@ let g:ale_go_gopls_options = '-remote=auto'
 " enable non-default checks, and disable composites
 let g:ale_go_gopls_init_options = {
 \  'ui.diagnostic.analyses': {
-\    'composites':   v:true,
+\    'composites':   v:false,
 \    'unusedwrite':  v:true,
 \    'nilness':      v:true,
 \    'unusedparams': v:true,
@@ -1702,8 +1701,11 @@ let g:ale_go_gopls_init_options = {
 \    'shadow':       v:true,
 \  },
 \}
+" staticcheck integration in gopls is experimental and may be removed (2022-04-15)
+" it's not working anyway
+" \  'ui.diagnostic.staticcheck': v:true,
 " \    'unusedresult': v:true, " this is already a default
-" \    'fieldalignment': v:true,
+" \    'fieldalignment': v:true, " ensures fields are sorted to optimise memory
 
 " autocmd FileType go nmap <buffer> <silent> <C-]> <Plug>(ale_go_to_definition)
 " autocmd FileType go nmap <buffer> <silent> gd <Plug>(ale_go_to_definition)
