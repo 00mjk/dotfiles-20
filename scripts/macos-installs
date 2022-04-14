@@ -142,16 +142,12 @@ brew tap homebrew/cask-fonts
 brew install --cask -q \
   font-jetbrains-mono \
   font-juliamono \
-  google-chrome \
   iterm2 \
   middle \
   monitorcontrol \
   pastebot \
   rectangle \
   visual-studio-code
-
-# cask firefox
-# cask zoom
 
 echo "[setup] Ensure local ~/Applications is available only to this user"
 mkdir -p ~/Applications
