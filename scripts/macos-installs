@@ -182,12 +182,11 @@ defaults write com.tapbots.Pastebot2Mac UIVisibilityState 10
 
 pipx ensurepath
 
-# pipx install \
-#   yapf \
-#   pylint \
-#   flake8 \
-#   mypy \
-#   litecli \
+pipx install yapf
+pipx install pylint
+pipx install flake8
+pipx install mypy
+# pipx install litecli
 
 # ---------------------------------------------------- #
 # --- Fix source code files appearing in Spotlight --- #
