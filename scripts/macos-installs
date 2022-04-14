@@ -70,7 +70,8 @@ brew install --formula -q \
   nano \
   openssh \
   rsync \
-  sqlite
+  sqlite \
+  zsh
 
 # extra utilities
 brew install --formula -q \
