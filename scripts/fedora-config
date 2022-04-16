@@ -5,7 +5,7 @@ set -exo pipefail
 CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
 ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 
-source "${CURRDIR}/utils.sh"
+source "${ROOTDIR}/scripts/utils.sh"
 
 # --------------------------------------- #
 # --- Use existing VIM setup for root --- #

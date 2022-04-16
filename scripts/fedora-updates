@@ -9,10 +9,12 @@ source "${CURRDIR}/utils.sh"
 
 sudo dnf upgrade -y
 
-$CURRDIR/golang-packages
+$ROOTDIR/scripts/golang-packages
 
 vim +PlugUpgrade +qall
 vim +PlugUpdate +qall
+
+$ROOTDIR/scripts/fzf
 
 if [[ -n "$(command -v pipx)" ]]; then
   pipx upgrade-all

@@ -57,18 +57,19 @@ sudo dnf install -y \
   zoxide \
   zsh
 
-$ROOTDIR/scripts/fzf
+$ROOTDIR/scripts/dotfiles
 
 $ROOTDIR/scripts/golang
 export PATH=/usr/local/go/bin:$PATH
 $ROOTDIR/scripts/golang-packages
 $ROOTDIR/scripts/golang-zsh-completion
 
-$ROOTDIR/scripts/fedora-config
+$ROOTDIR/scripts/fzf
 
 $ROOTDIR/scripts/vim
 
+$ROOTDIR/scripts/fedora-config
+
 $ROOTDIR/scripts/fedora-updates
 
-# Must be executed last, because it causes this script to exit even when successful
 $ROOTDIR/scripts/docker-fedora
