@@ -24,4 +24,4 @@ if ! sudo grep -E $SSH_PASSWORD_AUTH_PATTERN /etc/ssh/sshd_config; then
   sudo tee -a /etc/ssh/sshd_config <<< "PasswordAuthentication no"
 fi
 
-usermod -s /usr/bin/zsh $(whoami)
+sudo usermod -s /usr/bin/zsh $(whoami)

@@ -15,8 +15,6 @@ GOPATH ....... $(go env GOPATH)
 
 EOF
 
-pushd ~
-
 # Editor support - Go
 go install -v golang.org/x/tools/cmd/goimports@latest
 go install -v github.com/fatih/gomodifytags@latest
@@ -33,7 +31,6 @@ go install -v github.com/ramya-rao-a/go-outline@latest
 go install -v github.com/cweill/gotests/gotests@latest
 go install -v github.com/haya14busa/goplay/cmd/goplay@latest
 go install -v github.com/segmentio/golines@latest
-go install -v mvdan.cc/unparam@latest
 
 # Editor support - Terraform
 go install -v github.com/hashicorp/terraform-ls@latest
@@ -41,10 +38,8 @@ go install -v github.com/hashicorp/terraform-ls@latest
 # Linters
 go install -v honnef.co/go/tools/cmd/staticcheck@latest
 go install -v github.com/mgechev/revive@latest
-brew install --formula -q golangci-lint
-# or, if the latest version as soon as released is needed:
-# brew tap golangci/tap
-# brew install golangci/tap/golangci-lint
+go install -v mvdan.cc/unparam@latest
+"${ROOTDIR}/scripts/golangci-lint"
 
 # Utils
 go install -v github.com/kyoh86/richgo@latest
@@ -58,8 +53,6 @@ go install -v github.com/dundee/gdu/v5/cmd/gdu@latest
 # go install -v golang.org/x/exp/cmd/modgraphviz@latest
 # go install -v github.com/jfeliu007/goplantuml/cmd/goplantuml@latest
 # go install -v github.com/KyleBanks/depth/cmd/depth@latest
-
-popd
 
 echo "[setup] Install local Go scripts"
 pushd $ROOTDIR/go

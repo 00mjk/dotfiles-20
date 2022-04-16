@@ -60,6 +60,7 @@ sudo dnf install -y \
 $ROOTDIR/scripts/fzf
 
 $ROOTDIR/scripts/golang
+export PATH=/usr/local/go/bin:$PATH
 $ROOTDIR/scripts/golang-packages
 $ROOTDIR/scripts/golang-zsh-completion
 
