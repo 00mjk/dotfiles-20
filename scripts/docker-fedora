@@ -45,22 +45,24 @@ sudo dnf -y config-manager --add-repo https://download.docker.com/linux/fedora/d
 
 sudo dnf install -y docker-ce docker-ce-cli containerd.io
 
-sudo usermod -aG docker $USER
-
 sudo systemctl start docker
 
-newgrp docker
+sudo docker run hello-world
 
-docker run hello-world
+# ------------------------------------ #
+# --- 4. Run Docker as normal user --- #
+# ------------------------------------ #
 
-# --------------------------------------------------------------------- #
-# --- 4. Install docker-compose from the standard Fedora repository --- #
-# --------------------------------------------------------------------- #
+sudo usermod -aG docker $USER
+
+# --------------------------------- #
+# --- 5. Install docker-compose --- #
+# --------------------------------- #
 
 pipx install docker-compose
 
 # -------------------------------------- #
-# --- 5. Install zsh autocompletions --- #
+# --- 6. Install zsh autocompletions --- #
 # -------------------------------------- #
 
 ZSH_LOCAL_SITE_FUNCTIONS=~/.config/zsh/site-functions
@@ -73,10 +75,10 @@ curl \
     -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose \
     -o $ZSH_LOCAL_SITE_FUNCTIONS/_docker-compose
 
-rm -rf ~/.zcompdump* && compinit
+rm -rf ~/.zcompdump*
 
 # ----------------- #
-# --- 6. Finish --- #
+# --- 7. Finish --- #
 # ----------------- #
 
 echo "
