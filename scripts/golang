@@ -58,8 +58,8 @@ GO_VERSION=$1
 
 # If no version was specified use the latest available
 if [[ -z "$GO_VERSION" ]]; then
-  # The Golang project does not use github releases properly (2021-05-14).
-  # The most reliable way is currently to parse the official Golang downloads page.
+  # The Golang project does not use github releases properly (2022-04-16).
+  # The most reliable way is still to parse the official Golang downloads page.
   GO_VERSION=$(
     curl -gsL go.dev/dl \
       | grep -m1 "${GO_PLATFORM}-${GO_ARCH}.tar.gz" \
