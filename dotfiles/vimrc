@@ -1117,8 +1117,7 @@ endfor
 " Automatically enable spell checking for some filetypes.
 " <http://robots.thoughtbot.com/vim-spell-checking>
 " autocmd BufRead,BufNewFile *.md setlocal spell
-" autocmd FileType markdown setlocal spell
-autocmd FileType gitcommit setlocal spell
+autocmd FileType gitcommit,go,markdown,md setlocal spell
 
 " ------------------------------------ "
 " --- Pandoc Syntax (for Markdown) --- "
@@ -1129,7 +1128,7 @@ augroup pandoc_syntax
     autocmd! BufNewFile,BufFilePre,BufRead *.txt set filetype=markdown.pandoc
 augroup END
 
-let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#syntax#style#underline_special = 0
 let g:pandoc#syntax#style#use_definition_lists = 0
 
@@ -1593,7 +1592,7 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_function_parameters = 1
 let g:go_highlight_functions = 1 " includes methods
 let g:go_highlight_operators = 1
-let g:go_highlight_string_spellcheck = 1 " even if it's currently the default
+let g:go_highlight_string_spellcheck = 0 " default is 1
 let g:go_highlight_types = 1
 
 let g:go_highlight_generate_tags = 1

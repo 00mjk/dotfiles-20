@@ -83,7 +83,7 @@ highlight link goFormatSpecifier Identifier
 highlight goTypeName cterm=none,bold ctermbg=none ctermfg=14
 highlight goTypeConstructor cterm=none ctermbg=none ctermfg=2
 " highlight goSameId ctermbg=8
-highlight goSameId cterm=underline
+highlight goSameId cterm=reverse
 highlight goFunctionCall cterm=none ctermbg=none ctermfg=4
 
 " Highlight: Pandoc

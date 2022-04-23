@@ -90,6 +90,7 @@ brew install --formula -q \
   imagemagick \
   jo \
   jq \
+  lf \
   lsof \
   mosh \
   mtr \
