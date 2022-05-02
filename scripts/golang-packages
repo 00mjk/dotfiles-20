@@ -5,6 +5,8 @@ set -eu
 CURRDIR="$(cd "$(dirname "$([ -L "${0}" ] && readlink "${0}" || echo "${0}")")" && pwd -P)"
 ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 
+echo "[setup] Installing Go packages"
+
 cat << EOF
 
 GOVERSION .... $(go env GOVERSION)
@@ -15,51 +17,67 @@ GOPATH ....... $(go env GOPATH)
 
 EOF
 
+function go_install() {
+  local pkg=$1
+  echo "--- ${pkg}"
+  go install -v "${pkg}@latest"
+}
+
 # Editor support - Go
-go install -v golang.org/x/tools/cmd/goimports@latest
-go install -v github.com/fatih/gomodifytags@latest
-go install -v github.com/fatih/motion@latest
-go install -v github.com/kisielk/errcheck@latest
-go install -v github.com/koron/iferr@latest
-go install -v github.com/josharian/impl@latest
-go install -v github.com/jstemmer/gotags@latest
-go install -v github.com/go-delve/delve/cmd/dlv@latest
-go install -v golang.org/x/tools/gopls@latest
-go install -v mvdan.cc/gofumpt@latest
-go install -v golang.org/x/tools/cmd/guru@latest
-go install -v github.com/ramya-rao-a/go-outline@latest
-go install -v github.com/cweill/gotests/gotests@latest
-go install -v github.com/haya14busa/goplay/cmd/goplay@latest
-go install -v github.com/segmentio/golines@latest
+go_install golang.org/x/tools/cmd/goimports
+go_install github.com/fatih/gomodifytags
+go_install github.com/fatih/motion
+go_install github.com/kisielk/errcheck
+go_install github.com/koron/iferr
+go_install github.com/josharian/impl
+go_install github.com/jstemmer/gotags
+go_install github.com/go-delve/delve/cmd/dlv
+go_install golang.org/x/tools/gopls
+go_install mvdan.cc/gofumpt
+go_install golang.org/x/tools/cmd/guru
+go_install github.com/ramya-rao-a/go-outline
+go_install github.com/cweill/gotests/gotests
+go_install github.com/haya14busa/goplay/cmd/goplay
+go_install github.com/segmentio/golines
 
 # Editor support - Terraform
-go install -v github.com/hashicorp/terraform-ls@latest
+go_install github.com/hashicorp/terraform-ls
 
 # Linters
-go install -v honnef.co/go/tools/cmd/staticcheck@latest
-go install -v github.com/mgechev/revive@latest
-go install -v mvdan.cc/unparam@latest
-"${ROOTDIR}/scripts/golangci-lint"
+go_install honnef.co/go/tools/cmd/staticcheck
+go_install github.com/mgechev/revive
+go_install mvdan.cc/unparam
 
 # Utils
-go install -v github.com/kyoh86/richgo@latest
-go install -v github.com/cespare/reflex@latest
-go install -v github.com/dundee/gdu/v5/cmd/gdu@latest
+go_install github.com/kyoh86/richgo
+go_install github.com/cespare/reflex
+go_install github.com/dundee/gdu/v5/cmd/gdu
+# go_install github.com/brimdata/zed/cmd/zed
+go_install github.com/brimdata/zed/cmd/zq
 
 # Other
-# go install -v github.com/xxxserxxx/gotop/v4/cmd/gotop@latest # deprecation notices when building
-# go install -v golang.org/x/tools/cmd/present@latest
-# go install -v github.com/asciimoo/wuzz@latest
-# go install -v golang.org/x/exp/cmd/modgraphviz@latest
-# go install -v github.com/jfeliu007/goplantuml/cmd/goplantuml@latest
-# go install -v github.com/KyleBanks/depth/cmd/depth@latest
+# go_install github.com/xxxserxxx/gotop/v4/cmd/gotop # deprecation notices when building
+# go_install golang.org/x/tools/cmd/present
+# go_install github.com/asciimoo/wuzz
+# go_install golang.org/x/exp/cmd/modgraphviz
+# go_install github.com/jfeliu007/goplantuml/cmd/goplantuml
+# go_install github.com/KyleBanks/depth/cmd/depth
 
-echo "[setup] Install local Go scripts"
+"${ROOTDIR}/scripts/golangci-lint"
+
+echo "[setup] Install custom Go scripts"
+
+function go_install_local() {
+  pkg=$1
+  echo "--- ${pkg}"
+  go install -v "${pkg}"
+}
+
 pushd $ROOTDIR/go
 go mod tidy
-go install -v github.com/bravoecho/dotfiles/go/cmd/colorcombos
-go install -v github.com/bravoecho/dotfiles/go/cmd/onlydirs
-go install -v github.com/bravoecho/dotfiles/go/cmd/gitprompt
+go_install_local github.com/bravoecho/dotfiles/go/cmd/colorcombos
+go_install_local github.com/bravoecho/dotfiles/go/cmd/onlydirs
+go_install_local github.com/bravoecho/dotfiles/go/cmd/gitprompt
 popd
 
 # echo "[setup] Update Go binaries for Vim"

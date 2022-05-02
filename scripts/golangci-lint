@@ -2,7 +2,7 @@
 
 set -eu
 
-echo "=== Installing golangci-lint"
+echo "[setup] Installing golangci-lint"
 
 latest_url=$(
   curl \
