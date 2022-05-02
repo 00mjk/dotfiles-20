@@ -148,7 +148,6 @@ brew install --cask -q \
   font-juliamono \
   iterm2 \
   middle \
-  monitorcontrol \
   pastebot \
   rectangle \
   visual-studio-code

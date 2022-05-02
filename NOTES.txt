@@ -173,6 +173,7 @@ macOS old installation notes
   - devdocs
   - docker
   - font-go
+  - monitorcontrol
   - google-drive
   - homebrew/cask-drivers/logitech-camera-settings
   - homebrew/cask/menubar-stats
