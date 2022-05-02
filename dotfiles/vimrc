@@ -92,6 +92,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'ycm-core/YouCompleteMe'
 " Plug 'jayli/vim-easycomplete'
 
+Plug 'puremourning/vimspector'
+
 " Plugins: Colorschemes
 " ---------------------
 
