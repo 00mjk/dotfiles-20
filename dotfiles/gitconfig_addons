@@ -85,7 +85,7 @@
   s = status
   sb = status -s
   sd = diff --staged
-  slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(reset)%s (%C(blue)%an)%C(green)%d' --date=short-local
+  slog = log --pretty=format:'%C(magenta)%m %C(yellow)%h %C(red)%ad %C(reset)%s %C(magenta)[%C(blue)%an%C(magenta)]%C(green)%d' --date=short-local
   st = status
   sti = status --ignored
   shall = stash save --include-untracked
