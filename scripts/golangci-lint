@@ -2,6 +2,8 @@
 
 set -eu
 
+echo "=== Installing golangci-lint"
+
 latest_url=$(
   curl \
     --head \
@@ -13,6 +15,22 @@ latest_url=$(
 )
 
 latest_version="${latest_url##*/}"
+
+current_version=
+if [[ -n "$(command -v golangci-lint)" ]]; then
+  current_version=$(golangci-lint --version | awk '
+    {
+      match($0, /^.+ ([0-9]+\.[0-9]+)(\.[0-9]+)?/, m)
+      printf "v%s",m[1]
+      if (m[2] != "") printf "%s",m[2]
+    }
+  ')
+fi
+
+if [[ "${current_version}" == "${latest_version}" ]]; then
+  echo "Current version is the latest (${current_version}). Skipping."
+  exit 0
+fi
 
 # From: https://golangci-lint.run/usage/install
 curl \
