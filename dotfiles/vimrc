@@ -1677,7 +1677,8 @@ let g:ale_go_golangci_lint_package = 1
 
 " ST1000 = package comment
 " ST1020, ST1021, ST1022 = documentation for exported symbols
-let g:ale_go_staticcheck_options = '-tests -checks=all,-ST1000,-ST1020,-ST1021,-ST1022'
+" ST1003 = no underscores in Go names
+let g:ale_go_staticcheck_options = '-tests -checks=all,-ST1000,-ST1020,-ST1021,-ST1022,-ST1003'
 let g:ale_go_staticcheck_lint_package = 1
 
 " let g:ale_go_errcheck_executable =
