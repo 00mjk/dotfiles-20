@@ -57,6 +57,7 @@ Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 " Plug 'direnv/direnv.vim'
 Plug 'fvictorio/vim-extract-variable'
+Plug 'lifepillar/pgsql.vim'
 
 " Plugins: Markdown
 " -----------------
@@ -1472,6 +1473,12 @@ autocmd FileType sql setlocal commentstring=--\ %s
 " ------------- "
 
 let g:v_autofmt_bufwritepre = 1
+
+" ----------------- "
+" --- pgsql.vim --- "
+" ----------------- "
+
+let g:sql_type_default = 'pgsql'
 
 " -------------- "
 " --- vim-go --- "
