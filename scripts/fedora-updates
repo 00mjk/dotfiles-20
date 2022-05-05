@@ -8,6 +8,7 @@ ROOTDIR=$(cd "$CURRDIR"; git rev-parse --show-toplevel)
 source "${CURRDIR}/utils.sh"
 
 sudo dnf upgrade -y
+sudo dnf clean all
 
 $ROOTDIR/scripts/golang-packages
 
