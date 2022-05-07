@@ -35,7 +35,7 @@ go_install github.com/go-delve/delve/cmd/dlv
 go_install golang.org/x/tools/gopls
 go_install mvdan.cc/gofumpt
 go_install golang.org/x/tools/cmd/guru
-go_install github.com/ramya-rao-a/go-outline
+# go_install github.com/ramya-rao-a/go-outline
 go_install github.com/cweill/gotests/gotests
 go_install github.com/haya14busa/goplay/cmd/goplay
 go_install github.com/segmentio/golines
