@@ -388,9 +388,10 @@ alias df='df -h'
 alias clocksync='sudo ntpdate pool.ntp.org'
 alias tmax='tmux'
 alias tumx='tmux'
-alias kdark=' kitty +kitten themes --reload-in=all Bravoecho Dark'
-alias klight=' kitty +kitten themes --reload-in=all Bravoecho Light'
+alias kdark='kitty +kitten themes --reload-in=all Bravoecho Dark'
+alias klight='kitty +kitten themes --reload-in=all Bravoecho Light'
 alias fedora-old-kernels='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q)'
+alias di='dua -x i'
 
 # --- shell --- #
 
