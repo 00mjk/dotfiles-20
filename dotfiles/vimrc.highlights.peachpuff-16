@@ -9,14 +9,15 @@ autocmd! bufwritepost ~/.vimrc.highlights.peachpuff-16 source ~/.vimrc.highlight
 
 " for some reason the vertsplit highlight needs to be placed after the set
 " colorcolumn option
+"
+" NOTE: remove any highlighting from CursorLine, or it will make YCM's
+" (YouCompleteMe) signature help unusable.
 highlight VertSplit       ctermbg=8     ctermfg=8     cterm=none
 highlight NonText                       ctermfg=7     cterm=none
 highlight ColorColumn     ctermbg=0
-highlight WildMenu        ctermbg=11                  ctermfg=0
+highlight WildMenu        ctermbg=11    ctermfg=0
 highlight LineNr          ctermbg=none  ctermfg=7     cterm=none
 highlight CursorLineNr    ctermbg=0     ctermfg=15    cterm=none
-" remove any highlighting from CursorLine, or it will make YCM's (YouCompleteMe)
-" signature help unusable.
 highlight CursorLine                                   cterm=none
 highlight CursorLineFold                               cterm=none
 highlight Folded          ctermbg=0     ctermfg=4      cterm=none
@@ -24,20 +25,21 @@ highlight FoldColumn      ctermbg=0     ctermfg=4      cterm=none
 highlight SignColumn      ctermbg=none  cterm=none
 highlight Search          ctermbg=0     ctermfg=11     cterm=reverse
 highlight Todo            ctermbg=none  ctermfg=4      cterm=none,bold,italic
-" Visual needs to be reversed, to correctly override other reversed styles when selecting them
+
+" Visual needs to be reversed, to correctly override other reversed styles when
+" selecting them
 highlight Visual          ctermbg=15  ctermfg=8    cterm=reverse
 highlight Comment         ctermfg=7     cterm=italic
 
-highlight SpellBad ctermbg=9 ctermfg=8 cterm=reverse,bold
-
-highlight SpellCap      ctermbg=12     ctermfg=8   cterm=reverse,bold
-highlight SpellRare     ctermbg=13     ctermfg=8   cterm=reverse,bold
-highlight SpellLocal    ctermbg=14     ctermfg=8   cterm=reverse,bold
-highlight Error         ctermbg=none  ctermfg=9     cterm=underline,bold
-highlight Pmenu         ctermbg=8 ctermfg=none
+highlight SpellBad      ctermbg=8     ctermfg=1   cterm=underline
+highlight SpellCap      ctermbg=8     ctermfg=12  cterm=underline
+highlight SpellRare     ctermbg=8     ctermfg=13  cterm=underline
+highlight SpellLocal    ctermbg=8     ctermfg=14  cterm=underline
+highlight Error         ctermbg=none  ctermfg=9   cterm=underline,bold
 
 " NOTE: PmenuSel is also used as part of YCM's (YouCompleteMe) signature help.
-highlight PmenuSel      ctermbg=0 ctermfg=4 cterm=bold,reverse
+highlight Pmenu         ctermbg=8     ctermfg=none
+highlight PmenuSel      ctermbg=0     ctermfg=4     cterm=bold,reverse
 
 highlight PmenuSbar     ctermbg=8
 highlight PmenuThumb    ctermbg=7
